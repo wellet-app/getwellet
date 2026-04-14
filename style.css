@@ -481,6 +481,7 @@ section {
   font-size: 11px;
   color: var(--color-text-faint);
   margin-top: var(--space-1);
+  white-space: nowrap;
 }
 
 .stat-item .stat-source a {
