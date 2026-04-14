@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wellet — The Health Tool Built for Caregivers</title>
+  <meta name="description" content="Wellet reads your loved one's health records, tracks their patterns, and tells you what matters. Built by a caregiver, for caregivers.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Wellet — The Health Tool Built for Caregivers">
+  <meta property="og:description" content="63 million Americans are family caregivers. None of them have a tool that reads the chart for them. Until now.">
+  <meta property="og:type" content="website">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232d6a4f'/%3E%3Cpath d='M8 16c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='3' fill='white'/%3E%3C/svg%3E">
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header">
+    <div class="container">
+      <a href="#" class="logo" aria-label="Wellet home">
+        <svg viewBox="0 138 150 42" style="height:26px;width:auto;" xmlns="http://www.w3.org/2000/svg" aria-label="Wellet">
+          <path fill="var(--color-primary)" d="M45.5,142c.94.94,1.4,2.08,1.4,3.42,0,.89-.19,1.73-.58,2.52-.65-.1-1.33-.14-2.05-.14-3.07,0-5.56.97-7.45,2.9-1.9,1.93-3.36,4.34-4.39,7.22-1.03,2.88-2.17,6.86-3.42,11.95l-.47,1.94-.11-.25v.29h-5.15l-4.43-11.2-4.03,11.2h-5.15l-5.69-14.44c-.67-1.34-1.28-2.24-1.82-2.7-.54-.46-1.27-.73-2.18-.83l.25-2.56h12.56l-.04,2.56c-.53.07-1.01.26-1.44.58-.43.31-.65.76-.65,1.33,0,.17.04.38.11.65l3.71,9.47,3.1-8.5c-.48-.96-.88-1.67-1.21-2.14s-.67-.8-1.04-.99c-.37-.19-.87-.32-1.49-.4v-2.56h12.82v2.56c-.86.02-1.49.13-1.87.32-.38.19-.58.55-.58,1.08,0,.34.07.74.22,1.22l3.06,7.78c1.54-7.46,3.49-13.28,5.85-17.44,2.36-4.16,5.15-6.25,8.37-6.25,1.58,0,2.84.47,3.78,1.4Z"/>
+          <path fill="var(--color-primary)" d="M57.31,168.14c-1.13,1.44-2.57,2.56-4.32,3.37-1.75.8-3.61,1.21-5.58,1.21s-3.92-.49-5.65-1.48c-1.73-.98-3.1-2.32-4.1-4.01-1.01-1.69-1.51-3.55-1.51-5.56s.5-3.87,1.51-5.56c1.01-1.69,2.38-3.03,4.1-4.01,1.73-.98,3.61-1.48,5.65-1.48,1.92,0,3.62.28,5.09.83s2.62,1.31,3.42,2.29c.8.97,1.21,2.06,1.21,3.26,0,2.62-1.68,4.46-5.04,5.54-1.49.46-3.06.68-4.72.68-1.08,0-2.24-.11-3.49-.32.02,1.13.35,2.16.99,3.1.64.94,1.46,1.67,2.47,2.21s2.05.81,3.13.81c.96,0,1.94-.2,2.93-.61,1-.41,1.82-.98,2.47-1.73l1.44,1.48ZM45.7,155.59c-.8,1.26-1.34,2.86-1.6,4.81.84.17,1.64.25,2.41.25,1.61,0,2.87-.34,3.78-1.01.91-.67,1.51-1.5,1.8-2.48.1-.29.14-.59.14-.9,0-.86-.32-1.56-.95-2.09-.64-.53-1.36-.76-2.18-.68-1.46.14-2.6.85-3.4,2.11Z"/>
+          <path fill="var(--color-primary)" d="M58.21,170.23c.7-.12,1.26-.52,1.69-1.21.43-.68.65-1.9.65-3.65v-14.26c0-1.18-.13-2.08-.38-2.72s-.5-1.06-.76-1.26-.71-.51-1.39-.92c.65-.84,1.61-1.47,2.9-1.89,1.28-.42,2.59-.63,3.91-.63,1.15,0,2.04.14,2.66.43v21.24c0,1.75.22,2.97.65,3.65.43.68,1,1.09,1.69,1.21l.11,1.62h-11.84l.11-1.62Z"/>
+          <path fill="var(--color-primary)" d="M70.85,170.23c.7-.12,1.26-.52,1.69-1.21.43-.68.65-1.9.65-3.65v-14.26c0-1.18-.13-2.08-.38-2.72s-.5-1.06-.76-1.26-.71-.51-1.39-.92c.65-.84,1.61-1.47,2.9-1.89,1.28-.42,2.59-.63,3.91-.63,1.15,0,2.04.14,2.66.43v21.24c0,1.75.22,2.97.65,3.65.43.68,1,1.09,1.69,1.21l.11,1.62h-11.84l.11-1.62Z"/>
+          <path fill="var(--color-primary)" d="M104.11,168.14c-1.13,1.44-2.57,2.56-4.32,3.37-1.75.8-3.61,1.21-5.58,1.21s-3.92-.49-5.65-1.48c-1.73-.98-3.1-2.32-4.1-4.01-1.01-1.69-1.51-3.55-1.51-5.56s.5-3.87,1.51-5.56c1.01-1.69,2.38-3.03,4.1-4.01,1.73-.98,3.61-1.48,5.65-1.48,1.92,0,3.62.28,5.09.83,1.48.55,2.62,1.31,3.42,2.29.8.97,1.21,2.06,1.21,3.26,0,2.62-1.68,4.46-5.04,5.54-1.49.46-3.06.68-4.72.68-1.08,0-2.24-.11-3.49-.32.02,1.13.35,2.16.99,3.1.64.94,1.46,1.67,2.47,2.21,1.01.54,2.05.81,3.13.81.96,0,1.94-.2,2.93-.61s1.82-.98,2.47-1.73l1.44,1.48ZM92.5,155.59c-.8,1.26-1.34,2.86-1.6,4.81.84.17,1.64.25,2.41.25,1.61,0,2.87-.34,3.78-1.01s1.51-1.5,1.8-2.48c.09-.29.14-.59.14-.9,0-.86-.32-1.56-.95-2.09-.64-.53-1.36-.76-2.18-.68-1.46.14-2.6.85-3.4,2.11Z"/>
+          <path fill="var(--color-primary)" d="M139.93,141.71c.46.5.76,1.14.86,1.81.17,1.09-.14,2.07-.91,2.95s-1.69,1.36-2.84,1.51c-.83.11-1.71.14-2.64.09-1.17-.04-2.31,0-3.43.15-1.24.16-2.36.49-3.36,1-1,.5-1.5.85-2.29,1.37-1.25.83-.64.51-2.68,1.64-1.7.75-1.02.47-2.27.96-2.92,1.15-5.84,1.04-6.2,1.21v12.12c0,.86.13,1.51.38,1.93s.58.63.99.63c.26,0,.55-.09.86-.27.31-.18.6-.43.86-.74l1.44,1.48c-.98,1.1-1.96,1.87-2.92,2.3-.96.43-2.08.65-3.35.65-1.58,0-2.89-.4-3.92-1.21-1.03-.8-1.55-1.95-1.55-3.44v-13c-.74-.07-1.58-.24-2.52-.5v-1.8c.53.12.97.18,1.33.18.96,0,1.82-.27,2.59-.81.77-.54,1.42-1.18,1.96-1.91.54-.73,1.15-1.66,1.82-2.79.48-.89.88-1.52,1.19-1.91h.83v6.8c3.33.07,5-.58,7.3-1.62,1.91-1.06,2.49-1.68,3.33-2.56.36-.38.58-.67,1.77-1.97.66-.72,2.14-1.98,2.76-2.44,1.43-1.1,2.12-1.49,3.27-2.09,1.14-.61,2.11-.76,3.26-.88,2.04-.21,3.13.16,4.06,1.16Z"/>
+        </svg>
+      </a>
+      <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+      <nav>
+        <ul class="nav-links" role="list">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#founder">About</a></li>
+          <li>
+            <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="hero" id="top">
+    <div class="container">
+      <div class="hero-badge">Building in Public</div>
+      <h1>The health tool built for <strong>caregivers</strong></h1>
+      <p class="hero-subtitle">Wellet reads your loved one's health records, tracks their patterns, and tells you what matters this week. So you can stop guessing.</p>
+
+      <!-- Waitlist Form -->
+      <div class="waitlist" id="waitlist-form">
+        <form id="signup-form" onsubmit="return handleSignup(event)">
+          <div class="waitlist-options">
+            <div class="waitlist-option">
+              <input type="checkbox" id="opt-launch" name="interest" value="launch" checked>
+              <label for="opt-launch">
+                <svg class="option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                </svg>
+                <span class="option-title">Notify me at launch</span>
+                <span class="option-desc">One email when Wellet is ready</span>
+              </label>
+            </div>
+            <div class="waitlist-option">
+              <input type="checkbox" id="opt-follow" name="interest" value="follow" checked>
+              <label for="opt-follow">
+                <svg class="option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
+                </svg>
+                <span class="option-title">Follow the build</span>
+                <span class="option-desc">Weekly updates as we build Wellet</span>
+              </label>
+            </div>
+          </div>
+          <div class="waitlist-email-row">
+            <input type="email" id="email-input" placeholder="you@email.com" required aria-label="Your email address">
+            <button type="submit" class="btn-primary" id="submit-btn">Join waitlist</button>
+          </div>
+          <p class="waitlist-note">No spam. Unsubscribe anytime.</p>
+        </form>
+        <div class="waitlist-error" id="form-error"></div>
+        <div class="waitlist-success" id="form-success">
+          <p>You're in. We'll keep you posted.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== STAT STRIP ========== -->
+  <div class="stat-strip">
+    <div class="container">
+      <div class="stat-item reveal">
+        <span class="stat-number">63M</span>
+        <span class="stat-label">family caregivers in the US</span>
+        <span class="stat-source"><a href="https://www.aarp.org/pri/topics/ltss/family-caregiving/caregiving-in-the-us-2025/" target="_blank" rel="noopener noreferrer">AARP 2025</a></span>
+      </div>
+      <div class="stat-item reveal">
+        <span class="stat-number">27 hrs/wk</span>
+        <span class="stat-label">average care time per caregiver</span>
+        <span class="stat-source"><a href="https://www.aarp.org/caregiving/financial-legal/valuing-the-invaluable-report-2026/" target="_blank" rel="noopener noreferrer">AARP 2026</a></span>
+      </div>
+      <div class="stat-item reveal">
+        <span class="stat-number">$1T+</span>
+        <span class="stat-label">in unpaid labor annually</span>
+        <span class="stat-source"><a href="https://www.aarp.org/caregiving/financial-legal/valuing-the-invaluable-report-2026/" target="_blank" rel="noopener noreferrer">AARP 2026</a></span>
+      </div>
+      <div class="stat-item reveal">
+        <span class="stat-number">57%</span>
+        <span class="stat-label">perform medical tasks untrained</span>
+        <span class="stat-source"><a href="https://www.aarp.org/caregiving/financial-legal/valuing-the-invaluable-report-2026/" target="_blank" rel="noopener noreferrer">AARP 2026</a></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== PROBLEM / FEATURES ========== -->
+  <section class="problem-section" id="features">
+    <div class="container container--narrow">
+      <h2 class="reveal">The system wasn't built for you</h2>
+      <p class="section-subtitle reveal">Every health tool points at "me." Caregiving points outward. Wellet is the first health platform designed for the person holding someone else's chart.</p>
+    </div>
+    <div class="container">
+      <div class="features-grid">
+        <div class="feature-card reveal">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="16" y1="13" x2="8" y2="13"/>
+            <line x1="16" y1="17" x2="8" y2="17"/>
+          </svg>
+          <h3>Update Me</h3>
+          <p>Upload a discharge summary, lab result, or visit note. Wellet reads it, extracts the medications, flags what changed, and writes you a summary in plain language.</p>
+        </div>
+        <div class="feature-card reveal">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+          <h3>Ask Wellet</h3>
+          <p>Ask questions about your loved one's health and get answers grounded in their actual medical records. Not generic search results — their chart, their context.</p>
+        </div>
+        <div class="feature-card reveal">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+          <h3>Stability Signal</h3>
+          <p>"All signals within normal range for 14 days." The most valuable thing a caregiver can hear. Wellet watches the patterns so you don't have to guess whether to worry.</p>
+        </div>
+        <div class="feature-card reveal">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <h3>Care Circle</h3>
+          <p>Invite siblings, aides, and providers into one shared view. Everyone sees the same timeline. No more group texts or conflicting medication lists.</p>
+        </div>
+        <div class="feature-card reveal">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          <h3>EHR Integration</h3>
+          <p>Connect to your loved one's electronic health records. Labs, visit notes, and medication changes flow in automatically — no more logging into three patient portals.</p>
+        </div>
+        <div class="feature-card reveal">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+          <h3>CareSignals</h3>
+          <p>Wellet watches for pattern shifts across all your data — EHR records, wearables, and passive home sensors that witness daily routines (not cameras). When something changes, you'll know.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HOW IT WORKS ========== -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <h2 class="reveal">How Wellet works</h2>
+      <div class="steps-grid">
+        <div class="step reveal">
+          <h3>Upload</h3>
+          <p>Drop in a discharge summary, lab result, or medication list. Wellet reads it and builds a health timeline.</p>
+        </div>
+        <div class="step reveal">
+          <h3>Connect</h3>
+          <p>Link EHRs, wearables, or home sensors. Data flows in automatically. Your care circle sees the same picture.</p>
+        </div>
+        <div class="step reveal">
+          <h3>Know</h3>
+          <p>Get weekly summaries, pattern alerts, and plain-language answers. Know when to act and when to rest.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PRICING ========== -->
+  <section class="pricing-section" id="pricing">
+    <div class="container">
+      <h2 class="reveal">Less than one copay a month</h2>
+      <p class="section-subtitle reveal">One preventable ER visit costs $2,000 to $5,000. Wellet costs less than your monthly streaming subscriptions.</p>
+
+      <div class="pricing-grid">
+        <!-- Free -->
+        <div class="pricing-card reveal">
+          <div class="tier-name">Wellet Core</div>
+          <div class="tier-tagline">Get organized</div>
+          <div class="price">Free</div>
+          <div class="price-note">Always free</div>
+          <ul role="list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              1 care recipient profile
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Care circle (up to 3 members)
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Health timeline (manual entry)
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Document storage (500 MB)
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Basic Ask Wellet
+            </li>
+          </ul>
+          <a href="#top" class="btn-tier">Join waitlist</a>
+        </div>
+
+        <!-- Plus -->
+        <div class="pricing-card featured reveal">
+          <div class="card-badge">Most Popular</div>
+          <div class="tier-name">Wellet Plus</div>
+          <div class="tier-tagline">Update Me</div>
+          <div class="price">$9.99<span style="font-size: var(--text-sm); font-family: var(--font-body); color: var(--color-text-muted);">/mo</span></div>
+          <div class="price-note">or $99/year (save 17%)</div>
+          <ul role="list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Everything in Core
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Weekly AI health summaries
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Personalized Ask Wellet
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              AI document extraction
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Pattern detection alerts
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Care circle (up to 10)
+            </li>
+          </ul>
+          <a href="#top" class="btn-tier">Join waitlist</a>
+        </div>
+
+        <!-- Pro -->
+        <div class="pricing-card reveal">
+          <div class="tier-name">Wellet Pro</div>
+          <div class="tier-tagline">The Full Picture</div>
+          <div class="price">$29.99<span style="font-size: var(--text-sm); font-family: var(--font-body); color: var(--color-text-muted);">/mo</span></div>
+          <div class="price-note">or $299/year (save 17%)</div>
+          <ul role="list">
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Everything in Plus
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Live EHR integration
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Wearable data (Oura, Apple Health)
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Stability Signal
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Multiple care recipients (up to 3)
+            </li>
+            <li>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+              Priority support
+            </li>
+          </ul>
+          <a href="#top" class="btn-tier">Join waitlist</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== FOUNDER ========== -->
+  <section class="founder-section" id="founder">
+    <div class="container">
+      <h2 class="reveal">Built by a caregiver</h2>
+      <div class="founder-card reveal">
+        <div class="founder-avatar" aria-hidden="true">
+          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </div>
+        <div class="founder-bio">
+          <h3>Betsy Eble</h3>
+          <div class="founder-title">Founder &amp; Clinical Designer</div>
+          <p>I designed the UX for Duke Health's first electronic health record system. I know how clinical data flows — and I know where it breaks for families.</p>
+          <p>When I became a caregiver myself, I saw the gap firsthand. Every health tool I tried was built for the patient or the provider. Nothing was built for the person in between — the one reading the discharge summary at 11 PM, trying to figure out if a medication changed.</p>
+          <p>That's Wellet. The tool I needed and couldn't find.</p>
+          <div class="founder-links">
+            <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer">Medium</a>
+            <a href="https://www.linkedin.com/in/betsyeble/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CTA BOTTOM ========== -->
+  <section class="cta-bottom">
+    <div class="container">
+      <h2 class="reveal">Stop guessing. Start knowing.</h2>
+      <p class="reveal">Join the waitlist and be the first to know when Wellet launches. Or follow along as we build it in public.</p>
+      <a href="#top" class="btn-cta reveal">Join the waitlist</a>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <span class="footer-copy">&copy; 2026 Wellet Health. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer">Blog</a>
+        <a href="mailto:betsy.eble@gmail.com">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script src="./app.js"></script>
+</body>
+</html>
