@@ -45,6 +45,7 @@
         <ul class="nav-links" role="list">
           <li><a href="#features">Features</a></li>
           <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#early-access">Early Access</a></li>
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="#founder">About</a></li>
           <li><a href="#faq">FAQ</a></li>
@@ -300,6 +301,68 @@
             </li>
           </ul>
           <a href="#top" class="btn-tier">Get early access</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== EARLY ACCESS ========== -->
+  <section class="early-access" id="early-access">
+    <div class="container">
+      <h2 class="reveal">Get in early. Get rewarded.</h2>
+      <p class="section-subtitle reveal">We're building Wellet with caregivers, not just for them. Early testers get lifetime perks — and the best rewards go first.</p>
+
+      <div class="ea-grid">
+        <!-- Founding 50 card -->
+        <div class="ea-card ea-card--founding reveal" id="ea-founding">
+          <div class="ea-badge">&#9733; Founding Member</div>
+          <h3>Founding 50</h3>
+          <p class="ea-reward">Free Wellet Pro for life + Founding Member badge + your name in credits</p>
+          <div class="ea-progress-wrap">
+            <div class="ea-progress-bar"><div class="ea-progress-fill" id="ea-fill-founding" style="width:0%"></div></div>
+            <span class="ea-counter" id="ea-count-founding">Loading...</span>
+          </div>
+          <div class="ea-sold-out-label">SOLD OUT</div>
+          <form class="ea-form" id="ea-form-founding" onsubmit="return handleEarlyAccess(event, 'founding')">
+            <input type="email" placeholder="you@email.com" required class="ea-input">
+            <button type="submit" class="btn-primary ea-btn">Claim your spot</button>
+          </form>
+          <div class="ea-success" id="ea-success-founding"><p></p></div>
+          <div class="ea-error" id="ea-error-founding"></div>
+        </div>
+
+        <!-- Early 100 card -->
+        <div class="ea-card reveal" id="ea-early">
+          <h3>Early 100</h3>
+          <p class="ea-reward">Free Wellet Pro for 12 months + early access badge</p>
+          <div class="ea-progress-wrap">
+            <div class="ea-progress-bar"><div class="ea-progress-fill" id="ea-fill-early" style="width:0%"></div></div>
+            <span class="ea-counter" id="ea-count-early">Loading...</span>
+          </div>
+          <div class="ea-sold-out-label">SOLD OUT</div>
+          <form class="ea-form" id="ea-form-early" onsubmit="return handleEarlyAccess(event, 'early')">
+            <input type="email" placeholder="you@email.com" required class="ea-input">
+            <button type="submit" class="btn-primary ea-btn">Claim your spot</button>
+          </form>
+          <div class="ea-success" id="ea-success-early"><p></p></div>
+          <div class="ea-error" id="ea-error-early"></div>
+        </div>
+
+        <!-- Beta 250 card -->
+        <div class="ea-card reveal" id="ea-beta">
+          <h3>Beta 250</h3>
+          <p class="ea-reward">Free Wellet Plus for 12 months</p>
+          <div class="ea-progress-wrap">
+            <div class="ea-progress-bar"><div class="ea-progress-fill" id="ea-fill-beta" style="width:0%"></div></div>
+            <span class="ea-counter" id="ea-count-beta">Loading...</span>
+          </div>
+          <div class="ea-sold-out-label">SOLD OUT</div>
+          <form class="ea-form" id="ea-form-beta" onsubmit="return handleEarlyAccess(event, 'beta')">
+            <input type="email" placeholder="you@email.com" required class="ea-input">
+            <button type="submit" class="btn-primary ea-btn">Claim your spot</button>
+          </form>
+          <div class="ea-success" id="ea-success-beta"><p></p></div>
+          <div class="ea-error" id="ea-error-beta"></div>
         </div>
       </div>
     </div>
