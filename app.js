@@ -158,9 +158,9 @@ document.querySelectorAll('.nav-links a').forEach((link) => {
 
 // --- EARLY ACCESS TIER MESSAGES ---
 var EA_TIER_MESSAGES = {
-  founding: 'You\'re in as a Founding Member. Wellet Pro is yours for life.',
-  early: 'Locked in. You\'ll get Wellet Pro free for your first 12 months.',
-  beta: 'You\'re on the Beta 250 list. Wellet Plus, on us for a year.'
+  founding: 'You\'re in as a Founding Member. Connect is yours for life.',
+  early: 'Locked in. You\'ll get Connect free for your first 12 months.',
+  beta: 'You\'re on the Beta 250 list. Supporter, on us for a year.'
 };
 
 // --- LOAD TIER COUNTS ---
@@ -302,6 +302,25 @@ function handleEarlyAccess(event, tier) {
     });
   }
 })();
+
+// --- FOLLOW THE BUILD ---
+function handleFollowBuild(checkbox) {
+  // Update the waitlist row with follow_build preference
+  var emailInput = document.getElementById('email-input');
+  var email = emailInput ? emailInput.value.trim() : '';
+  if (!email || !checkbox.checked) return;
+
+  fetch(SUPABASE_URL + '/rest/v1/waitlist?email=eq.' + encodeURIComponent(email), {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+      'Prefer': 'return=minimal'
+    },
+    body: JSON.stringify({ follow_build: true })
+  }).catch(function() { /* silent fail — not critical */ });
+}
 
 // --- INIT TIER COUNTS ON LOAD ---
 document.addEventListener('DOMContentLoaded', function() {

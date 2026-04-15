@@ -63,7 +63,7 @@
   <!-- ========== HERO ========== -->
   <section class="hero" id="top">
     <div class="container">
-      <h1>The health tool built for <strong>caregivers</strong></h1>
+      <h1>Stop wondering if Mom is <strong>okay</strong></h1>
       <p class="hero-subtitle">Wellet reads your loved one's health records, tracks their patterns, and tells you what matters this week. So you can stop guessing.</p>
 
       <!-- Waitlist Form -->
@@ -78,6 +78,10 @@
         <div class="waitlist-error" id="form-error"></div>
         <div class="waitlist-success" id="form-success">
           <p>You're in. We'll keep you posted.</p>
+          <label class="follow-build-label">
+            <input type="checkbox" id="follow-build-check" onchange="handleFollowBuild(this)">
+            <span>Follow the build — get weekly updates as we ship new features</span>
+          </label>
         </div>
       </div>
       <a href="https://mywellet.com?demo=guided" target="_blank" rel="noopener noreferrer" class="btn-demo">
@@ -129,7 +133,7 @@
             <line x1="16" y1="17" x2="8" y2="17"/>
           </svg>
           <h3>Update Me</h3>
-          <p>Upload a discharge summary, lab result, or visit note. Wellet reads it, extracts the medications, flags what changed, and writes you a summary in plain language.</p>
+          <p>Upload a discharge summary, lab result, or visit note. Wellet reads it, pulls out what changed, and gives you a plain-language summary you can actually act on.</p>
         </div>
         <div class="feature-card reveal">
           <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -143,8 +147,8 @@
           <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
           </svg>
-          <h3>Stability Signal</h3>
-          <p>"All signals within normal range for 14 days." The most valuable thing a caregiver can hear. Wellet remembers the patterns so you don't have to guess whether to worry.</p>
+          <h3>Patterns</h3>
+          <p>"Stable for 14 days — nothing new to worry about." Wellet tracks the trends across vitals, labs, and medications so you always know whether things are steady or shifting.</p>
         </div>
         <div class="feature-card reveal">
           <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -171,7 +175,7 @@
             <polyline points="9 22 9 12 15 12 15 22"/>
           </svg>
           <h3>CareSignals</h3>
-          <p>Wellet watches for pattern shifts across all your data — EHR records, wearables, and passive home sensors that witness daily routines (not cameras). When something changes, you'll know.</p>
+          <p>Wellet watches for pattern shifts across EHR records and wearables. Passive home sensors — coming soon — will add another layer by witnessing daily routines (not cameras). When something changes, you'll know.</p>
         </div>
       </div>
     </div>
@@ -192,7 +196,7 @@
         </div>
         <div class="step reveal">
           <h3>Know</h3>
-          <p>Get weekly summaries, pattern alerts, and plain-language answers. Know when to act and when to rest.</p>
+          <p>Get weekly summaries, pattern alerts, and plain-language answers. Know what changed and what to ask the doctor.</p>
         </div>
       </div>
     </div>
@@ -201,15 +205,15 @@
   <!-- ========== PRICING ========== -->
   <section class="pricing-section" id="pricing">
     <div class="container">
-      <h2 class="reveal">Less than one copay a month</h2>
+      <h2 class="reveal">Simple, annual pricing</h2>
       <p class="section-subtitle reveal">One preventable ER visit costs $2,000 to $5,000. Wellet costs less than your monthly streaming subscriptions.</p>
 
       <div class="pricing-grid">
         <!-- Free -->
         <div class="pricing-card reveal">
-          <div class="tier-name">Wellet Core</div>
+          <div class="tier-name">Free</div>
           <div class="tier-tagline">Get organized</div>
-          <div class="price">Free</div>
+          <div class="price">$0</div>
           <div class="price-note">Always free</div>
           <ul role="list">
             <li>
@@ -236,17 +240,17 @@
           <a href="#top" class="btn-tier">Get early access</a>
         </div>
 
-        <!-- Plus -->
+        <!-- Supporter -->
         <div class="pricing-card featured reveal">
           <div class="card-badge">Most Popular</div>
-          <div class="tier-name">Wellet Plus</div>
-          <div class="tier-tagline">Update Me</div>
-          <div class="price">$9.99<span style="font-size: var(--text-sm); font-family: var(--font-body); color: var(--color-text-muted);">/mo</span></div>
-          <div class="price-note">or $99/year (save 17%)</div>
+          <div class="tier-name">Supporter</div>
+          <div class="tier-tagline">Update Me + AI insights</div>
+          <div class="price">$25<span style="font-size: var(--text-sm); font-family: var(--font-body); color: var(--color-text-muted);">/yr</span></div>
+          <div class="price-note">Billed annually</div>
           <ul role="list">
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-              Everything in Core
+              Everything in Free
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
@@ -272,16 +276,16 @@
           <a href="#top" class="btn-tier">Get early access</a>
         </div>
 
-        <!-- Pro -->
+        <!-- Connect -->
         <div class="pricing-card reveal">
-          <div class="tier-name">Wellet Pro</div>
-          <div class="tier-tagline">The Full Picture</div>
-          <div class="price">$29.99<span style="font-size: var(--text-sm); font-family: var(--font-body); color: var(--color-text-muted);">/mo</span></div>
-          <div class="price-note">or $299/year (save 17%)</div>
+          <div class="tier-name">Connect</div>
+          <div class="tier-tagline">The full picture</div>
+          <div class="price">$60<span style="font-size: var(--text-sm); font-family: var(--font-body); color: var(--color-text-muted);">/yr</span></div>
+          <div class="price-note">Billed annually</div>
           <ul role="list">
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-              Everything in Plus
+              Everything in Supporter
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
@@ -293,7 +297,7 @@
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
-              Stability Signal
+              Patterns
             </li>
             <li>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
@@ -321,7 +325,7 @@
         <div class="ea-card ea-card--founding reveal" id="ea-founding">
           <div class="ea-badge">&#9733; Founding Member</div>
           <h3>Founding 50</h3>
-          <p class="ea-reward">Free Wellet Pro for life + Founding Member badge + your name in credits</p>
+          <p class="ea-reward">Free Connect for life + Founding Member badge + your name in credits</p>
           <div class="ea-progress-wrap">
             <div class="ea-progress-bar"><div class="ea-progress-fill" id="ea-fill-founding" style="width:0%"></div></div>
             <span class="ea-counter" id="ea-count-founding">Loading...</span>
@@ -338,7 +342,7 @@
         <!-- Early 100 card -->
         <div class="ea-card reveal" id="ea-early">
           <h3>Early 100</h3>
-          <p class="ea-reward">Free Wellet Pro for 12 months + early access badge</p>
+          <p class="ea-reward">Free Connect for 12 months + early access badge</p>
           <div class="ea-progress-wrap">
             <div class="ea-progress-bar"><div class="ea-progress-fill" id="ea-fill-early" style="width:0%"></div></div>
             <span class="ea-counter" id="ea-count-early">Loading...</span>
@@ -355,7 +359,7 @@
         <!-- Beta 250 card -->
         <div class="ea-card reveal" id="ea-beta">
           <h3>Beta 250</h3>
-          <p class="ea-reward">Free Wellet Plus for 12 months</p>
+          <p class="ea-reward">Free Supporter for 12 months</p>
           <div class="ea-progress-wrap">
             <div class="ea-progress-bar"><div class="ea-progress-fill" id="ea-fill-beta" style="width:0%"></div></div>
             <span class="ea-counter" id="ea-count-beta">Loading...</span>
@@ -457,7 +461,7 @@
             <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="faq-answer">
-            <p>Wellet Core is free forever. Wellet Plus (AI summaries, pattern detection) is $9.99/mo, and Wellet Pro (EHR integration, wearables, Stability Signal) is $29.99/mo. Less than one copay.</p>
+            <p>Wellet is free to start. The Supporter tier ($25/year) adds AI summaries and pattern detection. Connect ($60/year) adds EHR integration, wearables, and Patterns. All plans are billed annually.</p>
           </div>
         </div>
 
@@ -467,17 +471,7 @@
             <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="faq-answer">
-            <p>Patient portals are built for the patient or the provider. Wellet is built for the person in between — the caregiver reading the chart at 11 PM trying to figure out if something changed. We pull data from portals and translate it into what you actually need to know.</p>
-          </div>
-        </div>
-
-        <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
-            <span>Can I share information with other family members?</span>
-            <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-          </button>
-          <div class="faq-answer">
-            <p>Yes. Care Circle lets you invite siblings, other caregivers, or providers into one shared view. Everyone sees the same health timeline — no more group texts or conflicting medication lists.</p>
+            <p>Patient portals are built for the patient or the provider. Wellet is built for the person in between — the caregiver reading the chart at 11 PM trying to figure out if something changed. We pull data from portals and translate it into what you actually need to know. Care Circle lets you invite siblings, other caregivers, or providers into one shared view so everyone sees the same timeline.</p>
           </div>
         </div>
 

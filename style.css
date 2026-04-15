@@ -462,6 +462,24 @@ section {
   margin: 0 auto;
 }
 
+/* Follow the Build checkbox */
+.follow-build-label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  text-align: left;
+}
+
+.follow-build-label input[type='checkbox'] {
+  margin-top: 2px;
+  accent-color: var(--color-primary);
+  flex-shrink: 0;
+}
+
 .waitlist-error {
   display: none;
   text-align: center;
