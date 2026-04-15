@@ -48,6 +48,7 @@
           <li><a href="#pricing">Pricing</a></li>
           <li><a href="#founder">About</a></li>
           <li><a href="#faq">FAQ</a></li>
+          <li><a href="https://mywellet.com" class="nav-signin" style="font-weight:500;color:var(--color-primary);white-space:nowrap;">Sign in →</a></li>
           <li>
             <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -67,34 +68,11 @@
       <!-- Waitlist Form -->
       <div class="waitlist" id="waitlist-form">
         <form id="signup-form" onsubmit="return handleSignup(event)">
-          <div class="waitlist-options">
-            <div class="waitlist-option">
-              <input type="checkbox" id="opt-launch" name="interest" value="launch" checked>
-              <label for="opt-launch">
-                <svg class="option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                  <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-                </svg>
-                <span class="option-title">Notify me at launch</span>
-                <span class="option-desc">One email when Wellet is ready</span>
-              </label>
-            </div>
-            <div class="waitlist-option">
-              <input type="checkbox" id="opt-follow" name="interest" value="follow" checked>
-              <label for="opt-follow">
-                <svg class="option-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/>
-                </svg>
-                <span class="option-title">Follow the build</span>
-                <span class="option-desc">Weekly updates as we build Wellet</span>
-              </label>
-            </div>
-          </div>
           <div class="waitlist-email-row">
             <input type="email" id="email-input" placeholder="you@email.com" required aria-label="Your email address">
-            <button type="submit" class="btn-primary" id="submit-btn">Join waitlist</button>
+            <button type="submit" class="btn-primary" id="submit-btn">Get early access</button>
           </div>
-          <p class="waitlist-note">No spam. Unsubscribe anytime.</p>
+          <p class="waitlist-note">We'll notify you at launch and share build updates along the way. No spam.</p>
         </form>
         <div class="waitlist-error" id="form-error"></div>
         <div class="waitlist-success" id="form-success">
@@ -250,7 +228,7 @@
               Basic Ask Wellet
             </li>
           </ul>
-          <a href="#top" class="btn-tier">Join waitlist</a>
+          <a href="#top" class="btn-tier">Get early access</a>
         </div>
 
         <!-- Plus -->
@@ -286,7 +264,7 @@
               Care circle (up to 10)
             </li>
           </ul>
-          <a href="#top" class="btn-tier">Join waitlist</a>
+          <a href="#top" class="btn-tier">Get early access</a>
         </div>
 
         <!-- Pro -->
@@ -321,7 +299,7 @@
               Priority support
             </li>
           </ul>
-          <a href="#top" class="btn-tier">Join waitlist</a>
+          <a href="#top" class="btn-tier">Get early access</a>
         </div>
       </div>
     </div>
@@ -392,7 +370,7 @@
             <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="faq-answer">
-            <p>Yes. Your data lives on your device. Wellet's AI processes your information to give you insights, then lets go — nothing is stored on our servers or used for training. All data is encrypted and isolated with row-level security.</p>
+            <p>Yes. Your health data is encrypted and isolated with row-level security — no other user or even Wellet staff can access it. AI features process your data to surface insights without storing or training on anything. You own your data, you control who sees it, and you can export or delete it anytime.</p>
           </div>
         </div>
 
@@ -444,8 +422,8 @@
   <section class="cta-bottom">
     <div class="container">
       <h2 class="reveal">Stop guessing. Start knowing.</h2>
-      <p class="reveal">Join the waitlist and be the first to know when Wellet launches. Or follow along as we build it in public.</p>
-      <a href="#top" class="btn-cta reveal">Join the waitlist</a>
+      <p class="reveal">Be the first to know when Wellet launches. We'll share updates as we build it.</p>
+      <a href="#top" class="btn-cta reveal">Get early access</a>
     </div>
   </section>
 

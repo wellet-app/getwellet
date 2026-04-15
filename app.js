@@ -56,18 +56,11 @@ async function handleSignup(e) {
   const emailInput = document.getElementById('email-input');
 
   const email = emailInput.value.trim();
-  const checked = Array.from(document.querySelectorAll('input[name="interest"]:checked')).map(cb => cb.value);
-  const interest = checked.length === 2 ? 'both' : checked.length === 1 ? checked[0] : null;
+  const interest = 'both';
 
   // Reset states
   errorEl.classList.remove('visible');
   errorEl.textContent = '';
-
-  if (!interest) {
-    errorEl.textContent = 'Please select at least one option.';
-    errorEl.classList.add('visible');
-    return false;
-  }
 
   if (!email) {
     errorEl.textContent = 'Please enter your email address.';
@@ -84,7 +77,7 @@ async function handleSignup(e) {
 
   // Disable button
   submitBtn.disabled = true;
-  submitBtn.textContent = 'Joining...';
+  submitBtn.textContent = 'Submitting...';
 
   try {
     const res = await fetch(SUPABASE_URL + '/rest/v1/waitlist', {
