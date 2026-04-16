@@ -518,7 +518,8 @@ section {
   letter-spacing: -0.02em;
 }
 
-.stat-item .stat-label {
+.stat-item .stat-label,
+.stat-item figcaption {
   font-size: var(--text-xs);
   color: var(--color-text-muted);
   margin-top: var(--space-1);

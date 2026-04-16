@@ -86,36 +86,44 @@
       </div>
       <a href="https://mywellet.com?demo=guided" target="_blank" rel="noopener noreferrer" class="btn-demo">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="6,3 20,12 6,21"/></svg>
-        Try the demo
+        Try the demo<span class="sr-only"> (opens in new tab)</span>
       </a>
     </div>
   </section>
 
   <!-- ========== STAT STRIP ========== -->
-  <div class="stat-strip">
+  <section class="stat-strip" aria-label="Caregiver statistics">
     <div class="container">
-      <div class="stat-item reveal">
-        <span class="stat-number">63M</span>
-        <span class="stat-label">family caregivers in the US</span>
-        <span class="stat-source"><a href="https://www.aarp.org/pri/topics/ltss/family-caregiving/caregiving-in-the-us-2025/" target="_blank" rel="noopener noreferrer">AARP 2025</a></span>
-      </div>
-      <div class="stat-item reveal">
-        <span class="stat-number">27 hrs/wk</span>
-        <span class="stat-label">average care time per caregiver</span>
-        <span class="stat-source"><a href="https://www.aarp.org/caregiving/financial-legal/valuing-the-invaluable-report-2026/" target="_blank" rel="noopener noreferrer">AARP 2026</a></span>
-      </div>
-      <div class="stat-item reveal">
-        <span class="stat-number">$1T+</span>
-        <span class="stat-label">in unpaid labor annually</span>
-        <span class="stat-source"><a href="https://www.aarp.org/caregiving/financial-legal/valuing-the-invaluable-report-2026/" target="_blank" rel="noopener noreferrer">AARP 2026</a></span>
-      </div>
-      <div class="stat-item reveal">
-        <span class="stat-number">57%</span>
-        <span class="stat-label">perform medical tasks untrained</span>
-        <span class="stat-source"><a href="https://www.aarp.org/caregiving/financial-legal/valuing-the-invaluable-report-2026/" target="_blank" rel="noopener noreferrer">AARP 2026</a></span>
-      </div>
+      <figure class="stat-item reveal">
+        <span class="stat-number" aria-hidden="true">63M</span>
+        <figcaption>
+          <span class="sr-only">63 million</span> family caregivers in the US
+        </figcaption>
+        <span class="stat-source"><a href="https://www.aarp.org/pri/topics/ltss/family-caregiving/caregiving-in-the-us-2025/" target="_blank" rel="noopener noreferrer">AARP 2025<span class="sr-only"> (opens in new tab)</span></a></span>
+      </figure>
+      <figure class="stat-item reveal">
+        <span class="stat-number" aria-hidden="true">27 hrs/wk</span>
+        <figcaption>
+          <span class="sr-only">27 hours per week</span> average care time per caregiver
+        </figcaption>
+        <span class="stat-source"><a href="https://www.aarp.org/caregiving/financial-legal/valuing-the-invaluable-report-2026/" target="_blank" rel="noopener noreferrer">AARP 2026<span class="sr-only"> (opens in new tab)</span></a></span>
+      </figure>
+      <figure class="stat-item reveal">
+        <span class="stat-number" aria-hidden="true">$1T+</span>
+        <figcaption>
+          <span class="sr-only">Over 1 trillion dollars</span> in unpaid labor annually
+        </figcaption>
+        <span class="stat-source"><a href="https://www.aarp.org/caregiving/financial-legal/valuing-the-invaluable-report-2026/" target="_blank" rel="noopener noreferrer">AARP 2026<span class="sr-only"> (opens in new tab)</span></a></span>
+      </figure>
+      <figure class="stat-item reveal">
+        <span class="stat-number" aria-hidden="true">57%</span>
+        <figcaption>
+          <span class="sr-only">57 percent</span> perform medical tasks untrained
+        </figcaption>
+        <span class="stat-source"><a href="https://www.aarp.org/caregiving/financial-legal/valuing-the-invaluable-report-2026/" target="_blank" rel="noopener noreferrer">AARP 2026<span class="sr-only"> (opens in new tab)</span></a></span>
+      </figure>
     </div>
-  </div>
+  </section>
 
   <!-- ========== PROBLEM / FEATURES ========== -->
   <section class="problem-section" id="features">
@@ -391,8 +399,8 @@
           <p>When I became a caregiver myself, I saw the gap firsthand. Every health tool I tried was built for the patient or the provider. Nothing was built for the person in between — the one reading the discharge summary at 11 PM, trying to figure out if a medication changed.</p>
           <p>That's Wellet. The tool I needed and couldn't find.</p>
           <div class="founder-links">
-            <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer">Medium</a>
-            <a href="https://www.linkedin.com/in/betsyeble/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer">Medium<span class="sr-only"> (opens in new tab)</span></a>
+            <a href="https://www.linkedin.com/in/betsyeble/" target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in new tab)</span></a>
           </div>
         </div>
       </div>
@@ -406,71 +414,71 @@
       <div class="faq-list reveal">
 
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" id="faq-question-1" aria-expanded="false" aria-controls="faq-answer-1">
             <span>What is Wellet?</span>
             <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-question-1">
             <p>Wellet is a health companion built for family caregivers. It reads your loved one's medical records, tracks their medications and health patterns, and tells you what's changing — in plain language.</p>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" id="faq-question-2" aria-expanded="false" aria-controls="faq-answer-2">
             <span>Who is Wellet for?</span>
             <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-2" role="region" aria-labelledby="faq-question-2">
             <p>Anyone caring for a family member — whether you're managing your parent's medications, coordinating with siblings, or keeping track of your own health journey. Wellet works for caregivers at every stage.</p>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" id="faq-question-3" aria-expanded="false" aria-controls="faq-answer-3">
             <span>How does Wellet read health records?</span>
             <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-3" role="region" aria-labelledby="faq-question-3">
             <p>You can upload documents like discharge summaries or lab results, and Wellet's AI extracts the important details. You can also connect directly to your loved one's electronic health records through supported patient portals — no manual data entry needed.</p>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" id="faq-question-4" aria-expanded="false" aria-controls="faq-answer-4">
             <span>Is my data private?</span>
             <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-4" role="region" aria-labelledby="faq-question-4">
             <p>Yes. Your health data is encrypted and isolated with row-level security — no other user or even Wellet staff can access it. AI features process your data to surface insights without storing or training on anything. You own your data, you control who sees it, and you can export or delete it anytime.</p>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" id="faq-question-5" aria-expanded="false" aria-controls="faq-answer-5">
             <span>Do I need access to my loved one's patient portal?</span>
             <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-5" role="region" aria-labelledby="faq-question-5">
             <p>Not required. Wellet works great with manual entry and document uploads. But if you have caregiver proxy access to their portal, you can connect their records for automatic updates. We'll guide you through getting proxy access if you don't have it yet.</p>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" id="faq-question-6" aria-expanded="false" aria-controls="faq-answer-6">
             <span>What does Wellet cost?</span>
             <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-6" role="region" aria-labelledby="faq-question-6">
             <p>Wellet is free to start. The Supporter tier ($25/year) adds AI summaries and pattern detection. Connect ($60/year) adds EHR integration, wearables, and Patterns. All plans are billed annually.</p>
           </div>
         </div>
 
         <div class="faq-item">
-          <button class="faq-question" aria-expanded="false">
+          <button class="faq-question" id="faq-question-7" aria-expanded="false" aria-controls="faq-answer-7">
             <span>How is Wellet different from MyChart or other patient portals?</span>
             <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </button>
-          <div class="faq-answer">
+          <div class="faq-answer" id="faq-answer-7" role="region" aria-labelledby="faq-question-7">
             <p>Patient portals are built for the patient or the provider. Wellet is built for the person in between — the caregiver reading the chart at 11 PM trying to figure out if something changed. We pull data from portals and translate it into what you actually need to know. Care Circle lets you invite siblings, other caregivers, or providers into one shared view so everyone sees the same timeline.</p>
           </div>
         </div>
@@ -493,7 +501,7 @@
     <div class="container">
       <span class="footer-copy">&copy; 2026 Wellet Health. All rights reserved.</span>
       <div class="footer-links">
-        <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer">Blog</a>
+        <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer">Blog<span class="sr-only"> (opens in new tab)</span></a>
         <a href="mailto:hello@getwellet.com">Contact</a>
       </div>
     </div>
