@@ -45,6 +45,72 @@ function updateToggleIcon(btn, theme) {
   document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
 })();
 
+// --- ENTRY-PATH ATTRIBUTION ---
+// Classifies each visitor into one of the three trigger-moment channels
+// so we can measure institutional, peer, and content signups separately.
+function getAttribution() {
+  try {
+    const qs = new URLSearchParams(window.location.search);
+    const utm_source = qs.get('utm_source') || null;
+    const utm_medium = qs.get('utm_medium') || null;
+    const utm_campaign = qs.get('utm_campaign') || null;
+    const ref = (document.referrer || '').split('?')[0] || null;
+    const path = window.location.pathname + window.location.search;
+
+    // Derive entry_path bucket (trigger-moment channels from the strategy memo)
+    let entry_path = 'direct';
+    const refHost = ref ? (new URL(ref)).hostname.toLowerCase() : '';
+    const campaign = (utm_campaign || '').toLowerCase();
+    const source = (utm_source || '').toLowerCase();
+    const medium = (utm_medium || '').toLowerCase();
+
+    // Institutional: tagged links from clinicians, VA CSP, hospital handouts, etc.
+    if (medium === 'clinician' || medium === 'institutional' ||
+        campaign.startsWith('clinician') || campaign.startsWith('va_csp') ||
+        campaign.startsWith('hospital') || campaign.startsWith('gcm') ||
+        source === 'va' || source === 'elizabeth_dole' || source === 'aca' ||
+        path.indexOf('/for-clinicians') === 0) {
+      entry_path = 'institutional';
+    }
+    // Peer pass-along: in-it caregivers referring just-arriving ones
+    else if (medium === 'peer' || medium === 'referral' ||
+             campaign.indexOf('pass_along') !== -1 || campaign.indexOf('hidden_helpers') !== -1 ||
+             source === 'peer' || source === 'caregiver') {
+      entry_path = 'peer_pass_along';
+    }
+    // Veteran caregiver community (its own high-leverage bucket)
+    else if (source === 'va_community' || source === 'hidden_heroes' ||
+             campaign.indexOf('veteran') !== -1 || campaign.indexOf('military') !== -1) {
+      entry_path = 'veteran';
+    }
+    // Content / ambient recall: Medium, LinkedIn, TikTok, Reddit, etc.
+    else if (medium === 'content' || medium === 'social' || medium === 'organic_social' ||
+             ['medium', 'linkedin', 'tiktok', 'reddit', 'x', 'twitter', 'facebook', 'instagram'].indexOf(source) !== -1 ||
+             /medium\.com|linkedin\.com|tiktok\.com|reddit\.com|x\.com|twitter\.com|facebook\.com|instagram\.com/.test(refHost)) {
+      entry_path = 'content';
+    }
+    // Paid
+    else if (medium === 'cpc' || medium === 'paid' || medium === 'ppc') {
+      entry_path = 'paid';
+    }
+    // Known referrer host but unclassified
+    else if (ref) {
+      entry_path = 'other';
+    }
+
+    return {
+      entry_path: entry_path,
+      referrer: ref,
+      utm_source: utm_source,
+      utm_medium: utm_medium,
+      utm_campaign: utm_campaign,
+      landing_page: path
+    };
+  } catch (err) {
+    return { entry_path: 'direct', referrer: null, utm_source: null, utm_medium: null, utm_campaign: null, landing_page: null };
+  }
+}
+
 // --- WAITLIST FORM ---
 async function handleSignup(e) {
   e.preventDefault();
@@ -57,6 +123,7 @@ async function handleSignup(e) {
 
   const email = emailInput.value.trim();
   const interest = 'both';
+  const attribution = getAttribution();
 
   // Reset states
   errorEl.classList.remove('visible');
@@ -88,7 +155,7 @@ async function handleSignup(e) {
         'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
         'Prefer': 'return=minimal'
       },
-      body: JSON.stringify({ email, interest })
+      body: JSON.stringify(Object.assign({ email, interest }, attribution))
     });
 
     if (res.ok) {
@@ -256,7 +323,7 @@ function handleEarlyAccess(event, tier) {
       'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
       'Prefer': 'return=minimal'
     },
-    body: JSON.stringify({ email: email, interest: 'both', reward_tier: tier })
+    body: JSON.stringify(Object.assign({ email: email, interest: 'both', reward_tier: tier }, getAttribution()))
   })
   .then(function(res) {
     if (res.ok) {
