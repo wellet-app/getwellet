@@ -567,6 +567,15 @@ section {
   .phone-update-text {
     font-size: 10px;
   }
+  .waitlist-email-row {
+    flex-direction: column;
+  }
+  .waitlist-email-row input[type='email'] {
+    width: 100%;
+  }
+  .hero-subtitle {
+    max-width: 100%;
+  }
 }
 
 /* ============================================================
@@ -885,21 +894,21 @@ section {
 }
 
 .feature-card--dark {
-  background: #1a3329;
-  border-color: #2a4a3a;
-  color: #d8f3dc;
+  background: #22412f;
+  border-color: #3a6b4a;
+  color: #eaf5ee;
 }
 
 .feature-card--dark h3 {
-  color: #d8f3dc;
+  color: #ffffff;
 }
 
 .feature-card--dark p {
-  color: #95d5b2;
+  color: #c8e6d0;
 }
 
 .feature-card--dark .feature-icon {
-  color: #74c69d;
+  color: #a3d9b1;
 }
 
 .feature-card .feature-icon {
@@ -965,6 +974,21 @@ section {
 
 .preview-line--short {
   width: 40%;
+}
+
+.preview-summary-title {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}
+
+.preview-summary-body {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  line-height: 1.55;
+  margin-bottom: var(--space-3);
 }
 
 .preview-change {
