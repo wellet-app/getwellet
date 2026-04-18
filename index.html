@@ -14,7 +14,7 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="./base.css">
@@ -63,32 +63,59 @@
 
   <!-- ========== HERO ========== -->
   <section class="hero" id="top">
-    <div class="container">
-      <h1>Stop wondering if Mom is <strong>okay</strong></h1>
-      <p class="hero-subtitle">Wellet reads your loved one's health records, tracks their patterns, and tells you what matters this week. So you can stop guessing.</p>
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <h1>Stop wondering if Mom is <strong>okay</strong></h1>
+        <p class="hero-subtitle">Wellet reads your loved one's health records, tracks their patterns, and tells you what matters this week. So you can stop guessing.</p>
 
-      <!-- Waitlist Form -->
-      <div class="waitlist" id="waitlist-form">
-        <form id="signup-form" onsubmit="return handleSignup(event)">
-          <div class="waitlist-email-row">
-            <input type="email" id="email-input" placeholder="you@email.com" required aria-label="Your email address">
-            <button type="submit" class="btn-primary" id="submit-btn">Get early access</button>
+        <!-- Waitlist Form -->
+        <div class="waitlist" id="waitlist-form">
+          <form id="signup-form" onsubmit="return handleSignup(event)">
+            <div class="waitlist-email-row">
+              <input type="email" id="email-input" placeholder="you@email.com" required aria-label="Your email address">
+              <button type="submit" class="btn-primary" id="submit-btn">Get early access</button>
+            </div>
+            <p class="waitlist-note">We'll notify you at launch and share build updates along the way. No spam.</p>
+          </form>
+          <div class="waitlist-error" id="form-error"></div>
+          <div class="waitlist-success" id="form-success">
+            <p>You're in. We'll keep you posted.</p>
+            <label class="follow-build-label">
+              <input type="checkbox" id="follow-build-check" onchange="handleFollowBuild(this)">
+              <span>Follow the build — get weekly updates as we ship new features</span>
+            </label>
           </div>
-          <p class="waitlist-note">We'll notify you at launch and share build updates along the way. No spam.</p>
-        </form>
-        <div class="waitlist-error" id="form-error"></div>
-        <div class="waitlist-success" id="form-success">
-          <p>You're in. We'll keep you posted.</p>
-          <label class="follow-build-label">
-            <input type="checkbox" id="follow-build-check" onchange="handleFollowBuild(this)">
-            <span>Follow the build — get weekly updates as we ship new features</span>
-          </label>
+        </div>
+        <a href="https://mywellet.com?demo=guided" target="_blank" rel="noopener noreferrer" class="btn-demo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="6,3 20,12 6,21"/></svg>
+          Try the demo<span class="sr-only"> (opens in new tab)</span>
+        </a>
+      </div>
+
+      <!-- Phone Mockup -->
+      <div class="hero-phone" aria-hidden="true">
+        <div class="phone-frame">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+            <div class="phone-header">
+              <span class="phone-greeting">Good morning</span>
+              <span class="phone-name">Mom's Health</span>
+            </div>
+            <div class="phone-card phone-card--summary">
+              <div class="phone-card-label">This Week</div>
+              <div class="phone-card-text">Stable for 14 days. No new changes to medications or labs.</div>
+            </div>
+            <div class="phone-card phone-card--alert">
+              <div class="phone-card-label">CareSignal</div>
+              <div class="phone-card-text">Morning routine started 47 min later than usual</div>
+            </div>
+            <div class="phone-card phone-card--ask">
+              <div class="phone-card-label">Ask Wellet</div>
+              <div class="phone-card-text">"What changed at her last visit?"</div>
+            </div>
+          </div>
         </div>
       </div>
-      <a href="https://mywellet.com?demo=guided" target="_blank" rel="noopener noreferrer" class="btn-demo">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="6,3 20,12 6,21"/></svg>
-        Try the demo<span class="sr-only"> (opens in new tab)</span>
-      </a>
     </div>
   </section>
 
@@ -134,16 +161,31 @@
     </div>
     <div class="container">
       <div class="features-grid">
-        <div class="feature-card reveal">
-          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-            <line x1="16" y1="13" x2="8" y2="13"/>
-            <line x1="16" y1="17" x2="8" y2="17"/>
-          </svg>
-          <h3>Update Me</h3>
-          <p>Upload a discharge summary, lab result, or visit note. Wellet reads it, pulls out what changed, and gives you a plain-language summary you can actually act on.</p>
+        <!-- Update Me — spans 2 columns -->
+        <div class="feature-card feature-card--wide reveal">
+          <div class="feature-card-body">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+            <h3>Update Me</h3>
+            <p>Upload a discharge summary, lab result, or visit note. Wellet reads it, pulls out what changed, and gives you a plain-language summary you can actually act on.</p>
+          </div>
+          <div class="feature-preview" aria-hidden="true">
+            <div class="preview-panel preview-panel--update">
+              <div class="preview-badge">New Summary</div>
+              <div class="preview-line preview-line--title"></div>
+              <div class="preview-line"></div>
+              <div class="preview-line preview-line--short"></div>
+              <div class="preview-change"><span class="preview-dot preview-dot--changed"></span> Metformin 500mg → 1000mg</div>
+              <div class="preview-change"><span class="preview-dot preview-dot--new"></span> A1C: 6.8% (was 7.2%)</div>
+            </div>
+          </div>
         </div>
+
+        <!-- Ask Wellet -->
         <div class="feature-card reveal">
           <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10"/>
@@ -152,6 +194,8 @@
           <h3>Ask Wellet</h3>
           <p>Ask questions about your loved one's health and get answers grounded in their actual medical records. Not generic search results — their chart, their context.</p>
         </div>
+
+        <!-- Patterns -->
         <div class="feature-card reveal">
           <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
@@ -159,6 +203,8 @@
           <h3>Patterns</h3>
           <p>"Stable for 14 days — nothing new to worry about." Wellet tracks the trends across vitals, labs, and medications so you always know whether things are steady or shifting.</p>
         </div>
+
+        <!-- Care Circle -->
         <div class="feature-card reveal">
           <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
@@ -169,6 +215,8 @@
           <h3>Care Circle</h3>
           <p>Invite siblings, aides, and providers into one shared view. Everyone sees the same timeline. No more group texts or conflicting medication lists.</p>
         </div>
+
+        <!-- EHR Integration -->
         <div class="feature-card reveal">
           <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
             <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
@@ -178,13 +226,37 @@
           <h3>EHR Integration</h3>
           <p>Connect to your loved one's electronic health records. Labs, visit notes, and medication changes flow in automatically — no more logging into three patient portals.</p>
         </div>
-        <div class="feature-card reveal">
-          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
-          </svg>
-          <h3>CareSignals</h3>
-          <p>Wellet watches for pattern shifts across EHR records and wearables. Passive home sensors — coming soon — will add another layer by witnessing daily routines (not cameras). When something changes, you'll know.</p>
+
+        <!-- CareSignals — spans 3 columns, dark -->
+        <div class="feature-card feature-card--full feature-card--dark reveal">
+          <div class="feature-card-body">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+              <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            <h3>CareSignals</h3>
+            <p>Wellet watches for pattern shifts across EHR records and wearables. Passive home sensors — coming soon — will add another layer by witnessing daily routines (not cameras). When something changes, you'll know.</p>
+          </div>
+          <div class="feature-preview feature-preview--signals" aria-hidden="true">
+            <div class="signal-row">
+              <span class="signal-icon signal-icon--motion"></span>
+              <span class="signal-label">Kitchen motion</span>
+              <span class="signal-time">7:12 AM</span>
+              <span class="signal-status signal-status--normal">Normal</span>
+            </div>
+            <div class="signal-row">
+              <span class="signal-icon signal-icon--door"></span>
+              <span class="signal-label">Front door</span>
+              <span class="signal-time">8:03 AM</span>
+              <span class="signal-status signal-status--normal">Normal</span>
+            </div>
+            <div class="signal-row signal-row--alert">
+              <span class="signal-icon signal-icon--routine"></span>
+              <span class="signal-label">Morning routine</span>
+              <span class="signal-time">9:48 AM</span>
+              <span class="signal-status signal-status--late">47 min late</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

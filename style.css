@@ -43,8 +43,12 @@
   --content-wide: 1200px;
 
   /* Fonts */
-  --font-display: 'DM Serif Display', serif;
+  --font-display: 'Fraunces', serif;
   --font-body: 'DM Sans', sans-serif;
+
+  /* Accent */
+  --color-amber: #C07028;
+  --color-amber-light: #f5e6d8;
 }
 
 /* ============================================================
@@ -248,7 +252,17 @@ section {
    ============================================================ */
 .hero {
   padding-block: clamp(var(--space-16), 10vw, var(--space-32));
-  text-align: center;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+.hero-content {
+  text-align: left;
 }
 
 .hero-badge {
@@ -272,13 +286,14 @@ section {
   font-weight: 400;
   color: var(--color-text);
   max-width: 18ch;
-  margin: 0 auto var(--space-6);
+  margin: 0 0 var(--space-6);
   line-height: 1.1;
 }
 
 .hero h1 strong {
-  color: var(--color-primary);
+  color: var(--color-amber);
   font-weight: 400;
+  font-style: italic;
 }
 
 .hero-subtitle {
@@ -286,8 +301,119 @@ section {
   font-weight: 300;
   color: var(--color-text-muted);
   max-width: 48ch;
-  margin: 0 auto var(--space-8);
+  margin: 0 0 var(--space-8);
   line-height: 1.5;
+}
+
+/* ---- Phone Mockup ---- */
+.hero-phone {
+  display: flex;
+  justify-content: center;
+}
+
+.phone-frame {
+  width: 280px;
+  background: var(--color-surface-2);
+  border: 2px solid var(--color-divider);
+  border-radius: 36px;
+  padding: 12px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+.phone-notch {
+  width: 120px;
+  height: 28px;
+  background: var(--color-surface-2);
+  border-radius: 0 0 16px 16px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  border: 2px solid var(--color-divider);
+  border-top: none;
+}
+
+.phone-screen {
+  background: var(--color-bg);
+  border-radius: 24px;
+  padding: var(--space-5);
+  margin-top: -14px;
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.phone-header {
+  padding: var(--space-3) 0;
+}
+
+.phone-greeting {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.phone-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  color: var(--color-text);
+  margin-top: var(--space-1);
+}
+
+.phone-card {
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+}
+
+.phone-card-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-primary);
+  margin-bottom: var(--space-1);
+}
+
+.phone-card--alert .phone-card-label {
+  color: var(--color-amber);
+}
+
+.phone-card-text {
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.phone-card--ask {
+  background: var(--color-primary-light);
+  border-color: var(--color-primary);
+}
+
+.phone-card--ask .phone-card-text {
+  font-style: italic;
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+  .hero-phone {
+    order: -1;
+  }
+  .phone-frame {
+    width: 240px;
+  }
+  .phone-screen {
+    min-height: 360px;
+  }
 }
 
 /* ============================================================
@@ -295,7 +421,7 @@ section {
    ============================================================ */
 .waitlist {
   max-width: 480px;
-  margin: 0 auto;
+  margin: 0;
 }
 
 .waitlist-options {
@@ -440,7 +566,7 @@ section {
   font-size: var(--text-xs);
   color: var(--color-text-faint);
   margin-top: var(--space-3);
-  text-align: center;
+  text-align: left;
 }
 
 .waitlist-success {
@@ -497,9 +623,9 @@ section {
    STAT STRIP
    ============================================================ */
 .stat-strip {
-  background: var(--color-surface);
-  border-top: 1px solid var(--color-divider);
-  border-bottom: 1px solid var(--color-divider);
+  background: #1a3329;
+  border-top: none;
+  border-bottom: none;
   padding-block: var(--space-10);
 }
 
@@ -513,7 +639,7 @@ section {
 .stat-item .stat-number {
   font-family: var(--font-display);
   font-size: var(--text-xl);
-  color: var(--color-primary);
+  color: #d8f3dc;
   display: block;
   letter-spacing: -0.02em;
 }
@@ -521,25 +647,25 @@ section {
 .stat-item .stat-label,
 .stat-item figcaption {
   font-size: var(--text-xs);
-  color: var(--color-text-muted);
+  color: #95d5b2;
   margin-top: var(--space-1);
 }
 
 .stat-item .stat-source {
   font-size: 11px;
-  color: var(--color-text-faint);
+  color: #74c69d;
   margin-top: var(--space-1);
   white-space: nowrap;
 }
 
 .stat-item .stat-source a {
-  color: var(--color-text-faint);
+  color: #74c69d;
   text-decoration: underline;
-  text-decoration-color: color-mix(in srgb, var(--color-text-faint) 50%, transparent);
+  text-decoration-color: rgba(116, 198, 157, 0.4);
 }
 
 .stat-item .stat-source a:hover {
-  color: var(--color-text-muted);
+  color: #d8f3dc;
 }
 
 @media (max-width: 768px) {
@@ -587,6 +713,42 @@ section {
   padding: var(--space-8) var(--space-6);
 }
 
+/* Wide card (Update Me) — spans 2 columns */
+.feature-card--wide {
+  grid-column: span 2;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+/* Full-width card (CareSignals) — spans 3 columns, dark bg */
+.feature-card--full {
+  grid-column: span 3;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.feature-card--dark {
+  background: #1a3329;
+  border-color: #2a4a3a;
+  color: #d8f3dc;
+}
+
+.feature-card--dark h3 {
+  color: #d8f3dc;
+}
+
+.feature-card--dark p {
+  color: #95d5b2;
+}
+
+.feature-card--dark .feature-icon {
+  color: #74c69d;
+}
+
 .feature-card .feature-icon {
   width: 40px;
   height: 40px;
@@ -606,8 +768,144 @@ section {
   line-height: 1.6;
 }
 
+/* ---- Feature Preview Panels ---- */
+.feature-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-panel {
+  background: var(--color-bg);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  width: 100%;
+  max-width: 300px;
+}
+
+.preview-badge {
+  display: inline-block;
+  background: var(--color-primary-light);
+  color: var(--color-primary);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-3);
+}
+
+.preview-line {
+  height: 8px;
+  background: var(--color-divider);
+  border-radius: 4px;
+  margin-bottom: var(--space-2);
+}
+
+.preview-line--title {
+  width: 60%;
+  height: 10px;
+  background: var(--color-text-faint);
+}
+
+.preview-line--short {
+  width: 40%;
+}
+
+.preview-change {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  padding: var(--space-1) 0;
+}
+
+.preview-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.preview-dot--changed {
+  background: var(--color-amber);
+}
+
+.preview-dot--new {
+  background: var(--color-primary);
+}
+
+/* ---- CareSignals Preview ---- */
+.feature-preview--signals {
+  flex-direction: column;
+  gap: 0;
+  align-items: stretch;
+}
+
+.signal-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid rgba(116, 198, 157, 0.15);
+  font-size: var(--text-xs);
+}
+
+.signal-row:last-child {
+  border-bottom: none;
+}
+
+.signal-icon {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.signal-icon--motion { background: #74c69d; }
+.signal-icon--door { background: #52b788; }
+.signal-icon--routine { background: var(--color-amber); }
+
+.signal-label {
+  color: #d8f3dc;
+  flex: 1;
+}
+
+.signal-time {
+  color: #74c69d;
+  font-variant-numeric: tabular-nums;
+}
+
+.signal-status {
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.03em;
+}
+
+.signal-status--normal {
+  color: #52b788;
+}
+
+.signal-status--late {
+  color: var(--color-amber);
+}
+
+.signal-row--alert {
+  background: rgba(192, 112, 40, 0.08);
+  border-radius: var(--radius-sm);
+  padding-inline: var(--space-2);
+}
+
 @media (max-width: 768px) {
   .features-grid {
+    grid-template-columns: 1fr;
+  }
+  .feature-card--wide,
+  .feature-card--full {
+    grid-column: span 1;
     grid-template-columns: 1fr;
   }
 }
