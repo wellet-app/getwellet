@@ -10,7 +10,7 @@
   --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
   --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
   --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
-  --text-3xl: clamp(2.5rem, 1rem + 4vw, 5rem);
+  --text-3xl: clamp(2.5rem, 1rem + 3.2vw, 3.8rem);
 
   /* Spacing */
   --space-1: 0.25rem;
@@ -251,13 +251,13 @@ section {
    HERO
    ============================================================ */
 .hero {
-  padding-block: clamp(var(--space-16), 10vw, var(--space-32));
+  padding-block: clamp(var(--space-8), 4vw, var(--space-16));
 }
 
 .hero-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--space-12);
+  gap: var(--space-8);
   align-items: center;
 }
 
@@ -277,7 +277,7 @@ section {
   font-weight: 600;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  margin-bottom: var(--space-6);
+  margin-bottom: var(--space-4);
 }
 
 .hero h1 {
@@ -286,8 +286,8 @@ section {
   font-weight: 400;
   color: var(--color-text);
   max-width: 18ch;
-  margin: 0 0 var(--space-6);
-  line-height: 1.1;
+  margin: 0 0 var(--space-4);
+  line-height: 1.08;
 }
 
 .hero h1 strong {
@@ -301,7 +301,7 @@ section {
   font-weight: 300;
   color: var(--color-text-muted);
   max-width: 48ch;
-  margin: 0 0 var(--space-8);
+  margin: 0 0 var(--space-6);
   line-height: 1.5;
 }
 
