@@ -10,7 +10,7 @@
   --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
   --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
   --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
-  --text-3xl: clamp(2.5rem, 1rem + 3.2vw, 3.8rem);
+  --text-3xl: clamp(2.5rem, 1rem + 3vw, 3.5rem);
 
   /* Spacing */
   --space-1: 0.25rem;
@@ -251,7 +251,7 @@ section {
    HERO
    ============================================================ */
 .hero {
-  padding-block: clamp(var(--space-8), 4vw, var(--space-16));
+  padding-block: clamp(var(--space-6), 3vw, var(--space-10));
 }
 
 .hero-grid {
@@ -286,8 +286,8 @@ section {
   font-weight: 400;
   color: var(--color-text);
   max-width: 18ch;
-  margin: 0 0 var(--space-4);
-  line-height: 1.08;
+  margin: 0 0 var(--space-3);
+  line-height: 1.06;
 }
 
 .hero h1 strong {
@@ -301,8 +301,8 @@ section {
   font-weight: 300;
   color: var(--color-text-muted);
   max-width: 48ch;
-  margin: 0 0 var(--space-6);
-  line-height: 1.5;
+  margin: 0 0 var(--space-5);
+  line-height: 1.45;
 }
 
 /* ---- Phone Mockup ---- */
@@ -555,7 +555,7 @@ section {
     text-align: left;
   }
   .hero-phone {
-    order: -1;
+    display: none;
   }
   .phone-frame {
     width: 240px;
