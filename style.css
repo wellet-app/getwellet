@@ -900,15 +900,15 @@ section {
 }
 
 .feature-card--dark h3 {
-  color: #ffffff;
+  color: #fffdf8;
 }
 
 .feature-card--dark p {
-  color: #c8e6d0;
+  color: #f0ece4;
 }
 
 .feature-card--dark .feature-icon {
-  color: #a3d9b1;
+  color: #dce8df;
 }
 
 .feature-card .feature-icon {
