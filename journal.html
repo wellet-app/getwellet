@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Building Wellet — A Caregiver's Build Journal</title>
+  <meta name="description" content="A designer. An AI engineering team. Zero traditional developers. This is the journal of how one caregiver is building the health tool she needed — in public.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Building Wellet — A Caregiver's Build Journal">
+  <meta property="og:description" content="A designer. An AI engineering team. Zero traditional developers. This is the journal of how one caregiver is building the health tool she needed — in public.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getwellet.com/journal">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://getwellet.com/journal">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232d6a4f'/%3E%3Cpath d='M8 16c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='3' fill='white'/%3E%3C/svg%3E">
+
+  <!-- Theme init — must run before paint -->
+  <script>
+    (function() {
+      var stored = localStorage.getItem('wellet-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <style>
+    /* ===== JOURNAL PAGE STYLES ===== */
+
+    .jn-page {
+      background: var(--color-bg);
+      min-height: 100dvh;
+    }
+
+    .jn-main {
+      padding: var(--space-12) 0 var(--space-20);
+    }
+
+    /* ---- Hero / Intro ---- */
+    .jn-hero {
+      padding: var(--space-16) 0 var(--space-12);
+      border-bottom: 1px solid var(--color-divider);
+      margin-bottom: var(--space-16);
+    }
+
+    .jn-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      padding: var(--space-1) var(--space-4);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-6);
+    }
+
+    .jn-hero h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 400;
+      color: var(--color-text);
+      line-height: 1.15;
+      margin-bottom: var(--space-4);
+      max-width: 18ch;
+    }
+
+    .jn-hero-sub {
+      font-size: var(--text-lg);
+      color: var(--color-text-muted);
+      line-height: 1.6;
+      max-width: 60ch;
+      margin-bottom: var(--space-8);
+      font-weight: 300;
+    }
+
+    .jn-founder-bio {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6) var(--space-8);
+      max-width: 68ch;
+      display: flex;
+      gap: var(--space-4);
+      align-items: flex-start;
+    }
+
+    .jn-founder-bio-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      background: var(--color-primary-light);
+      border-radius: var(--radius-full);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+      margin-top: 2px;
+    }
+
+    .jn-founder-bio p {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    .jn-founder-bio strong {
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    /* ---- Section labels ---- */
+    .jn-section-label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-8);
+      padding-bottom: var(--space-3);
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    /* ---- Article Cards ---- */
+    .jn-articles-section {
+      margin-bottom: var(--space-16);
+    }
+
+    .jn-articles-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-6);
+    }
+
+    .jn-article-card {
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-4);
+      text-align: left;
+      transition: box-shadow var(--transition-interactive), border-color var(--transition-interactive);
+    }
+
+    .jn-article-card:hover {
+      box-shadow: var(--shadow-md);
+      border-color: var(--color-accent);
+    }
+
+    .jn-article-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+
+    .jn-article-num {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
+    }
+
+    .jn-coming-soon {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      background: var(--color-surface-offset);
+      color: var(--color-text-faint);
+      border: 1px solid var(--color-divider);
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .jn-article-date {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      white-space: nowrap;
+    }
+
+    .jn-article-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 400;
+      color: var(--color-text);
+      line-height: 1.3;
+      margin: 0;
+    }
+
+    .jn-article-excerpt {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.7;
+      font-weight: 300;
+      margin: 0;
+      flex: 1;
+    }
+
+    .jn-article-footer {
+      margin-top: auto;
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--color-divider);
+    }
+
+    .jn-medium-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-primary);
+      text-decoration: none;
+      transition: opacity var(--transition-interactive);
+    }
+
+    .jn-medium-link:hover {
+      opacity: 0.75;
+    }
+
+    .jn-medium-link svg {
+      flex-shrink: 0;
+    }
+
+    /* ---- Changelog Timeline ---- */
+    .jn-changelog-section {
+      margin-bottom: var(--space-16);
+    }
+
+    .jn-timeline {
+      position: relative;
+      padding-left: var(--space-8);
+    }
+
+    .jn-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: var(--color-primary);
+      opacity: 0.35;
+    }
+
+    .jn-timeline-week {
+      position: relative;
+      padding-bottom: var(--space-12);
+    }
+
+    .jn-timeline-week:last-child {
+      padding-bottom: 0;
+    }
+
+    .jn-timeline-dot {
+      position: absolute;
+      left: calc(-1 * var(--space-8) - 5px);
+      top: 6px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      border: 2px solid var(--color-bg);
+      box-shadow: 0 0 0 2px var(--color-primary);
+    }
+
+    .jn-timeline-week-label {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 400;
+      color: var(--color-text);
+      margin-bottom: var(--space-2);
+    }
+
+    .jn-timeline-week-dates {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+      margin-bottom: var(--space-5);
+      letter-spacing: 0.03em;
+    }
+
+    .jn-timeline-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .jn-timeline-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.55;
+    }
+
+    .jn-timeline-item::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      opacity: 0.5;
+      flex-shrink: 0;
+      margin-top: 7px;
+    }
+
+    .jn-timeline-placeholder {
+      font-size: var(--text-sm);
+      color: var(--color-text-faint);
+      font-style: italic;
+      padding: var(--space-4) var(--space-6);
+      background: var(--color-surface);
+      border: 1px dashed var(--color-border);
+      border-radius: var(--radius-md);
+      display: inline-block;
+    }
+
+    /* ---- Podcast callout ---- */
+    .jn-podcast-callout {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-6);
+      max-width: 720px;
+    }
+
+    .jn-podcast-callout-left {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .jn-podcast-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--color-primary-light);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+      flex-shrink: 0;
+    }
+
+    .jn-podcast-callout-text strong {
+      display: block;
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-1);
+    }
+
+    .jn-podcast-callout-text p {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    .jn-podcast-link {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-primary);
+      text-decoration: none;
+      white-space: nowrap;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 1px;
+      transition: opacity var(--transition-interactive);
+      flex-shrink: 0;
+    }
+
+    .jn-podcast-link:hover {
+      opacity: 0.75;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .jn-articles-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .jn-podcast-callout {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .jn-hero h1 {
+        max-width: none;
+      }
+
+      .jn-founder-bio {
+        flex-direction: column;
+      }
+
+      .jn-timeline {
+        padding-left: var(--space-6);
+      }
+    }
+  </style>
+</head>
+<body class="jn-page">
+
+  <!-- ========== HEADER ========== -->
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo" aria-label="Wellet home">
+        <svg viewBox="0 138 150 42" style="height:26px;width:auto;" xmlns="http://www.w3.org/2000/svg" aria-label="Wellet">
+          <path fill="var(--color-primary)" d="M45.5,142c.94.94,1.4,2.08,1.4,3.42,0,.89-.19,1.73-.58,2.52-.65-.1-1.33-.14-2.05-.14-3.07,0-5.56.97-7.45,2.9-1.9,1.93-3.36,4.34-4.39,7.22-1.03,2.88-2.17,6.86-3.42,11.95l-.47,1.94-.11-.25v.29h-5.15l-4.43-11.2-4.03,11.2h-5.15l-5.69-14.44c-.67-1.34-1.28-2.24-1.82-2.7-.54-.46-1.27-.73-2.18-.83l.25-2.56h12.56l-.04,2.56c-.53.07-1.01.26-1.44.58-.43.31-.65.76-.65,1.33,0,.17.04.38.11.65l3.71,9.47,3.1-8.5c-.48-.96-.88-1.67-1.21-2.14s-.67-.8-1.04-.99c-.37-.19-.87-.32-1.49-.4v-2.56h12.82v2.56c-.86.02-1.49.13-1.87.32-.38.19-.58.55-.58,1.08,0,.34.07.74.22,1.22l3.06,7.78c1.54-7.46,3.49-13.28,5.85-17.44,2.36-4.16,5.15-6.25,8.37-6.25,1.58,0,2.84.47,3.78,1.4Z"/>
+          <path fill="var(--color-primary)" d="M57.31,168.14c-1.13,1.44-2.57,2.56-4.32,3.37-1.75.8-3.61,1.21-5.58,1.21s-3.92-.49-5.65-1.48c-1.73-.98-3.1-2.32-4.1-4.01-1.01-1.69-1.51-3.55-1.51-5.56s.5-3.87,1.51-5.56c1.01-1.69,2.38-3.03,4.1-4.01,1.73-.98,3.61-1.48,5.65-1.48,1.92,0,3.62.28,5.09.83s2.62,1.31,3.42,2.29c.8.97,1.21,2.06,1.21,3.26,0,2.62-1.68,4.46-5.04,5.54-1.49.46-3.06.68-4.72.68-1.08,0-2.24-.11-3.49-.32.02,1.13.35,2.16.99,3.1.64.94,1.46,1.67,2.47,2.21s2.05.81,3.13.81c.96,0,1.94-.2,2.93-.61,1-.41,1.82-.98,2.47-1.73l1.44,1.48ZM45.7,155.59c-.8,1.26-1.34,2.86-1.6,4.81.84.17,1.64.25,2.41.25,1.61,0,2.87-.34,3.78-1.01.91-.67,1.51-1.5,1.8-2.48.1-.29.14-.59.14-.9,0-.86-.32-1.56-.95-2.09-.64-.53-1.36-.76-2.18-.68-1.46.14-2.6.85-3.4,2.11Z"/>
+          <path fill="var(--color-primary)" d="M58.21,170.23c.7-.12,1.26-.52,1.69-1.21.43-.68.65-1.9.65-3.65v-14.26c0-1.18-.13-2.08-.38-2.72s-.5-1.06-.76-1.26-.71-.51-1.39-.92c.65-.84,1.61-1.47,2.9-1.89,1.28-.42,2.59-.63,3.91-.63,1.15,0,2.04.14,2.66.43v21.24c0,1.75.22,2.97.65,3.65.43.68,1,1.09,1.69,1.21l.11,1.62h-11.84l.11-1.62Z"/>
+          <path fill="var(--color-primary)" d="M70.85,170.23c.7-.12,1.26-.52,1.69-1.21.43-.68.65-1.9.65-3.65v-14.26c0-1.18-.13-2.08-.38-2.72s-.5-1.06-.76-1.26-.71-.51-1.39-.92c.65-.84,1.61-1.47,2.9-1.89,1.28-.42,2.59-.63,3.91-.63,1.15,0,2.04.14,2.66.43v21.24c0,1.75.22,2.97.65,3.65.43.68,1,1.09,1.69,1.21l.11,1.62h-11.84l.11-1.62Z"/>
+          <path fill="var(--color-primary)" d="M104.11,168.14c-1.13,1.44-2.57,2.56-4.32,3.37-1.75.8-3.61,1.21-5.58,1.21s-3.92-.49-5.65-1.48c-1.73-.98-3.1-2.32-4.1-4.01-1.01-1.69-1.51-3.55-1.51-5.56s.5-3.87,1.51-5.56c1.01-1.69,2.38-3.03,4.1-4.01,1.73-.98,3.61-1.48,5.65-1.48,1.92,0,3.62.28,5.09.83,1.48.55,2.62,1.31,3.42,2.29.8.97,1.21,2.06,1.21,3.26,0,2.62-1.68,4.46-5.04,5.54-1.49.46-3.06.68-4.72.68-1.08,0-2.24-.11-3.49-.32.02,1.13.35,2.16.99,3.1.64.94,1.46,1.67,2.47,2.21,1.01.54,2.05.81,3.13.81.96,0,1.94-.2,2.93-.61s1.82-.98,2.47-1.73l1.44,1.48ZM92.5,155.59c-.8,1.26-1.34,2.86-1.6,4.81.84.17,1.64.25,2.41.25,1.61,0,2.87-.34,3.78-1.01s1.51-1.5,1.8-2.48c.09-.29.14-.59.14-.9,0-.86-.32-1.56-.95-2.09-.64-.53-1.36-.76-2.18-.68-1.46.14-2.6.85-3.4,2.11Z"/>
+          <path fill="var(--color-primary)" d="M139.93,141.71c.46.5.76,1.14.86,1.81.17,1.09-.14,2.07-.91,2.95s-1.69,1.36-2.84,1.51c-.83.11-1.71.14-2.64.09-1.17-.04-2.31,0-3.43.15-1.24.16-2.36.49-3.36,1-1,.5-1.5.85-2.29,1.37-1.25.83-.64.51-2.68,1.64-1.7.75-1.02.47-2.27.96-2.92,1.15-5.84,1.04-6.2,1.21v12.12c0,.86.13,1.51.38,1.93s.58.63.99.63c.26,0,.55-.09.86-.27.31-.18.6-.43.86-.74l1.44,1.48c-.98,1.1-1.96,1.87-2.92,2.3-.96.43-2.08.65-3.35.65-1.58,0-2.89-.4-3.92-1.21-1.03-.8-1.55-1.95-1.55-3.44v-13c-.74-.07-1.58-.24-2.52-.5v-1.8c.53.12.97.18,1.33.18.96,0,1.82-.27,2.59-.81.77-.54,1.42-1.18,1.96-1.91.54-.73,1.15-1.66,1.82-2.79.48-.89.88-1.52,1.19-1.91h.83v6.8c3.33.07,5-.58,7.3-1.62,1.91-1.06,2.49-1.68,3.33-2.56.36-.38.58-.67,1.77-1.97.66-.72,2.14-1.98,2.76-2.44,1.43-1.1,2.12-1.49,3.27-2.09,1.14-.61,2.11-.76,3.26-.88,2.04-.21,3.13.16,4.06,1.16Z"/>
+        </svg>
+      </a>
+      <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+      <nav>
+        <ul class="nav-links" role="list">
+          <li><a href="/#features">Features</a></li>
+          <li><a href="/#how-it-works">How It Works</a></li>
+          <li><a href="/#early-access">Early Access</a></li>
+          <li><a href="/#pricing">Pricing</a></li>
+          <li><a href="/#founder">About</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/#your-data">Your Data</a></li>
+          <li><a href="/connect">Connect</a></li>
+          <li><a href="/transparency">Transparency</a></li>
+          <li><a href="/journal" class="nav-active" aria-current="page">Journal</a></li>
+          <li><a href="https://mywellet.com" class="nav-signin" style="font-weight:500;color:var(--color-primary);white-space:nowrap;">Sign in →</a></li>
+          <li>
+            <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== MAIN ========== -->
+  <main class="jn-main" id="main-content">
+    <div class="container">
+
+      <!-- ---- HERO / INTRO ---- -->
+      <section class="jn-hero reveal" aria-labelledby="jn-heading">
+        <div class="jn-eyebrow" aria-label="Build in Public">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+          Build in Public
+        </div>
+        <h1 id="jn-heading">Building Wellet</h1>
+        <p class="jn-hero-sub">A designer. An AI engineering team. Zero traditional developers. This is the journal of how one caregiver is building the health tool she needed — in public.</p>
+
+        <div class="jn-founder-bio" role="note" aria-label="Founder background">
+          <div class="jn-founder-bio-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <p>
+            <strong>Betsy Eble</strong> spent 20 years in healthcare UX, including designing the UX for Duke Health's first EHR. When her parents' health got complicated, she realized no tool existed for the person holding someone else's chart. So she started building one.
+          </p>
+        </div>
+      </section>
+
+      <!-- ---- MEDIUM ARTICLES ---- -->
+      <section class="jn-articles-section" aria-labelledby="jn-articles-label">
+        <div class="jn-section-label" id="jn-articles-label">Build in Public — Articles</div>
+
+        <div class="jn-articles-grid">
+
+          <!-- Article 1 -->
+          <article class="jn-article-card reveal">
+            <div class="jn-article-card-header">
+              <span class="jn-article-num">Article #1</span>
+              <span class="jn-article-date">Apr 15, 2025 · Week 1</span>
+            </div>
+            <h2 class="jn-article-title">You Don't Realize How Broken Care Is Until You Try to Hold It All</h2>
+            <p class="jn-article-excerpt">Most health tools are built around you. Your steps. Your sleep. Your labs. This is the story of why Wellet exists.</p>
+            <div class="jn-article-footer">
+              <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer" class="jn-medium-link" aria-label="Read Article 1 on Medium (opens in new tab)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+                Read on Medium →
+              </a>
+            </div>
+          </article>
+
+          <!-- Article 2 -->
+          <article class="jn-article-card reveal">
+            <div class="jn-article-card-header">
+              <span class="jn-article-num">Article #2</span>
+              <span class="jn-article-date">Apr 16, 2025 · Week 1</span>
+            </div>
+            <h2 class="jn-article-title">Caregiving Is a Design Problem, Not a Personal Failure</h2>
+            <p class="jn-article-excerpt">Most caregivers I talk to say some version of the same thing: "I feel like I'm not doing enough."</p>
+            <div class="jn-article-footer">
+              <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer" class="jn-medium-link" aria-label="Read Article 2 on Medium (opens in new tab)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+                Read on Medium →
+              </a>
+            </div>
+          </article>
+
+          <!-- Article 3 — Coming soon -->
+          <article class="jn-article-card reveal">
+            <div class="jn-article-card-header">
+              <span class="jn-article-num">Article #3</span>
+              <span class="jn-coming-soon" aria-label="Not yet published">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l3 3"/></svg>
+                Coming soon
+              </span>
+            </div>
+            <h2 class="jn-article-title">I Built a HIPAA-Compliant Health App in One Week for Under $1,000. Here's What It Actually Cost.</h2>
+            <p class="jn-article-excerpt">Not a flex. A reframe. And a conversation about who gets to build healthcare technology — and why it matters.</p>
+            <div class="jn-article-footer" aria-hidden="true">
+              <span style="font-size:var(--text-xs);color:var(--color-text-faint);">Week 2 · Draft in progress</span>
+            </div>
+          </article>
+
+          <!-- Article 4 — Coming soon -->
+          <article class="jn-article-card reveal">
+            <div class="jn-article-card-header">
+              <span class="jn-article-num">Article #4</span>
+              <span class="jn-coming-soon" aria-label="Not yet published">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l3 3"/></svg>
+                Coming soon
+              </span>
+            </div>
+            <h2 class="jn-article-title">11-Feature Friday</h2>
+            <p class="jn-article-excerpt">Build in Public, Article #4 — what shipped this week and what's coming next.</p>
+            <div class="jn-article-footer" aria-hidden="true">
+              <span style="font-size:var(--text-xs);color:var(--color-text-faint);">Week 2 · Draft in progress</span>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <!-- ---- CHANGELOG TIMELINE ---- -->
+      <section class="jn-changelog-section" aria-labelledby="jn-changelog-label">
+        <div class="jn-section-label" id="jn-changelog-label">Changelog</div>
+
+        <div class="jn-timeline" role="list" aria-label="Weekly build changelog">
+
+          <!-- Week 1 -->
+          <div class="jn-timeline-week reveal" role="listitem">
+            <div class="jn-timeline-dot" aria-hidden="true"></div>
+            <div class="jn-timeline-week-label">Week 1</div>
+            <div class="jn-timeline-week-dates">Apr 14–18, 2025</div>
+            <ul class="jn-timeline-items">
+              <li class="jn-timeline-item">Core app architecture: Supabase + Netlify + vanilla JS</li>
+              <li class="jn-timeline-item">Auth system with magic links and alpha allowlist</li>
+              <li class="jn-timeline-item">People management and care circle invites</li>
+              <li class="jn-timeline-item">Document upload with AI extraction (discharge summaries, lab results)</li>
+              <li class="jn-timeline-item">Ask Wellet AI chat grounded in health records</li>
+              <li class="jn-timeline-item">Visit Prep guided workflow</li>
+              <li class="jn-timeline-item">EHR integration via Epic SMART on FHIR</li>
+              <li class="jn-timeline-item">Medication and health event tracking</li>
+              <li class="jn-timeline-item">CareSignals wearable data display</li>
+              <li class="jn-timeline-item">Security sprint: token encryption, CSP headers, CORS lockdown</li>
+              <li class="jn-timeline-item">Transparency dashboard with anonymous analytics</li>
+              <li class="jn-timeline-item">4 Medium articles, 4 podcast episodes</li>
+              <li class="jn-timeline-item">Marketing site redesign (getwellet.com)</li>
+            </ul>
+          </div>
+
+          <!-- Week 2 -->
+          <div class="jn-timeline-week reveal" role="listitem">
+            <div class="jn-timeline-dot" aria-hidden="true"></div>
+            <div class="jn-timeline-week-label">Week 2</div>
+            <div class="jn-timeline-week-dates">Apr 21+, 2025</div>
+            <span class="jn-timeline-placeholder">Building now — check back for updates.</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ---- PODCAST CALLOUT ---- -->
+      <section aria-label="Podcast">
+        <div class="jn-podcast-callout reveal">
+          <div class="jn-podcast-callout-left">
+            <div class="jn-podcast-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
+            </div>
+            <div class="jn-podcast-callout-text">
+              <strong>Wellet: Building in Public</strong>
+              <p>The audio companion to this journal. Episodes drop weekly alongside major shipping milestones.</p>
+            </div>
+          </div>
+          <a href="/podcast" class="jn-podcast-link">
+            Follow along on the Wellet Podcast →
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <span class="footer-copy">&copy; 2026 Wellet Health. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer">Blog<span class="sr-only"> (opens in new tab)</span></a>
+        <a href="mailto:hello@getwellet.com">Contact</a>
+        <a href="https://mywellet.com/privacy">Privacy</a>
+        <a href="https://mywellet.com/terms">Terms</a>
+      </div>
+    </div>
+    <div class="container footer-social">
+      <a href="https://x.com/betsyeble" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on X" title="@betsyeble on X">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://x.com/welletapp" target="_blank" rel="noopener noreferrer" aria-label="Wellet on X" title="@welletapp on X">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://linkedin.com/in/betsyeble" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on LinkedIn" title="Betsy Eble on LinkedIn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="https://bsky.app/profile/betsyeble.bsky.social" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on Bluesky" title="@betsyeble on Bluesky">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.785 2.627 3.6 3.476 6.158 3.226-4.476.767-8.07 2.632-4.86 8.527 3.53 5.2 6.088-.508 7.078-2.012.315-.483.465-.71.535-.838a.56.56 0 0 1 .93 0c.07.128.22.355.535.838.99 1.504 3.548 7.212 7.079 2.012 3.21-5.895-.385-7.76-4.86-8.527 2.557.25 5.372-.6 6.157-3.226.247-.828.625-5.79.625-6.479 0-.688-.14-1.86-.903-2.203-.659-.3-1.664-.62-4.3 1.24C12.046 4.747 9.087 8.686 8 10.8h4z"/></svg>
+      </a>
+      <a href="https://instagram.com/welletapp" target="_blank" rel="noopener noreferrer" aria-label="Wellet on Instagram" title="@welletapp on Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+      <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on Medium" title="Betsy Eble on Medium">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+      </a>
+      <a href="https://open.spotify.com/show/5QUDaF0Pp0mIfZwh1aEzU6" target="_blank" rel="noopener noreferrer" aria-label="Wellet Podcast on Spotify" title="Wellet Podcast on Spotify">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+      </a>
+    </div>
+    <div class="container footer-disclaimer">
+      <p>Wellet is not a medical device and does not provide medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider with questions about a medical condition.</p>
+    </div>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script>
+    // Theme toggle
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.querySelector('[data-theme-toggle]');
+      if (btn) {
+        var current = document.documentElement.getAttribute('data-theme') || 'light';
+        updateToggleIcon(btn, current);
+        btn.addEventListener('click', function() {
+          var cur = document.documentElement.getAttribute('data-theme') || 'light';
+          var next = cur === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('wellet-theme', next);
+          updateToggleIcon(btn, next);
+        });
+      }
+    });
+
+    function updateToggleIcon(btn, theme) {
+      btn.innerHTML = theme === 'dark'
+        ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+        : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+    }
+
+    // Scroll reveal
+    (function() {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
+    })();
+  </script>
+</body>
+</html>
