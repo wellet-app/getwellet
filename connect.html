@@ -55,6 +55,17 @@
       padding: var(--space-16) 0 var(--space-16);
       border-bottom: 1px solid var(--color-divider);
     }
+    .cn-hero .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-10);
+      align-items: center;
+    }
+    @media (min-width: 768px) {
+      .cn-hero .container {
+        grid-template-columns: 1fr auto;
+      }
+    }
 
     .cn-hero-eyebrow {
       display: inline-flex;
@@ -474,6 +485,104 @@
       .cn-hero h1 {
         max-width: none;
       }
+      .cn-phone {
+        width: 230px;
+      }
+    }
+
+    /* ---- Connect Phone Mockup ---- */
+    .cn-phone-wrap { display: flex; justify-content: center; }
+    .cn-phone {
+      width: 260px;
+      background: #fff;
+      border-radius: 28px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.06);
+      overflow: hidden;
+      border: 6px solid #1a1a1a;
+      position: relative;
+    }
+    .cn-phone-notch {
+      width: 100px;
+      height: 22px;
+      background: #1a1a1a;
+      border-radius: 0 0 14px 14px;
+      margin: 0 auto;
+    }
+    .cn-phone-screen {
+      padding: 20px 18px 24px;
+      background: var(--color-bg, #F7F5F0);
+    }
+    .cn-phone-logo {
+      width: 72px;
+      margin-bottom: 16px;
+    }
+    .cn-phone-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--color-text);
+      line-height: 1.25;
+      margin-bottom: 8px;
+    }
+    .cn-phone-body {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      line-height: 1.55;
+      margin-bottom: 18px;
+    }
+    .cn-phone-body strong { color: var(--color-text); font-weight: 500; }
+    .cn-phone-card {
+      background: #fff;
+      border: 1px solid var(--color-divider);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+    .cn-phone-card-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-primary);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .cn-phone-card-label .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--color-primary);
+    }
+    .cn-phone-card-text {
+      font-size: 13px;
+      color: var(--color-text);
+      line-height: 1.5;
+    }
+    .cn-phone-btn {
+      display: block;
+      width: 100%;
+      padding: 13px;
+      background: var(--color-primary);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 600;
+      text-align: center;
+      cursor: default;
+    }
+    .cn-phone-footer {
+      text-align: center;
+      font-size: 10px;
+      color: var(--color-text-muted);
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+    .cn-phone-footer svg {
+      vertical-align: middle;
+      margin-right: 2px;
     }
   </style>
 </head>
@@ -528,13 +637,36 @@
     <!-- ---- HERO ---- -->
     <section class="cn-hero" aria-labelledby="cn-heading">
       <div class="container">
-        <div class="cn-hero-eyebrow" aria-label="Companion App">
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
-          Companion App
+        <div>
+          <div class="cn-hero-eyebrow" aria-label="Companion App">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>
+            Companion App
+          </div>
+          <h1 id="cn-heading">Wellet Connect</h1>
+          <p class="cn-hero-sub">Your loved one's health data, flowing to you automatically. No more manual entry. No more guessing.</p>
+          <p class="cn-hero-explainer">Wellet Connect is a lightweight companion app that lives on your loved one's phone. They approve once, and their health data — vitals, medications, lab results — starts flowing to your Wellet dashboard in real time.</p>
         </div>
-        <h1 id="cn-heading">Wellet Connect</h1>
-        <p class="cn-hero-sub">Your loved one's health data, flowing to you automatically. No more manual entry. No more guessing.</p>
-        <p class="cn-hero-explainer">Wellet Connect is a lightweight companion app that lives on your loved one's phone. They approve once, and their health data — vitals, medications, lab results — starts flowing to your Wellet dashboard in real time.</p>
+
+        <!-- Phone Mockup -->
+        <div class="cn-phone-wrap">
+          <div class="cn-phone">
+            <div class="cn-phone-notch"></div>
+            <div class="cn-phone-screen">
+              <img src="/assets/wellet-logo-email.png" alt="Wellet" class="cn-phone-logo">
+              <div class="cn-phone-title">Share with Betsy</div>
+              <p class="cn-phone-body">Betsy has invited you to share health updates through Wellet. She'll be able to see <strong>vitals</strong>, <strong>medications</strong>, and <strong>appointments</strong>.</p>
+              <div class="cn-phone-card">
+                <div class="cn-phone-card-label"><span class="dot"></span> What gets shared</div>
+                <div class="cn-phone-card-text">Apple Health vitals, medication confirmations, and EHR records you approve.</div>
+              </div>
+              <button class="cn-phone-btn" aria-hidden="true">Approve &amp; Connect</button>
+              <div class="cn-phone-footer">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Encrypted &amp; isolated with row-level security
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
