@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wellet Transparency Dashboard</title>
+  <meta name="description" content="Live, anonymized usage data from Wellet — showing how caregivers use the app. No personal health information is collected or displayed. Published for researchers and medical professionals.">
+  <meta name="keywords" content="Wellet transparency, caregiver app analytics, health app usage data, open data, anonymized usage, caregiver research data">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Wellet Transparency Dashboard — Live Anonymous Usage Data">
+  <meta property="og:description" content="We publish fully anonymized, aggregated usage data so researchers and medical professionals can see exactly how Wellet is being used.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getwellet.com/transparency">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://getwellet.com/transparency">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232d6a4f'/%3E%3Cpath d='M8 16c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='3' fill='white'/%3E%3C/svg%3E">
+
+  <style>
+    /* ===== TRANSPARENCY PAGE STYLES ===== */
+
+    .tp-page {
+      background: var(--color-bg);
+      min-height: 100dvh;
+    }
+
+    .tp-main {
+      padding: var(--space-12) 0 var(--space-20);
+    }
+
+    /* Banner */
+    .tp-banner {
+      background: var(--color-primary-light);
+      border: 1px solid var(--color-primary);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6) var(--space-8);
+      margin-bottom: var(--space-10);
+      display: flex;
+      gap: var(--space-4);
+      align-items: flex-start;
+    }
+
+    .tp-banner-icon {
+      flex-shrink: 0;
+      color: var(--color-primary);
+      margin-top: 2px;
+    }
+
+    .tp-banner-text p {
+      color: var(--color-text);
+      font-size: var(--text-sm);
+      line-height: 1.65;
+      max-width: 80ch;
+    }
+
+    .tp-banner-text strong {
+      display: block;
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-1);
+    }
+
+    /* Page header */
+    .tp-header {
+      margin-bottom: var(--space-10);
+    }
+
+    .tp-header h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 400;
+      color: var(--color-text);
+      margin-bottom: var(--space-2);
+    }
+
+    .tp-header-meta {
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+    }
+
+    .tp-last-refreshed {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+
+    .tp-refresh-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      font-weight: 500;
+      color: var(--color-primary);
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: var(--space-2) var(--space-4);
+      cursor: pointer;
+      transition: background var(--transition-interactive), border-color var(--transition-interactive);
+    }
+
+    .tp-refresh-btn:hover {
+      background: var(--color-primary-light);
+      border-color: var(--color-primary);
+    }
+
+    .tp-refresh-btn.loading svg {
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Stats row */
+    .tp-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--space-4);
+      margin-bottom: var(--space-8);
+    }
+
+    .tp-stat-card {
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+    }
+
+    .tp-stat-label {
+      font-size: var(--text-xs);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .tp-stat-value {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 600;
+      color: var(--color-text);
+      font-variant-numeric: tabular-nums lining-nums;
+      line-height: 1;
+      margin-bottom: var(--space-1);
+    }
+
+    .tp-stat-sub {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+    }
+
+    /* Charts grid */
+    .tp-charts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-6);
+    }
+
+    .tp-chart-card {
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+    }
+
+    .tp-chart-card--full {
+      grid-column: 1 / -1;
+    }
+
+    .tp-chart-title {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-6);
+    }
+
+    .tp-chart-wrap {
+      position: relative;
+      width: 100%;
+    }
+
+    .tp-chart-wrap--tall {
+      height: 320px;
+    }
+
+    .tp-chart-wrap--medium {
+      height: 260px;
+    }
+
+    .tp-chart-wrap--short {
+      height: 220px;
+    }
+
+    /* Empty state */
+    .tp-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-3);
+      padding: var(--space-8) 0;
+      color: var(--color-text-faint);
+    }
+
+    .tp-empty-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--color-surface-offset);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-text-faint);
+    }
+
+    .tp-empty p {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      max-width: 36ch;
+    }
+
+    .tp-empty strong {
+      display: block;
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text-muted);
+    }
+
+    /* Tables */
+    .tp-table-wrap {
+      overflow-x: auto;
+    }
+
+    .tp-table {
+      width: 100%;
+      font-size: var(--text-sm);
+      border-collapse: collapse;
+    }
+
+    .tp-table thead th {
+      text-align: left;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--color-text-muted);
+      padding: var(--space-2) var(--space-4) var(--space-3);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .tp-table tbody tr {
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .tp-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .tp-table tbody td {
+      padding: var(--space-3) var(--space-4);
+      color: var(--color-text);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .tp-table tbody td:first-child {
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    .tp-table .td-arrow {
+      color: var(--color-text-faint);
+      font-size: var(--text-xs);
+      padding: 0 var(--space-2);
+    }
+
+    .tp-table .td-count {
+      color: var(--color-text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .tp-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      border-radius: var(--radius-full);
+      padding: 2px 10px;
+      font-size: var(--text-xs);
+      font-weight: 500;
+    }
+
+    /* Methodology note */
+    .tp-methodology {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-8);
+      margin-top: var(--space-10);
+    }
+
+    .tp-methodology h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 400;
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+    }
+
+    .tp-methodology-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-8);
+    }
+
+    .tp-meth-col h3 {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-3);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .tp-meth-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .tp-meth-col ul li {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      display: flex;
+      align-items: baseline;
+      gap: var(--space-2);
+      max-width: none;
+    }
+
+    .tp-meth-col ul li::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .tp-meth-col--yes h3 {
+      color: var(--color-primary);
+    }
+
+    .tp-meth-col--yes ul li::before {
+      background: var(--color-primary);
+    }
+
+    .tp-meth-col--no h3 {
+      color: var(--color-text-muted);
+    }
+
+    .tp-error-banner {
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      display: none;
+    }
+
+    .tp-error-banner.visible {
+      display: block;
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .tp-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .tp-charts-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tp-chart-card--full {
+        grid-column: 1;
+      }
+
+      .tp-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .tp-methodology-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .tp-banner {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .tp-stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body class="tp-page">
+
+  <!-- ========== HEADER ========== -->
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo" aria-label="Wellet home">
+        <svg viewBox="0 138 150 42" style="height:26px;width:auto;" xmlns="http://www.w3.org/2000/svg" aria-label="Wellet">
+          <path fill="var(--color-primary)" d="M45.5,142c.94.94,1.4,2.08,1.4,3.42,0,.89-.19,1.73-.58,2.52-.65-.1-1.33-.14-2.05-.14-3.07,0-5.56.97-7.45,2.9-1.9,1.93-3.36,4.34-4.39,7.22-1.03,2.88-2.17,6.86-3.42,11.95l-.47,1.94-.11-.25v.29h-5.15l-4.43-11.2-4.03,11.2h-5.15l-5.69-14.44c-.67-1.34-1.28-2.24-1.82-2.7-.54-.46-1.27-.73-2.18-.83l.25-2.56h12.56l-.04,2.56c-.53.07-1.01.26-1.44.58-.43.31-.65.76-.65,1.33,0,.17.04.38.11.65l3.71,9.47,3.1-8.5c-.48-.96-.88-1.67-1.21-2.14s-.67-.8-1.04-.99c-.37-.19-.87-.32-1.49-.4v-2.56h12.82v2.56c-.86.02-1.49.13-1.87.32-.38.19-.58.55-.58,1.08,0,.34.07.74.22,1.22l3.06,7.78c1.54-7.46,3.49-13.28,5.85-17.44,2.36-4.16,5.15-6.25,8.37-6.25,1.58,0,2.84.47,3.78,1.4Z"/>
+          <path fill="var(--color-primary)" d="M57.31,168.14c-1.13,1.44-2.57,2.56-4.32,3.37-1.75.8-3.61,1.21-5.58,1.21s-3.92-.49-5.65-1.48c-1.73-.98-3.1-2.32-4.1-4.01-1.01-1.69-1.51-3.55-1.51-5.56s.5-3.87,1.51-5.56c1.01-1.69,2.38-3.03,4.1-4.01,1.73-.98,3.61-1.48,5.65-1.48,1.92,0,3.62.28,5.09.83s2.62,1.31,3.42,2.29c.8.97,1.21,2.06,1.21,3.26,0,2.62-1.68,4.46-5.04,5.54-1.49.46-3.06.68-4.72.68-1.08,0-2.24-.11-3.49-.32.02,1.13.35,2.16.99,3.1.64.94,1.46,1.67,2.47,2.21s2.05.81,3.13.81c.96,0,1.94-.2,2.93-.61,1-.41,1.82-.98,2.47-1.73l1.44,1.48ZM45.7,155.59c-.8,1.26-1.34,2.86-1.6,4.81.84.17,1.64.25,2.41.25,1.61,0,2.87-.34,3.78-1.01.91-.67,1.51-1.5,1.8-2.48.1-.29.14-.59.14-.9,0-.86-.32-1.56-.95-2.09-.64-.53-1.36-.76-2.18-.68-1.46.14-2.6.85-3.4,2.11Z"/>
+          <path fill="var(--color-primary)" d="M58.21,170.23c.7-.12,1.26-.52,1.69-1.21.43-.68.65-1.9.65-3.65v-14.26c0-1.18-.13-2.08-.38-2.72s-.5-1.06-.76-1.26-.71-.51-1.39-.92c.65-.84,1.61-1.47,2.9-1.89,1.28-.42,2.59-.63,3.91-.63,1.15,0,2.04.14,2.66.43v21.24c0,1.75.22,2.97.65,3.65.43.68,1,1.09,1.69,1.21l.11,1.62h-11.84l.11-1.62Z"/>
+          <path fill="var(--color-primary)" d="M70.85,170.23c.7-.12,1.26-.52,1.69-1.21.43-.68.65-1.9.65-3.65v-14.26c0-1.18-.13-2.08-.38-2.72s-.5-1.06-.76-1.26-.71-.51-1.39-.92c.65-.84,1.61-1.47,2.9-1.89,1.28-.42,2.59-.63,3.91-.63,1.15,0,2.04.14,2.66.43v21.24c0,1.75.22,2.97.65,3.65.43.68,1,1.09,1.69,1.21l.11,1.62h-11.84l.11-1.62Z"/>
+          <path fill="var(--color-primary)" d="M104.11,168.14c-1.13,1.44-2.57,2.56-4.32,3.37-1.75.8-3.61,1.21-5.58,1.21s-3.92-.49-5.65-1.48c-1.73-.98-3.1-2.32-4.1-4.01-1.01-1.69-1.51-3.55-1.51-5.56s.5-3.87,1.51-5.56c1.01-1.69,2.38-3.03,4.1-4.01,1.73-.98,3.61-1.48,5.65-1.48,1.92,0,3.62.28,5.09.83,1.48.55,2.62,1.31,3.42,2.29.8.97,1.21,2.06,1.21,3.26,0,2.62-1.68,4.46-5.04,5.54-1.49.46-3.06.68-4.72.68-1.08,0-2.24-.11-3.49-.32.02,1.13.35,2.16.99,3.1.64.94,1.46,1.67,2.47,2.21,1.01.54,2.05.81,3.13.81.96,0,1.94-.2,2.93-.61s1.82-.98,2.47-1.73l1.44,1.48ZM92.5,155.59c-.8,1.26-1.34,2.86-1.6,4.81.84.17,1.64.25,2.41.25,1.61,0,2.87-.34,3.78-1.01s1.51-1.5,1.8-2.48c.09-.29.14-.59.14-.9,0-.86-.32-1.56-.95-2.09-.64-.53-1.36-.76-2.18-.68-1.46.14-2.6.85-3.4,2.11Z"/>
+          <path fill="var(--color-primary)" d="M139.93,141.71c.46.5.76,1.14.86,1.81.17,1.09-.14,2.07-.91,2.95s-1.69,1.36-2.84,1.51c-.83.11-1.71.14-2.64.09-1.17-.04-2.31,0-3.43.15-1.24.16-2.36.49-3.36,1-1,.5-1.5.85-2.29,1.37-1.25.83-.64.51-2.68,1.64-1.7.75-1.02.47-2.27.96-2.92,1.15-5.84,1.04-6.2,1.21v12.12c0,.86.13,1.51.38,1.93s.58.63.99.63c.26,0,.55-.09.86-.27.31-.18.6-.43.86-.74l1.44,1.48c-.98,1.1-1.96,1.87-2.92,2.3-.96.43-2.08.65-3.35.65-1.58,0-2.89-.4-3.92-1.21-1.03-.8-1.55-1.95-1.55-3.44v-13c-.74-.07-1.58-.24-2.52-.5v-1.8c.53.12.97.18,1.33.18.96,0,1.82-.27,2.59-.81.77-.54,1.42-1.18,1.96-1.91.54-.73,1.15-1.66,1.82-2.79.48-.89.88-1.52,1.19-1.91h.83v6.8c3.33.07,5-.58,7.3-1.62,1.91-1.06,2.49-1.68,3.33-2.56.36-.38.58-.67,1.77-1.97.66-.72,2.14-1.98,2.76-2.44,1.43-1.1,2.12-1.49,3.27-2.09,1.14-.61,2.11-.76,3.26-.88,2.04-.21,3.13.16,4.06,1.16Z"/>
+        </svg>
+      </a>
+      <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+      <nav>
+        <ul class="nav-links" role="list">
+          <li><a href="/#features">Features</a></li>
+          <li><a href="/#how-it-works">How It Works</a></li>
+          <li><a href="/#early-access">Early Access</a></li>
+          <li><a href="/#pricing">Pricing</a></li>
+          <li><a href="/#founder">About</a></li>
+          <li><a href="/#faq">FAQ</a></li>
+          <li><a href="/#your-data">Your Data</a></li>
+          <li><a href="/transparency" class="nav-active" aria-current="page">Transparency</a></li>
+          <li><a href="https://mywellet.com" class="nav-signin" style="font-weight:500;color:var(--color-primary);white-space:nowrap;">Sign in →</a></li>
+          <li>
+            <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== MAIN ========== -->
+  <main class="tp-main" id="main-content">
+    <div class="container">
+
+      <!-- Privacy Banner -->
+      <div class="tp-banner" role="note" aria-label="Privacy commitment">
+        <div class="tp-banner-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <polyline points="9 12 11 14 15 10"/>
+          </svg>
+        </div>
+        <div class="tp-banner-text">
+          <strong>Fully anonymized &amp; aggregated data only</strong>
+          <p>This dashboard shows aggregated, anonymous usage patterns from the Wellet app. No personal health information is collected or displayed here — ever. We publish this data as a commitment to transparency and to support caregiving research. Every metric shown is an aggregate across all users with no way to identify any individual.</p>
+        </div>
+      </div>
+
+      <!-- Page heading + refresh controls -->
+      <div class="tp-header">
+        <h1>Transparency Dashboard</h1>
+        <div class="tp-header-meta">
+          <span class="tp-last-refreshed" id="last-refreshed">Loading data…</span>
+          <button class="tp-refresh-btn" id="refresh-btn" onclick="loadDashboard()" aria-label="Refresh dashboard data">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="refresh-icon">
+              <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+            </svg>
+            Refresh
+          </button>
+        </div>
+      </div>
+
+      <!-- Error banner (hidden by default) -->
+      <div class="tp-error-banner" id="error-banner" role="alert">
+        Unable to load dashboard data. The data service may be temporarily unavailable — please try again in a few minutes.
+      </div>
+
+      <!-- ===== SECTION 1: Summary Stats ===== -->
+      <div class="tp-stats-grid" id="stats-grid">
+        <div class="tp-stat-card">
+          <div class="tp-stat-label">Total Sessions</div>
+          <div class="tp-stat-value" id="stat-sessions">—</div>
+          <div class="tp-stat-sub">All time</div>
+        </div>
+        <div class="tp-stat-card">
+          <div class="tp-stat-label">Unique Users</div>
+          <div class="tp-stat-value" id="stat-users">—</div>
+          <div class="tp-stat-sub">All time</div>
+        </div>
+        <div class="tp-stat-card">
+          <div class="tp-stat-label">Avg. Session Duration</div>
+          <div class="tp-stat-value" id="stat-duration">—</div>
+          <div class="tp-stat-sub">Minutes</div>
+        </div>
+        <div class="tp-stat-card">
+          <div class="tp-stat-label">Total Events</div>
+          <div class="tp-stat-value" id="stat-events">—</div>
+          <div class="tp-stat-sub">All time</div>
+        </div>
+      </div>
+
+      <!-- ===== CHARTS GRID ===== -->
+      <div class="tp-charts-grid">
+
+        <!-- Daily Sessions -->
+        <div class="tp-chart-card tp-chart-card--full">
+          <div class="tp-chart-title">Daily Sessions</div>
+          <div id="daily-empty" class="tp-empty" style="display:none">
+            <div class="tp-empty-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <strong>No session data yet</strong>
+            <p>Session trends will appear here once usage data begins flowing in. Check back soon.</p>
+          </div>
+          <div class="tp-chart-wrap tp-chart-wrap--tall" id="daily-wrap">
+            <canvas id="chart-daily" aria-label="Daily sessions over time" role="img"></canvas>
+          </div>
+        </div>
+
+        <!-- Feature Usage -->
+        <div class="tp-chart-card">
+          <div class="tp-chart-title">Feature Usage</div>
+          <div id="feature-empty" class="tp-empty" style="display:none">
+            <div class="tp-empty-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+            </div>
+            <strong>No feature data yet</strong>
+            <p>Feature usage counts will appear here once users interact with the app.</p>
+          </div>
+          <div class="tp-chart-wrap tp-chart-wrap--tall" id="feature-wrap">
+            <canvas id="chart-features" aria-label="Feature usage counts" role="img"></canvas>
+          </div>
+        </div>
+
+        <!-- Satisfaction -->
+        <div class="tp-chart-card">
+          <div class="tp-chart-title">Satisfaction by Feature</div>
+          <div id="satisfaction-empty" class="tp-empty" style="display:none">
+            <div class="tp-empty-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+            </div>
+            <strong>No satisfaction data yet</strong>
+            <p>User satisfaction ratings will appear here once feedback is submitted.</p>
+          </div>
+          <div class="tp-chart-wrap tp-chart-wrap--tall" id="satisfaction-wrap">
+            <canvas id="chart-satisfaction" aria-label="Average satisfaction rating by feature" role="img"></canvas>
+          </div>
+        </div>
+
+        <!-- Language Distribution -->
+        <div class="tp-chart-card">
+          <div class="tp-chart-title">Language Distribution</div>
+          <div id="language-empty" class="tp-empty" style="display:none">
+            <div class="tp-empty-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <strong>No language data yet</strong>
+            <p>Language distribution will appear here once users connect.</p>
+          </div>
+          <div class="tp-chart-wrap tp-chart-wrap--medium" id="language-wrap" style="display:flex;align-items:center;justify-content:flex-start;gap:2rem">
+            <div style="flex:0 0 200px;height:200px;position:relative;">
+              <canvas id="chart-languages" aria-label="Language distribution donut chart" role="img"></canvas>
+            </div>
+            <div id="language-legend" style="font-size:var(--text-xs);color:var(--color-text-muted);display:flex;flex-direction:column;gap:6px;"></div>
+          </div>
+        </div>
+
+        <!-- Device Breakdown -->
+        <div class="tp-chart-card">
+          <div class="tp-chart-title">Device Breakdown</div>
+          <div id="device-empty" class="tp-empty" style="display:none">
+            <div class="tp-empty-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <strong>No device data yet</strong>
+            <p>Device type breakdown will appear here once usage begins.</p>
+          </div>
+          <div class="tp-chart-wrap tp-chart-wrap--medium" id="device-wrap" style="display:flex;align-items:center;justify-content:flex-start;gap:2rem">
+            <div style="flex:0 0 200px;height:200px;position:relative;">
+              <canvas id="chart-devices" aria-label="Device type distribution donut chart" role="img"></canvas>
+            </div>
+            <div id="device-legend" style="font-size:var(--text-xs);color:var(--color-text-muted);display:flex;flex-direction:column;gap:6px;"></div>
+          </div>
+        </div>
+
+        <!-- Region Distribution -->
+        <div class="tp-chart-card tp-chart-card--full">
+          <div class="tp-chart-title">Region Distribution</div>
+          <div id="region-empty" class="tp-empty" style="display:none">
+            <div class="tp-empty-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <strong>No region data yet</strong>
+            <p>Geographic regions will appear here once users connect from different locations.</p>
+          </div>
+          <div class="tp-chart-wrap tp-chart-wrap--medium" id="region-wrap">
+            <canvas id="chart-regions" aria-label="User region distribution bar chart" role="img"></canvas>
+          </div>
+        </div>
+
+        <!-- Navigation Flows -->
+        <div class="tp-chart-card tp-chart-card--full">
+          <div class="tp-chart-title">Navigation Flows</div>
+          <p style="font-size:var(--text-xs);color:var(--color-text-faint);margin-bottom:var(--space-4);">Top view-to-view transitions in the app</p>
+          <div id="nav-empty" class="tp-empty" style="display:none">
+            <div class="tp-empty-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 10 20 15 15 20"/><path d="M4 4v7a4 4 0 0 0 4 4h12"/></svg>
+            </div>
+            <strong>No navigation data yet</strong>
+            <p>In-app navigation patterns will appear here once users begin exploring the app.</p>
+          </div>
+          <div class="tp-table-wrap" id="nav-wrap">
+            <table class="tp-table" id="nav-table" aria-label="Navigation flow transitions">
+              <thead>
+                <tr>
+                  <th>From</th>
+                  <th class="td-arrow"></th>
+                  <th>To</th>
+                  <th>Count</th>
+                  <th>Share</th>
+                </tr>
+              </thead>
+              <tbody id="nav-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Frustration Hotspots -->
+        <div class="tp-chart-card tp-chart-card--full">
+          <div class="tp-chart-title">Frustration Hotspots</div>
+          <p style="font-size:var(--text-xs);color:var(--color-text-faint);margin-bottom:var(--space-4);">Elements with the highest rage-click frequency — signals where users struggle</p>
+          <div id="frustration-empty" class="tp-empty" style="display:none">
+            <div class="tp-empty-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <strong>No frustration data yet</strong>
+            <p>Rage-click hotspots will appear here as user frustration patterns are detected.</p>
+          </div>
+          <div class="tp-table-wrap" id="frustration-wrap">
+            <table class="tp-table" id="frustration-table" aria-label="Frustration hotspots">
+              <thead>
+                <tr>
+                  <th>Element</th>
+                  <th>Screen</th>
+                  <th>Rage Clicks</th>
+                </tr>
+              </thead>
+              <tbody id="frustration-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+
+      </div><!-- /tp-charts-grid -->
+
+      <!-- ===== METHODOLOGY NOTE ===== -->
+      <div class="tp-methodology">
+        <h2>Data Methodology</h2>
+        <div class="tp-methodology-grid">
+          <div class="tp-meth-col tp-meth-col--yes">
+            <h3>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              What IS collected
+            </h3>
+            <ul role="list">
+              <li>Feature interaction counts (which screens are tapped, not what data is viewed)</li>
+              <li>Anonymous session duration and session count</li>
+              <li>Device type (mobile, tablet, desktop) — no model or OS version</li>
+              <li>App language preference</li>
+              <li>Coarse geographic region (country or U.S. state) — no GPS or precise location</li>
+              <li>Navigation paths (which screens are visited in sequence)</li>
+              <li>Voluntary satisfaction ratings (1–5 stars per feature)</li>
+              <li>Rage-click patterns (element labels, not content viewed)</li>
+            </ul>
+          </div>
+          <div class="tp-meth-col tp-meth-col--no">
+            <h3>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+              What is NEVER collected
+            </h3>
+            <ul role="list">
+              <li>No protected health information (PHI) of any kind</li>
+              <li>No health records, diagnoses, medications, or lab results</li>
+              <li>No names, email addresses, or account identifiers</li>
+              <li>No IP addresses or precise location data</li>
+              <li>No content of messages or notes</li>
+              <li>No demographic information (age, race, gender)</li>
+              <li>No cross-app tracking or third-party data sharing</li>
+              <li>No data sold to or shared with advertisers or data brokers</li>
+            </ul>
+          </div>
+        </div>
+        <p style="font-size:var(--text-xs);color:var(--color-text-faint);margin-top:var(--space-6);">
+          Data is aggregated on the server before being published here. The underlying event store uses row-level security and is never publicly accessible. For questions about this data, contact <a href="mailto:privacy@getwellet.com" style="color:var(--color-primary);">privacy@getwellet.com</a>. See also our <a href="https://mywellet.com/privacy" style="color:var(--color-primary);">Privacy Policy</a>.
+        </p>
+      </div>
+
+    </div><!-- /container -->
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <span class="footer-copy">&copy; 2026 Wellet Health. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer">Blog<span class="sr-only"> (opens in new tab)</span></a>
+        <a href="mailto:hello@getwellet.com">Contact</a>
+        <a href="https://mywellet.com/privacy">Privacy</a>
+        <a href="https://mywellet.com/terms">Terms</a>
+      </div>
+    </div>
+    <div class="container footer-social">
+      <a href="https://x.com/betsyeble" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on X" title="@betsyeble on X">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://x.com/welletapp" target="_blank" rel="noopener noreferrer" aria-label="Wellet on X" title="@welletapp on X">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://linkedin.com/in/betsyeble" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on LinkedIn" title="Betsy Eble on LinkedIn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="https://bsky.app/profile/betsyeble.bsky.social" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on Bluesky" title="@betsyeble on Bluesky">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.785 2.627 3.6 3.476 6.158 3.226-4.476.767-8.07 2.632-4.86 8.527 3.53 5.2 6.088-.508 7.078-2.012.315-.483.465-.71.535-.838a.56.56 0 0 1 .93 0c.07.128.22.355.535.838.99 1.504 3.548 7.212 7.079 2.012 3.21-5.895-.385-7.76-4.86-8.527 2.557.25 5.372-.6 6.157-3.226.247-.828.625-5.79.625-6.479 0-.688-.14-1.86-.903-2.203-.659-.3-1.664-.62-4.3 1.24C12.046 4.747 9.087 8.686 8 10.8h4z"/></svg>
+      </a>
+      <a href="https://instagram.com/welletapp" target="_blank" rel="noopener noreferrer" aria-label="Wellet on Instagram" title="@welletapp on Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+      <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on Medium" title="Betsy Eble on Medium">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+      </a>
+      <a href="https://open.spotify.com/show/5QUDaF0Pp0mIfZwh1aEzU6" target="_blank" rel="noopener noreferrer" aria-label="Wellet Podcast on Spotify" title="Wellet Podcast on Spotify">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+      </a>
+    </div>
+    <div class="container footer-disclaimer">
+      <p>Wellet is not a medical device and does not provide medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider with questions about a medical condition.</p>
+    </div>
+  </footer>
+
+  <!-- ========== THEME SCRIPT (same as index.html) ========== -->
+  <script>
+    // Theme init (must run before paint)
+    (function() {
+      const stored = localStorage.getItem('wellet-theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = stored || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <!-- ========== DASHBOARD SCRIPT ========== -->
+  <script>
+    // Theme toggle
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.querySelector('[data-theme-toggle]');
+      if (btn) {
+        btn.addEventListener('click', () => {
+          const current = document.documentElement.getAttribute('data-theme') || 'light';
+          const next = current === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('wellet-theme', next);
+        });
+      }
+    });
+
+    // ===== Supabase config =====
+    const SUPABASE_URL = 'https://nrpdhxygzyfmyljzfexv.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ycGRoeHlnenlmbXlsanpmZXh2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU3NTQ3MjUsImV4cCI6MjA5MTMzMDcyNX0.6gdj1hlW2UAc3gJOyjPJBeBJWth_Fcc5C5LH9zWyDXU';
+
+    // Chart instances map for destroy-before-recreate
+    const chartInstances = {};
+
+    // ===== Color helpers (respect dark mode) =====
+    function getCSSVar(name) {
+      return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+    }
+
+    function getChartColors() {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      return {
+        primary:    isDark ? '#52b788' : '#2d6a4f',
+        secondary:  isDark ? '#74c69d' : '#52796f',
+        tertiary:   isDark ? '#95d5b2' : '#84a98c',
+        palette: [
+          isDark ? '#52b788' : '#2d6a4f',
+          isDark ? '#74c69d' : '#40916c',
+          isDark ? '#95d5b2' : '#52b788',
+          isDark ? '#b7e4c7' : '#74c69d',
+          isDark ? '#d8f3dc' : '#95d5b2',
+          isDark ? '#3a7d5b' : '#1b4332',
+          isDark ? '#2d6a4f' : '#081c15',
+          isDark ? '#b59f6a' : '#b08d57',
+        ],
+        text:       getCSSVar('--color-text'),
+        textMuted:  getCSSVar('--color-text-muted'),
+        textFaint:  getCSSVar('--color-text-faint'),
+        border:     getCSSVar('--color-border'),
+        surface2:   getCSSVar('--color-surface-2'),
+        bg:         getCSSVar('--color-bg'),
+      };
+    }
+
+    // ===== Chart.js global defaults =====
+    function applyChartDefaults() {
+      const c = getChartColors();
+      Chart.defaults.color = c.textMuted;
+      Chart.defaults.borderColor = c.border;
+      Chart.defaults.font.family = "'DM Sans', sans-serif";
+      Chart.defaults.font.size = 12;
+    }
+
+    // ===== Destroy existing chart =====
+    function destroyChart(key) {
+      if (chartInstances[key]) {
+        chartInstances[key].destroy();
+        delete chartInstances[key];
+      }
+    }
+
+    // ===== Formatting helpers =====
+    function fmtNumber(n) {
+      if (n == null || isNaN(n)) return '—';
+      return Number(n).toLocaleString();
+    }
+
+    function fmtDuration(seconds) {
+      if (seconds == null || isNaN(seconds)) return '—';
+      const mins = Math.round(seconds / 60);
+      if (mins < 1) return '<1 min';
+      if (mins === 1) return '1 min';
+      return mins + ' min';
+    }
+
+    function isEmpty(val) {
+      if (val == null) return true;
+      if (Array.isArray(val)) return val.length === 0;
+      if (typeof val === 'object') return Object.keys(val).length === 0;
+      return false;
+    }
+
+    // ===== Show/hide empty states =====
+    function showEmpty(emptyId, wrapId) {
+      const e = document.getElementById(emptyId);
+      const w = document.getElementById(wrapId);
+      if (e) e.style.display = 'flex';
+      if (w) w.style.display = 'none';
+    }
+
+    function showChart(emptyId, wrapId, displayVal) {
+      const e = document.getElementById(emptyId);
+      const w = document.getElementById(wrapId);
+      if (e) e.style.display = 'none';
+      if (w) w.style.display = displayVal || 'block';
+    }
+
+    // ===== Render summary stats =====
+    function renderSummary(summary) {
+      if (!summary) {
+        ['stat-sessions','stat-users','stat-duration','stat-events'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = '—';
+        });
+        return;
+      }
+      document.getElementById('stat-sessions').textContent = fmtNumber(summary.total_sessions);
+      document.getElementById('stat-users').textContent    = fmtNumber(summary.unique_users);
+      document.getElementById('stat-duration').textContent = fmtDuration(summary.avg_duration_seconds);
+      document.getElementById('stat-events').textContent   = fmtNumber(summary.total_events);
+    }
+
+    // ===== Render daily sessions =====
+    function renderDailySessions(daily) {
+      if (isEmpty(daily)) {
+        showEmpty('daily-empty', 'daily-wrap');
+        return;
+      }
+      showChart('daily-empty', 'daily-wrap', 'block');
+      const c = getChartColors();
+      const labels = daily.map(d => {
+        const dt = new Date(d.date || d.day || d.session_date);
+        return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+      });
+      const values = daily.map(d => d.sessions || d.count || 0);
+
+      destroyChart('daily');
+      const ctx = document.getElementById('chart-daily').getContext('2d');
+      chartInstances['daily'] = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Sessions',
+            data: values,
+            borderColor: c.primary,
+            backgroundColor: c.primary + '22',
+            fill: true,
+            tension: 0.35,
+            pointRadius: values.length > 30 ? 0 : 3,
+            pointHoverRadius: 5,
+            borderWidth: 2,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: c.surface2,
+              titleColor: c.text,
+              bodyColor: c.textMuted,
+              borderColor: c.border,
+              borderWidth: 1,
+            }
+          },
+          scales: {
+            x: {
+              grid: { color: c.border + '55' },
+              ticks: { color: c.textFaint, maxTicksLimit: 8 },
+            },
+            y: {
+              beginAtZero: true,
+              grid: { color: c.border + '55' },
+              ticks: { color: c.textFaint, precision: 0 },
+            }
+          }
+        }
+      });
+    }
+
+    // ===== Render feature usage =====
+    function renderFeatureUsage(features) {
+      if (isEmpty(features)) {
+        showEmpty('feature-empty', 'feature-wrap');
+        return;
+      }
+      showChart('feature-empty', 'feature-wrap', 'block');
+      const c = getChartColors();
+      // Sort descending
+      const sorted = [...features].sort((a, b) => (b.count || b.usage_count || 0) - (a.count || a.usage_count || 0));
+      const labels = sorted.map(f => f.feature || f.feature_name || f.name || 'Unknown');
+      const values = sorted.map(f => f.count || f.usage_count || 0);
+
+      destroyChart('features');
+      const ctx = document.getElementById('chart-features').getContext('2d');
+      chartInstances['features'] = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Usage',
+            data: values,
+            backgroundColor: c.palette.slice(0, labels.length).map(col => col + 'cc'),
+            borderColor:     c.palette.slice(0, labels.length),
+            borderWidth: 1,
+            borderRadius: 4,
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: c.surface2,
+              titleColor: c.text,
+              bodyColor: c.textMuted,
+              borderColor: c.border,
+              borderWidth: 1,
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              grid: { color: c.border + '55' },
+              ticks: { color: c.textFaint, precision: 0 },
+            },
+            y: {
+              grid: { display: false },
+              ticks: { color: c.textMuted },
+            }
+          }
+        }
+      });
+    }
+
+    // ===== Render satisfaction =====
+    function renderSatisfaction(satisfaction) {
+      if (isEmpty(satisfaction)) {
+        showEmpty('satisfaction-empty', 'satisfaction-wrap');
+        return;
+      }
+      showChart('satisfaction-empty', 'satisfaction-wrap', 'block');
+      const c = getChartColors();
+      const labels = satisfaction.map(s => s.feature || s.feature_name || s.name || 'Unknown');
+      const values = satisfaction.map(s => parseFloat(s.avg_rating || s.average || s.rating || 0).toFixed(2));
+
+      destroyChart('satisfaction');
+      const ctx = document.getElementById('chart-satisfaction').getContext('2d');
+      chartInstances['satisfaction'] = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Avg Rating',
+            data: values,
+            backgroundColor: c.primary + 'bb',
+            borderColor: c.primary,
+            borderWidth: 1,
+            borderRadius: 4,
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: ctx => ` ${ctx.parsed.x} / 5`
+              },
+              backgroundColor: c.surface2,
+              titleColor: c.text,
+              bodyColor: c.textMuted,
+              borderColor: c.border,
+              borderWidth: 1,
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              max: 5,
+              grid: { color: c.border + '55' },
+              ticks: { color: c.textFaint },
+            },
+            y: {
+              grid: { display: false },
+              ticks: { color: c.textMuted },
+            }
+          }
+        }
+      });
+    }
+
+    // ===== Render donut chart (languages / devices) =====
+    function renderDonut(data, canvasId, legendId, emptyId, wrapId, labelKey, valueKey) {
+      if (isEmpty(data)) {
+        showEmpty(emptyId, wrapId);
+        return;
+      }
+      showChart(emptyId, wrapId, 'flex');
+      const c = getChartColors();
+      const labels = data.map(d => d[labelKey] || d.label || d.name || 'Unknown');
+      const values = data.map(d => d[valueKey] || d.count || d.sessions || 0);
+      const total = values.reduce((a, b) => a + b, 0);
+
+      destroyChart(canvasId);
+      const ctx = document.getElementById(canvasId).getContext('2d');
+      chartInstances[canvasId] = new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels,
+          datasets: [{
+            data: values,
+            backgroundColor: c.palette.slice(0, labels.length).map(col => col + 'dd'),
+            borderColor: c.bg,
+            borderWidth: 2,
+            hoverBorderColor: c.bg,
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          cutout: '62%',
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: ctx => {
+                  const pct = total > 0 ? ((ctx.parsed / total) * 100).toFixed(1) : 0;
+                  return ` ${ctx.label}: ${fmtNumber(ctx.parsed)} (${pct}%)`;
+                }
+              },
+              backgroundColor: c.surface2,
+              titleColor: c.text,
+              bodyColor: c.textMuted,
+              borderColor: c.border,
+              borderWidth: 1,
+            }
+          }
+        }
+      });
+
+      // Custom legend
+      const legendEl = document.getElementById(legendId);
+      if (legendEl) {
+        legendEl.innerHTML = '';
+        labels.forEach((label, i) => {
+          const pct = total > 0 ? ((values[i] / total) * 100).toFixed(1) : 0;
+          const item = document.createElement('div');
+          item.style.cssText = 'display:flex;align-items:center;gap:8px;';
+          item.innerHTML = `
+            <span style="width:10px;height:10px;border-radius:50%;background:${c.palette[i] || c.primary};flex-shrink:0;"></span>
+            <span style="color:var(--color-text-muted)">${label}</span>
+            <span style="color:var(--color-text-faint);margin-left:auto;">${pct}%</span>
+          `;
+          legendEl.appendChild(item);
+        });
+      }
+    }
+
+    // ===== Render region bar chart =====
+    function renderRegions(regions) {
+      if (isEmpty(regions)) {
+        showEmpty('region-empty', 'region-wrap');
+        return;
+      }
+      showChart('region-empty', 'region-wrap', 'block');
+      const c = getChartColors();
+      const sorted = [...regions].sort((a, b) => (b.count || b.sessions || 0) - (a.count || a.sessions || 0)).slice(0, 20);
+      const labels = sorted.map(r => r.region || r.country || r.name || 'Unknown');
+      const values = sorted.map(r => r.count || r.sessions || 0);
+
+      destroyChart('regions');
+      const ctx = document.getElementById('chart-regions').getContext('2d');
+      chartInstances['regions'] = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Users',
+            data: values,
+            backgroundColor: c.primary + 'bb',
+            borderColor: c.primary,
+            borderWidth: 1,
+            borderRadius: 3,
+          }]
+        },
+        options: {
+          indexAxis: 'y',
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              backgroundColor: c.surface2,
+              titleColor: c.text,
+              bodyColor: c.textMuted,
+              borderColor: c.border,
+              borderWidth: 1,
+            }
+          },
+          scales: {
+            x: {
+              beginAtZero: true,
+              grid: { color: c.border + '55' },
+              ticks: { color: c.textFaint, precision: 0 },
+            },
+            y: {
+              grid: { display: false },
+              ticks: { color: c.textMuted },
+            }
+          }
+        }
+      });
+    }
+
+    // ===== Render navigation flows table =====
+    function renderNavFlows(flows) {
+      if (isEmpty(flows)) {
+        showEmpty('nav-empty', 'nav-wrap');
+        return;
+      }
+      showChart('nav-empty', 'nav-wrap', 'block');
+      const total = flows.reduce((a, f) => a + (f.count || f.transitions || 0), 0);
+      const tbody = document.getElementById('nav-tbody');
+      tbody.innerHTML = '';
+      flows.slice(0, 20).forEach(f => {
+        const count = f.count || f.transitions || 0;
+        const pct = total > 0 ? ((count / total) * 100).toFixed(1) : '0.0';
+        const from = f.from_view || f.from_screen || f.from || '—';
+        const to   = f.to_view   || f.to_screen   || f.to   || '—';
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${from}</td>
+          <td class="td-arrow" aria-hidden="true">→</td>
+          <td>${to}</td>
+          <td class="td-count">${fmtNumber(count)}</td>
+          <td><span class="tp-badge">${pct}%</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // ===== Render frustration hotspots =====
+    function renderFrustration(frustration) {
+      if (isEmpty(frustration)) {
+        showEmpty('frustration-empty', 'frustration-wrap');
+        return;
+      }
+      showChart('frustration-empty', 'frustration-wrap', 'block');
+      const tbody = document.getElementById('frustration-tbody');
+      tbody.innerHTML = '';
+      frustration.slice(0, 20).forEach(f => {
+        const element = f.element || f.element_label || f.selector || '—';
+        const screen  = f.screen  || f.view || f.page || '—';
+        const count   = f.count   || f.rage_clicks || f.clicks || 0;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${element}</td>
+          <td style="color:var(--color-text-muted)">${screen}</td>
+          <td class="td-count">${fmtNumber(count)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // ===== Main data load =====
+    async function loadDashboard() {
+      const refreshBtn  = document.getElementById('refresh-btn');
+      const refreshIcon = document.getElementById('refresh-icon');
+      const lastRefreshed = document.getElementById('last-refreshed');
+      const errorBanner = document.getElementById('error-banner');
+
+      // Loading state
+      refreshBtn.classList.add('loading');
+      refreshBtn.disabled = true;
+      errorBanner.classList.remove('visible');
+
+      try {
+        const resp = await fetch(`${SUPABASE_URL}/rest/v1/rpc/get_transparency_data`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+          },
+          body: JSON.stringify({})
+        });
+
+        if (!resp.ok) {
+          throw new Error(`HTTP ${resp.status}: ${resp.statusText}`);
+        }
+
+        const data = await resp.json();
+
+        applyChartDefaults();
+
+        // Render all sections
+        renderSummary(data.summary);
+        renderDailySessions(data.daily_sessions);
+        renderFeatureUsage(data.feature_usage);
+        renderNavFlows(data.nav_flows);
+        renderSatisfaction(data.satisfaction);
+        renderDonut(data.languages, 'chart-languages', 'language-legend', 'language-empty', 'language-wrap', 'language', 'count');
+        renderDonut(data.devices,   'chart-devices',   'device-legend',   'device-empty',   'device-wrap',   'device',   'count');
+        renderRegions(data.regions);
+        renderFrustration(data.frustration);
+
+        // Update timestamp
+        const now = new Date();
+        lastRefreshed.textContent = 'Last refreshed: ' + now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', second: '2-digit', hour12: true });
+
+      } catch (err) {
+        console.error('Dashboard load error:', err);
+        errorBanner.classList.add('visible');
+        lastRefreshed.textContent = 'Failed to load — check back soon';
+
+        // Show friendly empty states for all charts
+        showEmpty('daily-empty', 'daily-wrap');
+        showEmpty('feature-empty', 'feature-wrap');
+        showEmpty('satisfaction-empty', 'satisfaction-wrap');
+        showEmpty('language-empty', 'language-wrap');
+        showEmpty('device-empty', 'device-wrap');
+        showEmpty('region-empty', 'region-wrap');
+        showEmpty('nav-empty', 'nav-wrap');
+        showEmpty('frustration-empty', 'frustration-wrap');
+
+        // Show dash stats
+        ['stat-sessions','stat-users','stat-duration','stat-events'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.textContent = '—';
+        });
+      } finally {
+        refreshBtn.classList.remove('loading');
+        refreshBtn.disabled = false;
+      }
+    }
+
+    // ===== Auto-refresh every 5 minutes =====
+    let refreshTimer = null;
+    function startAutoRefresh() {
+      if (refreshTimer) clearInterval(refreshTimer);
+      refreshTimer = setInterval(loadDashboard, 5 * 60 * 1000);
+    }
+
+    // ===== Init =====
+    document.addEventListener('DOMContentLoaded', () => {
+      loadDashboard();
+      startAutoRefresh();
+
+      // Re-render charts on theme change (to update colors)
+      const observer = new MutationObserver(() => {
+        applyChartDefaults();
+      });
+      observer.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-theme']
+      });
+    });
+  </script>
+
+</body>
+</html>

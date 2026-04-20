@@ -1940,3 +1940,105 @@ section {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ========== TRANSPARENCY SECTION (index.html) ========== */
+.transparency-section {
+  background: var(--color-surface-2);
+  padding: var(--space-20) 0;
+  border-top: 1px solid var(--color-divider);
+}
+
+.transparency-section h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 400;
+  text-align: left;
+  margin-bottom: var(--space-2);
+}
+
+.transparency-section .section-subtitle {
+  text-align: left;
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  max-width: 62ch;
+  margin-bottom: var(--space-12);
+}
+
+.tp-index-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-10);
+}
+
+.tp-index-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8);
+  text-align: left;
+}
+
+.tp-index-card .yd-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--color-primary-soft, #E8F0EB);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-4);
+  color: var(--color-primary);
+}
+
+.tp-index-card h3 {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.tp-index-card p {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+.tp-index-cta {
+  text-align: left;
+}
+
+.tp-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--color-primary);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+  transition: opacity var(--transition-interactive);
+}
+
+.tp-cta-link:hover {
+  opacity: 0.75;
+}
+
+/* Nav active state for transparency page */
+.nav-active {
+  font-weight: 500;
+  color: var(--color-primary) !important;
+}
+
+@media (max-width: 900px) {
+  .tp-index-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .tp-index-grid {
+    grid-template-columns: 1fr;
+  }
+}
