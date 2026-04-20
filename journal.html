@@ -459,16 +459,20 @@
       </button>
       <nav>
         <ul class="nav-links" role="list">
-          <li><a href="/#features">Features</a></li>
-          <li><a href="/#how-it-works">How It Works</a></li>
-          <li><a href="/#early-access">Early Access</a></li>
+                    <li><a href="/#features">Features</a></li>
           <li><a href="/#pricing">Pricing</a></li>
-          <li><a href="/#founder">About</a></li>
-          <li><a href="/#faq">FAQ</a></li>
-          <li><a href="/#your-data">Your Data</a></li>
           <li><a href="/connect">Connect</a></li>
-          <li><a href="/transparency">Transparency</a></li>
           <li><a href="/journal" class="nav-active" aria-current="page">Journal</a></li>
+          <li class="nav-more-wrap"><button class="nav-more-btn" onclick="this.parentElement.classList.toggle('open')" aria-label="More pages">More <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l3 3 3-3"/></svg></button>
+            <ul class="nav-dropdown">
+              <li><a href="/#how-it-works">How It Works</a></li>
+              <li><a href="/#founder">About</a></li>
+              <li><a href="/#faq">FAQ</a></li>
+              <li><a href="/#your-data">Your Data</a></li>
+              <li><a href="/transparency">Transparency</a></li>
+              <li><a href="/#early-access">Early Access</a></li>
+            </ul>
+          </li>
           <li><a href="https://mywellet.com" class="nav-signin" style="font-weight:500;color:var(--color-primary);white-space:nowrap;">Sign in →</a></li>
           <li>
             <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
@@ -711,6 +715,14 @@
       }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
       document.querySelectorAll('.reveal').forEach(function(el) { observer.observe(el); });
     })();
+  </script>
+  <script>
+    document.addEventListener('click', function(e) {
+      var wrap = document.querySelector('.nav-more-wrap');
+      if (wrap && !wrap.contains(e.target)) {
+        wrap.classList.remove('open');
+      }
+    });
   </script>
 </body>
 </html>
