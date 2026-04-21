@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wellet for VA Families — Health Coordination for Veterans' Caregivers</title>
+  <meta name="description" content="Wellet reads the VA Health Summary and organizes every medication, condition, and lab result in one place. Built for caregivers of VA-enrolled Veterans. No VA approval required.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Wellet for VA Families — Health Coordination for Veterans' Caregivers">
+  <meta property="og:description" content="Upload the VA Health Summary once. Wellet reads the full picture — medications, conditions, allergies, lab results — and keeps it with you at every appointment.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getwellet.com/veterans">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://getwellet.com/veterans">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232d6a4f'/%3E%3Cpath d='M8 16c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='3' fill='white'/%3E%3C/svg%3E">
+
+  <!-- Theme init — must run before paint -->
+  <script>
+    (function() {
+      var stored = localStorage.getItem('wellet-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <style>
+    /* ===== VETERANS PAGE STYLES ===== */
+
+    .vt-page {
+      background: var(--color-bg);
+      min-height: 100dvh;
+    }
+
+    .vt-main {
+      padding-bottom: var(--space-24);
+    }
+
+    /* ---- Hero ---- */
+    .vt-hero {
+      padding: var(--space-16) 0 var(--space-16);
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .vt-hero .container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-10);
+      align-items: center;
+    }
+
+    @media (min-width: 768px) {
+      .vt-hero .container {
+        grid-template-columns: 1fr auto;
+        gap: var(--space-16);
+      }
+    }
+
+    .vt-hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      padding: var(--space-1) var(--space-4);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-6);
+    }
+
+    .vt-hero h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      font-weight: 400;
+      color: var(--color-text);
+      line-height: 1.15;
+      margin-bottom: var(--space-4);
+      max-width: 24ch;
+    }
+
+    .vt-hero-sub {
+      font-size: var(--text-lg);
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      max-width: 56ch;
+      margin-bottom: var(--space-8);
+      font-weight: 300;
+    }
+
+    .vt-hero-sub a {
+      color: var(--color-primary);
+      text-underline-offset: 3px;
+    }
+
+    .vt-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-4);
+    }
+
+    .vt-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      padding: var(--space-3) var(--space-6);
+      border-radius: var(--radius-full);
+      font-weight: 500;
+      font-size: var(--text-base);
+      text-decoration: none;
+      transition: background var(--transition-interactive);
+      white-space: nowrap;
+    }
+
+    .vt-btn-primary:hover {
+      background: var(--color-primary-hover);
+    }
+
+    .vt-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      color: var(--color-primary);
+      font-weight: 500;
+      font-size: var(--text-base);
+      text-decoration: none;
+      border-bottom: 1px solid var(--color-primary-light);
+      padding-bottom: 2px;
+      transition: border-color var(--transition-interactive), color var(--transition-interactive);
+      white-space: nowrap;
+    }
+
+    .vt-btn-secondary:hover {
+      color: var(--color-primary-hover);
+      border-color: var(--color-primary);
+    }
+
+    /* Hero badge card */
+    .vt-hero-stat {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-6) var(--space-8);
+      text-align: center;
+      flex-shrink: 0;
+      min-width: 200px;
+    }
+
+    .vt-hero-stat-number {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 600;
+      color: var(--color-primary);
+      line-height: 1.1;
+      margin-bottom: var(--space-2);
+    }
+
+    .vt-hero-stat-label {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      max-width: 16ch;
+      margin: 0 auto;
+    }
+
+    /* ---- Section containers ---- */
+    .vt-section {
+      padding: var(--space-16) 0;
+      border-bottom: 1px solid var(--color-divider);
+    }
+
+    .vt-section:last-of-type {
+      border-bottom: none;
+    }
+
+    .vt-section-label {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin-bottom: var(--space-3);
+    }
+
+    .vt-section h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 400;
+      color: var(--color-text);
+      line-height: 1.2;
+      margin-bottom: var(--space-2);
+    }
+
+    .vt-section-sub {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      max-width: 58ch;
+      margin-bottom: var(--space-10);
+      font-weight: 300;
+    }
+
+    /* ---- Problem section ---- */
+    .vt-problem-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .vt-problem-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: var(--space-6);
+      }
+    }
+
+    .vt-problem-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+    }
+
+    .vt-problem-card-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--color-primary-light);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--space-4);
+      color: var(--color-primary);
+    }
+
+    .vt-problem-card h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-3);
+    }
+
+    .vt-problem-card p {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.65;
+    }
+
+    /* ---- How It Works — Steps ---- */
+    .vt-steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    @media (min-width: 768px) {
+      .vt-steps {
+        grid-template-columns: repeat(4, 1fr);
+        gap: var(--space-4);
+      }
+    }
+
+    .vt-step {
+      position: relative;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+    }
+
+    .vt-step-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-full);
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      margin-bottom: var(--space-4);
+      flex-shrink: 0;
+    }
+
+    .vt-step h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-2);
+      line-height: 1.3;
+    }
+
+    .vt-step p {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.65;
+    }
+
+    .vt-step p a {
+      color: var(--color-primary);
+      text-underline-offset: 3px;
+    }
+
+    .vt-step-connector {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .vt-step-connector {
+        display: block;
+        position: absolute;
+        top: 28px;
+        right: -18px;
+        color: var(--color-text-faint);
+        z-index: 1;
+      }
+    }
+
+    .vt-step-note {
+      margin-top: var(--space-8);
+      padding: var(--space-4) var(--space-6);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-left: 3px solid var(--color-primary);
+      border-radius: var(--radius-lg);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.65;
+    }
+
+    .vt-step-note a {
+      color: var(--color-primary);
+      font-weight: 500;
+      text-underline-offset: 3px;
+    }
+
+    /* ---- What Wellet reads ---- */
+    .vt-reads-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+
+    @media (min-width: 768px) {
+      .vt-reads-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--space-4);
+      }
+    }
+
+    .vt-reads-item {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-4);
+      padding: var(--space-5) var(--space-6);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+    }
+
+    .vt-reads-icon {
+      width: 36px;
+      height: 36px;
+      background: var(--color-primary-light);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--color-primary);
+    }
+
+    .vt-reads-content h3 {
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-1);
+    }
+
+    .vt-reads-content p {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.55;
+    }
+
+    /* ---- Privacy ---- */
+    .vt-privacy-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-4);
+    }
+
+    @media (min-width: 768px) {
+      .vt-privacy-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: var(--space-6);
+      }
+    }
+
+    .vt-privacy-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+
+    .vt-privacy-card-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--color-primary-light);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--color-primary);
+    }
+
+    .vt-privacy-card h3 {
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .vt-privacy-card p {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    .vt-privacy-lockup {
+      margin-top: var(--space-8);
+      padding: var(--space-5) var(--space-6);
+      background: var(--color-surface-offset);
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--space-4);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.55;
+    }
+
+    .vt-privacy-lockup svg {
+      flex-shrink: 0;
+      color: var(--color-primary);
+    }
+
+    /* ---- Alpha note ---- */
+    .vt-alpha-note {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: var(--space-8) var(--space-8);
+      max-width: 62ch;
+      position: relative;
+    }
+
+    .vt-alpha-note-label {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--color-amber-light);
+      color: var(--color-amber);
+      padding: var(--space-1) var(--space-3);
+      border-radius: var(--radius-full);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-5);
+    }
+
+    .vt-alpha-note blockquote {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: var(--text-lg);
+      font-weight: 300;
+      color: var(--color-text);
+      line-height: 1.55;
+      border: none;
+      padding: 0;
+      margin: 0 0 var(--space-4);
+    }
+
+    .vt-alpha-note cite {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      font-style: normal;
+    }
+
+    /* ---- Final CTA ---- */
+    .vt-cta {
+      text-align: center;
+    }
+
+    .vt-cta h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 400;
+      color: var(--color-text);
+      margin-bottom: var(--space-4);
+    }
+
+    .vt-cta p {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      max-width: 48ch;
+      margin: 0 auto var(--space-8);
+      font-weight: 300;
+    }
+
+    .vt-cta-note {
+      margin-top: var(--space-4);
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+    }
+
+    /* Mobile nav active highlight */
+    .nav-active-vt {
+      color: var(--color-primary) !important;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body class="vt-page">
+
+  <!-- ========== HEADER ========== -->
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo" aria-label="Wellet home">
+        <svg viewBox="0 138 150 42" style="height:26px;width:auto;" xmlns="http://www.w3.org/2000/svg" aria-label="Wellet">
+          <path fill="var(--color-primary)" d="M45.5,142c.94.94,1.4,2.08,1.4,3.42,0,.89-.19,1.73-.58,2.52-.65-.1-1.33-.14-2.05-.14-3.07,0-5.56.97-7.45,2.9-1.9,1.93-3.36,4.34-4.39,7.22-1.03,2.88-2.17,6.86-3.42,11.95l-.47,1.94-.11-.25v.29h-5.15l-4.43-11.2-4.03,11.2h-5.15l-5.69-14.44c-.67-1.34-1.28-2.24-1.82-2.7-.54-.46-1.27-.73-2.18-.83l.25-2.56h12.56l-.04,2.56c-.53.07-1.01.26-1.44.58-.43.31-.65.76-.65,1.33,0,.17.04.38.11.65l3.71,9.47,3.1-8.5c-.48-.96-.88-1.67-1.21-2.14s-.67-.8-1.04-.99c-.37-.19-.87-.32-1.49-.4v-2.56h12.82v2.56c-.86.02-1.49.13-1.87.32-.38.19-.58.55-.58,1.08,0,.34.07.74.22,1.22l3.06,7.78c1.54-7.46,3.49-13.28,5.85-17.44,2.36-4.16,5.15-6.25,8.37-6.25,1.58,0,2.84.47,3.78,1.4Z"/>
+          <path fill="var(--color-primary)" d="M57.31,168.14c-1.13,1.44-2.57,2.56-4.32,3.37-1.75.8-3.61,1.21-5.58,1.21s-3.92-.49-5.65-1.48c-1.73-.98-3.1-2.32-4.1-4.01-1.01-1.69-1.51-3.55-1.51-5.56s.5-3.87,1.51-5.56c1.01-1.69,2.38-3.03,4.1-4.01,1.73-.98,3.61-1.48,5.65-1.48,1.92,0,3.62.28,5.09.83s2.62,1.31,3.42,2.29c.8.97,1.21,2.06,1.21,3.26,0,2.62-1.68,4.46-5.04,5.54-1.49.46-3.06.68-4.72.68-1.08,0-2.24-.11-3.49-.32.02,1.13.35,2.16.99,3.1.64.94,1.46,1.67,2.47,2.21s2.05.81,3.13.81c.96,0,1.94-.2,2.93-.61,1-.41,1.82-.98,2.47-1.73l1.44,1.48ZM45.7,155.59c-.8,1.26-1.34,2.86-1.6,4.81.84.17,1.64.25,2.41.25,1.61,0,2.87-.34,3.78-1.01.91-.67,1.51-1.5,1.8-2.48.1-.29.14-.59.14-.9,0-.86-.32-1.56-.95-2.09-.64-.53-1.36-.76-2.18-.68-1.46.14-2.6.85-3.4,2.11Z"/>
+          <path fill="var(--color-primary)" d="M58.21,170.23c.7-.12,1.26-.52,1.69-1.21.43-.68.65-1.9.65-3.65v-14.26c0-1.18-.13-2.08-.38-2.72s-.5-1.06-.76-1.26-.71-.51-1.39-.92c.65-.84,1.61-1.47,2.9-1.89,1.28-.42,2.59-.63,3.91-.63,1.15,0,2.04.14,2.66.43v21.24c0,1.75.22,2.97.65,3.65.43.68,1,1.09,1.69,1.21l.11,1.62h-11.84l.11-1.62Z"/>
+          <path fill="var(--color-primary)" d="M70.85,170.23c.7-.12,1.26-.52,1.69-1.21.43-.68.65-1.9.65-3.65v-14.26c0-1.18-.13-2.08-.38-2.72s-.5-1.06-.76-1.26-.71-.51-1.39-.92c.65-.84,1.61-1.47,2.9-1.89,1.28-.42,2.59-.63,3.91-.63,1.15,0,2.04.14,2.66.43v21.24c0,1.75.22,2.97.65,3.65.43.68,1,1.09,1.69,1.21l.11,1.62h-11.84l.11-1.62Z"/>
+          <path fill="var(--color-primary)" d="M104.11,168.14c-1.13,1.44-2.57,2.56-4.32,3.37-1.75.8-3.61,1.21-5.58,1.21s-3.92-.49-5.65-1.48c-1.73-.98-3.1-2.32-4.1-4.01-1.01-1.69-1.51-3.55-1.51-5.56s.5-3.87,1.51-5.56c1.01-1.69,2.38-3.03,4.1-4.01,1.73-.98,3.61-1.48,5.65-1.48,1.92,0,3.62.28,5.09.83,1.48.55,2.62,1.31,3.42,2.29.8.97,1.21,2.06,1.21,3.26,0,2.62-1.68,4.46-5.04,5.54-1.49.46-3.06.68-4.72.68-1.08,0-2.24-.11-3.49-.32.02,1.13.35,2.16.99,3.1.64.94,1.46,1.67,2.47,2.21,1.01.54,2.05.81,3.13.81.96,0,1.94-.2,2.93-.61s1.82-.98,2.47-1.73l1.44,1.48ZM92.5,155.59c-.8,1.26-1.34,2.86-1.6,4.81.84.17,1.64.25,2.41.25,1.61,0,2.87-.34,3.78-1.01s1.51-1.5,1.8-2.48c.09-.29.14-.59.14-.9,0-.86-.32-1.56-.95-2.09-.64-.53-1.36-.76-2.18-.68-1.46.14-2.6.85-3.4,2.11Z"/>
+          <path fill="var(--color-primary)" d="M139.93,141.71c.46.5.76,1.14.86,1.81.17,1.09-.14,2.07-.91,2.95s-1.69,1.36-2.84,1.51c-.83.11-1.71.14-2.64.09-1.17-.04-2.31,0-3.43.15-1.24.16-2.36.49-3.36,1-1,.5-1.5.85-2.29,1.37-1.25.83-.64.51-2.68,1.64-1.7.75-1.02.47-2.27.96-2.92,1.15-5.84,1.04-6.2,1.21v12.12c0,.86.13,1.51.38,1.93s.58.63.99.63c.26,0,.55-.09.86-.27.31-.18.6-.43.86-.74l1.44,1.48c-.98,1.1-1.96,1.87-2.92,2.3-.96.43-2.08.65-3.35.65-1.58,0-2.89-.4-3.92-1.21-1.03-.8-1.55-1.95-1.55-3.44v-13c-.74-.07-1.58-.24-2.52-.5v-1.8c.53.12.97.18,1.33.18.96,0,1.82-.27,2.59-.81.77-.54,1.42-1.18,1.96-1.91.54-.73,1.15-1.66,1.82-2.79.48-.89.88-1.52,1.19-1.91h.83v6.8c3.33.07,5-.58,7.3-1.62,1.91-1.06,2.49-1.68,3.33-2.56.36-.38.58-.67,1.77-1.97.66-.72,2.14-1.98,2.76-2.44,1.43-1.1,2.12-1.49,3.27-2.09,1.14-.61,2.11-.76,3.26-.88,2.04-.21,3.13.16,4.06,1.16Z"/>
+        </svg>
+      </a>
+      <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+      <nav>
+        <ul class="nav-links" role="list">
+          <li><a href="/#features">Features</a></li>
+          <li><a href="/#pricing">Pricing</a></li>
+          <li><a href="/connect">Connect</a></li>
+          <li><a href="/journal">Journal</a></li>
+          <li class="nav-more-wrap"><button class="nav-more-btn" onclick="this.parentElement.classList.toggle('open')" aria-label="More pages">More <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l3 3 3-3"/></svg></button>
+            <ul class="nav-dropdown">
+              <li><a href="/#how-it-works">How It Works</a></li>
+              <li><a href="/#founder">About</a></li>
+              <li><a href="/#faq">FAQ</a></li>
+              <li><a href="/#your-data">Your Data</a></li>
+              <li><a href="/transparency">Transparency</a></li>
+              <li><a href="/#early-access">Early Access</a></li>
+              <li><a href="/veterans" class="nav-active-vt" aria-current="page">Veterans</a></li>
+            </ul>
+          </li>
+          <li><a href="https://mywellet.com" class="nav-signin" style="font-weight:500;color:var(--color-primary);white-space:nowrap;">Sign in →</a></li>
+          <li>
+            <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== MAIN ========== -->
+  <main class="vt-main" id="top">
+
+    <!-- ========== 1. HERO ========== -->
+    <section class="vt-hero" id="hero">
+      <div class="container">
+        <div class="vt-hero-content">
+          <div class="vt-hero-eyebrow">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            For VA Families
+          </div>
+          <h1>Every appointment. Every medication. All in one place.</h1>
+          <p class="vt-hero-sub">
+            Built for family caregivers of VA-enrolled Veterans — including the
+            <a href="https://www.caregiver.va.gov/docs/2024/CSP_Annual_Report_2023-Final.pdf" target="_blank" rel="noopener noreferrer">~98,000 caregivers</a>
+            enrolled in the VA Caregiver Support Program. Wellet reads the VA Health Summary — the complete record already downloadable from VA.gov — and gives you the full picture without digging through portal after portal.
+          </p>
+          <div class="vt-hero-actions">
+            <a href="https://mywellet.com" class="vt-btn-primary" target="_blank" rel="noopener noreferrer">
+              Get early access
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="#how-it-works" class="vt-btn-secondary">
+              See how it works
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="vt-hero-stat" aria-label="98,000 VA caregivers served annually">
+          <div class="vt-hero-stat-number">~98,000</div>
+          <div class="vt-hero-stat-label">VA caregivers reached annually through the Caregiver Support Program</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 2. THE PROBLEM ========== -->
+    <section class="vt-section" id="the-problem">
+      <div class="container container--narrow">
+        <p class="vt-section-label">The coordination burden</p>
+        <h2>You're the one who holds it all. No tool was built for that.</h2>
+        <p class="vt-section-sub">VA caregivers carry a specific, exhausting kind of load — and until now, no tool was designed for the person doing the actual work.</p>
+
+        <div class="vt-problem-grid">
+          <div class="vt-problem-card">
+            <div class="vt-problem-card-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            </div>
+            <h3>The coordination weight</h3>
+            <p>Your Veteran's health information lives inside the VA system. You're the person doing the day-to-day coordination — the one who remembers the last lab result, the exact medication dose, which specialist said what. That's not a small job. Wellet stays on top of it with you.</p>
+          </div>
+          <div class="vt-problem-card">
+            <div class="vt-problem-card-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg>
+            </div>
+            <h3>The credential reality</h3>
+            <p>The VA hasn't built a caregiver proxy system yet. In practice, most caregivers download the VA Health Summary using their family member's VA.gov login — or the Veteran downloads it themselves and hands it over. Wellet doesn't require anything else. Download the file, upload it here.</p>
+          </div>
+          <div class="vt-problem-card">
+            <div class="vt-problem-card-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 14a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8 10.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 17z"/></svg>
+            </div>
+            <h3>The outside appointment gap</h3>
+            <p>VA records don't travel well. When your family member sees an outside specialist — a cardiologist, an orthopedist, a community neurologist — no one in that room has the VA's data. You're the bridge. Wellet makes sure you always have what they need.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 3. HOW IT WORKS ========== -->
+    <section class="vt-section" id="how-it-works">
+      <div class="container container--narrow">
+        <p class="vt-section-label">How it works</p>
+        <h2>Four steps. About ten minutes. Done.</h2>
+        <p class="vt-section-sub">No VA approval required. No API setup. No waiting. The VA Health Summary is a file your family member can download right now — and Wellet reads every section of it.</p>
+
+        <div class="vt-steps">
+          <!-- Step 1 -->
+          <div class="vt-step">
+            <div class="vt-step-num" aria-hidden="true">1</div>
+            <h3>Sign in at VA.gov/my-health</h3>
+            <p>Go to <a href="https://www.va.gov/my-health/" target="_blank" rel="noopener noreferrer">VA.gov/my-health</a> and sign in with Login.gov or ID.me. The old MyHealtheVet URL (myhealth.va.gov) now redirects there automatically.</p>
+            <span class="vt-step-connector" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+          </div>
+          <!-- Step 2 -->
+          <div class="vt-step">
+            <div class="vt-step-num" aria-hidden="true">2</div>
+            <h3>Go to Medical Records</h3>
+            <p>Select <strong>My Health</strong> in the top navigation, then choose <strong>Medical records</strong> from the left sidebar or the dashboard card.</p>
+            <span class="vt-step-connector" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+          </div>
+          <!-- Step 3 -->
+          <div class="vt-step">
+            <div class="vt-step-num" aria-hidden="true">3</div>
+            <h3>Download the VA Health Summary</h3>
+            <p>Look for <strong>VA Health Summary</strong> — not "Blue Button Report," which is a different format. Select <strong>Download VA Health Summary</strong> and choose the <strong>XML</strong> format when prompted. The PDF works too, but XML gives Wellet the most complete picture.</p>
+            <span class="vt-step-connector" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </span>
+          </div>
+          <!-- Step 4 -->
+          <div class="vt-step">
+            <div class="vt-step-num" aria-hidden="true">4</div>
+            <h3>Upload to Wellet — done in 10 seconds</h3>
+            <p>Inside Wellet, tap <strong>Add VA Health Summary</strong>, select the file (it'll be named something like <code>VA_Health_Summary.xml</code>), and Wellet reads it immediately. Your family member's timeline populates on the spot.</p>
+          </div>
+        </div>
+
+        <div class="vt-step-note" role="note">
+          <strong>No password sharing needed:</strong> If your Veteran has an iPhone, <a href="/connect">Wellet Connect</a> can sync health data automatically — no need to share VA.gov credentials. The CCDA upload path above works for anyone, regardless of device.
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 4. WHAT WELLET READS ========== -->
+    <section class="vt-section" id="what-wellet-reads">
+      <div class="container container--narrow">
+        <p class="vt-section-label">What Wellet reads</p>
+        <h2>Everything in the VA Health Summary, organized.</h2>
+        <p class="vt-section-sub">The VA Health Summary is a structured XML document — Wellet reads every clinical section and turns it into a timeline you can actually use.</p>
+
+        <div class="vt-reads-grid" role="list">
+
+          <div class="vt-reads-item" role="listitem">
+            <div class="vt-reads-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div class="vt-reads-content">
+              <h3>Conditions</h3>
+              <p>The full problem list with onset dates where available — so you can walk into any appointment with a complete picture of what's been diagnosed.</p>
+            </div>
+          </div>
+
+          <div class="vt-reads-item" role="listitem">
+            <div class="vt-reads-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2v-4M9 21H5a2 2 0 0 1-2-2v-4m0 0h18"/></svg>
+            </div>
+            <div class="vt-reads-content">
+              <h3>Medications</h3>
+              <p>The active medication list with dosage and indication. When a new prescription comes in at an outside appointment, the full list is right there.</p>
+            </div>
+          </div>
+
+          <div class="vt-reads-item" role="listitem">
+            <div class="vt-reads-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </div>
+            <div class="vt-reads-content">
+              <h3>Allergies</h3>
+              <p>Substance, reaction type, and severity. Critical information that often doesn't make it from the VA chart to an outside provider's intake form.</p>
+            </div>
+          </div>
+
+          <div class="vt-reads-item" role="listitem">
+            <div class="vt-reads-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="vt-reads-content">
+              <h3>Immunizations</h3>
+              <p>Vaccine names and administration dates — useful for community providers, travel medicine, and care transitions.</p>
+            </div>
+          </div>
+
+          <div class="vt-reads-item" role="listitem">
+            <div class="vt-reads-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            </div>
+            <div class="vt-reads-content">
+              <h3>Lab Results</h3>
+              <p>Panel names, result values, and dates. Wellet reads each result into the timeline so you can follow the trend across visits — not just the most recent number.</p>
+            </div>
+          </div>
+
+          <div class="vt-reads-item" role="listitem">
+            <div class="vt-reads-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div class="vt-reads-content">
+              <h3>Vital Signs</h3>
+              <p>The most recent readings — blood pressure, weight, BMI, and more. Useful context at any appointment, not just VA visits.</p>
+            </div>
+          </div>
+
+          <div class="vt-reads-item" role="listitem">
+            <div class="vt-reads-icon" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+            </div>
+            <div class="vt-reads-content">
+              <h3>Procedures</h3>
+              <p>Surgical and clinical procedures with dates — the kind of history that matters when a new specialist asks what's already been tried.</p>
+            </div>
+          </div>
+
+          <div class="vt-reads-item" role="listitem" style="background:var(--color-surface-offset); border-color: var(--color-divider);">
+            <div class="vt-reads-icon" aria-hidden="true" style="background: var(--color-surface-2);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            </div>
+            <div class="vt-reads-content">
+              <h3>Point-in-time snapshot</h3>
+              <p>The VA Health Summary reflects the Veteran's record as of the download date. It doesn't update automatically — but re-uploading a fresh copy from VA.gov takes less than two minutes, and Wellet merges it with what's already there.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 5. PRIVACY ========== -->
+    <section class="vt-section" id="privacy">
+      <div class="container container--narrow">
+        <p class="vt-section-label">Your data</p>
+        <h2>Private by design. Yours to control.</h2>
+        <p class="vt-section-sub">Health data is not a product. Wellet treats it like the sensitive, personal information it is.</p>
+
+        <div class="vt-privacy-grid">
+          <div class="vt-privacy-card">
+            <div class="vt-privacy-card-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h3>Encrypted and isolated</h3>
+            <p>Every record is stored encrypted and isolated with row-level security — scoped to your account, inaccessible to other users. The raw VA Health Summary file is stored in a private bucket with the same protection.</p>
+          </div>
+          <div class="vt-privacy-card">
+            <div class="vt-privacy-card-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <h3>You own it</h3>
+            <p>You control who sees your family member's data. You can export everything or delete it anytime — no hoops, no support tickets. The data is yours, not Wellet's.</p>
+          </div>
+          <div class="vt-privacy-card">
+            <div class="vt-privacy-card-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>
+            </div>
+            <h3>Never trained on</h3>
+            <p>Your health data is never used to train AI models, shared with advertisers, or sold to third parties. It exists in Wellet for one purpose: to help you coordinate care.</p>
+          </div>
+        </div>
+
+        <div class="vt-privacy-lockup" role="note">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span>No VA approval required — this path uses a file the Veteran has already downloaded from their own VA.gov account. Wellet never accesses VA systems directly.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 6. HONEST ALPHA NOTE ========== -->
+    <section class="vt-section" id="alpha-note">
+      <div class="container container--narrow">
+        <div class="vt-alpha-note" role="note">
+          <div class="vt-alpha-note-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            Private alpha
+          </div>
+          <blockquote>
+            "Wellet has been in my head for years. The app is less than a month old. There will be bugs. When you find one, tap the bug icon inside the app — it goes straight to me."
+          </blockquote>
+          <cite>— Betsy Eble, founder</cite>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== 7. FINAL CTA ========== -->
+    <section class="vt-section vt-cta" id="early-access">
+      <div class="container container--narrow">
+        <h2>Ready to try it?</h2>
+        <p>Early access is open now. Sign up at mywellet.com and start with the VA Health Summary upload — the whole flow takes about ten minutes.</p>
+        <a href="https://mywellet.com" class="vt-btn-primary" style="display:inline-flex;" target="_blank" rel="noopener noreferrer">
+          Get early access
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <p class="vt-cta-note">Private alpha — waitlist if full. No commitment required.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container">
+      <span class="footer-copy">&copy; 2026 Wellet Health. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer">Blog<span class="sr-only"> (opens in new tab)</span></a>
+        <a href="mailto:hello@getwellet.com">Contact</a>
+        <a href="https://mywellet.com/privacy">Privacy</a>
+        <a href="https://mywellet.com/terms">Terms</a>
+      </div>
+    </div>
+    <div class="container footer-social">
+      <a href="https://x.com/betsyeble" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on X" title="@betsyeble on X">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://x.com/welletapp" target="_blank" rel="noopener noreferrer" aria-label="Wellet on X" title="@welletapp on X">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+      </a>
+      <a href="https://linkedin.com/in/betsyeble" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on LinkedIn" title="Betsy Eble on LinkedIn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      </a>
+      <a href="https://bsky.app/profile/betsyeble.bsky.social" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on Bluesky" title="@betsyeble on Bluesky">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.785 2.627 3.6 3.476 6.158 3.226-4.476.767-8.07 2.632-4.86 8.527 3.53 5.2 6.088-.508 7.078-2.012.315-.483.465-.71.535-.838a.56.56 0 0 1 .93 0c.07.128.22.355.535.838.99 1.504 3.548 7.212 7.079 2.012 3.21-5.895-.385-7.76-4.86-8.527 2.557.25 5.372-.6 6.157-3.226.247-.828.625-5.79.625-6.479 0-.688-.14-1.86-.903-2.203-.659-.3-1.664-.62-4.3 1.24C12.046 4.747 9.087 8.686 8 10.8h4z"/></svg>
+      </a>
+      <a href="https://instagram.com/welletapp" target="_blank" rel="noopener noreferrer" aria-label="Wellet on Instagram" title="@welletapp on Instagram">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      </a>
+      <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on Medium" title="Betsy Eble on Medium">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+      </a>
+      <a href="https://open.spotify.com/show/5QUDaF0Pp0mIfZwh1aEzU6" target="_blank" rel="noopener noreferrer" aria-label="Wellet Podcast on Spotify" title="Wellet Podcast on Spotify">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
+      </a>
+    </div>
+    <div class="container footer-disclaimer">
+      <p>Wellet is not a medical device and does not provide medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider with questions about a medical condition.</p>
+    </div>
+  </footer>
+
+  <!-- Theme toggle script -->
+  <script>
+    (function() {
+      var btn = document.querySelector('[data-theme-toggle]');
+      if (!btn) return;
+
+      function getTheme() {
+        var stored = localStorage.getItem('wellet-theme');
+        if (stored) return stored;
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+
+      function applyTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        var icon = btn.querySelector('svg');
+        if (theme === 'dark') {
+          btn.setAttribute('aria-label', 'Switch to light mode');
+          if (icon) icon.innerHTML = '<circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>';
+        } else {
+          btn.setAttribute('aria-label', 'Switch to dark mode');
+          if (icon) icon.innerHTML = '<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>';
+        }
+      }
+
+      applyTheme(getTheme());
+
+      btn.addEventListener('click', function() {
+        var next = getTheme() === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('wellet-theme', next);
+        applyTheme(next);
+      });
+
+      // Close dropdown on outside click
+      document.addEventListener('click', function(e) {
+        var wrap = document.querySelector('.nav-more-wrap');
+        if (wrap && !wrap.contains(e.target)) {
+          wrap.classList.remove('open');
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
