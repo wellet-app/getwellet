@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Getting Proxy Access to Your Loved One's Patient Portal — Wellet</title>
+  <meta name="description" content="A short, honest walkthrough of how to request proxy (caregiver) access to an adult family member's MyChart or patient portal account. Set up with the hospital directly — no Wellet account needed.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Getting proxy access to your loved one's patient portal">
+  <meta property="og:description" content="Short, honest walkthrough of how to request caregiver proxy access at most major hospitals.">
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://getwellet.com/proxy-access">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://getwellet.com/proxy-access">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232d6a4f'/%3E%3Cpath d='M8 16c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='3' fill='white'/%3E%3C/svg%3E">
+
+  <!-- Theme init — must run before paint -->
+  <script>
+    (function() {
+      var stored = localStorage.getItem('wellet-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <style>
+    /* ---- Standalone page shell ---- */
+    .px-standalone-header {
+      padding: var(--space-6) 0;
+      border-bottom: 1px solid var(--color-divider);
+      background: color-mix(in srgb, var(--color-bg) 90%, transparent);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .px-standalone-header .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .px-hero {
+      padding-block: clamp(var(--space-12), 7vw, var(--space-16));
+      background: var(--color-bg);
+    }
+    .px-hero .container {
+      max-width: var(--content-default);
+    }
+    .px-hero-eyebrow {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-primary);
+      margin: 0 0 var(--space-4) 0;
+    }
+    .px-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(var(--text-xl), 4vw, var(--text-2xl));
+      font-weight: 400;
+      color: var(--color-text);
+      line-height: 1.15;
+      margin: 0 0 var(--space-5) 0;
+    }
+    .px-hero-subtitle {
+      font-size: var(--text-lg);
+      font-weight: 300;
+      color: var(--color-text-muted);
+      max-width: 60ch;
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    .px-section {
+      padding-block: clamp(var(--space-10), 6vw, var(--space-16));
+      border-top: 1px solid var(--color-divider);
+    }
+    .px-section--surface { background: var(--color-surface); }
+    .px-section .container { max-width: var(--content-default); }
+
+    .px-section h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 400;
+      color: var(--color-text);
+      line-height: 1.2;
+      margin: 0 0 var(--space-6) 0;
+    }
+    .px-section h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 400;
+      color: var(--color-text);
+      margin: var(--space-8) 0 var(--space-3) 0;
+    }
+    .px-section p {
+      font-size: var(--text-base);
+      line-height: 1.65;
+      color: var(--color-text);
+      margin: 0 0 var(--space-4) 0;
+      max-width: 68ch;
+    }
+    .px-section ol, .px-section ul {
+      font-size: var(--text-base);
+      line-height: 1.7;
+      color: var(--color-text);
+      max-width: 68ch;
+      margin: 0 0 var(--space-4) 0;
+      padding-left: var(--space-6);
+    }
+    .px-section li { margin-bottom: var(--space-2); }
+    .px-section a { color: var(--color-primary); }
+
+    .px-callout {
+      background: var(--color-primary-light);
+      border-left: 3px solid var(--color-primary);
+      border-radius: var(--radius-md);
+      padding: var(--space-5) var(--space-6);
+      margin: var(--space-6) 0;
+      max-width: 68ch;
+    }
+    .px-callout p { margin: 0; color: var(--color-text); }
+    .px-callout strong { color: var(--color-primary); }
+
+    .px-path {
+      background: var(--color-bg);
+      border: 1px solid var(--color-divider);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      margin-bottom: var(--space-5);
+    }
+    .px-path-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 400;
+      color: var(--color-text);
+      margin: 0 0 var(--space-2) 0;
+    }
+    .px-path-sub {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      margin: 0 0 var(--space-4) 0;
+    }
+
+    .px-hospitals {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-6);
+    }
+    .px-hospital {
+      background: var(--color-bg);
+      border: 1px solid var(--color-divider);
+      border-radius: var(--radius-md);
+      padding: var(--space-4) var(--space-5);
+      font-size: var(--text-sm);
+    }
+    .px-hospital-name {
+      font-weight: 500;
+      color: var(--color-text);
+      margin-bottom: var(--space-1);
+    }
+    .px-hospital a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-size: var(--text-sm);
+    }
+    .px-hospital a:hover { text-decoration: underline; }
+
+    .px-standalone-footer {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-divider);
+      padding-block: var(--space-8);
+      text-align: center;
+    }
+    .px-standalone-footer .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-3);
+    }
+    .px-standalone-footer a {
+      color: var(--color-primary);
+      text-decoration: none;
+      font-size: var(--text-sm);
+      font-weight: 500;
+    }
+    .px-standalone-footer a:hover { text-decoration: underline; }
+    .px-standalone-footer .footer-copy {
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== HEADER ========== -->
+  <header class="px-standalone-header">
+    <div class="container">
+      <a href="https://getwellet.com" class="logo" aria-label="Wellet home">
+        <svg viewBox="0 138 150 42" style="height:26px;width:auto;" xmlns="http://www.w3.org/2000/svg" aria-label="Wellet">
+          <path fill="var(--color-primary)" d="M45.5,142c.94.94,1.4,2.08,1.4,3.42,0,.89-.19,1.73-.58,2.52-.65-.1-1.33-.14-2.05-.14-3.07,0-5.56.97-7.45,2.9-1.9,1.93-3.36,4.34-4.39,7.22-1.03,2.88-2.17,6.86-3.42,11.95l-.47,1.94-.11-.25v.29h-5.15l-4.43-11.2-4.03,11.2h-5.15l-5.69-14.44c-.67-1.34-1.28-2.24-1.82-2.7-.54-.46-1.27-.73-2.18-.83l.25-2.56h12.56l-.04,2.56c-.53.07-1.01.26-1.44.58-.43.31-.65.76-.65,1.33,0,.17.04.38.11.65l3.71,9.47,3.1-8.5c-.48-.96-.88-1.67-1.21-2.14s-.67-.8-1.04-.99c-.37-.19-.87-.32-1.49-.4v-2.56h12.82v2.56c-.86.02-1.49.13-1.87.32-.38.19-.58.55-.58,1.08,0,.34.07.74.22,1.22l3.06,7.78c1.54-7.46,3.49-13.28,5.85-17.44,2.36-4.16,5.15-6.25,8.37-6.25,1.58,0,2.84.47,3.78,1.4Z"/>
+          <path fill="var(--color-primary)" d="M57.31,168.14c-1.13,1.44-2.57,2.56-4.32,3.37-1.75.8-3.61,1.21-5.58,1.21s-3.92-.49-5.65-1.48c-1.73-.98-3.1-2.32-4.1-4.01-1.01-1.69-1.51-3.55-1.51-5.56s.5-3.87,1.51-5.56c1.01-1.69,2.38-3.03,4.1-4.01,1.73-.98,3.61-1.48,5.65-1.48,1.92,0,3.62.28,5.09.83s2.62,1.31,3.42,2.29c.8.97,1.21,2.06,1.21,3.26,0,2.62-1.68,4.46-5.04,5.54-1.49.46-3.06.68-4.72.68-1.08,0-2.24-.11-3.49-.32.02,1.13.35,2.16.99,3.1.64.94,1.46,1.67,2.47,2.21s2.05.81,3.13.81c.96,0,1.94-.2,2.93-.61,1-.41,1.82-.98,2.47-1.73l1.44,1.48ZM45.7,155.59c-.8,1.26-1.34,2.86-1.6,4.81.84.17,1.64.25,2.41.25,1.61,0,2.87-.34,3.78-1.01.91-.67,1.51-1.5,1.8-2.48.1-.29.14-.59.14-.9,0-.86-.32-1.56-.95-2.09-.64-.53-1.36-.76-2.18-.68-1.46.14-2.6.85-3.4,2.11Z"/>
+          <path fill="var(--color-primary)" d="M58.21,170.23c.7-.12,1.26-.52,1.69-1.21.43-.68.65-1.9.65-3.65v-14.26c0-1.18-.13-2.08-.38-2.72s-.5-1.06-.76-1.26-.71-.51-1.39-.92c.65-.84,1.61-1.47,2.9-1.89,1.28-.42,2.59-.63,3.91-.63,1.15,0,2.04.14,2.66.43v21.24c0,1.75.22,2.97.65,3.65.43.68,1,1.09,1.69,1.21l.11,1.62h-11.84l.11-1.62Z"/>
+          <path fill="var(--color-primary)" d="M70.85,170.23c.7-.12,1.26-.52,1.69-1.21.43-.68.65-1.9.65-3.65v-14.26c0-1.18-.13-2.08-.38-2.72s-.5-1.06-.76-1.26-.71-.51-1.39-.92c.65-.84,1.61-1.47,2.9-1.89,1.28-.42,2.59-.63,3.91-.63,1.15,0,2.04.14,2.66.43v21.24c0,1.75.22,2.97.65,3.65.43.68,1,1.09,1.69,1.21l.11,1.62h-11.84l.11-1.62Z"/>
+          <path fill="var(--color-primary)" d="M104.11,168.14c-1.13,1.44-2.57,2.56-4.32,3.37-1.75.8-3.61,1.21-5.58,1.21s-3.92-.49-5.65-1.48c-1.73-.98-3.1-2.32-4.1-4.01-1.01-1.69-1.51-3.55-1.51-5.56s.5-3.87,1.51-5.56c1.01-1.69,2.38-3.03,4.1-4.01,1.73-.98,3.61-1.48,5.65-1.48,1.92,0,3.62.28,5.09.83,1.48.55,2.62,1.31,3.42,2.29.8.97,1.21,2.06,1.21,3.26,0,2.62-1.68,4.46-5.04,5.54-1.49.46-3.06.68-4.72.68-1.08,0-2.24-.11-3.49-.32.02,1.13.35,2.16.99,3.1.64.94,1.46,1.67,2.47,2.21,1.01.54,2.05.81,3.13.81.96,0,1.94-.2,2.93-.61s1.82-.98,2.47-1.73l1.44,1.48ZM92.5,155.59c-.8,1.26-1.34,2.86-1.6,4.81.84.17,1.64.25,2.41.25,1.61,0,2.87-.34,3.78-1.01s1.51-1.5,1.8-2.48c.09-.29.14-.59.14-.9,0-.86-.32-1.56-.95-2.09-.64-.53-1.36-.76-2.18-.68-1.46.14-2.6.85-3.4,2.11Z"/>
+          <path fill="var(--color-primary)" d="M139.93,141.71c.46.5.76,1.14.86,1.81.17,1.09-.14,2.07-.91,2.95s-1.69,1.36-2.84,1.51c-.83.11-1.71.14-2.64.09-1.17-.04-2.31,0-3.43.15-1.24.16-2.36.49-3.36,1-1,.5-1.5.85-2.29,1.37-1.25.83-.64.51-2.68,1.64-1.7.75-1.02.47-2.27.96-2.92,1.15-5.84,1.04-6.2,1.21v12.12c0,.86.13,1.51.38,1.93s.58.63.99.63c.26,0,.55-.09.86-.27.31-.18.6-.43.86-.74l1.44,1.48c-.98,1.1-1.96,1.87-2.92,2.3-.96.43-2.08.65-3.35.65-1.58,0-2.89-.4-3.92-1.21-1.03-.8-1.55-1.95-1.55-3.44v-13c-.74-.07-1.58-.24-2.52-.5v-1.8c.53.12.97.18,1.33.18.96,0,1.82-.27,2.59-.81.77-.54,1.42-1.18,1.96-1.91.54-.73,1.15-1.66,1.82-2.79.48-.89.88-1.52,1.19-1.91h.83v6.8c3.33.07,5-.58,7.3-1.62,1.91-1.06,2.49-1.68,3.33-2.56.36-.38.58-.67,1.77-1.97.66-.72,2.14-1.98,2.76-2.44,1.43-1.1,2.12-1.49,3.27-2.09,1.14-.61,2.11-.76,3.26-.88,2.04-.21,3.13.16,4.06,1.16Z"/>
+        </svg>
+      </a>
+      <div style="display:flex;align-items:center;gap:var(--space-4);">
+        <nav aria-label="Site links">
+          <ul class="nav-links" role="list" style="position:static;background:none;box-shadow:none;">
+            <li><a href="/connect">Connect</a></li>
+            <li><a href="/transparency">Transparency</a></li>
+            <li><a href="/journal">Journal</a></li>
+          </ul>
+        </nav>
+        <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========== HERO ========== -->
+  <section class="px-hero">
+    <div class="container">
+      <p class="px-hero-eyebrow">Patient Portal Proxy Access</p>
+      <h1>Getting proxy access to your loved one's patient portal</h1>
+      <p class="px-hero-subtitle">Proxy access lets you see another adult's medical records through your own portal account. It's something you set up with the hospital directly — not through Wellet. Here's how it usually works.</p>
+    </div>
+  </section>
+
+  <!-- ========== WHAT IT IS ========== -->
+  <section class="px-section">
+    <div class="container">
+      <h2>What is proxy access?</h2>
+      <p>Proxy access (sometimes called "caregiver access" or "family access") is permission from your loved one that lets you view their health records inside your own patient portal account. Once it's set up, you can see labs, medications, visit summaries, and appointments the same way you see your own.</p>
+      <p>It's granted by the hospital and controlled by the patient — they can revoke it at any time. Wellet has no role in that process.</p>
+
+      <div class="px-callout">
+        <p><strong>Why Wellet can't do this for you:</strong> proxy access is a legal authorization between your loved one and their hospital. Every health system manages it through their own portal and forms. We're not in that loop — but once you have it, Wellet can read those records alongside anything you upload manually.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== TWO COMMON PATHS ========== -->
+  <section class="px-section px-section--surface">
+    <div class="container">
+      <h2>Two common ways to get it</h2>
+      <p>Most major U.S. hospitals run on a platform called MyChart (from Epic). The exact steps vary by health system, but these two paths cover the majority of cases.</p>
+
+      <div class="px-path">
+        <p class="px-path-title">Path 1 — Your loved one invites you (fastest)</p>
+        <p class="px-path-sub">Works when your loved one already has an active portal account and can log in.</p>
+        <ol>
+          <li>Have them log into their MyChart or patient portal on a computer or phone.</li>
+          <li>Open the menu and look for <strong>Sharing</strong>, <strong>Sharing Hub</strong>, or <strong>Share My Record</strong>.</li>
+          <li>Choose <strong>Friends and family access</strong> (or similar) and select <strong>Invite someone</strong>.</li>
+          <li>They fill in your name and email, accept the terms, and send the invite.</li>
+          <li>You get an email with a link. Click it, sign into (or create) your own MyChart account at their hospital, and confirm by entering their date of birth.</li>
+        </ol>
+        <p>Timing: usually minutes, not days.</p>
+      </div>
+
+      <div class="px-path">
+        <p class="px-path-title">Path 2 — Paper or PDF authorization form</p>
+        <p class="px-path-sub">Works when your loved one can't easily use the portal, or when the hospital requires extra verification.</p>
+        <ol>
+          <li>Download the hospital's adult proxy authorization form (each system has its own — links below for common ones).</li>
+          <li>Your loved one signs it, giving you access. You'll usually need to include a copy of your government-issued photo ID.</li>
+          <li>Return the form to the hospital's Health Information Management office — often by email, fax, or in person at a visit.</li>
+          <li>The hospital reviews the request and sends you an activation code by email or mail.</li>
+          <li>Use that code to link their record into your MyChart account.</li>
+        </ol>
+        <p>Timing: typically 2–5 business days, depending on the hospital.</p>
+      </div>
+
+      <div class="px-callout">
+        <p><strong>If your loved one is incapacitated</strong> (for example, with advanced dementia) and can't consent, most hospitals require a different form plus legal documentation — like a healthcare power of attorney, durable power of attorney for healthcare, or legal guardianship papers. Contact the hospital's Health Information Management office; they'll tell you what they need for that situation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HOSPITAL LINKS ========== -->
+  <section class="px-section">
+    <div class="container">
+      <h2>Direct links for common health systems</h2>
+      <p>These go straight to each hospital's own proxy-access page. Language, forms, and timelines are set by them — not Wellet.</p>
+
+      <div class="px-hospitals">
+        <div class="px-hospital">
+          <div class="px-hospital-name">Duke Health</div>
+          <a href="https://www.dukehealth.org/duke-mychart" target="_blank" rel="noopener noreferrer">My Duke Health proxy info &rarr;</a>
+        </div>
+        <div class="px-hospital">
+          <div class="px-hospital-name">Johns Hopkins Medicine</div>
+          <a href="https://www.hopkinsmedicine.org/patient-care/mychart/proxy-access" target="_blank" rel="noopener noreferrer">MyChart proxy access &rarr;</a>
+        </div>
+        <div class="px-hospital">
+          <div class="px-hospital-name">UNC Health</div>
+          <a href="https://www.unchealth.org/my-unc-chart" target="_blank" rel="noopener noreferrer">My UNC Chart &rarr;</a>
+        </div>
+        <div class="px-hospital">
+          <div class="px-hospital-name">Cleveland Clinic</div>
+          <a href="https://my.clevelandclinic.org/online-services/mychart" target="_blank" rel="noopener noreferrer">MyChart at Cleveland Clinic &rarr;</a>
+        </div>
+        <div class="px-hospital">
+          <div class="px-hospital-name">Mayo Clinic</div>
+          <a href="https://www.mayoclinic.org/patient-visitor-guide/patient-online-services" target="_blank" rel="noopener noreferrer">Patient Online Services &rarr;</a>
+        </div>
+        <div class="px-hospital">
+          <div class="px-hospital-name">Kaiser Permanente</div>
+          <a href="https://healthy.kaiserpermanente.org/front-door/act-on-behalf" target="_blank" rel="noopener noreferrer">Act on Behalf &rarr;</a>
+        </div>
+        <div class="px-hospital">
+          <div class="px-hospital-name">UCLA Health</div>
+          <a href="https://www.uclahealth.org/mychart" target="_blank" rel="noopener noreferrer">UCLA MyChart &rarr;</a>
+        </div>
+        <div class="px-hospital">
+          <div class="px-hospital-name">NYU Langone</div>
+          <a href="https://nyulangone.org/mychart" target="_blank" rel="noopener noreferrer">MyChart at NYU &rarr;</a>
+        </div>
+      </div>
+
+      <p style="margin-top:var(--space-6);font-size:var(--text-sm);color:var(--color-text-muted);">Don't see your hospital? Search "[hospital name] MyChart proxy access" — most health systems have a dedicated page with their form and instructions.</p>
+    </div>
+  </section>
+
+  <!-- ========== WHAT TO DO NEXT ========== -->
+  <section class="px-section px-section--surface">
+    <div class="container">
+      <h2>While you're waiting</h2>
+      <p>You don't need proxy access to start using Wellet. You can:</p>
+      <ul>
+        <li>Upload documents (discharge summaries, lab PDFs, the After Visit Summary) and Wellet reads and organizes them.</li>
+        <li>Add medications, allergies, and conditions manually.</li>
+        <li>Log daily check-ins and notes as you go.</li>
+      </ul>
+      <p>Once proxy access is active, you can connect the portal from <strong>Records &rsaquo; Connect Health Records</strong> and the rest flows in automatically.</p>
+    </div>
+  </section>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="px-standalone-footer">
+    <div class="container">
+      <a href="https://getwellet.com">&larr; Back to getwellet.com</a>
+      <span class="footer-copy">&copy; 2026 Wellet Health. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- ========== SCRIPTS ========== -->
+  <script src="./app.js"></script>
+</body>
+</html>
