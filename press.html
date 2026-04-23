@@ -3,19 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wellet Transparency Dashboard</title>
-  <meta name="description" content="Live, anonymized usage data from Wellet — showing how caregivers use the app. No personal health information is collected or displayed. Published for researchers and medical professionals.">
-  <meta name="keywords" content="Wellet transparency, caregiver app analytics, health app usage data, open data, anonymized usage, caregiver research data">
+  <title>Press &amp; Media Kit — Wellet</title>
+  <meta name="description" content="Wellet press kit — logos, screenshots, founder bio, brand guidelines, and media contact. Wellet is a health companion built for family caregivers.">
   <meta name="robots" content="index, follow">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="Wellet Transparency Dashboard — Live Anonymous Usage Data">
-  <meta property="og:description" content="We publish fully anonymized, aggregated usage data so researchers and medical professionals can see exactly how Wellet is being used.">
+  <meta property="og:title" content="Press &amp; Media Kit — Wellet">
+  <meta property="og:description" content="Logos, screenshots, founder bio, and brand guidelines for Wellet — the health companion built for family caregivers.">
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://getwellet.com/transparency">
+  <meta property="og:url" content="https://getwellet.com/press">
 
-  <!-- Canonical -->
-  <link rel="canonical" href="https://getwellet.com/transparency">
+  <link rel="canonical" href="https://getwellet.com/press">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -26,450 +24,290 @@
   <link rel="stylesheet" href="./base.css">
   <link rel="stylesheet" href="./style.css">
 
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232d6a4f'/%3E%3Cpath d='M8 16c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='3' fill='white'/%3E%3C/svg%3E">
 
+
   <style>
-    /* ===== TRANSPARENCY PAGE STYLES ===== */
+    .press-page { background: var(--color-bg); min-height: 100dvh; }
 
-    .tp-page {
-      background: var(--color-bg);
-      min-height: 100dvh;
+    .press-hero {
+      padding: var(--space-16) 0 var(--space-10);
+      background: linear-gradient(180deg, var(--color-primary-light) 0%, var(--color-bg) 100%);
     }
-
-    .tp-main {
-      padding: var(--space-12) 0 var(--space-20);
-    }
-
-    /* Banner */
-    .tp-banner {
-      background: var(--color-primary-light);
-      border: 1px solid var(--color-primary);
-      border-radius: var(--radius-lg);
-      padding: var(--space-6) var(--space-8);
-      margin-bottom: var(--space-10);
-      display: flex;
-      gap: var(--space-4);
-      align-items: flex-start;
-    }
-
-    .tp-banner-icon {
-      flex-shrink: 0;
+    .press-eyebrow {
+      display: inline-block;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.12em;
       color: var(--color-primary);
-      margin-top: 2px;
+      margin-bottom: var(--space-3);
     }
-
-    .tp-banner-text p {
+    .press-hero h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      line-height: 1.1;
       color: var(--color-text);
-      font-size: var(--text-sm);
-      line-height: 1.65;
-      max-width: 80ch;
+      margin: 0 0 var(--space-4);
+      max-width: 22ch;
     }
-
-    .tp-banner-text strong {
-      display: block;
-      font-size: var(--text-base);
-      font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: var(--space-1);
+    .press-lead {
+      font-size: var(--text-lg);
+      color: var(--color-text-muted);
+      max-width: 62ch;
+      line-height: 1.6;
+      margin: 0 0 var(--space-6);
     }
-
-    /* Early-access pre-launch banner */
-    .tp-prelaunch-banner {
-      background: var(--color-amber-light);
-      border: 1px solid var(--color-amber);
-      border-radius: var(--radius-lg);
-      padding: var(--space-5) var(--space-6);
-      margin-bottom: var(--space-6);
+    .press-actions {
       display: flex;
-      gap: var(--space-4);
-      align-items: flex-start;
-    }
-    [data-theme="dark"] .tp-prelaunch-banner {
-      background: color-mix(in srgb, var(--color-amber) 18%, var(--color-surface));
-      border-color: color-mix(in srgb, var(--color-amber) 60%, transparent);
-    }
-    .tp-prelaunch-icon {
-      flex-shrink: 0;
-      color: var(--color-amber);
-      margin-top: 2px;
-    }
-    .tp-prelaunch-text strong {
-      display: block;
-      font-size: var(--text-base);
-      font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: var(--space-1);
-    }
-    .tp-prelaunch-text p {
-      color: var(--color-text);
-      font-size: var(--text-sm);
-      line-height: 1.65;
-      max-width: 80ch;
-      margin: 0;
-    }
-
-    /* Page header */
-    .tp-header {
-      margin-bottom: var(--space-10);
-    }
-
-    .tp-header h1 {
-      font-family: var(--font-display);
-      font-size: var(--text-2xl);
-      font-weight: 400;
-      color: var(--color-text);
-      margin-bottom: var(--space-2);
-    }
-
-    .tp-header-meta {
-      display: flex;
-      align-items: center;
       gap: var(--space-4);
       flex-wrap: wrap;
+      align-items: center;
     }
-
-    .tp-last-refreshed {
-      font-size: var(--text-sm);
-      color: var(--color-text-muted);
+    .press-actions .btn-primary,
+    .press-actions .btn-ghost {
+      font-size: var(--text-base);
     }
-
-    .tp-refresh-btn {
+    .btn-ghost {
       display: inline-flex;
       align-items: center;
       gap: var(--space-2);
-      font-size: var(--text-sm);
-      font-weight: 500;
-      color: var(--color-primary);
-      background: var(--color-surface-2);
+      padding: 0.625rem 1rem;
       border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      color: var(--color-text);
       border-radius: var(--radius-md);
-      padding: var(--space-2) var(--space-4);
-      cursor: pointer;
-      transition: background var(--transition-interactive), border-color var(--transition-interactive);
-    }
-
-    .tp-refresh-btn:hover {
-      background: var(--color-primary-light);
-      border-color: var(--color-primary);
-    }
-
-    .tp-refresh-btn.loading svg {
-      animation: spin 0.8s linear infinite;
-    }
-
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-
-    /* Stats row */
-    .tp-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: var(--space-4);
-      margin-bottom: var(--space-8);
-    }
-
-    .tp-stat-card {
-      background: var(--color-surface-2);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-6);
-    }
-
-    .tp-stat-label {
-      font-size: var(--text-xs);
+      text-decoration: none;
       font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--color-text-muted);
-      margin-bottom: var(--space-2);
+    }
+    .btn-ghost:hover {
+      background: var(--color-surface-alt);
     }
 
-    .tp-stat-value {
-      font-family: var(--font-display);
-      font-size: var(--text-xl);
-      font-weight: 600;
+    .press-section { padding: var(--space-12) 0; }
+    .press-section-alt { background: var(--color-surface); }
+    .press-section h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
       color: var(--color-text);
-      font-variant-numeric: tabular-nums lining-nums;
-      line-height: 1;
-      margin-bottom: var(--space-1);
+      margin: 0 0 var(--space-5);
     }
-
-    .tp-stat-sub {
-      font-size: var(--text-xs);
-      color: var(--color-text-faint);
-    }
-
-    /* Charts grid */
-    .tp-charts-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-6);
-    }
-
-    .tp-chart-card {
-      background: var(--color-surface-2);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-8);
-    }
-
-    .tp-chart-card--full {
-      grid-column: 1 / -1;
-    }
-
-    .tp-chart-title {
-      font-family: var(--font-display);
+    .press-body {
+      color: var(--color-text);
       font-size: var(--text-base);
-      font-weight: 500;
-      color: var(--color-text);
-      margin-bottom: var(--space-6);
+      line-height: 1.65;
+      max-width: 68ch;
     }
 
-    .tp-chart-wrap {
-      position: relative;
-      width: 100%;
+    .press-facts {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--space-4);
+      margin-bottom: var(--space-5);
     }
-
-    .tp-chart-wrap--tall {
-      height: 320px;
-    }
-
-    .tp-chart-wrap--medium {
-      height: 260px;
-    }
-
-    .tp-chart-wrap--short {
-      height: 220px;
-    }
-
-    /* Empty state */
-    .tp-empty {
+    .press-fact {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      gap: var(--space-3);
-      padding: var(--space-8) 0;
-      color: var(--color-text-faint);
-    }
-
-    .tp-empty-icon {
-      width: 40px;
-      height: 40px;
-      background: var(--color-surface-offset);
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-text-faint);
-    }
-
-    .tp-empty p {
-      font-size: var(--text-sm);
-      color: var(--color-text-muted);
-      max-width: 36ch;
-    }
-
-    .tp-empty strong {
-      display: block;
-      font-size: var(--text-sm);
-      font-weight: 600;
-      color: var(--color-text-muted);
-    }
-
-    /* Tables */
-    .tp-table-wrap {
-      overflow-x: auto;
-    }
-
-    .tp-table {
-      width: 100%;
-      font-size: var(--text-sm);
-      border-collapse: collapse;
-    }
-
-    .tp-table thead th {
-      text-align: left;
-      font-size: var(--text-xs);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      color: var(--color-text-muted);
-      padding: var(--space-2) var(--space-4) var(--space-3);
-      border-bottom: 1px solid var(--color-border);
-    }
-
-    .tp-table tbody tr {
-      border-bottom: 1px solid var(--color-divider);
-    }
-
-    .tp-table tbody tr:last-child {
-      border-bottom: none;
-    }
-
-    .tp-table tbody td {
-      padding: var(--space-3) var(--space-4);
-      color: var(--color-text);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .tp-table tbody td:first-child {
-      color: var(--color-text);
-      font-weight: 500;
-    }
-
-    .tp-table .td-arrow {
-      color: var(--color-text-faint);
-      font-size: var(--text-xs);
-      padding: 0 var(--space-2);
-    }
-
-    .tp-table .td-count {
-      color: var(--color-text-muted);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .tp-badge {
-      display: inline-flex;
-      align-items: center;
       gap: 4px;
-      background: var(--color-primary-light);
-      color: var(--color-primary);
-      border-radius: var(--radius-full);
-      padding: 2px 10px;
-      font-size: var(--text-xs);
-      font-weight: 500;
-    }
-
-    /* Methodology note */
-    .tp-methodology {
+      padding: var(--space-4);
       background: var(--color-surface);
       border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-8);
-      margin-top: var(--space-10);
+      border-radius: var(--radius-md);
     }
-
-    .tp-methodology h2 {
-      font-family: var(--font-display);
-      font-size: var(--text-lg);
-      font-weight: 400;
-      color: var(--color-text);
-      margin-bottom: var(--space-4);
-    }
-
-    .tp-methodology-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-8);
-    }
-
-    .tp-meth-col h3 {
-      font-size: var(--text-sm);
+    .press-fact-label {
+      font-size: var(--text-xs);
       font-weight: 600;
-      color: var(--color-text);
-      margin-bottom: var(--space-3);
-      display: flex;
-      align-items: center;
-      gap: var(--space-2);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
     }
+    .press-fact-value { color: var(--color-text); font-weight: 500; }
+    .press-fact a { color: var(--color-primary); text-decoration: none; }
+    .press-fact a:hover { text-decoration: underline; }
 
-    .tp-meth-col ul {
-      list-style: none;
+    .press-logo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: var(--space-5);
+    }
+    .press-logo-card {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 1px solid var(--color-border);
       display: flex;
       flex-direction: column;
-      gap: var(--space-2);
     }
-
-    .tp-meth-col ul li {
-      font-size: var(--text-sm);
-      color: var(--color-text-muted);
-      display: flex;
-      align-items: baseline;
-      gap: var(--space-2);
-      max-width: none;
-    }
-
-    .tp-meth-col ul li::before {
-      content: '';
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: currentColor;
-      flex-shrink: 0;
-      margin-top: 6px;
-    }
-
-    .tp-meth-col--yes h3 {
-      color: var(--color-primary);
-    }
-
-    .tp-meth-col--yes ul li::before {
-      background: var(--color-primary);
-    }
-
-    .tp-meth-col--no h3 {
-      color: var(--color-text-muted);
-    }
-
-    .tp-error-banner {
-      background: var(--color-surface-2);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-6);
-      color: var(--color-text-muted);
-      font-size: var(--text-sm);
-      display: none;
-    }
-
-    .tp-error-banner.visible {
+    .press-logo-card > img {
+      width: 100%;
+      height: 140px;
+      object-fit: contain;
+      padding: var(--space-6) var(--space-8);
       display: block;
     }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      .tp-stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
+    .press-logo-card--sage { background: #608F7C; border-color: #608F7C; }
+    .press-logo-card--sage .press-logo-meta {
+      background: #4f7865;
+      border-top-color: #4f7865;
+      color: rgba(255,255,255,0.85);
     }
-
-    @media (max-width: 640px) {
-      .tp-charts-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .tp-chart-card--full {
-        grid-column: 1;
-      }
-
-      .tp-stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .tp-methodology-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .tp-banner {
-        flex-direction: column;
-      }
+    .press-logo-card--sage .press-logo-dl a {
+      color: #fff;
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.25);
     }
-
-    @media (max-width: 400px) {
-      .tp-stats-grid {
-        grid-template-columns: 1fr;
-      }
+    .press-logo-card--sage .press-logo-dl a:hover {
+      background: #fff;
+      color: #608F7C;
+      border-color: #fff;
     }
+    .press-logo-card--light { background: var(--color-surface); }
+    .press-logo-card--mark > img { height: 160px; object-fit: contain; padding: var(--space-4); }
+    .press-logo-meta {
+      padding: var(--space-3) var(--space-4);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      background: var(--color-surface-alt);
+      border-top: 1px solid var(--color-border);
+      flex-wrap: wrap;
+    }
+    .press-logo-dl { display: inline-flex; gap: var(--space-2); }
+    .press-logo-dl a {
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--color-primary);
+      text-decoration: none;
+      padding: 2px 6px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-bg);
+    }
+    .press-logo-dl a:hover { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
+
+    .press-founder {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: var(--space-8);
+      align-items: start;
+    }
+    @media (max-width: 640px) { .press-founder { grid-template-columns: 1fr; } }
+    .press-founder-photo {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+      align-items: flex-start;
+    }
+    .press-founder-photo img {
+      width: 220px;
+      height: 220px;
+      border-radius: var(--radius-lg);
+      object-fit: cover;
+      border: 1px solid var(--color-border);
+    }
+    .press-photo-dl {
+      font-size: var(--text-sm);
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .press-photo-dl:hover { text-decoration: underline; }
+    .press-founder-bio h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: var(--text-2xl);
+      margin: 0 0 4px;
+      color: var(--color-text);
+    }
+    .press-founder-title {
+      color: var(--color-primary);
+      font-weight: 500;
+      margin: 0 0 var(--space-4);
+    }
+    .press-founder-bio p { color: var(--color-text); line-height: 1.65; margin: 0 0 var(--space-3); max-width: 60ch; }
+    .press-founder-links { display: flex; flex-wrap: wrap; gap: var(--space-2); font-size: var(--text-sm); }
+    .press-founder-links a { color: var(--color-primary); text-decoration: none; font-weight: 500; }
+    .press-founder-links a:hover { text-decoration: underline; }
+    .press-sep { color: var(--color-text-faint); }
+
+    .press-screens {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: var(--space-5);
+    }
+    .press-screen {
+      margin: 0;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--color-bg);
+    }
+    .press-screen img {
+      width: 100%;
+      height: 360px;
+      object-fit: contain;
+      background: var(--color-surface);
+      display: block;
+      padding: var(--space-4);
+    }
+    .press-screen figcaption {
+      padding: var(--space-3) var(--space-4);
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      background: var(--color-surface-alt);
+      border-top: 1px solid var(--color-border);
+      flex-wrap: wrap;
+    }
+    .press-screen figcaption a { color: var(--color-primary); text-decoration: none; font-weight: 500; }
+    .press-screen figcaption a:hover { text-decoration: underline; }
+
+    .press-brand-card {
+      padding: var(--space-6);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      background: var(--color-surface);
+      max-width: 720px;
+    }
+    .press-swatch-row { display: flex; gap: var(--space-2); margin-bottom: var(--space-4); }
+    .press-swatch { width: 44px; height: 44px; border-radius: var(--radius-sm); display: inline-block; }
+    .press-brand-card h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: var(--text-xl);
+      margin: 0 0 var(--space-2);
+    }
+    .press-brand-card p { color: var(--color-text); line-height: 1.6; margin: 0 0 var(--space-3); }
+    .press-brand-card code {
+      font-family: 'SF Mono', Menlo, monospace;
+      font-size: 0.92em;
+      padding: 1px 5px;
+      background: var(--color-surface-alt);
+      border-radius: var(--radius-sm);
+    }
+    .press-brand-links { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+
+    .press-boilerplate .press-body { max-width: 76ch; font-style: italic; color: var(--color-text-muted); }
+
+    .press-cta {
+      padding: var(--space-14) 0;
+      text-align: center;
+      background: var(--color-primary-light);
+    }
+    .press-cta h2 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      margin: 0 0 var(--space-2);
+      color: var(--color-text);
+    }
+    .press-cta p { color: var(--color-text-muted); margin: 0 0 var(--space-5); }
   </style>
-</head>
-<body class="tp-page">
 
-  <!-- ========== HEADER ========== -->
+</head>
+<body>
+
   <header class="header">
     <div class="container">
       <a href="/" class="logo" aria-label="Wellet home">
@@ -497,8 +335,8 @@
               <li><a href="/#founder">About</a></li>
               <li><a href="/#faq">FAQ</a></li>
               <li><a href="/#your-data">Your Data</a></li>
-              <li><a href="/transparency" class="nav-active" aria-current="page">Transparency</a></li>
-              <li><a href="/press">Press</a></li>
+              <li><a href="/transparency">Transparency</a></li>
+              <li><a href="/press" class="nav-active" aria-current="page">Press</a></li>
               <li><a href="/#early-access">Early Access</a></li>
             </ul>
           </li>
@@ -513,288 +351,190 @@
     </div>
   </header>
 
-  <!-- ========== MAIN ========== -->
-  <main class="tp-main" id="main-content">
-    <div class="container">
 
-      <!-- Early-access / pre-launch honesty banner -->
-      <div class="tp-prelaunch-banner" role="note" aria-label="Early access notice">
-        <div class="tp-prelaunch-icon" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="12" y1="8" x2="12" y2="12"/>
-            <line x1="12" y1="16" x2="12.01" y2="16"/>
-          </svg>
-        </div>
-        <div class="tp-prelaunch-text">
-          <strong>Early access — data reflects our first testers</strong>
-          <p>Wellet is in early access right now, which means these numbers represent a small group of early users (including the founder). Sessions, languages, and regions will look sparse until we open up more broadly. We're publishing from day one so the growth is honest and visible.</p>
+  <main class="press-page">
+    <section class="press-hero">
+      <div class="container">
+        <span class="press-eyebrow">PRESS &amp; MEDIA</span>
+        <h1>Wellet press kit</h1>
+        <p class="press-lead">Wellet is a health companion built for family caregivers. We read medical records, follow medications and care patterns, and tell families what's changing — in plain language.</p>
+        <div class="press-actions">
+          <a class="btn-primary" href="/press/wellet-media-kit.zip" download>Download full media kit (.zip)</a>
+          <a class="btn-ghost" href="mailto:betsy@getwellet.com?subject=Press%20inquiry">Press inquiries: betsy@getwellet.com</a>
         </div>
       </div>
+    </section>
 
-      <!-- Privacy Banner -->
-      <div class="tp-banner" role="note" aria-label="Privacy commitment">
-        <div class="tp-banner-icon" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-            <polyline points="9 12 11 14 15 10"/>
-          </svg>
+    <section class="press-section">
+      <div class="container">
+        <h2>Company snapshot</h2>
+        <div class="press-facts">
+          <div class="press-fact"><span class="press-fact-label">Product</span><span class="press-fact-value">A health companion for family caregivers</span></div>
+          <div class="press-fact"><span class="press-fact-label">Founder</span><span class="press-fact-value">Betsy Eble — Founder &amp; Clinical Designer</span></div>
+          <div class="press-fact"><span class="press-fact-label">Headquarters</span><span class="press-fact-value">North Carolina, USA</span></div>
+          <div class="press-fact"><span class="press-fact-label">Marketing site</span><span class="press-fact-value"><a href="https://getwellet.com">getwellet.com</a></span></div>
+          <div class="press-fact"><span class="press-fact-label">App</span><span class="press-fact-value"><a href="https://mywellet.com">mywellet.com</a></span></div>
+          <div class="press-fact"><span class="press-fact-label">Press contact</span><span class="press-fact-value"><a href="mailto:betsy@getwellet.com">betsy@getwellet.com</a></span></div>
         </div>
-        <div class="tp-banner-text">
-          <strong>Fully anonymized &amp; aggregated data only</strong>
-          <p>This dashboard shows aggregated, anonymous usage patterns from the Wellet app. No personal health information is collected or displayed here — ever. We publish this data as a commitment to transparency and to support caregiving research. Every metric shown is an aggregate across all users with no way to identify any individual.</p>
+        <p class="press-body">Wellet reads a loved one's medical records, follows medications and health patterns, and tells family members what's changing. It's built to help coordinate care — not to second-guess clinicians.</p>
+      </div>
+    </section>
+
+    <section class="press-section press-section-alt">
+      <div class="container">
+        <h2>Logos</h2>
+        <p class="press-body">Use the wordmark whenever space allows. Use the &ldquo;w&rdquo; mark for small-space applications (app icons, avatars, favicons). Don&rsquo;t recolor, distort, or re-typeset.</p>
+
+        <div class="press-logo-grid">
+          <div class="press-logo-card press-logo-card--sage">
+            <img src="/press/logos/wellet-wordmark-white.svg" alt="Wellet wordmark, white on sage">
+            <div class="press-logo-meta">
+              <span>Wordmark · White</span>
+              <span class="press-logo-dl">
+                <a href="/press/logos/wellet-wordmark-white.svg" download>SVG</a>
+                <a href="/press/logos/wellet-wordmark-white-512w.png" download>512</a>
+                <a href="/press/logos/wellet-wordmark-white-1024w.png" download>1024</a>
+                <a href="/press/logos/wellet-wordmark-white-2048w.png" download>2048</a>
+              </span>
+            </div>
+          </div>
+          <div class="press-logo-card press-logo-card--light">
+            <img src="/press/logos/wellet-wordmark.svg" alt="Wellet wordmark, sage on light">
+            <div class="press-logo-meta">
+              <span>Wordmark · Sage</span>
+              <span class="press-logo-dl">
+                <a href="/press/logos/wellet-wordmark.svg" download>SVG</a>
+                <a href="/press/logos/wellet-wordmark-512w.png" download>512</a>
+                <a href="/press/logos/wellet-wordmark-1024w.png" download>1024</a>
+                <a href="/press/logos/wellet-wordmark-2048w.png" download>2048</a>
+              </span>
+            </div>
+          </div>
+          <div class="press-logo-card press-logo-card--light">
+            <img src="/press/logos/wellet-wordmark-black.svg" alt="Wellet wordmark, black on light">
+            <div class="press-logo-meta">
+              <span>Wordmark · Black</span>
+              <span class="press-logo-dl">
+                <a href="/press/logos/wellet-wordmark-black.svg" download>SVG</a>
+                <a href="/press/logos/wellet-wordmark-black-512w.png" download>512</a>
+                <a href="/press/logos/wellet-wordmark-black-1024w.png" download>1024</a>
+                <a href="/press/logos/wellet-wordmark-black-2048w.png" download>2048</a>
+              </span>
+            </div>
+          </div>
+          <div class="press-logo-card press-logo-card--light press-logo-card--mark">
+            <img src="/press/logos/wellet-mark.svg" alt="Wellet w-mark">
+            <div class="press-logo-meta">
+              <span>W-mark · Sage tile</span>
+              <span class="press-logo-dl">
+                <a href="/press/logos/wellet-mark.svg" download>SVG</a>
+                <a href="/press/logos/wellet-mark-256.png" download>256</a>
+                <a href="/press/logos/wellet-mark-512.png" download>512</a>
+                <a href="/press/logos/wellet-mark-1024.png" download>1024</a>
+                <a href="/press/logos/wellet-mark-2048.png" download>2048</a>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- Page heading + refresh controls -->
-      <div class="tp-header">
-        <h1>Transparency Dashboard</h1>
-        <div class="tp-header-meta">
-          <span class="tp-last-refreshed" id="last-refreshed">Loading data…</span>
-          <button class="tp-refresh-btn" id="refresh-btn" onclick="loadDashboard()" aria-label="Refresh dashboard data">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="refresh-icon">
-              <polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/>
-              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-            </svg>
-            Refresh
-          </button>
+    <section class="press-section">
+      <div class="container">
+        <h2>Founder</h2>
+        <div class="press-founder">
+          <div class="press-founder-photo">
+            <img src="/press/founder/betsy-eble-headshot.jpg" alt="Betsy Eble, founder of Wellet">
+            <a class="press-photo-dl" href="/press/founder/betsy-eble-headshot.jpg" download>Download headshot</a>
+          </div>
+          <div class="press-founder-bio">
+            <h3>Betsy Eble</h3>
+            <p class="press-founder-title">Founder &amp; Clinical Designer</p>
+            <p>Betsy designed the UX for Duke Health&rsquo;s first EHR, launched through Duke Executive Health. When she became a family caregiver, she saw the gap firsthand — every tool was built for the patient or the provider, but nothing was built for the person in between.</p>
+            <p>Wellet is the tool she needed and couldn&rsquo;t find. It reads a loved one&rsquo;s medical records, follows their medications and health patterns, and tells families what&rsquo;s changing in plain language.</p>
+            <p class="press-founder-links">
+              <a href="/press/founder/betsy-eble-bio.md" download>Full bio (short / medium / long)</a>
+              <span class="press-sep">·</span>
+              <a href="/press/founder/fact-sheet.md" download>Fact sheet</a>
+              <span class="press-sep">·</span>
+              <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer">Medium</a>
+              <span class="press-sep">·</span>
+              <a href="https://www.linkedin.com/in/betsyeble/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            </p>
+          </div>
         </div>
       </div>
+    </section>
 
-      <!-- Error banner (hidden by default) -->
-      <div class="tp-error-banner" id="error-banner" role="alert">
-        Unable to load dashboard data. The data service may be temporarily unavailable — please try again in a few minutes.
-      </div>
-
-      <!-- ===== SECTION 1: Summary Stats ===== -->
-      <div class="tp-stats-grid" id="stats-grid">
-        <div class="tp-stat-card">
-          <div class="tp-stat-label">Total Sessions</div>
-          <div class="tp-stat-value" id="stat-sessions">—</div>
-          <div class="tp-stat-sub">All time</div>
-        </div>
-        <div class="tp-stat-card">
-          <div class="tp-stat-label">Unique Users</div>
-          <div class="tp-stat-value" id="stat-users">—</div>
-          <div class="tp-stat-sub">All time</div>
-        </div>
-        <div class="tp-stat-card">
-          <div class="tp-stat-label">Avg. Session Duration</div>
-          <div class="tp-stat-value" id="stat-duration">—</div>
-          <div class="tp-stat-sub">Minutes</div>
-        </div>
-        <div class="tp-stat-card">
-          <div class="tp-stat-label">Total Events</div>
-          <div class="tp-stat-value" id="stat-events">—</div>
-          <div class="tp-stat-sub">All time</div>
+    <section class="press-section press-section-alt">
+      <div class="container">
+        <h2>Product screenshots</h2>
+        <p class="press-body">Representative product views. Please credit &ldquo;Courtesy of Wellet&rdquo; and don&rsquo;t crop out the Wellet wordmark.</p>
+        <div class="press-screens">
+          <figure class="press-screen">
+            <img src="/press/screenshots/wellet-home-screen.png" alt="Wellet home screen showing a loved one's care overview">
+            <figcaption>
+              <span>Home · care overview</span>
+              <a href="/press/screenshots/wellet-home-screen.png" download>Download PNG</a>
+            </figcaption>
+          </figure>
+          <figure class="press-screen">
+            <img src="/press/screenshots/ask-wellet.png" alt="Ask Wellet — caregiver-focused AI assistant">
+            <figcaption>
+              <span>Ask Wellet · caregiver AI</span>
+              <a href="/press/screenshots/ask-wellet.png" download>Download PNG</a>
+            </figcaption>
+          </figure>
         </div>
       </div>
+    </section>
 
-      <!-- ===== CHARTS GRID ===== -->
-      <div class="tp-charts-grid">
-
-        <!-- Daily Sessions -->
-        <div class="tp-chart-card tp-chart-card--full">
-          <div class="tp-chart-title">Daily Sessions</div>
-          <div id="daily-empty" class="tp-empty" style="display:none">
-            <div class="tp-empty-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    <section class="press-section">
+      <div class="container">
+        <h2>Brand</h2>
+        <div class="press-brand">
+          <div class="press-brand-card">
+            <div class="press-swatch-row">
+              <span class="press-swatch" style="background:#608F7C" title="#608F7C"></span>
+              <span class="press-swatch" style="background:#1A2329" title="#1A2329"></span>
+              <span class="press-swatch" style="background:#FAFAF7;border:1px solid #D8D4CA" title="#FAFAF7"></span>
+              <span class="press-swatch" style="background:#F4EFE6;border:1px solid #D8D4CA" title="#F4EFE6"></span>
+              <span class="press-swatch" style="background:#C67E3F" title="#C67E3F"></span>
+              <span class="press-swatch" style="background:#B85C4C" title="#B85C4C"></span>
             </div>
-            <strong>No session data yet</strong>
-            <p>Session trends will appear here once usage data begins flowing in. Check back soon.</p>
-          </div>
-          <div class="tp-chart-wrap tp-chart-wrap--tall" id="daily-wrap">
-            <canvas id="chart-daily" aria-label="Daily sessions over time" role="img"></canvas>
+            <h3>Colors &amp; type at a glance</h3>
+            <p>Primary: Wellet Sage <code>#608F7C</code>. Display: Fraunces. Body: DM Sans. Full guidelines cover clear space, voice, and do&rsquo;s/don&rsquo;ts.</p>
+            <p class="press-brand-links">
+              <a class="btn-ghost" href="/press/brand/wellet-brand-guidelines.pdf" target="_blank" rel="noopener noreferrer">View guidelines (PDF)</a>
+              <a class="btn-ghost" href="/press/brand/wellet-brand-guidelines.pdf" download>Download PDF</a>
+            </p>
           </div>
         </div>
-
-        <!-- Feature Usage -->
-        <div class="tp-chart-card">
-          <div class="tp-chart-title">Feature Usage</div>
-          <div id="feature-empty" class="tp-empty" style="display:none">
-            <div class="tp-empty-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
-            </div>
-            <strong>No feature data yet</strong>
-            <p>Feature usage counts will appear here once users interact with the app.</p>
-          </div>
-          <div class="tp-chart-wrap tp-chart-wrap--tall" id="feature-wrap">
-            <canvas id="chart-features" aria-label="Feature usage counts" role="img"></canvas>
-          </div>
-        </div>
-
-        <!-- Satisfaction -->
-        <div class="tp-chart-card">
-          <div class="tp-chart-title">Satisfaction by Feature</div>
-          <div id="satisfaction-empty" class="tp-empty" style="display:none">
-            <div class="tp-empty-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
-            </div>
-            <strong>No satisfaction data yet</strong>
-            <p>User satisfaction ratings will appear here once feedback is submitted.</p>
-          </div>
-          <div class="tp-chart-wrap tp-chart-wrap--tall" id="satisfaction-wrap">
-            <canvas id="chart-satisfaction" aria-label="Average satisfaction rating by feature" role="img"></canvas>
-          </div>
-        </div>
-
-        <!-- Language Distribution -->
-        <div class="tp-chart-card">
-          <div class="tp-chart-title">Language Distribution</div>
-          <div id="language-empty" class="tp-empty" style="display:none">
-            <div class="tp-empty-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-            </div>
-            <strong>No language data yet</strong>
-            <p>Language distribution will appear here once users connect.</p>
-          </div>
-          <div class="tp-chart-wrap tp-chart-wrap--medium" id="language-wrap" style="display:flex;align-items:center;justify-content:flex-start;gap:2rem">
-            <div style="flex:0 0 200px;height:200px;position:relative;">
-              <canvas id="chart-languages" aria-label="Language distribution donut chart" role="img"></canvas>
-            </div>
-            <div id="language-legend" style="font-size:var(--text-xs);color:var(--color-text-muted);display:flex;flex-direction:column;gap:6px;"></div>
-          </div>
-        </div>
-
-        <!-- Device Breakdown -->
-        <div class="tp-chart-card">
-          <div class="tp-chart-title">Device Breakdown</div>
-          <div id="device-empty" class="tp-empty" style="display:none">
-            <div class="tp-empty-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-            </div>
-            <strong>No device data yet</strong>
-            <p>Device type breakdown will appear here once usage begins.</p>
-          </div>
-          <div class="tp-chart-wrap tp-chart-wrap--medium" id="device-wrap" style="display:flex;align-items:center;justify-content:flex-start;gap:2rem">
-            <div style="flex:0 0 200px;height:200px;position:relative;">
-              <canvas id="chart-devices" aria-label="Device type distribution donut chart" role="img"></canvas>
-            </div>
-            <div id="device-legend" style="font-size:var(--text-xs);color:var(--color-text-muted);display:flex;flex-direction:column;gap:6px;"></div>
-          </div>
-        </div>
-
-        <!-- Region Distribution -->
-        <div class="tp-chart-card tp-chart-card--full">
-          <div class="tp-chart-title">Region Distribution</div>
-          <div id="region-empty" class="tp-empty" style="display:none">
-            <div class="tp-empty-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </div>
-            <strong>No region data yet</strong>
-            <p>Geographic regions will appear here once users connect from different locations.</p>
-          </div>
-          <div class="tp-chart-wrap tp-chart-wrap--medium" id="region-wrap">
-            <canvas id="chart-regions" aria-label="User region distribution bar chart" role="img"></canvas>
-          </div>
-        </div>
-
-        <!-- Navigation Flows -->
-        <div class="tp-chart-card tp-chart-card--full">
-          <div class="tp-chart-title">Navigation Flows</div>
-          <p style="font-size:var(--text-xs);color:var(--color-text-faint);margin-bottom:var(--space-4);">Top view-to-view transitions in the app</p>
-          <div id="nav-empty" class="tp-empty" style="display:none">
-            <div class="tp-empty-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 10 20 15 15 20"/><path d="M4 4v7a4 4 0 0 0 4 4h12"/></svg>
-            </div>
-            <strong>No navigation data yet</strong>
-            <p>In-app navigation patterns will appear here once users begin exploring the app.</p>
-          </div>
-          <div class="tp-table-wrap" id="nav-wrap">
-            <table class="tp-table" id="nav-table" aria-label="Navigation flow transitions">
-              <thead>
-                <tr>
-                  <th>From</th>
-                  <th class="td-arrow"></th>
-                  <th>To</th>
-                  <th>Count</th>
-                  <th>Share</th>
-                </tr>
-              </thead>
-              <tbody id="nav-tbody"></tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Frustration Hotspots -->
-        <div class="tp-chart-card tp-chart-card--full">
-          <div class="tp-chart-title">Frustration Hotspots</div>
-          <p style="font-size:var(--text-xs);color:var(--color-text-faint);margin-bottom:var(--space-4);">Elements with the highest rage-click frequency — signals where users struggle</p>
-          <div id="frustration-empty" class="tp-empty" style="display:none">
-            <div class="tp-empty-icon" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            </div>
-            <strong>No frustration data yet</strong>
-            <p>Rage-click hotspots will appear here as user frustration patterns are detected.</p>
-          </div>
-          <div class="tp-table-wrap" id="frustration-wrap">
-            <table class="tp-table" id="frustration-table" aria-label="Frustration hotspots">
-              <thead>
-                <tr>
-                  <th>Element</th>
-                  <th>Screen</th>
-                  <th>Rage Clicks</th>
-                </tr>
-              </thead>
-              <tbody id="frustration-tbody"></tbody>
-            </table>
-          </div>
-        </div>
-
-      </div><!-- /tp-charts-grid -->
-
-      <!-- ===== METHODOLOGY NOTE ===== -->
-      <div class="tp-methodology">
-        <h2>Data Methodology</h2>
-        <div class="tp-methodology-grid">
-          <div class="tp-meth-col tp-meth-col--yes">
-            <h3>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-              What IS collected
-            </h3>
-            <ul role="list">
-              <li>Feature interaction counts (which screens are tapped, not what data is viewed)</li>
-              <li>Anonymous session duration and session count</li>
-              <li>Device type (mobile, tablet, desktop) — no model or OS version</li>
-              <li>App language preference</li>
-              <li>Coarse geographic region (country or U.S. state) — no GPS or precise location</li>
-              <li>Navigation paths (which screens are visited in sequence)</li>
-              <li>Voluntary satisfaction ratings (1–5 stars per feature)</li>
-              <li>Rage-click patterns (element labels, not content viewed)</li>
-            </ul>
-          </div>
-          <div class="tp-meth-col tp-meth-col--no">
-            <h3>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-              What is NEVER collected
-            </h3>
-            <ul role="list">
-              <li>No protected health information (PHI) of any kind</li>
-              <li>No health records, diagnoses, medications, or lab results</li>
-              <li>No names, email addresses, or account identifiers</li>
-              <li>No IP addresses or precise location data</li>
-              <li>No content of messages or notes</li>
-              <li>No demographic information (age, race, gender)</li>
-              <li>No cross-app surveillance or third-party data sharing</li>
-              <li>No data sold to or shared with advertisers or data brokers</li>
-            </ul>
-          </div>
-        </div>
-        <p style="font-size:var(--text-xs);color:var(--color-text-faint);margin-top:var(--space-6);">
-          Data is aggregated on the server before being published here. The underlying event store uses row-level security and is never publicly accessible. For questions about this data, contact <a href="mailto:privacy@getwellet.com" style="color:var(--color-primary);">privacy@getwellet.com</a>. See also our <a href="https://mywellet.com/privacy" style="color:var(--color-primary);">Privacy Policy</a>.
-        </p>
       </div>
+    </section>
 
-    </div><!-- /container -->
+    <section class="press-section press-section-alt">
+      <div class="container press-boilerplate">
+        <h2>Boilerplate</h2>
+        <p class="press-body">Wellet is a health companion built for family caregivers. It reads uploaded records and connects to supported patient portals, follows medications and health patterns, and tells family members what&rsquo;s changing in plain language. Wellet is built to help coordinate care — not to provide medical advice or second-guess clinicians. Founded by Betsy Eble, who designed the UX for Duke Health&rsquo;s first EHR. Learn more at <a href="https://getwellet.com">getwellet.com</a>.</p>
+      </div>
+    </section>
+
+    <section class="press-cta">
+      <div class="container">
+        <h2>Need something else?</h2>
+        <p>Interview requests, custom screenshots, embargoed previews — happy to help.</p>
+        <a class="btn-primary" href="mailto:betsy@getwellet.com?subject=Press%20inquiry">Email betsy@getwellet.com</a>
+      </div>
+    </section>
   </main>
 
-  <!-- ========== FOOTER ========== -->
+
   <footer class="footer">
     <div class="container">
       <span class="footer-copy">&copy; 2026 Wellet Health. All rights reserved.</span>
       <div class="footer-links">
         <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer">Blog<span class="sr-only"> (opens in new tab)</span></a>
-        <a href="/press">Press</a>
         <a href="mailto:hello@getwellet.com">Contact</a>
         <a href="https://mywellet.com/privacy">Privacy</a>
         <a href="https://mywellet.com/terms">Terms</a>
