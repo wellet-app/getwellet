@@ -77,6 +77,41 @@
       margin-bottom: var(--space-1);
     }
 
+    /* Early-access pre-launch banner */
+    .tp-prelaunch-banner {
+      background: var(--color-amber-light);
+      border: 1px solid var(--color-amber);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5) var(--space-6);
+      margin-bottom: var(--space-6);
+      display: flex;
+      gap: var(--space-4);
+      align-items: flex-start;
+    }
+    [data-theme="dark"] .tp-prelaunch-banner {
+      background: color-mix(in srgb, var(--color-amber) 18%, var(--color-surface));
+      border-color: color-mix(in srgb, var(--color-amber) 60%, transparent);
+    }
+    .tp-prelaunch-icon {
+      flex-shrink: 0;
+      color: var(--color-amber);
+      margin-top: 2px;
+    }
+    .tp-prelaunch-text strong {
+      display: block;
+      font-size: var(--text-base);
+      font-weight: 600;
+      color: var(--color-text);
+      margin-bottom: var(--space-1);
+    }
+    .tp-prelaunch-text p {
+      color: var(--color-text);
+      font-size: var(--text-sm);
+      line-height: 1.65;
+      max-width: 80ch;
+      margin: 0;
+    }
+
     /* Page header */
     .tp-header {
       margin-bottom: var(--space-10);
@@ -480,6 +515,21 @@
   <!-- ========== MAIN ========== -->
   <main class="tp-main" id="main-content">
     <div class="container">
+
+      <!-- Early-access / pre-launch honesty banner -->
+      <div class="tp-prelaunch-banner" role="note" aria-label="Early access notice">
+        <div class="tp-prelaunch-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+        </div>
+        <div class="tp-prelaunch-text">
+          <strong>Early access — data reflects our first testers</strong>
+          <p>Wellet is in early access right now, which means these numbers represent a small group of early users (including the founder). Sessions, languages, and regions will look sparse until we open up more broadly. We're publishing from day one so the growth is honest and visible.</p>
+        </div>
+      </div>
 
       <!-- Privacy Banner -->
       <div class="tp-banner" role="note" aria-label="Privacy commitment">
