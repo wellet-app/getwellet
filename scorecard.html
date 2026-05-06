@@ -241,6 +241,7 @@
       justify-content: space-between;
       gap: var(--space-3);
       margin-top: var(--space-2);
+      padding: var(--space-2) var(--space-1);
     }
     .sc-back {
       background: none;
@@ -257,6 +258,7 @@
 
     .sc-next {
       padding: var(--space-3) var(--space-7);
+      margin: 0 var(--space-1);
       border-radius: var(--radius-md, 12px);
       background: var(--color-primary);
       color: var(--color-bg);
@@ -266,6 +268,7 @@
       font-weight: 500;
       cursor: pointer;
       transition: opacity 0.15s ease;
+      white-space: nowrap;
     }
     .sc-next:hover { opacity: 0.92; }
     .sc-next:disabled { opacity: 0.4; cursor: not-allowed; }
@@ -407,14 +410,34 @@
       line-height: 1.55;
       margin: 0 0 var(--space-4) 0;
     }
+    .sc-capture p a,
+    .sc-capture a {
+      color: var(--color-primary);
+      text-decoration: underline;
+      font-weight: 500;
+    }
+    .sc-capture p a:visited,
+    .sc-capture a:visited {
+      color: var(--color-primary);
+    }
     .sc-capture-row {
       display: flex;
       gap: var(--space-3);
       flex-wrap: wrap;
+      align-items: stretch;
     }
     .sc-capture-row .sc-input {
-      flex: 1;
-      min-width: 200px;
+      flex: 1 1 240px;
+      min-width: 0;
+    }
+    .sc-capture-row .sc-next {
+      flex: 0 0 auto;
+      white-space: nowrap;
+    }
+    @media (max-width: 520px) {
+      .sc-capture-row .sc-next {
+        flex: 1 1 100%;
+      }
     }
     .sc-consent {
       display: flex;
