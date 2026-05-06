@@ -1,0 +1,5 @@
+# getwellet.com — Wellet marketing site
+User-agent: *
+Allow: /
+
+Sitemap: https://getwellet.com/sitemap.xml
