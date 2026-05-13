@@ -530,6 +530,60 @@ section {
   border-radius: 2px;
 }
 
+/* Before your appointment card */
+.phone-before-card {
+  background: var(--color-cream, #fcf8f0);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-lg);
+  padding: 12px;
+  margin-top: var(--space-3);
+}
+
+.phone-before-eyebrow {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+
+.phone-before-title {
+  font-family: var(--font-serif, 'Fraunces', serif);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text);
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+
+.phone-before-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px solid var(--color-divider);
+}
+
+.phone-before-stat {
+  text-align: center;
+}
+
+.phone-before-stat-val {
+  font-family: var(--font-serif, 'Fraunces', serif);
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--color-primary);
+  line-height: 1;
+  margin-bottom: 3px;
+}
+
+.phone-before-stat-lbl {
+  font-size: 8px;
+  color: var(--color-text-faint);
+  line-height: 1.2;
+}
+
 /* Update Me summary card */
 .phone-update-card {
   background: #eef1eb;
@@ -570,13 +624,22 @@ section {
 /* Alert card */
 .phone-alert-card {
   display: flex;
-  gap: 8px;
-  align-items: flex-start;
+  flex-direction: column;
+  gap: 4px;
   background: #fdf3ec;
   border: 1px solid #f0d4bc;
   border-radius: var(--radius-lg);
   padding: 10px 12px;
   margin-top: var(--space-2);
+}
+
+.phone-alert-eyebrow {
+  font-size: 9px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-amber);
+  margin-bottom: 2px;
 }
 
 .phone-alert-icon {
@@ -999,6 +1062,146 @@ section {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   line-height: 1.6;
+}
+
+/* ============================================================
+   LAYERED FEATURES SECTION (added 2026-05-13)
+   Three layers: 01 What Wellet sees · 02 What Wellet does for you
+   · 03 What belongs to your family
+   ============================================================ */
+.problem-section .container + .container {
+  margin-top: var(--space-16);
+}
+
+.layer-eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  margin-bottom: var(--space-6);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+}
+
+.layer-eyebrow-num {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--color-text-faint);
+}
+
+.layer-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--color-divider);
+  margin-left: var(--space-2);
+}
+
+/* Layer 1 grid: 1fr 2fr so EHR card sits next to wide CareSignals */
+.features-grid--sees {
+  grid-template-columns: 1fr 2fr;
+}
+
+.features-grid--sees .feature-card--full {
+  grid-column: span 1;
+}
+
+/* "New" badge on the 5 shipped features */
+.feature-card--new {
+  position: relative;
+}
+
+.feature-new-badge {
+  position: absolute;
+  top: var(--space-5);
+  right: var(--space-5);
+  font-family: var(--font-body);
+  font-size: 0.625rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+  background: var(--color-primary-light);
+  padding: 3px 9px;
+  border-radius: var(--radius-full);
+}
+
+/* "Recurring · Wellet noticed" eyebrow under Recurring patterns h3 */
+.feature-eyebrow-line {
+  font-family: var(--font-body) !important;
+  font-size: 0.7rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary) !important;
+  margin-bottom: var(--space-3) !important;
+  line-height: 1.4 !important;
+}
+
+/* Moat banner inside layer 3 */
+.moat-banner {
+  background: linear-gradient(135deg, #fcf8f0 0%, #f5ead8 100%);
+  border: 1px solid #e8dcc4;
+  border-radius: var(--radius-xl);
+  padding: var(--space-12) var(--space-10);
+  margin-bottom: var(--space-8);
+  text-align: center;
+}
+
+[data-theme='dark'] .moat-banner {
+  background: linear-gradient(135deg, #2a2218 0%, #221a10 100%);
+  border-color: #3a2e1e;
+}
+
+.moat-banner-line {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 1rem + 2vw, 2.4rem);
+  font-weight: 400;
+  line-height: 1.18;
+  color: var(--color-text);
+  margin: 0 0 var(--space-4) 0;
+  max-width: 22ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.moat-banner-line em {
+  font-style: italic;
+  color: var(--color-primary);
+}
+
+.moat-banner-sub {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  line-height: 1.65;
+  color: var(--color-text-muted);
+  max-width: 54ch;
+  margin: 0 auto;
+  font-weight: 300;
+}
+
+/* Mobile: layer 1 grid collapses, moat banner shrinks */
+@media (max-width: 768px) {
+  .features-grid--sees {
+    grid-template-columns: 1fr;
+  }
+  .features-grid--sees .feature-card--full {
+    grid-column: span 1;
+  }
+  .moat-banner {
+    padding: var(--space-8) var(--space-5);
+  }
+  .layer-eyebrow {
+    margin-bottom: var(--space-4);
+  }
+  .problem-section .container + .container {
+    margin-top: var(--space-10);
+  }
 }
 
 /* ---- Feature Preview Panels ---- */
@@ -1534,6 +1737,24 @@ section {
   background: var(--color-primary);
   color: var(--color-text-inverse);
   text-align: center;
+}
+
+.cta-bottom-moat {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 0.9rem + 1.6vw, 2rem);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--color-text-inverse);
+  opacity: 0.96;
+  max-width: 22ch;
+  margin: 0 auto var(--space-10);
+  padding-bottom: var(--space-8);
+  border-bottom: 1px solid rgba(245, 247, 243, 0.18);
+}
+
+.cta-bottom-moat em {
+  font-style: italic;
+  opacity: 0.78;
 }
 
 .cta-bottom h2 {

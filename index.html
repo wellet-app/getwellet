@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wellet — The Health Tool Built for Caregivers</title>
-  <meta name="description" content="Wellet reads your loved one's health records, watches for pattern shifts, and tells you what matters. Built by a caregiver, for caregivers.">
+  <meta name="description" content="Wellet reads your loved one's health records, watches for pattern shifts, and remembers what you can't. A record that belongs to your family, not the hospital. Built by a caregiver, for caregivers.">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Wellet — The Health Tool Built for Caregivers">
@@ -53,14 +53,14 @@
         <ul class="nav-links" role="list">
           <li><a href="#features">Features</a></li>
           <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#your-data">Your Data</a></li>
           <li><a href="/connect">Connect</a></li>
-          <li><a href="/journal">Journal</a></li>
           <li class="nav-more-wrap"><button class="nav-more-btn" onclick="this.parentElement.classList.toggle('open')" aria-label="More pages">More <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l3 3 3-3"/></svg></button>
             <ul class="nav-dropdown">
+              <li><a href="/journal">Journal</a></li>
               <li><a href="#how-it-works">How It Works</a></li>
               <li><a href="#founder">About</a></li>
               <li><a href="#faq">FAQ</a></li>
-              <li><a href="#your-data">Your Data</a></li>
               <li><a href="/transparency">Transparency</a></li>
               <li><a href="#early-access">Early Access</a></li>
               <li><a href="/press">Press</a></li>
@@ -138,26 +138,30 @@
               <span class="phone-pill">Mom</span>
             </div>
 
-            <!-- Tab bar -->
-            <div class="phone-tabs">
-              <span class="phone-tab phone-tab--active">Update Me</span>
-              <span class="phone-tab">Timeline</span>
-              <span class="phone-tab">Patterns</span>
+            <!-- Before your appointment card -->
+            <div class="phone-before-card">
+              <div class="phone-before-eyebrow">Tomorrow · 9:00 AM · Dr. Johnson</div>
+              <div class="phone-before-title">Before your appointment</div>
+              <div class="phone-before-stats">
+                <div class="phone-before-stat"><div class="phone-before-stat-val">3</div><div class="phone-before-stat-lbl">Questions ready</div></div>
+                <div class="phone-before-stat"><div class="phone-before-stat-val">2</div><div class="phone-before-stat-lbl">New on chart</div></div>
+                <div class="phone-before-stat"><div class="phone-before-stat-val">4</div><div class="phone-before-stat-lbl">Wishes captured</div></div>
+              </div>
             </div>
 
             <!-- Update Me summary card -->
             <div class="phone-update-card">
               <div class="phone-update-label">What's going on with Dad right now</div>
-              <div class="phone-update-text">Dad is 2 months post-op from his second peroneal knee release. His oncology CML test came back &lt;0.001 — continued improvement. Blood pressure has been <strong>running higher this week</strong>.</div>
-              <div class="phone-update-meta">Generated from 47 health events · Ask a follow-up</div>
+              <div class="phone-update-text">Dad is 2 months post-op from his second peroneal knee release. His oncology CML test came back &lt;0.001 &mdash; continued improvement. Blood pressure has been <strong>running higher this week</strong>.</div>
+              <div class="phone-update-meta">Generated from 47 health events &middot; Ask a follow-up</div>
             </div>
 
-            <!-- Alert card -->
+            <!-- Recurring pattern card -->
             <div class="phone-alert-card">
-              <div class="phone-alert-icon">⚠</div>
+              <div class="phone-alert-eyebrow">Recurring &middot; Wellet noticed</div>
               <div>
-                <div class="phone-alert-title">Blood pressure pattern noticed</div>
-                <div class="phone-alert-text">Readings consistently higher since Feb 18. May be related to the Hydrochlorothiazide adjustment.</div>
+                <div class="phone-alert-title">Blood pressure runs higher in the morning</div>
+                <div class="phone-alert-text">Across 30 days, morning readings average ~14 mmHg higher than evening. Wellet is noticing this so you can mention it at the next visit.</div>
               </div>
             </div>
 
@@ -214,85 +218,11 @@
       <h2 class="reveal">The system wasn't built for you</h2>
       <p class="section-subtitle reveal">Every health tool points at "me." Caregiving points outward. Wellet is the first health platform designed for the person holding someone else's chart.</p>
     </div>
+
+    <!-- ── LAYER 1: What Wellet sees ───────────────────────────────────── -->
     <div class="container">
-      <div class="features-grid">
-        <!-- Update Me — spans 2 columns -->
-        <div class="feature-card feature-card--wide reveal">
-          <div class="feature-card-body">
-            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-              <polyline points="14 2 14 8 20 8"/>
-              <line x1="16" y1="13" x2="8" y2="13"/>
-              <line x1="16" y1="17" x2="8" y2="17"/>
-            </svg>
-            <h3>Update Me</h3>
-            <p>Upload a discharge summary, lab result, or visit note. Wellet reads it, pulls out what changed, and gives you a plain-language summary you can actually act on.</p>
-          </div>
-          <div class="feature-preview" aria-hidden="true">
-            <div class="preview-panel preview-panel--update">
-              <div class="preview-badge">New Summary</div>
-              <div class="preview-summary-title">Endocrinology visit — Apr 10</div>
-              <div class="preview-summary-body">A1C improved to 6.8% (was 7.2% in January). Doctor increased Metformin to 1000mg and wants a recheck in 3 months.</div>
-              <div class="preview-change"><span class="preview-dot preview-dot--changed"></span> Metformin 500mg → 1000mg</div>
-              <div class="preview-change"><span class="preview-dot preview-dot--new"></span> A1C: 6.8% (was 7.2%)</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Ask Wellet -->
-        <div class="feature-card reveal">
-          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <path d="M12 6v6l4 2"/>
-          </svg>
-          <h3>Ask Wellet</h3>
-          <p>Ask questions about your loved one's health and get answers grounded in their actual medical records. Not generic search results — their chart, their context.</p>
-        </div>
-
-        <!-- Patterns -->
-        <div class="feature-card reveal">
-          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-          </svg>
-          <h3>Patterns</h3>
-          <p>"Blood pressure pattern noticed — multiple readings above 140 systolic in the last two weeks. Consider discussing with the care team." Wellet watches for shifts across vitals, labs, and medications so you know when something is worth a conversation.</p>
-        </div>
-
-        <!-- Care Circle -->
-        <div class="feature-card reveal">
-          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-            <circle cx="9" cy="7" r="4"/>
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
-          </svg>
-          <h3>Care Circle</h3>
-          <p>Invite siblings, aides, and providers into one shared view. Everyone sees the same timeline. No more group texts or conflicting medication lists.</p>
-        </div>
-
-        <!-- Living Timeline -->
-        <div class="feature-card reveal">
-          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="12" y1="2" x2="12" y2="22"/>
-            <circle cx="12" cy="6" r="2" fill="currentColor"/>
-            <circle cx="12" cy="12" r="2" fill="currentColor"/>
-            <circle cx="12" cy="18" r="2" fill="currentColor"/>
-          </svg>
-          <h3>Living Timeline</h3>
-          <p>Everything that happened around your loved one's health — what the hospital recorded, what you wrote at 11 PM, what your sister noticed, what Wellet noticed — in order, in one place. The chart is only part of the story.</p>
-        </div>
-
-        <!-- What your care team might not tell you -->
-        <div class="feature-card reveal">
-          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="12" y1="8" x2="12" y2="12"/>
-            <line x1="12" y1="16" x2="12.01" y2="16"/>
-          </svg>
-          <h3>What your care team might not tell you</h3>
-          <p>Tap a diagnosis and Wellet pulls the things a seven-minute visit usually skips — open clinical trials, FDA-approved treatments, centers of excellence, patient-advocacy groups, and recent research — all grounded in your loved one's actual condition.</p>
-        </div>
-
+      <div class="layer-eyebrow reveal"><span class="layer-eyebrow-num">01</span> What Wellet sees</div>
+      <div class="features-grid features-grid--sees">
         <!-- EHR Integration -->
         <div class="feature-card reveal">
           <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -300,11 +230,11 @@
             <line x1="8" y1="21" x2="16" y2="21"/>
             <line x1="12" y1="17" x2="12" y2="21"/>
           </svg>
-          <h3>EHR Integration</h3>
-          <p>Connect to your loved one's electronic health records. Labs, visit notes, and medication changes flow in automatically — no more logging into three patient portals.</p>
+          <h3>The chart</h3>
+          <p>Connect to your loved one's electronic health records through SMART on FHIR. Labs, visit notes, and medication changes flow in automatically &mdash; no more logging into three patient portals.</p>
         </div>
 
-        <!-- CareSignals — spans 3 columns, dark -->
+        <!-- CareSignals -->
         <div class="feature-card feature-card--full feature-card--dark reveal">
           <div class="feature-card-body">
             <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -312,7 +242,7 @@
               <polyline points="9 22 9 12 15 12 15 22"/>
             </svg>
             <h3>CareSignals</h3>
-            <p>Wellet watches for pattern shifts across EHR records and wearables. Passive home sensors — coming soon — will add another layer by witnessing daily routines (not cameras). When something changes, you'll know.</p>
+            <p>Beyond the chart, Wellet watches for pattern shifts across wearables, uploads, and the moments your family captures. Passive home sensors &mdash; coming soon &mdash; will add another layer by witnessing daily routines (not cameras). When something changes, you'll know.</p>
           </div>
           <div class="feature-preview feature-preview--signals" aria-hidden="true">
             <div class="signal-row">
@@ -334,6 +264,141 @@
               <span class="signal-status signal-status--late">47 min late</span>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LAYER 2: What Wellet does for you ───────────────────────────── -->
+    <div class="container">
+      <div class="layer-eyebrow reveal"><span class="layer-eyebrow-num">02</span> What Wellet does for you</div>
+      <div class="features-grid">
+        <!-- Update Me — spans 2 columns -->
+        <div class="feature-card feature-card--wide reveal">
+          <div class="feature-card-body">
+            <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/>
+              <line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+            <h3>Update Me</h3>
+            <p>Upload a discharge summary, lab result, or visit note. Wellet reads it, pulls out what changed, and gives you a plain-language summary you can actually act on.</p>
+          </div>
+          <div class="feature-preview" aria-hidden="true">
+            <div class="preview-panel preview-panel--update">
+              <div class="preview-badge">New Summary</div>
+              <div class="preview-summary-title">Endocrinology visit &mdash; Apr 10</div>
+              <div class="preview-summary-body">A1C improved to 6.8% (was 7.2% in January). Doctor increased Metformin to 1000mg and wants a recheck in 3 months.</div>
+              <div class="preview-change"><span class="preview-dot preview-dot--changed"></span> Metformin 500mg &rarr; 1000mg</div>
+              <div class="preview-change"><span class="preview-dot preview-dot--new"></span> A1C: 6.8% (was 7.2%)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Before your appointment — NEW (L2) -->
+        <div class="feature-card feature-card--new reveal">
+          <span class="feature-new-badge">New</span>
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+            <circle cx="12" cy="16" r="2" fill="currentColor" stroke="none"/>
+          </svg>
+          <h3>Before your appointment</h3>
+          <p>The day before a visit, Wellet quietly gets you ready: the questions you've already saved, what's new on the chart, and the wishes you'll want in your pocket when you walk in.</p>
+        </div>
+
+        <!-- Recurring patterns — REWRITTEN (L1) -->
+        <div class="feature-card feature-card--new reveal">
+          <span class="feature-new-badge">New</span>
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+          </svg>
+          <h3>Recurring patterns</h3>
+          <p class="feature-eyebrow-line">Recurring &middot; Wellet noticed</p>
+          <p>"Blood pressure runs higher in the morning." "Lisinopril is being missed on Sundays." Wellet is noticing the shapes a caregiver would only catch after weeks of MyChart screenshots &mdash; so you can mention them at the next visit.</p>
+        </div>
+
+        <!-- Ask Wellet -->
+        <div class="feature-card reveal">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M12 6v6l4 2"/>
+          </svg>
+          <h3>Ask Wellet</h3>
+          <p>Ask questions about your loved one's health and get answers grounded in their actual medical records. Not generic search results &mdash; their chart, their context.</p>
+        </div>
+
+        <!-- Living Timeline -->
+        <div class="feature-card reveal">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="2" x2="12" y2="22"/>
+            <circle cx="12" cy="6" r="2" fill="currentColor"/>
+            <circle cx="12" cy="12" r="2" fill="currentColor"/>
+            <circle cx="12" cy="18" r="2" fill="currentColor"/>
+          </svg>
+          <h3>Living Timeline</h3>
+          <p>Everything that happened around your loved one's health &mdash; what the hospital recorded, what you wrote at 11 PM, what your sister noticed, what Wellet noticed &mdash; in order, in one place. The chart is only part of the story.</p>
+        </div>
+
+        <!-- What your care team might not tell you -->
+        <div class="feature-card reveal">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+          <h3>What your care team might not tell you</h3>
+          <p>Tap a diagnosis and Wellet pulls the things a seven-minute visit usually skips &mdash; open clinical trials, FDA-approved treatments, centers of excellence, patient-advocacy groups, and recent research &mdash; all grounded in your loved one's actual condition.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── LAYER 3: What belongs to your family ────────────────────────── -->
+    <div class="container">
+      <div class="layer-eyebrow reveal"><span class="layer-eyebrow-num">03</span> What belongs to your family</div>
+
+      <!-- Moat banner -->
+      <div class="moat-banner reveal">
+        <p class="moat-banner-line">A record that belongs to your family,<br><em>not the hospital.</em></p>
+        <p class="moat-banner-sub">The chart at the hospital is the chart. What Wellet holds is everything else: the voice notes, the gut feelings, the questions you asked at 11 PM, the wishes only you would have remembered to write down.</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Care Circle -->
+        <div class="feature-card reveal">
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          <h3>Care Circle</h3>
+          <p>Invite siblings, aides, and providers into one shared view. Everyone sees the same timeline. No more group texts or conflicting medication lists.</p>
+        </div>
+
+        <!-- Wishes — NEW (L6) -->
+        <div class="feature-card feature-card--new reveal">
+          <span class="feature-new-badge">New</span>
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+          </svg>
+          <h3>Wishes</h3>
+          <p>Capture the things only your loved one knows &mdash; how they want to be cared for, who they trust, the song at the end. Voice notes, in their own words, kept where the family will actually find them.</p>
+        </div>
+
+        <!-- Family Record — NEW (L7) -->
+        <div class="feature-card feature-card--new reveal">
+          <span class="feature-new-badge">New</span>
+          <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+            <polyline points="14 2 14 8 20 8"/>
+            <line x1="12" y1="18" x2="12" y2="12"/>
+            <polyline points="9 15 12 12 15 15"/>
+          </svg>
+          <h3>Family record (PDF)</h3>
+          <p>One tap, one PDF: the full chart, the care team, the patterns Wellet has been noticing, and the wishes in their own words. Yours to print, share with a sibling, or carry into an appointment.</p>
         </div>
       </div>
     </div>
@@ -704,7 +769,7 @@
             <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="faq-answer" id="faq-answer-1" role="region" aria-labelledby="faq-question-1">
-            <p>Wellet is a health companion built for family caregivers. It reads your loved one's medical records, follows their medications and health patterns, and tells you what's changing — in plain language.</p>
+            <p>Wellet is a health companion built for family caregivers. It reads your loved one's medical records, follows their medications and health patterns, and tells you what's changing — in plain language. A record that belongs to your family, not the hospital.</p>
           </div>
         </div>
 
@@ -714,7 +779,7 @@
             <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="faq-answer" id="faq-answer-2" role="region" aria-labelledby="faq-question-2">
-            <p>Anyone caring for a family member — whether you're managing a loved one's medications, coordinating with siblings, or staying on top of your own health journey. Wellet works for caregivers at every stage.</p>
+            <p>Anyone caring for a loved one — whether you're managing a family member's medications, coordinating with siblings, or staying on top of your own health journey. Wellet works for caregivers at every stage.</p>
           </div>
         </div>
 
@@ -815,6 +880,7 @@
   <!-- ========== CTA BOTTOM ========== -->
   <section class="cta-bottom">
     <div class="container">
+      <p class="cta-bottom-moat reveal">A record that belongs to your family,<br><em>not the hospital.</em></p>
       <h2 class="reveal">Stop guessing. Start knowing.</h2>
       <p class="reveal">Be the first to know when Wellet launches. We'll share updates as we build it.</p>
       <a href="#top" class="btn-cta reveal">Get early access</a>
@@ -824,7 +890,7 @@
   <!-- ========== FOOTER ========== -->
   <footer class="footer">
     <div class="container">
-      <span class="footer-copy">&copy; 2026 Wellet Health. All rights reserved.</span>
+      <span class="footer-copy">A record that belongs to your family, not the hospital. &nbsp;&middot;&nbsp; &copy; 2026 Wellet Health. All rights reserved.</span>
       <div class="footer-links">
         <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer">Blog<span class="sr-only"> (opens in new tab)</span></a>
         <a href="/press">Press</a>
