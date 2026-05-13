@@ -1037,8 +1037,11 @@ section {
   color: #fffdf8;
 }
 
-.feature-card--dark p {
-  color: #f0ece4;
+.feature-card--dark p,
+.feature-card.feature-card--dark p,
+.feature-card--dark .feature-card-body p {
+  color: #f5f1e8;
+  opacity: 0.92;
 }
 
 .feature-card--dark .feature-icon {
