@@ -303,6 +303,9 @@ section {
   .mobile-nav-toggle {
     display: block;
   }
+  .mobile-signin {
+    display: inline-block !important;
+  }
   .nav-more-wrap { width: 100%; }
   .nav-more-btn { width: 100%; justify-content: space-between; }
   .nav-dropdown {
@@ -856,6 +859,30 @@ section {
 .btn-demo:active {
   background: var(--color-primary-hover);
   color: var(--color-text-inverse);
+}
+
+/* Hero CTA row (replaces waitlist form) */
+.hero-cta-row {
+  margin-top: var(--space-6);
+}
+.btn-try-wellet {
+  display: inline-block;
+  padding: var(--space-4) var(--space-8);
+  font-size: var(--text-lg);
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: var(--radius-lg);
+  text-align: center;
+  transition: background var(--transition-interactive), transform 120ms ease;
+}
+.btn-try-wellet:hover {
+  transform: translateY(-1px);
+  background: var(--color-primary-hover);
+}
+.hero-cta-note {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-top: var(--space-3);
 }
 
 .waitlist-note {
