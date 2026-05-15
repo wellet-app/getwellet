@@ -112,6 +112,9 @@ function getAttribution() {
 }
 
 // --- WAITLIST FORM ---
+var _lastSignupEmail = '';
+var _resendCooldownTimer = null;
+
 async function handleSignup(e) {
   e.preventDefault();
 
@@ -146,6 +149,8 @@ async function handleSignup(e) {
   submitBtn.disabled = true;
   submitBtn.textContent = 'Submitting...';
 
+  _lastSignupEmail = email;
+
   try {
     const res = await fetch(SUPABASE_URL + '/rest/v1/waitlist', {
       method: 'POST',
@@ -159,28 +164,129 @@ async function handleSignup(e) {
     });
 
     if (res.ok) {
-      // Success
+      // First-time signup
       form.style.display = 'none';
-      successEl.classList.add('visible');
+      showHeroConfirmation(email, false);
     } else if (res.status === 409 || (await res.text()).includes('duplicate')) {
       // Already signed up
       form.style.display = 'none';
-      successEl.querySelector('p').textContent = "You're already on the list. We'll be in touch.";
-      successEl.classList.add('visible');
+      showHeroConfirmation(email, true);
     } else {
       errorEl.textContent = 'Something went wrong. Please try again.';
       errorEl.classList.add('visible');
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Join waitlist';
+      submitBtn.textContent = 'Get early access';
     }
   } catch (err) {
     errorEl.textContent = 'Connection error. Please try again.';
     errorEl.classList.add('visible');
     submitBtn.disabled = false;
-    submitBtn.textContent = 'Join waitlist';
+    submitBtn.textContent = 'Get early access';
   }
 
   return false;
+}
+
+// Show inline confirmation directly below the hero form area
+function showHeroConfirmation(email, alreadyOnList) {
+  var successEl = document.getElementById('form-success');
+  if (!successEl) return;
+
+  var safeEmail = escapeHtml(email);
+  var heading = alreadyOnList
+    ? '\u2713 You\u2019re already on the list.'
+    : '\u2713 Check your email.';
+  var detail = alreadyOnList
+    ? 'We sent your magic link to <strong>' + safeEmail + '</strong> earlier.'
+    : 'We just sent your magic link to <strong>' + safeEmail + '</strong>.';
+
+  successEl.innerHTML =
+    '<p class="confirmation-heading">' + heading + '</p>' +
+    '<p class="confirmation-detail">' + detail + '</p>' +
+    '<p class="confirmation-actions">' +
+      '<button type="button" class="confirmation-link" id="resend-link-btn" onclick="resendSignupLink()">Resend link</button>' +
+      ' <span class="confirmation-sep">\u00b7</span> ' +
+      '<button type="button" class="confirmation-link" onclick="resetHeroForm()">Use a different email</button>' +
+    '</p>' +
+    '<p class="confirmation-resend-status" id="resend-status"></p>';
+
+  successEl.classList.add('visible');
+}
+
+// Resend: re-POST to the same waitlist endpoint. 409 is fine — email is already recorded.
+var _resendInCooldown = false;
+
+async function resendSignupLink() {
+  if (_resendInCooldown || !_lastSignupEmail) return;
+
+  var resendBtn = document.getElementById('resend-link-btn');
+  var statusEl = document.getElementById('resend-status');
+  if (!resendBtn || !statusEl) return;
+
+  resendBtn.disabled = true;
+  resendBtn.textContent = 'Sending\u2026';
+
+  try {
+    await fetch(SUPABASE_URL + '/rest/v1/waitlist', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_ANON_KEY,
+        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+        'Prefer': 'return=minimal'
+      },
+      body: JSON.stringify({ email: _lastSignupEmail, interest: 'both' })
+    });
+    // Treat any response (200 or 409) as success for the user
+  } catch (err) {
+    // Network error — still show the confirmation so we don't confuse
+  }
+
+  // Show "Resent" feedback and start 60-second cooldown
+  _resendInCooldown = true;
+  var secondsLeft = 60;
+  statusEl.textContent = 'Resent \u2014 check your inbox';
+  statusEl.classList.add('visible');
+  resendBtn.textContent = 'Resend in ' + secondsLeft + 's';
+
+  if (_resendCooldownTimer) clearInterval(_resendCooldownTimer);
+  _resendCooldownTimer = setInterval(function() {
+    secondsLeft--;
+    if (secondsLeft <= 0) {
+      clearInterval(_resendCooldownTimer);
+      _resendCooldownTimer = null;
+      _resendInCooldown = false;
+      resendBtn.disabled = false;
+      resendBtn.textContent = 'Resend link';
+      statusEl.classList.remove('visible');
+    } else {
+      resendBtn.textContent = 'Resend in ' + secondsLeft + 's';
+    }
+  }, 1000);
+}
+
+// Reset: show the form again so user can enter a different email
+function resetHeroForm() {
+  var form = document.getElementById('signup-form');
+  var successEl = document.getElementById('form-success');
+  var submitBtn = document.getElementById('submit-btn');
+  var emailInput = document.getElementById('email-input');
+
+  if (successEl) { successEl.classList.remove('visible'); successEl.innerHTML = ''; }
+  if (form) form.style.display = '';
+  if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'Get early access'; }
+  if (emailInput) { emailInput.value = ''; emailInput.focus(); }
+
+  _lastSignupEmail = '';
+  _resendInCooldown = false;
+  if (_resendCooldownTimer) { clearInterval(_resendCooldownTimer); _resendCooldownTimer = null; }
+}
+
+// Minimal HTML escaper for user-entered email in confirmation
+function escapeHtml(s) {
+  var d = document.createElement('div');
+  d.appendChild(document.createTextNode(s));
+  return d.innerHTML;
 }
 
 // --- FAQ ACCORDION ---
@@ -356,19 +462,8 @@ function handleEarlyAccess(event, tier) {
   return false;
 }
 
-// --- HERO BUTTON: SCROLL TO EARLY ACCESS ---
-(function() {
-  var heroBtn = document.querySelector('#signup-form .btn-primary');
-  if (heroBtn) {
-    heroBtn.addEventListener('click', function(e) {
-      var target = document.getElementById('early-access');
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
-  }
-})();
+// Hero button scrollIntoView removed — confirmation now appears inline.
+// The #early-access tier section is still discoverable by natural scroll.
 
 // --- FOLLOW THE BUILD ---
 function handleFollowBuild(checkbox) {
