@@ -1593,6 +1593,23 @@ section {
   border-color: var(--color-primary-hover);
 }
 
+/* Coming-next-week pending state — Stripe LIVE pending */
+.pricing-card .btn-tier-pending,
+.pricing-card.featured .btn-tier-pending {
+  background: transparent;
+  color: var(--color-text-muted, #6b6b6b);
+  border-color: var(--color-border, #d1d1d1);
+  cursor: not-allowed;
+  pointer-events: none;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.pricing-card .btn-tier-pending:hover,
+.pricing-card.featured .btn-tier-pending:hover {
+  background: transparent;
+  color: var(--color-text-muted, #6b6b6b);
+}
+
 @media (max-width: 768px) {
   .pricing-grid {
     grid-template-columns: 1fr;
