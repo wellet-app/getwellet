@@ -915,6 +915,23 @@ section {
   display: block;
 }
 
+/* Hero CTA row (replaces waitlist form) */
+.hero-cta-row {
+  margin-top: var(--space-4);
+}
+.btn-try-wellet {
+  display: inline-block;
+  padding: var(--space-3) var(--space-8);
+  font-size: var(--text-base);
+  text-decoration: none;
+  text-align: center;
+}
+.hero-cta-note {
+  margin: var(--space-3) 0 0;
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+}
+
 /* ============================================================
    STAT STRIP
    ============================================================ */
@@ -1574,6 +1591,23 @@ section {
 .pricing-card.featured .btn-tier:hover {
   background: var(--color-primary-hover);
   border-color: var(--color-primary-hover);
+}
+
+/* Coming-next-week pending state — Stripe LIVE pending */
+.pricing-card .btn-tier-pending,
+.pricing-card.featured .btn-tier-pending {
+  background: transparent;
+  color: var(--color-text-muted, #6b6b6b);
+  border-color: var(--color-border, #d1d1d1);
+  cursor: not-allowed;
+  pointer-events: none;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.pricing-card .btn-tier-pending:hover,
+.pricing-card.featured .btn-tier-pending:hover {
+  background: transparent;
+  color: var(--color-text-muted, #6b6b6b);
 }
 
 @media (max-width: 768px) {

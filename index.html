@@ -62,7 +62,6 @@
               <li><a href="#founder">About</a></li>
               <li><a href="#faq">FAQ</a></li>
               <li><a href="/transparency">Transparency</a></li>
-              <li><a href="#early-access">Early Access</a></li>
               <li><a href="/press">Press</a></li>
             </ul>
           </li>
@@ -84,23 +83,9 @@
         <h1>The Notes app. The group text. The 11pm pharmacy call. You're already a <strong>caregiver</strong>.</h1>
         <p class="hero-subtitle">You've been holding all of it. Wellet reads the records, notices the patterns, and remembers what you can't. So you can stop being the memory.</p>
 
-        <!-- Waitlist Form -->
-        <div class="waitlist" id="waitlist-form">
-          <form id="signup-form" onsubmit="return handleSignup(event)">
-            <div class="waitlist-email-row">
-              <input type="email" id="email-input" placeholder="you@email.com" required aria-label="Your email address">
-              <button type="submit" class="btn-primary" id="submit-btn">Get early access</button>
-            </div>
-            <p class="waitlist-note">We'll notify you at launch and share build updates along the way. No spam.</p>
-          </form>
-          <div class="waitlist-error" id="form-error"></div>
-          <div class="waitlist-success" id="form-success">
-            <p>You're in. We'll keep you posted.</p>
-            <label class="follow-build-label">
-              <input type="checkbox" id="follow-build-check" onchange="handleFollowBuild(this)">
-              <span>Follow the build — get weekly updates as we ship new features</span>
-            </label>
-          </div>
+        <div class="hero-cta-row">
+          <a href="https://mywellet.com" class="btn-primary btn-try-wellet">Try Wellet free &rarr;</a>
+          <p class="hero-cta-note">Free to start. No credit card required.</p>
         </div>
         <a href="https://mywellet.com?demo=guided" target="_blank" rel="noopener noreferrer" class="btn-demo">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="6,3 20,12 6,21"/></svg>
@@ -478,10 +463,6 @@
       <h2 class="reveal">Simple, annual pricing</h2>
       <p class="section-subtitle reveal">One preventable ER visit costs $2,000 to $5,000. Wellet costs less than your monthly streaming subscriptions.</p>
 
-      <div class="pricing-early-access-note reveal" role="note" style="max-width: 720px; margin: 8px auto 28px; padding: 12px 18px; background: var(--color-amber-light, #f5e6d8); border: 1px solid rgba(192, 112, 40, 0.3); border-radius: 12px; color: var(--color-amber, #C07028); font-size: 14px; line-height: 1.5; text-align: center;">
-        <strong>Free during early access.</strong> Pricing shown is what each plan will cost at public launch. While we’re in early access, every plan is free to try. Founding and Early members keep their reward tier after launch.
-      </div>
-
       <div class="pricing-grid">
         <!-- Free -->
         <div class="pricing-card reveal">
@@ -511,7 +492,7 @@
               Basic Ask Wellet
             </li>
           </ul>
-          <a href="#top" class="btn-tier">Get early access</a>
+          <a href="https://mywellet.com" class="btn-tier">Get started free</a>
         </div>
 
         <!-- Plus -->
@@ -547,7 +528,7 @@
               Larger care circle
             </li>
           </ul>
-          <a href="#top" class="btn-tier">Get early access</a>
+          <span class="btn-tier btn-tier-pending" aria-disabled="true">Coming next week</span>
         </div>
 
         <!-- Pro -->
@@ -582,7 +563,7 @@
               Priority support
             </li>
           </ul>
-          <a href="#top" class="btn-tier">Get early access</a>
+          <span class="btn-tier btn-tier-pending" aria-disabled="true">Coming next week</span>
         </div>
       </div>
     </div>
@@ -658,7 +639,7 @@
             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </div>
           <h3>Language and device insights</h3>
-          <p>See which languages, devices, and regions our early users come from.</p>
+          <p>See which languages, devices, and regions Wellet caregivers come from.</p>
         </div>
 
         <div class="tp-index-card reveal">
@@ -676,67 +657,6 @@
     </div>
   </section>
 
-  <!-- ========== EARLY ACCESS ========== -->
-  <section class="early-access" id="early-access">
-    <div class="container">
-      <h2 class="reveal">Get in early. Get rewarded.</h2>
-      <p class="section-subtitle reveal">We're building Wellet with caregivers, not just for them. Early testers get lifetime perks — and the best rewards go first.</p>
-
-      <div class="ea-grid">
-        <!-- Founding 50 card -->
-        <div class="ea-card ea-card--founding reveal" id="ea-founding">
-          <div class="ea-badge">&#9733; Founding Member</div>
-          <h3>Founding 50</h3>
-          <p class="ea-reward">Free Pro for life + Founding Member badge in your profile</p>
-          <div class="ea-progress-wrap">
-            <div class="ea-progress-bar"><div class="ea-progress-fill" id="ea-fill-founding" style="width:0%"></div></div>
-            <span class="ea-counter" id="ea-count-founding">Loading...</span>
-          </div>
-          <div class="ea-sold-out-label">SOLD OUT</div>
-          <form class="ea-form" id="ea-form-founding" onsubmit="return handleEarlyAccess(event, 'founding')">
-            <input type="email" placeholder="you@email.com" required class="ea-input">
-            <button type="submit" class="btn-primary ea-btn">Claim your spot</button>
-          </form>
-          <div class="ea-success" id="ea-success-founding"><p></p></div>
-          <div class="ea-error" id="ea-error-founding"></div>
-        </div>
-
-        <!-- Early 100 card -->
-        <div class="ea-card reveal" id="ea-early">
-          <h3>Early 100</h3>
-          <p class="ea-reward">Free Pro for 12 months + early access badge</p>
-          <div class="ea-progress-wrap">
-            <div class="ea-progress-bar"><div class="ea-progress-fill" id="ea-fill-early" style="width:0%"></div></div>
-            <span class="ea-counter" id="ea-count-early">Loading...</span>
-          </div>
-          <div class="ea-sold-out-label">SOLD OUT</div>
-          <form class="ea-form" id="ea-form-early" onsubmit="return handleEarlyAccess(event, 'early')">
-            <input type="email" placeholder="you@email.com" required class="ea-input">
-            <button type="submit" class="btn-primary ea-btn">Claim your spot</button>
-          </form>
-          <div class="ea-success" id="ea-success-early"><p></p></div>
-          <div class="ea-error" id="ea-error-early"></div>
-        </div>
-
-        <!-- Beta 250 card -->
-        <div class="ea-card reveal" id="ea-beta">
-          <h3>Beta 250</h3>
-          <p class="ea-reward">Free Plus for 12 months</p>
-          <div class="ea-progress-wrap">
-            <div class="ea-progress-bar"><div class="ea-progress-fill" id="ea-fill-beta" style="width:0%"></div></div>
-            <span class="ea-counter" id="ea-count-beta">Loading...</span>
-          </div>
-          <div class="ea-sold-out-label">SOLD OUT</div>
-          <form class="ea-form" id="ea-form-beta" onsubmit="return handleEarlyAccess(event, 'beta')">
-            <input type="email" placeholder="you@email.com" required class="ea-input">
-            <button type="submit" class="btn-primary ea-btn">Claim your spot</button>
-          </form>
-          <div class="ea-success" id="ea-success-beta"><p></p></div>
-          <div class="ea-error" id="ea-error-beta"></div>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ========== FOUNDER ========== -->
   <section class="founder-section" id="founder">
@@ -823,7 +743,7 @@
             <svg class="faq-chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
           </button>
           <div class="faq-answer" id="faq-answer-6" role="region" aria-labelledby="faq-question-6">
-            <p>Wellet is free during early access. Every plan is unlocked while we’re in beta — there’s no billing yet. At public launch, Free stays free, Plus will be $9.99/mo ($99/yr), and Pro will be $29.99/mo ($299/yr). Founding 50 members keep Pro free for life; Early 100 members get Pro free for 12 months.</p>
+            <p>The Free plan is always free. Plus is $9.99/mo ($99/yr) and Pro is $29.99/mo ($299/yr). You can upgrade or cancel anytime from your account settings.</p>
           </div>
         </div>
 
@@ -886,8 +806,8 @@
     <div class="container">
       <p class="cta-bottom-moat reveal">A record that belongs to your family,<br><em>not the hospital.</em></p>
       <h2 class="reveal">Stop guessing. Start knowing.</h2>
-      <p class="reveal">Be the first to know when Wellet launches. We'll share updates as we build it.</p>
-      <a href="#top" class="btn-cta reveal">Get early access</a>
+      <p class="reveal">Wellet is open. Start free today.</p>
+      <a href="https://mywellet.com" class="btn-cta reveal">Try Wellet free &rarr;</a>
     </div>
   </section>
 
@@ -910,7 +830,7 @@
       <a href="https://x.com/welletapp" target="_blank" rel="noopener noreferrer" aria-label="Wellet on X" title="@welletapp on X">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
       </a>
-      <a href="https://www.linkedin.com/in/betsyeble/" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on LinkedIn" title="Betsy Eble on LinkedIn">
+      <a href="https://www.linkedin.com/in/betsyfriedmaneble/" target="_blank" rel="noopener noreferrer" aria-label="Betsy Friedman Eble on LinkedIn" title="Betsy Friedman Eble on LinkedIn">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
       </a>
       <a href="https://bsky.app/profile/betsyeble.bsky.social" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on Bluesky" title="@betsyeble on Bluesky">
