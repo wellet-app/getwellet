@@ -2532,3 +2532,23 @@ section {
     max-width: 280px;
   }
 }
+
+/* ===== HERO PHONE — real screenshot variant ===== */
+.hero-phone--image {
+  align-items: flex-start;
+}
+
+.hero-phone--image img {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 22px 36px rgba(40, 56, 48, 0.22));
+}
+
+@media (max-width: 900px) {
+  .hero-phone--image img {
+    max-width: 260px;
+    margin: 0 auto;
+  }
+}
