@@ -394,3 +394,49 @@ document.addEventListener('DOMContentLoaded', function() {
   loadTierCounts();
   setInterval(loadTierCounts, 30000);
 });
+
+// --- INLINE EMAIL SIGNUP (hero + bottom CTA) ---
+// Captures email on getwellet.com, fires Reddit Lead + Google Ads conversion,
+// then redirects to mywellet.com with ?email= so the OTP flow pre-fills.
+function startSignup(e, location) {
+  if (e && e.preventDefault) e.preventDefault();
+  var prefix = location === 'hero' ? 'hero' : 'bottom';
+  var input = document.getElementById(prefix + '-signup-email');
+  var btn = document.getElementById(prefix + '-signup-btn');
+  var errEl = document.getElementById(prefix + '-signup-error');
+  if (!input) return false;
+  var email = (input.value || '').trim().toLowerCase();
+  if (errEl) errEl.textContent = '';
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (errEl) errEl.textContent = 'Please enter a valid email address.';
+    return false;
+  }
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Starting…';
+  }
+  // Reddit Pixel — Lead event (email submitted)
+  try {
+    if (typeof rdt === 'function') {
+      rdt('track', 'Lead', { currency: 'USD', value: 0 });
+    }
+  } catch (err) {}
+  // Google Ads — sign_up event (no conversion label set up yet)
+  try {
+    if (typeof gtag === 'function') {
+      gtag('event', 'sign_up', { method: 'email', send_to: 'AW-985109408' });
+    }
+  } catch (err) {}
+  // Pass attribution + email through to mywellet.com
+  var attr = {};
+  try { attr = (typeof getAttribution === 'function') ? getAttribution() : {}; } catch (err) {}
+  var params = new URLSearchParams();
+  params.set('email', email);
+  if (attr.utm_source) params.set('utm_source', attr.utm_source);
+  if (attr.utm_medium) params.set('utm_medium', attr.utm_medium);
+  if (attr.utm_campaign) params.set('utm_campaign', attr.utm_campaign);
+  if (attr.entry_path) params.set('entry_path', attr.entry_path);
+  params.set('signup_location', location);
+  window.location.href = 'https://mywellet.com/?' + params.toString();
+  return false;
+}

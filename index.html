@@ -97,10 +97,15 @@
         <h1>The Notes app. The group text. The 11pm pharmacy call. You're already a <strong>caregiver</strong>.</h1>
         <p class="hero-subtitle">You've been holding all of it. Wellet reads the records, notices the patterns, and remembers what you can't. So you can stop being the memory.</p>
 
-        <div class="hero-cta-row">
-          <a href="https://mywellet.com" class="btn-primary btn-try-wellet">Try Wellet free &rarr;</a>
-          <p class="hero-cta-note">Free to start. No credit card required.</p>
-        </div>
+        <!-- Inline email capture: one field, one click, hands user off to mywellet.com with email pre-filled -->
+        <form id="hero-signup-form" class="hero-signup-form" onsubmit="return startSignup(event, 'hero')" novalidate>
+          <div class="hero-signup-row">
+            <input type="email" id="hero-signup-email" name="email" placeholder="you@email.com" required autocomplete="email" aria-label="Your email address">
+            <button type="submit" class="btn-primary btn-try-wellet" id="hero-signup-btn">Start free &rarr;</button>
+          </div>
+          <p class="hero-cta-note">No password. No credit card. We'll send you a 6-digit code to sign in.</p>
+          <div class="hero-signup-error" id="hero-signup-error" role="alert" aria-live="polite"></div>
+        </form>
         <a href="https://mywellet.com?demo=guided" target="_blank" rel="noopener noreferrer" class="btn-demo">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="none"><polygon points="6,3 20,12 6,21"/></svg>
           Try the demo<span class="sr-only"> (opens in new tab)</span>
@@ -857,7 +862,14 @@
       <p class="cta-bottom-moat reveal">A record that belongs to your family,<br><em>not the hospital.</em></p>
       <h2 class="reveal">Stop guessing. Start knowing.</h2>
       <p class="reveal">Wellet is open. Start free today.</p>
-      <a href="https://mywellet.com" class="btn-cta reveal">Try Wellet free &rarr;</a>
+      <form id="bottom-signup-form" class="hero-signup-form reveal" onsubmit="return startSignup(event, 'bottom')" novalidate>
+        <div class="hero-signup-row">
+          <input type="email" id="bottom-signup-email" name="email" placeholder="you@email.com" required autocomplete="email" aria-label="Your email address">
+          <button type="submit" class="btn-primary btn-try-wellet" id="bottom-signup-btn">Start free &rarr;</button>
+        </div>
+        <p class="hero-cta-note">No password. No credit card.</p>
+        <div class="hero-signup-error" id="bottom-signup-error" role="alert" aria-live="polite"></div>
+      </form>
     </div>
   </section>
 
