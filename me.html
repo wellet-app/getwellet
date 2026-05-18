@@ -601,10 +601,36 @@
           window.location.href = 'https://mywellet.com/?' + params.toString();
           return false;
         }
-        // For hero/bottom — add landing_page=/me to the params, then delegate to original
-        // (Original startSignup won't add landing_page, so we wrap by setting a sentinel in sessionStorage.)
-        try { sessionStorage.setItem('wellet_landing_page', '/me'); } catch (err) {}
-        return origStartSignup.call(this, e, location);
+        // For hero/bottom — we handle the redirect ourselves so we can append landing_page=/me
+        // and use a /me-specific signup_location, instead of delegating to the generic app.js handler.
+        var inputId = location === 'hero' ? 'hero-signup-email' : 'bottom-signup-email';
+        var btnId   = location === 'hero' ? 'hero-signup-btn'   : 'bottom-signup-btn';
+        var errId   = location === 'hero' ? 'hero-signup-error' : 'bottom-signup-error';
+        var input2 = document.getElementById(inputId);
+        var btn2   = document.getElementById(btnId);
+        var errEl2 = document.getElementById(errId);
+        if (!input2) return false;
+        var email2 = (input2.value || '').trim().toLowerCase();
+        if (errEl2) errEl2.textContent = '';
+        if (!email2 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email2)) {
+          if (errEl2) errEl2.textContent = 'Please enter a valid email address.';
+          return false;
+        }
+        if (btn2) { btn2.disabled = true; btn2.textContent = 'Starting\u2026'; }
+        try { if (typeof rdt === 'function') rdt('track', 'Lead', { currency: 'USD', value: 0 }); } catch (err) {}
+        try { if (typeof gtag === 'function') gtag('event', 'sign_up', { method: 'email', send_to: 'AW-985109408' }); } catch (err) {}
+        var attr2 = {};
+        try { attr2 = (typeof getAttribution === 'function') ? getAttribution() : {}; } catch (err) {}
+        var params2 = new URLSearchParams();
+        params2.set('email', email2);
+        if (attr2.utm_source)   params2.set('utm_source', attr2.utm_source);
+        if (attr2.utm_medium)   params2.set('utm_medium', attr2.utm_medium);
+        if (attr2.utm_campaign) params2.set('utm_campaign', attr2.utm_campaign);
+        if (attr2.entry_path)   params2.set('entry_path', attr2.entry_path);
+        params2.set('signup_location', 'me_' + location);
+        params2.set('landing_page', '/me');
+        window.location.href = 'https://mywellet.com/?' + params2.toString();
+        return false;
       };
     })();
 
