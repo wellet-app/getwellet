@@ -88,6 +88,34 @@
       display: inline-block;
     }
 
+    /* Hero two-column layout */
+    .me-hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+      gap: clamp(32px, 5vw, 80px);
+      align-items: center;
+    }
+    .me-hero-art {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .me-hero-art img {
+      width: 100%;
+      max-width: 440px;
+      height: auto;
+      display: block;
+    }
+    @media (max-width: 900px) {
+      .me-hero-grid {
+        grid-template-columns: 1fr;
+        gap: clamp(40px, 6vw, 56px);
+      }
+      .me-hero-art { order: 2; }
+      .me-hero-copy { order: 1; }
+      .me-hero-art img { max-width: 360px; }
+    }
+
     /* Three-pillar block */
     .me-pillars {
       padding: clamp(60px, 8vw, 100px) 0;
@@ -365,24 +393,32 @@
   <!-- ========== HERO ========== -->
   <section class="me-hero">
     <div class="container">
-      <h1>Your health is scattered across six portals. <em>Pull it together.</em></h1>
-      <p class="me-sub">Wellet connects to your hospital and brings every lab, visit, medication, and note into one quiet place — for you, not your chart.</p>
+      <div class="me-hero-grid">
+        <div class="me-hero-copy">
+          <h1>Your health is scattered across six portals. <em>Pull it together.</em></h1>
+          <p class="me-sub">Wellet connects to your hospital and brings every lab, visit, medication, and note into one quiet place — for you, not your chart.</p>
 
-      <form id="hero-signup-form" class="hero-signup-form me-cta-row" onsubmit="return startSignup(event, 'hero')" novalidate>
-        <div class="hero-signup-row">
-          <input type="email" id="hero-signup-email" name="email" placeholder="you@email.com" required autocomplete="email" aria-label="Your email address">
-          <button type="submit" class="btn-primary btn-try-wellet" id="hero-signup-btn">Start free &rarr;</button>
+          <form id="hero-signup-form" class="hero-signup-form me-cta-row" onsubmit="return startSignup(event, 'hero')" novalidate>
+            <div class="hero-signup-row">
+              <input type="email" id="hero-signup-email" name="email" placeholder="you@email.com" required autocomplete="email" aria-label="Your email address">
+              <button type="submit" class="btn-primary btn-try-wellet" id="hero-signup-btn">Start free &rarr;</button>
+            </div>
+            <p class="me-cta-note">30 days free. $9.99/year after. No credit card up front. Cancel any time.</p>
+            <div class="hero-signup-error" id="hero-signup-error" role="alert" aria-live="polite"></div>
+          </form>
+
+          <div class="me-trust-strip">
+            <strong>Works with</strong>
+            <span>Duke Health</span><span class="dot"></span>
+            <span>MyChart (Epic)</span><span class="dot"></span>
+            <span>Apple Health</span><span class="dot"></span>
+            <span>+ a growing list of hospitals</span>
+          </div>
         </div>
-        <p class="me-cta-note">30 days free. $9.99/year after. No credit card up front. Cancel any time.</p>
-        <div class="hero-signup-error" id="hero-signup-error" role="alert" aria-live="polite"></div>
-      </form>
 
-      <div class="me-trust-strip">
-        <strong>Works with</strong>
-        <span>Duke Health</span><span class="dot"></span>
-        <span>MyChart (Epic)</span><span class="dot"></span>
-        <span>Apple Health</span><span class="dot"></span>
-        <span>+ a growing list of hospitals</span>
+        <div class="me-hero-art">
+          <img src="./assets/iphone-me-timeline.png" alt="Wellet timeline: cholesterol noticed, upcoming physical, resting heart rate steady" loading="eager" width="700" height="1410">
+        </div>
       </div>
     </div>
   </section>
