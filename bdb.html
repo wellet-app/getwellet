@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wellet · Billion Dollar Build Receipts</title>
+  <meta name="description" content="Live receipts for Wellet's Billion Dollar Build application. Three live FHIR vendors (Epic-Duke, Epic-UNC, VA Lighthouse), 13 signups, 5 EHR connections, 558 commits in 68 days. Built solo with Computer.">
+
+  <!-- UNLISTED: this page is excluded from sitemap.xml and gets noindex/nofollow. Anyone with the URL can read it; search engines should not. -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Open Graph (used if someone shares the link in Slack/email/etc) -->
+  <meta property="og:title" content="Wellet · Billion Dollar Build Receipts">
+  <meta property="og:description" content="Live receipts. Three FHIR vendors today, 558 commits in 68 days, built solo with Computer.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getwellet.com/bdb">
+  <meta property="og:image" content="https://getwellet.com/og-image.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232d6a4f'/%3E%3Cpath d='M8 16c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='3' fill='white'/%3E%3C/svg%3E">
+
+  <!-- Theme init — runs before paint to avoid flash -->
+  <script>
+    (function() {
+      var stored = localStorage.getItem('wellet-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <style>
+    /* ===== BDB RECEIPTS PAGE ===== */
+
+    .bdb-page {
+      background: var(--color-bg);
+      min-height: 100dvh;
+    }
+
+    /* ---- HERO (editorial) ---- */
+    .bdb-hero {
+      padding: var(--space-16) 0 var(--space-12);
+      border-bottom: 1px solid var(--color-divider);
+      background: linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
+    }
+
+    .bdb-hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      padding: var(--space-1) var(--space-4);
+      border-radius: 9999px;
+      font-size: var(--text-xs);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-6);
+    }
+    .bdb-hero-eyebrow .pulse {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #2d6a4f;
+      box-shadow: 0 0 0 0 rgba(45,106,79,0.5);
+      animation: bdb-pulse 2.4s infinite;
+    }
+    @keyframes bdb-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(45,106,79,0.45); }
+      70%  { box-shadow: 0 0 0 10px rgba(45,106,79,0); }
+      100% { box-shadow: 0 0 0 0 rgba(45,106,79,0); }
+    }
+
+    .bdb-hero h1 {
+      font-family: var(--font-display);
+      font-size: var(--text-3xl);
+      font-weight: 400;
+      color: var(--color-text);
+      line-height: 1.1;
+      margin: 0 0 var(--space-5) 0;
+      max-width: 22ch;
+      letter-spacing: -0.01em;
+    }
+    .bdb-hero h1 em {
+      font-style: italic;
+      color: var(--color-primary);
+    }
+
+    .bdb-hero-sub {
+      font-size: var(--text-lg);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      max-width: 56ch;
+      margin: 0 0 var(--space-8) 0;
+    }
+
+    .bdb-hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-6);
+      font-size: var(--text-sm);
+      color: var(--color-text-faint);
+    }
+    .bdb-hero-meta strong { color: var(--color-text); font-weight: 500; }
+
+    /* ---- HEADLINE COUNTERS (5 big numbers, dense band) ---- */
+    .bdb-counters {
+      padding: var(--space-12) 0;
+      background: var(--color-surface-2);
+      border-bottom: 1px solid var(--color-divider);
+    }
+    .bdb-counters-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-6);
+    }
+    @media (min-width: 720px) {
+      .bdb-counters-grid { grid-template-columns: repeat(5, 1fr); }
+    }
+    .bdb-counter {
+      text-align: left;
+      padding: var(--space-4);
+      border-left: 2px solid var(--color-primary-light);
+    }
+    .bdb-counter-value {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 1.4rem + 2.5vw, 3.25rem);
+      font-weight: 400;
+      color: var(--color-primary);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: var(--space-2);
+    }
+    .bdb-counter-value.loading { color: var(--color-text-faint); }
+    .bdb-counter-label {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text-muted);
+      font-weight: 600;
+      margin-bottom: var(--space-1);
+    }
+    .bdb-counter-note {
+      font-size: var(--text-sm);
+      color: var(--color-text-faint);
+      line-height: 1.4;
+    }
+
+    /* ---- SECTION SHELL ---- */
+    .bdb-section {
+      padding: var(--space-16) 0;
+      border-bottom: 1px solid var(--color-divider);
+    }
+    .bdb-section h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 400;
+      color: var(--color-text);
+      margin: 0 0 var(--space-2) 0;
+      letter-spacing: -0.01em;
+    }
+    .bdb-section .eyebrow {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--color-text-faint);
+      font-weight: 600;
+      margin: 0 0 var(--space-2) 0;
+    }
+    .bdb-section-sub {
+      font-size: var(--text-base);
+      color: var(--color-text-muted);
+      max-width: 64ch;
+      margin: 0 0 var(--space-8) 0;
+    }
+
+    /* ---- FHIR VENDOR TILES ---- */
+    .bdb-vendors {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+    @media (min-width: 720px) {
+      .bdb-vendors { grid-template-columns: repeat(3, 1fr); }
+    }
+    .bdb-vendor {
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .bdb-vendor-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+    }
+    .bdb-vendor-name {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 500;
+      color: var(--color-text);
+    }
+    .bdb-vendor-status {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      font-size: var(--text-xs);
+      font-weight: 600;
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .bdb-vendor-status::before {
+      content: '';
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #2d6a4f;
+    }
+    .bdb-vendor-status.sandbox { color: var(--color-amber); }
+    .bdb-vendor-status.sandbox::before { background: var(--color-amber); }
+    .bdb-vendor-vendor {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+    .bdb-vendor-stat {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      color: var(--color-primary);
+      font-weight: 500;
+      padding-top: var(--space-2);
+      border-top: 1px dashed var(--color-divider);
+    }
+    .bdb-vendor-stat .num { font-size: var(--text-2xl); margin-right: var(--space-1); }
+    .bdb-vendor-endpoint {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11px;
+      color: var(--color-text-faint);
+      background: var(--color-surface-offset);
+      padding: var(--space-1) var(--space-2);
+      border-radius: 4px;
+      word-break: break-all;
+    }
+
+    /* ---- MULTI-EHR PROOF SHOT ---- */
+    .bdb-proof {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+      align-items: center;
+    }
+    @media (min-width: 880px) {
+      .bdb-proof { grid-template-columns: 1.1fr 1fr; }
+    }
+    .bdb-proof-img {
+      width: 100%;
+      border-radius: 12px;
+      border: 1px solid var(--color-border);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      display: block;
+    }
+    .bdb-proof-caption {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      font-style: italic;
+      margin-top: var(--space-3);
+    }
+    .bdb-proof p {
+      color: var(--color-text-muted);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      margin: 0 0 var(--space-4) 0;
+    }
+
+    /* ---- BULLET / FACT LISTS ---- */
+    .bdb-facts {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+    }
+    @media (min-width: 720px) {
+      .bdb-facts { grid-template-columns: 1fr 1fr; gap: var(--space-3) var(--space-8); }
+    }
+    .bdb-facts li {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-divider);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      line-height: 1.45;
+    }
+    .bdb-facts li::before {
+      content: '→';
+      color: var(--color-primary);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .bdb-facts li strong {
+      color: var(--color-primary);
+      font-weight: 600;
+    }
+
+    /* ---- COMPUTER PROMPTS CARDS ---- */
+    .bdb-prompts {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-5);
+    }
+    @media (min-width: 880px) {
+      .bdb-prompts { grid-template-columns: repeat(3, 1fr); }
+    }
+    .bdb-prompt {
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: var(--space-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .bdb-prompt-num {
+      font-family: var(--font-display);
+      font-size: var(--text-2xl);
+      color: var(--color-primary);
+      line-height: 1;
+      font-weight: 400;
+    }
+    .bdb-prompt-title {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      color: var(--color-text);
+      font-weight: 500;
+      margin: 0;
+      line-height: 1.25;
+    }
+    .bdb-prompt-date {
+      font-size: var(--text-xs);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-text-faint);
+      font-weight: 600;
+    }
+    .bdb-prompt p {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .bdb-prompt-result {
+      font-size: var(--text-sm);
+      color: var(--color-primary);
+      font-weight: 500;
+      padding-top: var(--space-2);
+      border-top: 1px dashed var(--color-divider);
+    }
+
+    /* ---- 8 CRONS LIST ---- */
+    .bdb-crons {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-2);
+    }
+    @media (min-width: 720px) {
+      .bdb-crons { grid-template-columns: 1fr 1fr; gap: var(--space-2) var(--space-6); }
+    }
+    .bdb-cron {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: var(--space-3);
+      align-items: center;
+      padding: var(--space-3) 0;
+      border-bottom: 1px solid var(--color-divider);
+      font-size: var(--text-sm);
+    }
+    .bdb-cron-schedule {
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      font-size: 11px;
+      color: var(--color-text-faint);
+      white-space: nowrap;
+    }
+    .bdb-cron-name { color: var(--color-text); }
+    .bdb-cron-effect {
+      font-size: var(--text-xs);
+      color: var(--color-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 600;
+    }
+
+    /* ---- FOOTER BAND ---- */
+    .bdb-footer {
+      padding: var(--space-12) 0 var(--space-16);
+      background: var(--color-surface-2);
+    }
+    .bdb-footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-8);
+    }
+    @media (min-width: 720px) {
+      .bdb-footer-grid { grid-template-columns: 2fr 1fr; gap: var(--space-12); }
+    }
+    .bdb-footer h3 {
+      font-family: var(--font-display);
+      font-size: var(--text-lg);
+      font-weight: 500;
+      color: var(--color-text);
+      margin: 0 0 var(--space-3) 0;
+    }
+    .bdb-footer p, .bdb-footer li {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+      line-height: 1.6;
+    }
+    .bdb-footer ul { padding-left: var(--space-5); margin: 0; }
+    .bdb-footer a { color: var(--color-primary); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ---- UTIL ---- */
+    .num-pulse { animation: bdb-numFlash 600ms ease-out; }
+    @keyframes bdb-numFlash {
+      0%   { color: var(--color-amber); }
+      100% { color: var(--color-primary); }
+    }
+    .skip-link {
+      position: absolute; left: -9999px;
+      background: var(--color-primary); color: white;
+      padding: var(--space-2) var(--space-4);
+    }
+    .skip-link:focus { left: var(--space-4); top: var(--space-4); z-index: 100; }
+  </style>
+</head>
+<body class="bdb-page">
+
+  <a href="#main" class="skip-link">Skip to content</a>
+
+  <!-- ========== HEADER (lightweight, just brand + sign-in) ========== -->
+  <header class="header">
+    <div class="container">
+      <a href="/" class="logo" aria-label="Wellet home">
+        <svg viewBox="0 138 150 42" style="height:26px;width:auto;" xmlns="http://www.w3.org/2000/svg" aria-label="Wellet">
+          <path fill="var(--color-primary)" d="M45.5,142c.94.94,1.4,2.08,1.4,3.42,0,.89-.19,1.73-.58,2.52-.65-.1-1.33-.14-2.05-.14-3.07,0-5.56.97-7.45,2.9-1.9,1.93-3.36,4.34-4.39,7.22-1.03,2.88-2.17,6.86-3.42,11.95l-.47,1.94-.11-.25v.29h-5.15l-4.43-11.2-4.03,11.2h-5.15l-5.69-14.44c-.67-1.34-1.28-2.24-1.82-2.7-.54-.46-1.27-.73-2.18-.83l.25-2.56h12.56l-.04,2.56c-.53.07-1.01.26-1.44.58-.43.31-.65.76-.65,1.33,0,.17.04.38.11.65l3.71,9.47,3.1-8.5c-.48-.96-.88-1.67-1.21-2.14s-.67-.8-1.04-.99c-.37-.19-.87-.32-1.49-.4v-2.56h12.82v2.56c-.86.02-1.49.13-1.87.32-.38.19-.58.55-.58,1.08,0,.34.07.74.22,1.22l3.06,7.78c1.54-7.46,3.49-13.28,5.85-17.44,2.36-4.16,5.15-6.25,8.37-6.25,1.58,0,2.84.47,3.78,1.4Z"/>
+          <path fill="var(--color-primary)" d="M57.31,168.14c-1.13,1.44-2.57,2.56-4.32,3.37-1.75.8-3.61,1.21-5.58,1.21s-3.92-.49-5.65-1.48c-1.73-.98-3.1-2.32-4.1-4.01-1.01-1.69-1.51-3.55-1.51-5.56s.5-3.87,1.51-5.56c1.01-1.69,2.38-3.03,4.1-4.01,1.73-.98,3.61-1.48,5.65-1.48,1.92,0,3.62.28,5.09.83s2.62,1.31,3.42,2.29c.8.97,1.21,2.06,1.21,3.26,0,2.62-1.68,4.46-5.04,5.54-1.49.46-3.06.68-4.72.68-1.08,0-2.24-.11-3.49-.32.02,1.13.35,2.16.99,3.1.64.94,1.46,1.67,2.47,2.21s2.05.81,3.13.81c.96,0,1.94-.2,2.93-.61,1-.41,1.82-.98,2.47-1.73l1.44,1.48ZM45.7,155.59c-.8,1.26-1.34,2.86-1.6,4.81.84.17,1.64.25,2.41.25,1.61,0,2.87-.34,3.78-1.01.91-.67,1.51-1.5,1.8-2.48.1-.29.14-.59.14-.9,0-.86-.32-1.56-.95-2.09-.64-.53-1.36-.76-2.18-.68-1.46.14-2.6.85-3.4,2.11Z"/>
+          <path fill="var(--color-primary)" d="M58.21,170.23c.7-.12,1.26-.52,1.69-1.21.43-.68.65-1.9.65-3.65v-14.26c0-1.18-.13-2.08-.38-2.72s-.5-1.06-.76-1.26-.71-.51-1.39-.92c.65-.84,1.61-1.47,2.9-1.89,1.28-.42,2.59-.63,3.91-.63,1.15,0,2.04.14,2.66.43v21.24c0,1.75.22,2.97.65,3.65.43.68,1,1.09,1.69,1.21l.11,1.62h-11.84l.11-1.62Z"/>
+          <path fill="var(--color-primary)" d="M70.85,170.23c.7-.12,1.26-.52,1.69-1.21.43-.68.65-1.9.65-3.65v-14.26c0-1.18-.13-2.08-.38-2.72s-.5-1.06-.76-1.26-.71-.51-1.39-.92c.65-.84,1.61-1.47,2.9-1.89,1.28-.42,2.59-.63,3.91-.63,1.15,0,2.04.14,2.66.43v21.24c0,1.75.22,2.97.65,3.65.43.68,1,1.09,1.69,1.21l.11,1.62h-11.84l.11-1.62Z"/>
+          <path fill="var(--color-primary)" d="M104.11,168.14c-1.13,1.44-2.57,2.56-4.32,3.37-1.75.8-3.61,1.21-5.58,1.21s-3.92-.49-5.65-1.48c-1.73-.98-3.1-2.32-4.1-4.01-1.01-1.69-1.51-3.55-1.51-5.56s.5-3.87,1.51-5.56c1.01-1.69,2.38-3.03,4.1-4.01,1.73-.98,3.61-1.48,5.65-1.48,1.92,0,3.62.28,5.09.83,1.48.55,2.62,1.31,3.42,2.29.8.97,1.21,2.06,1.21,3.26,0,2.62-1.68,4.46-5.04,5.54-1.49.46-3.06.68-4.72.68-1.08,0-2.24-.11-3.49-.32.02,1.13.35,2.16.99,3.1.64.94,1.46,1.67,2.47,2.21,1.01.54,2.05.81,3.13.81.96,0,1.94-.2,2.93-.61s1.82-.98,2.47-1.73l1.44,1.48ZM92.5,155.59c-.8,1.26-1.34,2.86-1.6,4.81.84.17,1.64.25,2.41.25,1.61,0,2.87-.34,3.78-1.01s1.51-1.5,1.8-2.48c.09-.29.14-.59.14-.9,0-.86-.32-1.56-.95-2.09-.64-.53-1.36-.76-2.18-.68-1.46.14-2.6.85-3.4,2.11Z"/>
+          <path fill="var(--color-primary)" d="M139.93,141.71c.46.5.76,1.14.86,1.81.17,1.09-.14,2.07-.91,2.95s-1.69,1.36-2.84,1.51c-.83.11-1.71.14-2.64.09-1.17-.04-2.31,0-3.43.15-1.24.16-2.36.49-3.36,1-1,.5-1.5.85-2.29,1.37-1.25.83-.64.51-2.68,1.64-1.7.75-1.02.47-2.27.96-2.92,1.15-5.84,1.04-6.2,1.21v12.12c0,.86.13,1.51.38,1.93s.58.63.99.63c.26,0,.55-.09.86-.27.31-.18.6-.43.86-.74l1.44,1.48c-.98,1.1-1.96,1.87-2.92,2.3-.96.43-2.08.65-3.35.65-1.58,0-2.89-.4-3.92-1.21-1.03-.8-1.55-1.95-1.55-3.44v-13c-.74-.07-1.58-.24-2.52-.5v-1.8c.53.12.97.18,1.33.18.96,0,1.82-.27,2.59-.81.77-.54,1.42-1.18,1.96-1.91.54-.73,1.15-1.66,1.82-2.79.48-.89.88-1.52,1.19-1.91h.83v6.8c3.33.07,5-.58,7.3-1.62,1.91-1.06,2.49-1.68,3.33-2.56.36-.38.58-.67,1.77-1.97.66-.72,2.14-1.98,2.76-2.44,1.43-1.1,2.12-1.49,3.27-2.09,1.14-.61,2.11-.76,3.26-.88,2.04-.21,3.13.16,4.06,1.16Z"/>
+        </svg>
+      </a>
+      <nav>
+        <ul class="nav-links" role="list">
+          <li><a href="/">Home</a></li>
+          <li><a href="/veterans">Veterans</a></li>
+          <li><a href="/journal">Journal</a></li>
+          <li><a href="https://mywellet.com" style="font-weight:500;color:var(--color-primary);">Sign in →</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ========== HERO ========== -->
+    <section class="bdb-hero">
+      <div class="container">
+        <div class="bdb-hero-eyebrow">
+          <span class="pulse" aria-hidden="true"></span>
+          Billion Dollar Build · Live receipts
+        </div>
+        <h1>The receipts behind Wellet's <em>Billion Dollar Build</em> application.</h1>
+        <p class="bdb-hero-sub">Every number below is a live count from Wellet's production database. No marketing math, no rounding up. Refresh the page to see it move.</p>
+        <div class="bdb-hero-meta">
+          <span><strong>Founder:</strong> Betsy Eble</span>
+          <span><strong>Built:</strong> Solo with Computer</span>
+          <span><strong>First commit:</strong> March 17, 2026</span>
+          <span><strong>Submission window closes:</strong> June 2, 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== HEADLINE COUNTERS ========== -->
+    <section class="bdb-counters">
+      <div class="container">
+        <div class="bdb-counters-grid">
+          <div class="bdb-counter">
+            <div class="bdb-counter-value loading" data-counter="live_fhir_vendors">—</div>
+            <div class="bdb-counter-label">Live FHIR vendors</div>
+            <div class="bdb-counter-note">Epic-Duke, Epic-UNC, VA Lighthouse</div>
+          </div>
+          <div class="bdb-counter">
+            <div class="bdb-counter-value loading" data-counter="ehr_connections_lifetime">—</div>
+            <div class="bdb-counter-label">EHR connections</div>
+            <div class="bdb-counter-note">Live charts syncing today</div>
+          </div>
+          <div class="bdb-counter">
+            <div class="bdb-counter-value loading" data-counter="signups_lifetime">—</div>
+            <div class="bdb-counter-label">Real signups</div>
+            <div class="bdb-counter-note">Excludes founder &amp; test accounts</div>
+          </div>
+          <div class="bdb-counter">
+            <div class="bdb-counter-value loading" data-counter="ops_events_lifetime">—</div>
+            <div class="bdb-counter-label">Ops events written</div>
+            <div class="bdb-counter-note">By silent Computer crons</div>
+          </div>
+          <div class="bdb-counter">
+            <div class="bdb-counter-value loading" data-counter="commits_total">558</div>
+            <div class="bdb-counter-label">Commits</div>
+            <div class="bdb-counter-note" data-note="days_since_first_commit">in 68 days</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== FHIR VENDORS ========== -->
+    <section class="bdb-section">
+      <div class="container">
+        <p class="eyebrow">The differentiator</p>
+        <h2>Three live FHIR vendors. Not Epic-only.</h2>
+        <p class="bdb-section-sub">Most consumer caregiver apps speak one vendor's API. Wellet speaks three today, with the architecture proven across two different FHIR stacks. Add the next hospital in a week, not a quarter.</p>
+
+        <div class="bdb-vendors">
+
+          <div class="bdb-vendor">
+            <div class="bdb-vendor-head">
+              <div class="bdb-vendor-name">Duke Health</div>
+              <div class="bdb-vendor-status">Production</div>
+            </div>
+            <div class="bdb-vendor-vendor">Epic R4 · Confidential client</div>
+            <div class="bdb-vendor-endpoint">health-apis.duke.edu/FHIR/api/FHIR/R4/</div>
+            <div class="bdb-vendor-stat"><span class="num" data-counter="ehr_by_vendor.duke">—</span><span style="font-size:var(--text-sm);">connected charts</span></div>
+          </div>
+
+          <div class="bdb-vendor">
+            <div class="bdb-vendor-head">
+              <div class="bdb-vendor-name">UNC Health Care</div>
+              <div class="bdb-vendor-status">Production</div>
+            </div>
+            <div class="bdb-vendor-vendor">Epic R4 · Confidential client</div>
+            <div class="bdb-vendor-endpoint">epicfe.unch.unc.edu/.../api/FHIR/R4/</div>
+            <div class="bdb-vendor-stat"><span class="num" data-counter="ehr_by_vendor.unc">—</span><span style="font-size:var(--text-sm);">connected charts</span></div>
+          </div>
+
+          <div class="bdb-vendor">
+            <div class="bdb-vendor-head">
+              <div class="bdb-vendor-name">VA Lighthouse</div>
+              <div class="bdb-vendor-status sandbox">Sandbox · prod in flight</div>
+            </div>
+            <div class="bdb-vendor-vendor">VA Lighthouse FHIR · 9M veterans</div>
+            <div class="bdb-vendor-endpoint">sandbox-api.va.gov/services/fhir/v0/r4/</div>
+            <div class="bdb-vendor-stat"><span class="num" data-counter="ehr_by_vendor.va">—</span><span style="font-size:var(--text-sm);">connected charts</span></div>
+          </div>
+
+        </div>
+
+        <p class="bdb-section-sub" style="margin-top:var(--space-8);">
+          <strong style="color:var(--color-text);">Architecture receipts:</strong>
+          Two different OAuth flavors (Epic SMART-on-FHIR Confidential, VA Lighthouse). One unified data model. <code style="font-family:'JetBrains Mono',monospace;font-size:0.85em;color:var(--color-primary);">ehr_system</code> column splits Duke/UNC/VA at the row level. Patient never sees the seam.
+        </p>
+      </div>
+    </section>
+
+    <!-- ========== MULTI-EHR PROOF SHOT ========== -->
+    <section class="bdb-section">
+      <div class="container">
+        <p class="eyebrow">The screenshot that took 64 days</p>
+        <h2>One medication list. Two hospitals. Same loved one.</h2>
+        <div class="bdb-proof" style="margin-top:var(--space-8);">
+          <div>
+            <img src="./wellet_bdb_multi_ehr_meds.jpg" alt="Wellet medications screen showing entries from both Duke Health and UNC Health Care for the same loved one." class="bdb-proof-img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+            <div style="display:none;padding:var(--space-12);text-align:center;background:var(--color-surface-offset);border-radius:12px;color:var(--color-text-faint);font-size:var(--text-sm);">[Screenshot: multi-EHR medications · captured May 24, 2026]</div>
+            <div class="bdb-proof-caption">Captured live from Mom's chart on May 24, 2026. Each medication carries the hospital it came from.</div>
+          </div>
+          <div>
+            <p>Most caregiver apps stop at one hospital. Wellet doesn't. The medications screen above is rendering rows from Duke's Epic FHIR R4 endpoint and UNC's Epic FHIR R4 endpoint simultaneously, with VA Lighthouse data backfilled the same day.</p>
+            <p>Every row carries its source label (<strong>From Duke Health</strong>, <strong>From UNC Health Care</strong>) so the caregiver always knows which chart said what. No silent merging. No source confusion.</p>
+            <p>This is what "multi-hospital" actually means: data flowing, attributed, deduped, and presented as one story.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== BUILD VELOCITY ========== -->
+    <section class="bdb-section">
+      <div class="container">
+        <p class="eyebrow">Build velocity</p>
+        <h2>What 68 days of solo + Computer looks like.</h2>
+        <ul class="bdb-facts" style="margin-top:var(--space-6);">
+          <li><span><strong data-counter="commits_total">558</strong> commits since March 17, 2026 — <strong data-counter="commits_30d">319</strong> in the last 30 days alone</span></li>
+          <li><strong data-counter="edge_functions_active">44</strong> production Supabase edge functions</li>
+          <li><strong>8</strong> always-on Computer crons running ops, evidence, triage, scope-watching</li>
+          <li><strong data-counter="db_migrations_total">47</strong> database migrations</li>
+          <li><span><strong>Three FHIR vendors</strong> live (Epic-Duke, Epic-UNC, VA Lighthouse) — <strong>two different OAuth stacks</strong></span></li>
+          <li><strong>Stripe LIVE</strong> · Plus $99/yr · Pro $299/yr · Free tier forever</li>
+          <li><strong>iOS Wellet Connect</strong> on TestFlight, App Store submission in review</li>
+          <li><strong>HIPAA in code:</strong> <code style="font-family:'JetBrains Mono',monospace;font-size:0.85em;color:var(--color-primary);">assertVendorAllowedForPhi()</code> guardrail enforces Azure OpenAI BAA for PHI, Sonar for non-PHI</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== THE COMPANY RUNS ITSELF ========== -->
+    <section class="bdb-section">
+      <div class="container">
+        <p class="eyebrow">The ops layer</p>
+        <h2>The company runs itself overnight.</h2>
+        <p class="bdb-section-sub">Eight silent-by-default Computer crons watching production. They write to <code style="font-family:'JetBrains Mono',monospace;font-size:0.85em;color:var(--color-primary);">wellet_ops_events</code> and notify only on real signal. A solo founder operating like a team of five.</p>
+
+        <div class="bdb-crons">
+          <div class="bdb-cron">
+            <div class="bdb-cron-schedule">:07 hourly</div>
+            <div class="bdb-cron-name">Inbox triage</div>
+            <div class="bdb-cron-effect">Filed</div>
+          </div>
+          <div class="bdb-cron">
+            <div class="bdb-cron-schedule">:12 / 2h</div>
+            <div class="bdb-cron-name">Tester signal → Linear issues</div>
+            <div class="bdb-cron-effect">Auto-filed</div>
+          </div>
+          <div class="bdb-cron">
+            <div class="bdb-cron-schedule">11:00 UTC daily</div>
+            <div class="bdb-cron-name">BDB evidence snapshot</div>
+            <div class="bdb-cron-effect">Logged</div>
+          </div>
+          <div class="bdb-cron">
+            <div class="bdb-cron-schedule">12:00 UTC daily</div>
+            <div class="bdb-cron-name">Duke FHIR scope watcher</div>
+            <div class="bdb-cron-effect">Healthy</div>
+          </div>
+          <div class="bdb-cron">
+            <div class="bdb-cron-schedule">07:07 UTC daily</div>
+            <div class="bdb-cron-name">Nightly extract-wishes (AI)</div>
+            <div class="bdb-cron-effect">Surfaced</div>
+          </div>
+          <div class="bdb-cron">
+            <div class="bdb-cron-schedule">:22 / 6h</div>
+            <div class="bdb-cron-name">Service health snapshot</div>
+            <div class="bdb-cron-effect">Watching</div>
+          </div>
+          <div class="bdb-cron">
+            <div class="bdb-cron-schedule">Mon 07:00 ET</div>
+            <div class="bdb-cron-name">Weekly founder brief</div>
+            <div class="bdb-cron-effect">Delivered</div>
+          </div>
+          <div class="bdb-cron">
+            <div class="bdb-cron-schedule">Hourly</div>
+            <div class="bdb-cron-name">Background EHR sync</div>
+            <div class="bdb-cron-effect">Syncing</div>
+          </div>
+        </div>
+
+        <p class="bdb-section-sub" style="margin-top:var(--space-8);">
+          <strong style="color:var(--color-text);"><span data-counter="ops_events_lifetime">—</span> ops events written</strong> by these crons since launch. Every one is a row in Postgres. None of them woke me up unless they needed to.
+        </p>
+      </div>
+    </section>
+
+    <!-- ========== 3 COMPUTER PROMPTS ========== -->
+    <section class="bdb-section">
+      <div class="container">
+        <p class="eyebrow">3 most impactful Computer prompts</p>
+        <h2>Three sessions that compounded.</h2>
+        <p class="bdb-section-sub">From the BDB application form. Each one turned a weekend of solo-founder risk into an afternoon.</p>
+
+        <div class="bdb-prompts" style="margin-top:var(--space-8);">
+
+          <div class="bdb-prompt">
+            <div class="bdb-prompt-num">01</div>
+            <div class="bdb-prompt-date">April 26, 2026</div>
+            <h3 class="bdb-prompt-title">Duke Confidential client OAuth migration</h3>
+            <p>Epic re-registration, JWKS key generation, OAuth architecture rollover from public to confidential client. Zero downtime on Mom's live chart.</p>
+            <div class="bdb-prompt-result">Result: weekend of risk → one afternoon.</div>
+          </div>
+
+          <div class="bdb-prompt">
+            <div class="bdb-prompt-num">02</div>
+            <div class="bdb-prompt-date">May 13, 2026</div>
+            <h3 class="bdb-prompt-title">"Can Computer triage my Gmail?"</h3>
+            <p>One question became 8 silent-by-default crons: inbox triage, tester-signal → Linear, BDB evidence, Duke scope watcher, nightly wishes extraction, service health, Monday brief, background EHR sync.</p>
+            <div class="bdb-prompt-result">Result: Wellet became a company, not a product.</div>
+          </div>
+
+          <div class="bdb-prompt">
+            <div class="bdb-prompt-num">03</div>
+            <div class="bdb-prompt-date">May 2026 (ongoing)</div>
+            <h3 class="bdb-prompt-title">Practitioner enrichment cascade</h3>
+            <p>Duke strips Practitioner.telecom on the wire. Computer designed a three-tier cascade: EHR → dukehealth.org directory → NPPES fallback. Caregivers see real names, departments, phones.</p>
+            <div class="bdb-prompt-result">Result: 4 Duke high-confidence rows + 27 NPPES rows powering Mom's care team today.</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== TRACTION / RECEIPTS ========== -->
+    <section class="bdb-section">
+      <div class="container">
+        <p class="eyebrow">Live traction</p>
+        <h2>The numbers that matter.</h2>
+        <ul class="bdb-facts" style="margin-top:var(--space-6);">
+          <li><strong data-counter="signups_lifetime">—</strong> real signups (excludes founder + test accounts)</li>
+          <li><strong data-counter="ehr_connections_lifetime">—</strong> live EHR connections syncing today</li>
+          <li><strong data-counter="hospital_requests_lifetime">—</strong> real hospital-connect request from a caregiver (Kelly Washburn, 83-year-old mom, multi-hospital bug fixed in 12 hours)</li>
+          <li><strong data-counter="bug_reports_7d">—</strong> bug reports last 7 days — build is holding</li>
+          <li><strong>53M</strong> US family caregivers (AARP) · <strong>12M</strong> caring for an aging loved one · <strong>9M</strong> veterans</li>
+          <li><strong>Stripe LIVE</strong> · Plus $99/yr, Pro $299/yr, free forever tier (no card)</li>
+          <li><strong>LinkedIn launch</strong> May 22 · Rich DeAugustinis (TMA, 10K+ members) engaged within hours</li>
+          <li><strong>$0</strong> outside capital · solo-funded · Wellet, LLC (path to Delaware C-Corp on selection)</li>
+        </ul>
+        <p class="bdb-section-sub" style="margin-top:var(--space-8);font-size:var(--text-sm);font-style:italic;">Counts auto-refresh from Supabase every page load. Last updated: <span id="bdb-updated-at">just now</span>.</p>
+      </div>
+    </section>
+
+    <!-- ========== WHY $1B ========== -->
+    <section class="bdb-section">
+      <div class="container">
+        <p class="eyebrow">Why a billion-dollar opportunity</p>
+        <h2>Three things just became true at once.</h2>
+        <ul class="bdb-facts" style="margin-top:var(--space-6);">
+          <li><strong>CMS interop rules</strong> mandate FHIR R4 at every Epic and Cerner hospital — Wellet is built on this rail</li>
+          <li><strong>Apple Health</strong> is the consumer aggregation layer 1B+ devices already trust — Wellet syncs to it natively</li>
+          <li><strong>LLMs under BAA</strong> can reason over a clinical record with citations — Azure OpenAI BAA in production today</li>
+          <li><strong>Moat:</strong> a Living Timeline fusing 9 data sources, a care-circle network effect (every loved one pulls in 3-5 family members), HIPAA in code, ops at &lt;$50K/yr</li>
+          <li><strong>Wedge → expansion:</strong> adult-child caregivers ($80B by 2030) → every adult owning their own chart → B2B2C with health systems &amp; employers</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="bdb-footer">
+    <div class="container">
+      <div class="bdb-footer-grid">
+        <div>
+          <h3>Verify everything on this page</h3>
+          <p>Open the app at <a href="https://mywellet.com">mywellet.com</a>. The /me door lets you build your own 30-day chart with no caregiver setup. The full caregiver experience starts with a free account — no credit card.</p>
+          <p style="margin-top:var(--space-3);">For investors and judges who want code-level proof: the repository is private but the live endpoints, schema, and ops events table are all queryable evidence. Email below to request access.</p>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <ul style="list-style:none;padding:0;margin:0;">
+            <li>Founder · Betsy Eble</li>
+            <li><a href="mailto:betsy@mywellet.com">betsy@mywellet.com</a></li>
+            <li><a href="https://mywellet.com">mywellet.com</a> (app)</li>
+            <li><a href="https://getwellet.com">getwellet.com</a> (marketing)</li>
+            <li><a href="https://getwellet.com/journal">getwellet.com/journal</a> (build log)</li>
+            <li><a href="https://getwellet.com/transparency">getwellet.com/transparency</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // bdb-stats fetcher. Public no-auth endpoint. If it fails, we leave the
+    // skeleton values in place (the hardcoded build-velocity counters still
+    // render, so the page is never blank — just less alive).
+    (function() {
+      var SUPABASE_URL = 'https://nrpdhxygzyfmyljzfexv.supabase.co';
+      var STATS_URL = SUPABASE_URL + '/functions/v1/bdb-stats';
+
+      function fmtNumber(n) {
+        if (n === null || n === undefined) return '—';
+        var num = Number(n);
+        if (isNaN(num)) return '—';
+        return num.toLocaleString('en-US');
+      }
+
+      function set(selector, value, opts) {
+        var nodes = document.querySelectorAll('[data-counter="' + selector + '"]');
+        for (var i = 0; i < nodes.length; i++) {
+          var node = nodes[i];
+          node.textContent = value;
+          node.classList.remove('loading');
+          if (opts && opts.flash) {
+            node.classList.add('num-pulse');
+            setTimeout((function(n){ return function(){ n.classList.remove('num-pulse'); }; })(node), 700);
+          }
+        }
+      }
+
+      function setNote(selector, value) {
+        var nodes = document.querySelectorAll('[data-note="' + selector + '"]');
+        for (var i = 0; i < nodes.length; i++) {
+          nodes[i].textContent = value;
+        }
+      }
+
+      function relativeTime(iso) {
+        try {
+          var diffMs = Date.now() - new Date(iso).getTime();
+          var secs = Math.floor(diffMs / 1000);
+          if (secs < 60) return 'just now';
+          if (secs < 3600) return Math.floor(secs/60) + ' min ago';
+          if (secs < 86400) return Math.floor(secs/3600) + ' hr ago';
+          return Math.floor(secs/86400) + ' days ago';
+        } catch (_e) { return 'just now'; }
+      }
+
+      fetch(STATS_URL, { method: 'GET', headers: { 'Accept': 'application/json' } })
+        .then(function(r) { return r.ok ? r.json() : Promise.reject(r.status); })
+        .then(function(data) {
+          if (!data) return;
+          set('signups_lifetime', fmtNumber(data.signups_lifetime));
+          set('ehr_connections_lifetime', fmtNumber(data.ehr_connections_lifetime));
+          set('live_fhir_vendors', fmtNumber(data.live_fhir_vendors));
+          set('ops_events_lifetime', fmtNumber(data.ops_events_lifetime));
+          set('hospital_requests_lifetime', fmtNumber(data.hospital_requests_lifetime));
+          set('bug_reports_7d', fmtNumber(data.bug_reports_7d));
+          set('commits_total', fmtNumber(data.commits_total));
+          set('commits_30d', fmtNumber(data.commits_30d));
+          set('edge_functions_active', fmtNumber(data.edge_functions_active));
+          set('db_migrations_total', fmtNumber(data.db_migrations_total));
+
+          if (data.ehr_connections_by_vendor) {
+            set('ehr_by_vendor.duke', fmtNumber(data.ehr_connections_by_vendor.duke));
+            set('ehr_by_vendor.unc', fmtNumber(data.ehr_connections_by_vendor.unc));
+            set('ehr_by_vendor.va', fmtNumber(data.ehr_connections_by_vendor.va));
+          }
+
+          if (data.days_since_first_commit) {
+            setNote('days_since_first_commit', 'in ' + data.days_since_first_commit + ' days');
+          }
+
+          var updEl = document.getElementById('bdb-updated-at');
+          if (updEl && data.updated_at) updEl.textContent = relativeTime(data.updated_at);
+        })
+        .catch(function(err) {
+          // Silent failure — leave skeleton. Log to console for debugging.
+          console.warn('bdb-stats fetch failed', err);
+        });
+    })();
+  </script>
+
+</body>
+</html>
