@@ -421,6 +421,12 @@ function startSignup(e, location) {
       rdt('track', 'Lead', { currency: 'USD', value: 0 });
     }
   } catch (err) {}
+  // Meta Pixel — Lead event (email submitted)
+  try {
+    if (typeof fbq === 'function') {
+      fbq('track', 'Lead', { content_name: 'getwellet_signup', value: 0, currency: 'USD' });
+    }
+  } catch (err) {}
   // Google Ads — sign_up event (no conversion label set up yet)
   try {
     if (typeof gtag === 'function') {
