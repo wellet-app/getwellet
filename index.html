@@ -112,8 +112,8 @@
   <section class="hero" id="top">
     <div class="container hero-grid">
       <div class="hero-content">
-        <h1>The Notes app. The group text. The 11pm pharmacy call. You're already a <strong>caregiver</strong>.</h1>
-        <p class="hero-subtitle">You've been holding all of it. Wellet reads the records, notices the patterns, and remembers what you can't. So you can stop being the memory.</p>
+        <h1>Before you call the doctor, open <strong>Wellet</strong>.</h1>
+        <p class="hero-subtitle">Wellet reads your loved one's records, notices what changed since last time, and drops those patterns into the timeline at the date they actually happened. So you walk into every visit knowing what to ask.</p>
 
         <!-- Inline email capture: one field, one click, hands user off to mywellet.com with email pre-filled -->
         <form id="hero-signup-form" class="hero-signup-form" onsubmit="return startSignup(event, 'hero')" novalidate>
@@ -201,6 +201,85 @@
               <span class="phone-nav-item">Ask Wellet</span>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== CARESIGNALS INTEGRATED TIMELINE ========== -->
+  <section class="caresignals-timeline-section" id="caresignals-timeline" aria-labelledby="cs-timeline-heading">
+    <div class="container container--narrow">
+      <div class="cs-eyebrow reveal">CareSignals, where they actually happened</div>
+      <h2 id="cs-timeline-heading" class="reveal">One timeline. Records on one side, patterns on the other, both in real chronological order.</h2>
+      <p class="cs-lede reveal">Most apps surface a pattern at the top of a feed the moment they detect it. Wellet places each CareSignal at the date the pattern actually began &mdash; right next to the labs, visits, and notes that drove it. So when you look back, you see the story unfold in order.</p>
+    </div>
+
+    <div class="container">
+      <div class="cs-timeline-demo reveal" role="presentation">
+        <ol class="cs-timeline-list">
+          <li class="cs-row cs-row--event">
+            <div class="cs-row-date"><span class="cs-row-month">May</span><span class="cs-row-day">22</span></div>
+            <div class="cs-row-body">
+              <div class="cs-row-kind">Lab result</div>
+              <div class="cs-row-title">A1c 7.8 &mdash; Duke Endocrinology</div>
+            </div>
+          </li>
+          <li class="cs-row cs-row--signal">
+            <div class="cs-row-date"><span class="cs-row-month">May</span><span class="cs-row-day">22</span></div>
+            <div class="cs-row-body">
+              <div class="cs-row-kind cs-row-kind--signal">CareSignal &middot; lab recovery</div>
+              <div class="cs-row-title">A1c trending back toward range after April spike. Two readings in a row inside target.</div>
+            </div>
+          </li>
+          <li class="cs-row cs-row--event">
+            <div class="cs-row-date"><span class="cs-row-month">May</span><span class="cs-row-day">14</span></div>
+            <div class="cs-row-body">
+              <div class="cs-row-kind">Medication change</div>
+              <div class="cs-row-title">Metformin XR dose adjusted &mdash; Duke MyChart</div>
+            </div>
+          </li>
+          <li class="cs-row cs-row--signal">
+            <div class="cs-row-date"><span class="cs-row-month">May</span><span class="cs-row-day">18</span></div>
+            <div class="cs-row-body">
+              <div class="cs-row-kind cs-row-kind--signal">CareSignal &middot; activity drop</div>
+              <div class="cs-row-title">Daily steps down ~32% in the four days following the new dose. Worth asking about at the next visit.</div>
+            </div>
+          </li>
+          <li class="cs-row cs-row--event">
+            <div class="cs-row-date"><span class="cs-row-month">May</span><span class="cs-row-day">06</span></div>
+            <div class="cs-row-body">
+              <div class="cs-row-kind">Visit note</div>
+              <div class="cs-row-title">Primary care follow-up &mdash; Dr. Patel</div>
+            </div>
+          </li>
+          <li class="cs-row cs-row--signal">
+            <div class="cs-row-date"><span class="cs-row-month">May</span><span class="cs-row-day">04</span></div>
+            <div class="cs-row-body">
+              <div class="cs-row-kind cs-row-kind--signal">CareSignal &middot; resting heart rate drift</div>
+              <div class="cs-row-title">Resting heart rate ran 8 bpm higher than baseline in the week leading up to this visit.</div>
+            </div>
+          </li>
+        </ol>
+        <div class="cs-timeline-legend" aria-hidden="true">
+          <span class="cs-legend-item"><span class="cs-legend-dot cs-legend-dot--event"></span>Records (labs, visits, meds)</span>
+          <span class="cs-legend-item"><span class="cs-legend-dot cs-legend-dot--signal"></span>What Wellet noticed</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="container container--narrow">
+      <div class="cs-callouts reveal">
+        <div class="cs-callout">
+          <div class="cs-callout-kicker">Before you call</div>
+          <p>Open Wellet and scroll. You see what's new since the last visit and what Wellet noticed in between &mdash; in the order it happened.</p>
+        </div>
+        <div class="cs-callout">
+          <div class="cs-callout-kicker">In the room</div>
+          <p>Hand the doctor the dates. "Her steps dropped four days after the new dose" is more useful than "she's been tired."</p>
+        </div>
+        <div class="cs-callout">
+          <div class="cs-callout-kicker">Afterward</div>
+          <p>Patterns stay anchored in time. Six months from now you can still see exactly when a trend started and what came before it.</p>
         </div>
       </div>
     </div>
