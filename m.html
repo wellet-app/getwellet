@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Wellet — One quiet place for what your loved one needs</title>
+  <meta name="description" content="Wellet reads your loved one's chart, watches for the shifts that matter, and remembers what you can't. Built by a caregiver, for caregivers.">
+  <meta name="robots" content="noindex, follow">
+
+  <!-- Open Graph (kept identical to root for share preview consistency) -->
+  <meta property="og:title" content="Wellet — One quiet place for what your loved one needs">
+  <meta property="og:description" content="Wellet reads your loved one's chart, watches for the shifts that matter, and remembers what you can't.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getwellet.com/m">
+  <meta property="og:image" content="https://getwellet.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232d6a4f'/%3E%3Cpath d='M8 16c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='3' fill='white'/%3E%3C/svg%3E">
+
+  <!-- Google tag -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-985109408"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'AW-985109408');
+  </script>
+
+  <!-- Reddit Pixel -->
+  <script>
+  !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);
+  rdt('init','a2_ivjxxd46s82e');
+  rdt('track', 'PageVisit');
+  </script>
+
+  <!-- Meta Pixel -->
+  <script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1491844009404209');
+  fbq('track', 'PageView');
+  fbq('track', 'ViewContent', { content_name: 'wellet_m_landing', content_category: 'meta_landing' });
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1491844009404209&ev=PageView&noscript=1"/></noscript>
+
+  <style>
+    :root {
+      --bg: #f5f7f3;
+      --bg-soft: #ebf0e6;
+      --text: #1a2416;
+      --text-muted: #5a6b52;
+      --primary: #2d6a4f;
+      --primary-hover: #1b4332;
+      --primary-light: #d8f3dc;
+      --amber: #C07028;
+      --amber-soft: #FFF6EC;
+      --amber-text: #7A4116;
+      --border: #d9e0d2;
+      --radius: 14px;
+      --radius-sm: 10px;
+      --shadow: 0 4px 16px rgba(26,36,22,0.08);
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0; padding: 0;
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      color: var(--text); background: var(--bg);
+      font-size: 17px; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    body { padding-bottom: 96px; /* leave room for sticky CTA */ }
+
+    /* IAB banner */
+    .iab {
+      display: none;
+      margin: 12px 16px 0;
+      padding: 14px 16px;
+      background: var(--amber-soft);
+      border: 1px solid var(--amber);
+      border-radius: var(--radius);
+      line-height: 1.5;
+    }
+    .iab.show { display: block; }
+    .iab-title { font-weight: 600; color: var(--amber-text); margin-bottom: 6px; font-size: 15px; }
+    .iab-body { font-size: 14px; color: #4a3320; margin: 0 0 10px; }
+    .iab-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .iab-btn-primary {
+      flex: 1; min-width: 140px; padding: 10px 14px;
+      background: var(--primary); color: #fff; border: none;
+      border-radius: var(--radius-sm); font: inherit; font-weight: 600;
+      cursor: pointer;
+    }
+    .iab-btn-secondary {
+      padding: 10px 14px; background: transparent; color: var(--amber-text);
+      border: 1px solid var(--amber); border-radius: var(--radius-sm);
+      font: inherit; cursor: pointer;
+    }
+    .iab-confirm { display: none; margin-top: 8px; font-size: 13px; color: var(--primary); font-weight: 500; }
+
+    /* Top bar */
+    .topbar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px; background: var(--bg);
+    }
+    .wordmark { height: 22px; }
+    .signin-link {
+      font-size: 14px; color: var(--primary); text-decoration: none;
+      font-weight: 500;
+    }
+
+    /* Hero */
+    .hero { padding: 12px 22px 20px; text-align: left; }
+    .hero h1 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 500;
+      font-size: 30px; line-height: 1.18;
+      margin: 16px 0 14px;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+    .hero h1 em {
+      font-style: italic; color: var(--primary); font-weight: 500;
+    }
+    .hero p.sub {
+      font-size: 17px; color: var(--text-muted); margin: 0 0 22px;
+    }
+
+    /* Email form */
+    .form-card {
+      background: #fff; padding: 18px;
+      border: 1px solid var(--border); border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin: 0 22px;
+    }
+    .form-card label {
+      display: block; font-size: 13px; font-weight: 500;
+      color: var(--text-muted); margin-bottom: 6px;
+    }
+    .form-card input[type="email"] {
+      width: 100%; padding: 14px 16px;
+      font: inherit; font-size: 17px;
+      border: 1px solid var(--border); border-radius: var(--radius-sm);
+      background: var(--bg);
+      color: var(--text);
+      outline: none;
+    }
+    .form-card input[type="email"]:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(45,106,79,0.15);
+    }
+    .form-card .submit {
+      width: 100%; padding: 16px;
+      margin-top: 12px;
+      background: var(--primary); color: #fff;
+      border: none; border-radius: var(--radius-sm);
+      font: inherit; font-size: 17px; font-weight: 600;
+      cursor: pointer;
+    }
+    .form-card .submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .form-card .err {
+      color: var(--amber); font-size: 13px; margin-top: 8px; min-height: 18px;
+    }
+    .form-card .note {
+      font-size: 13px; color: var(--text-muted); margin: 10px 0 0;
+      text-align: center;
+    }
+
+    /* Trust strip */
+    .trust {
+      margin: 28px 22px 0;
+      padding: 16px 0;
+      display: flex; flex-direction: column; gap: 10px;
+      font-size: 14px; color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+    .trust-row { display: flex; gap: 10px; align-items: flex-start; }
+    .trust-row svg { flex: 0 0 18px; margin-top: 2px; color: var(--primary); }
+    .trust-row strong { color: var(--text); font-weight: 500; }
+
+    /* Three pillars */
+    .pillars { margin: 28px 22px 0; }
+    .pillar {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px 18px;
+      margin-bottom: 10px;
+    }
+    .pillar h3 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 500;
+      font-size: 18px; margin: 0 0 6px; color: var(--text);
+    }
+    .pillar p { margin: 0; color: var(--text-muted); font-size: 15px; line-height: 1.5; }
+
+    /* Founder quote */
+    .founder {
+      margin: 28px 22px 0;
+      padding: 22px;
+      background: var(--bg-soft);
+      border-radius: var(--radius);
+      font-family: 'Fraunces', Georgia, serif;
+      font-style: italic;
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.45;
+    }
+    .founder-attr {
+      display: block; margin-top: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-style: normal; font-size: 13px; color: var(--text-muted);
+    }
+
+    /* Footer */
+    footer {
+      margin: 36px 22px 0;
+      padding: 20px 0 24px;
+      border-top: 1px solid var(--border);
+      font-size: 13px; color: var(--text-muted);
+      text-align: center;
+    }
+    footer a { color: var(--primary); text-decoration: none; }
+
+    /* Sticky CTA */
+    .sticky-cta {
+      position: fixed; left: 0; right: 0; bottom: 0;
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+      background: rgba(245, 247, 243, 0.96);
+      backdrop-filter: saturate(160%) blur(8px);
+      -webkit-backdrop-filter: saturate(160%) blur(8px);
+      border-top: 1px solid var(--border);
+      display: none;
+      z-index: 100;
+    }
+    .sticky-cta.show { display: block; }
+    .sticky-cta button {
+      width: 100%; padding: 14px;
+      background: var(--primary); color: #fff;
+      border: none; border-radius: var(--radius-sm);
+      font: inherit; font-size: 16px; font-weight: 600;
+      cursor: pointer;
+    }
+
+    @media (min-width: 720px) {
+      body { max-width: 560px; margin: 0 auto; }
+      .sticky-cta > * { max-width: 560px; margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========== IAB banner ========== -->
+  <div id="iab" class="iab" role="alert">
+    <div class="iab-title">Open Wellet in your real browser first</div>
+    <p class="iab-body">You arrived here from <span id="iab-app-name">an app</span>. Signing up needs a 6-digit code from your email — in-app browsers usually lose the code when you switch to Mail.</p>
+    <p class="iab-body">Tap the <strong>•••</strong> menu (top right) and choose <strong>Open in Safari</strong> or <strong>Open in Chrome</strong>. Or copy the link below.</p>
+    <div class="iab-actions">
+      <button type="button" class="iab-btn-primary" id="iab-copy" onclick="iabCopyLink()">Copy link</button>
+      <button type="button" class="iab-btn-secondary" onclick="iabDismiss()">Continue anyway</button>
+    </div>
+    <div id="iab-confirm" class="iab-confirm">Link copied. Paste it into Safari or Chrome.</div>
+  </div>
+
+  <!-- ========== Top bar ========== -->
+  <header class="topbar">
+    <svg class="wordmark" viewBox="0 138 150 42" xmlns="http://www.w3.org/2000/svg" aria-label="Wellet">
+      <path fill="#2d6a4f" d="M45.5,142c.94.94,1.4,2.08,1.4,3.42,0,.89-.19,1.73-.58,2.52-.65-.1-1.33-.14-2.05-.14-3.07,0-5.56.97-7.45,2.9-1.9,1.93-3.36,4.34-4.39,7.22-1.03,2.88-2.17,6.86-3.42,11.95l-.47,1.94-.11-.25v.29h-5.15l-4.43-11.2-4.03,11.2h-5.15l-5.69-14.44c-.67-1.34-1.28-2.24-1.82-2.7-.54-.46-1.27-.73-2.18-.83l.25-2.56h12.56l-.04,2.56c-.53.07-1.01.26-1.44.58-.43.31-.65.76-.65,1.33,0,.17.04.38.11.65l3.71,9.47,3.1-8.5c-.48-.96-.88-1.67-1.21-2.14s-.67-.8-1.04-.99c-.37-.19-.87-.32-1.49-.4v-2.56h12.82v2.56c-.86.02-1.49.13-1.87.32-.38.19-.58.55-.58,1.08,0,.34.07.74.22,1.22l3.06,7.78c1.54-7.46,3.49-13.28,5.85-17.44,2.36-4.16,5.15-6.25,8.37-6.25,1.58,0,2.84.47,3.78,1.4Z"/>
+      <path fill="#2d6a4f" d="M57.31,168.14c-1.13,1.44-2.57,2.56-4.32,3.37-1.75.8-3.61,1.21-5.58,1.21s-3.92-.49-5.65-1.48c-1.73-.98-3.1-2.32-4.1-4.01-1.01-1.69-1.51-3.55-1.51-5.56s.5-3.87,1.51-5.56c1.01-1.69,2.38-3.03,4.1-4.01,1.73-.98,3.61-1.48,5.65-1.48,1.92,0,3.62.28,5.09.83s2.62,1.31,3.42,2.29c.8.97,1.21,2.06,1.21,3.26,0,2.62-1.68,4.46-5.04,5.54-1.49.46-3.06.68-4.72.68-1.08,0-2.24-.11-3.49-.32.02,1.13.35,2.16.99,3.1.64.94,1.46,1.67,2.47,2.21s2.05.81,3.13.81c.96,0,1.94-.2,2.93-.61,1-.41,1.82-.98,2.47-1.73l1.44,1.48ZM45.7,155.59c-.8,1.26-1.34,2.86-1.6,4.81.84.17,1.64.25,2.41.25,1.61,0,2.87-.34,3.78-1.01.91-.67,1.51-1.5,1.8-2.48.1-.29.14-.59.14-.9,0-.86-.32-1.56-.95-2.09-.64-.53-1.36-.76-2.18-.68-1.46.14-2.6.85-3.4,2.11Z"/>
+      <path fill="#2d6a4f" d="M58.21,170.23c.7-.12,1.26-.52,1.69-1.21.43-.68.65-1.9.65-3.65v-14.26c0-1.18-.13-2.08-.38-2.72s-.5-1.06-.76-1.26-.71-.51-1.39-.92c.65-.84,1.61-1.47,2.9-1.89,1.28-.42,2.59-.63,3.91-.63,1.15,0,2.04.14,2.66.43v21.24c0,1.75.22,2.97.65,3.65.43.68,1,1.09,1.69,1.21l.11,1.62h-11.84l.11-1.62Z"/>
+      <path fill="#2d6a4f" d="M70.85,170.23c.7-.12,1.26-.52,1.69-1.21.43-.68.65-1.9.65-3.65v-14.26c0-1.18-.13-2.08-.38-2.72s-.5-1.06-.76-1.26-.71-.51-1.39-.92c.65-.84,1.61-1.47,2.9-1.89,1.28-.42,2.59-.63,3.91-.63,1.15,0,2.04.14,2.66.43v21.24c0,1.75.22,2.97.65,3.65.43.68,1,1.09,1.69,1.21l.11,1.62h-11.84l.11-1.62Z"/>
+      <path fill="#2d6a4f" d="M104.11,168.14c-1.13,1.44-2.57,2.56-4.32,3.37-1.75.8-3.61,1.21-5.58,1.21s-3.92-.49-5.65-1.48c-1.73-.98-3.1-2.32-4.1-4.01-1.01-1.69-1.51-3.55-1.51-5.56s.5-3.87,1.51-5.56c1.01-1.69,2.38-3.03,4.1-4.01,1.73-.98,3.61-1.48,5.65-1.48,1.92,0,3.62.28,5.09.83,1.48.55,2.62,1.31,3.42,2.29.8.97,1.21,2.06,1.21,3.26,0,2.62-1.68,4.46-5.04,5.54-1.49.46-3.06.68-4.72.68-1.08,0-2.24-.11-3.49-.32.02,1.13.35,2.16.99,3.1.64.94,1.46,1.67,2.47,2.21,1.01.54,2.05.81,3.13.81.96,0,1.94-.2,2.93-.61s1.82-.98,2.47-1.73l1.44,1.48ZM92.5,155.59c-.8,1.26-1.34,2.86-1.6,4.81.84.17,1.64.25,2.41.25,1.61,0,2.87-.34,3.78-1.01s1.51-1.5,1.8-2.48c.09-.29.14-.59.14-.9,0-.86-.32-1.56-.95-2.09-.64-.53-1.36-.76-2.18-.68-1.46.14-2.6.85-3.4,2.11Z"/>
+      <path fill="#2d6a4f" d="M139.93,141.71c.46.5.76,1.14.86,1.81.17,1.09-.14,2.07-.91,2.95s-1.69,1.36-2.84,1.51c-.83.11-1.71.14-2.64.09-1.17-.04-2.31,0-3.43.15-1.24.16-2.36.49-3.36,1-1,.5-1.5.85-2.29,1.37-1.25.83-.64.51-2.68,1.64-1.7.75-1.02.47-2.27.96-2.92,1.15-5.84,1.04-6.2,1.21v12.12c0,.86.13,1.51.38,1.93s.58.63.99.63c.26,0,.55-.09.86-.27.31-.18.6-.43.86-.74l1.44,1.48c-.98,1.1-1.96,1.87-2.92,2.3-.96.43-2.08.65-3.35.65-1.58,0-2.89-.4-3.92-1.21-1.03-.8-1.55-1.95-1.55-3.44v-13c-.74-.07-1.58-.24-2.52-.5v-1.8c.53.12.97.18,1.33.18.96,0,1.82-.27,2.59-.81.77-.54,1.42-1.18,1.96-1.91.54-.73,1.15-1.66,1.82-2.79.48-.89.88-1.52,1.19-1.91h.83v6.8c3.33.07,5-.58,7.3-1.62,1.91-1.06,2.49-1.68,3.33-2.56.36-.38.58-.67,1.77-1.97.66-.72,2.14-1.98,2.76-2.44,1.43-1.1,2.12-1.49,3.27-2.09,1.14-.61,2.11-.76,3.26-.88,2.04-.21,3.13.16,4.06,1.16Z"/>
+    </svg>
+    <a class="signin-link" href="https://mywellet.com">Sign in</a>
+  </header>
+
+  <!-- ========== Hero ========== -->
+  <section class="hero">
+    <h1>Caring for a loved one means remembering everything <em>they can't.</em></h1>
+    <p class="sub">Wellet reads the chart, notices the shifts that matter, and keeps it all in one quiet place. Built by a caregiver, for caregivers.</p>
+  </section>
+
+  <!-- ========== Email form (the only CTA above the fold) ========== -->
+  <form class="form-card" id="m-form" onsubmit="return mStartSignup(event)" novalidate>
+    <label for="m-email">Your email</label>
+    <input type="email" id="m-email" name="email" inputmode="email" autocomplete="email" placeholder="you@email.com" required>
+    <button type="submit" class="submit" id="m-submit">Get started — it's free</button>
+    <div class="err" id="m-err" aria-live="polite"></div>
+    <p class="note">No password. We send a 6-digit code to your email.</p>
+  </form>
+
+  <!-- ========== Trust strip ========== -->
+  <div class="trust">
+    <div class="trust-row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div><strong>Your data stays private.</strong> Encrypted, isolated, never sold. AI processes records in real time and stores nothing for training.</div>
+    </div>
+    <div class="trust-row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3 8-8"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <div><strong>Connects to 7 hospital systems.</strong> Duke, Mount Sinai, MSK, HSS, Montefiore, UNC, VA. More every week.</div>
+    </div>
+    <div class="trust-row">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <div><strong>Set up in under 2 minutes.</strong> Sign in, connect a chart or upload a record. Wellet does the reading.</div>
+    </div>
+  </div>
+
+  <!-- ========== Three pillars ========== -->
+  <div class="pillars">
+    <div class="pillar">
+      <h3>One chart, every portal</h3>
+      <p>Pull records from MyChart, the VA, and Apple Health into one place — so you stop logging into six portals.</p>
+    </div>
+    <div class="pillar">
+      <h3>CareSignals watches for shifts</h3>
+      <p>A new med, a lab trending the wrong way, a missed follow-up. Wellet notices before you have to.</p>
+    </div>
+    <div class="pillar">
+      <h3>Before-you-call summary</h3>
+      <p>Two minutes before any appointment, Wellet hands you a clean summary of what's changed and what to ask.</p>
+    </div>
+  </div>
+
+  <!-- ========== Founder quote ========== -->
+  <div class="founder">
+    "I built Wellet for my mom — and for every family member who's been holding the whole story in their head."
+    <span class="founder-attr">— Betsy Eble, founder</span>
+  </div>
+
+  <footer>
+    <a href="https://mywellet.com/privacy">Privacy</a> &nbsp;·&nbsp;
+    <a href="https://mywellet.com/terms">Terms</a> &nbsp;·&nbsp;
+    <a href="mailto:hello@getwellet.com">hello@getwellet.com</a>
+  </footer>
+
+  <!-- ========== Sticky CTA (appears after user scrolls past the hero form) ========== -->
+  <div class="sticky-cta" id="sticky-cta">
+    <button type="button" onclick="mScrollToForm()">Get started — it's free</button>
+  </div>
+
+  <script>
+    // ---------- IAB DETECTION ----------
+    (function detectIAB(){
+      try {
+        var ua = navigator.userAgent || '';
+        var iab = null;
+        if (/FBAN|FBAV|FB_IAB|FBIOS/i.test(ua)) iab = 'Facebook';
+        else if (/Instagram/i.test(ua)) iab = 'Instagram';
+        else if (/TikTok|musical_ly|Bytedance/i.test(ua)) iab = 'TikTok';
+        else if (/LinkedInApp/i.test(ua)) iab = 'LinkedIn';
+        else if (/Twitter/i.test(ua)) iab = 'X';
+        else if (/; wv\)/i.test(ua) && /utm_source=(facebook|fb|instagram|ig|meta)/i.test(window.location.search || '')) iab = 'Facebook';
+        if (!iab) return;
+        if (sessionStorage.getItem('wellet_iab_dismissed') === '1') return;
+        var nameEl = document.getElementById('iab-app-name');
+        if (nameEl) nameEl.textContent = 'the ' + iab + ' app';
+        document.getElementById('iab').classList.add('show');
+        try {
+          if (window.fbq) window.fbq('trackCustom', 'IABDetected', { app: iab });
+          if (window.gtag) window.gtag('event', 'iab_detected', { app: iab });
+        } catch (e) {}
+      } catch (e) {}
+    })();
+    function iabCopyLink(){
+      try {
+        var url = window.location.href;
+        var done = function(){
+          document.getElementById('iab-confirm').style.display = 'block';
+          document.getElementById('iab-copy').textContent = 'Copied';
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(url).then(done).catch(function(){
+            window.prompt('Copy this link and paste it into Safari or Chrome:', url);
+            done();
+          });
+        } else {
+          window.prompt('Copy this link and paste it into Safari or Chrome:', url);
+          done();
+        }
+      } catch (e) {}
+    }
+    function iabDismiss(){
+      try { sessionStorage.setItem('wellet_iab_dismissed', '1'); } catch (e) {}
+      document.getElementById('iab').classList.remove('show');
+    }
+
+    // ---------- SCROLL-TRIGGERED STICKY CTA ----------
+    (function stickyCTA(){
+      var form = document.getElementById('m-form');
+      var sticky = document.getElementById('sticky-cta');
+      if (!form || !sticky) return;
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if (entry.intersectionRatio === 0) sticky.classList.add('show');
+          else sticky.classList.remove('show');
+        });
+      }, { threshold: 0 });
+      io.observe(form);
+    })();
+    function mScrollToForm(){
+      var input = document.getElementById('m-email');
+      input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(function(){ input.focus(); }, 400);
+    }
+
+    // ---------- ATTRIBUTION ----------
+    function getAttribution(){
+      var sp = new URLSearchParams(window.location.search || '');
+      return {
+        utm_source: sp.get('utm_source') || 'meta',
+        utm_medium: sp.get('utm_medium') || 'paid_social',
+        utm_campaign: sp.get('utm_campaign') || '',
+        utm_content: sp.get('utm_content') || '',
+        entry_path: '/m'
+      };
+    }
+
+    // ---------- SIGNUP HANDOFF ----------
+    function mStartSignup(e){
+      if (e && e.preventDefault) e.preventDefault();
+      var input = document.getElementById('m-email');
+      var btn = document.getElementById('m-submit');
+      var err = document.getElementById('m-err');
+      var email = (input.value || '').trim().toLowerCase();
+      err.textContent = '';
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        err.textContent = 'Please enter a valid email address.';
+        return false;
+      }
+      btn.disabled = true;
+      btn.textContent = 'Starting…';
+      // Pixel fires
+      try { if (typeof rdt === 'function') rdt('track', 'Lead', { currency: 'USD', value: 0 }); } catch (e) {}
+      try { if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: 'wellet_m_signup', value: 0, currency: 'USD' }); } catch (e) {}
+      try { if (typeof gtag === 'function') gtag('event', 'sign_up', { method: 'email', send_to: 'AW-985109408' }); } catch (e) {}
+      // Hand off to mywellet
+      var attr = getAttribution();
+      var params = new URLSearchParams();
+      params.set('email', email);
+      params.set('utm_source', attr.utm_source);
+      params.set('utm_medium', attr.utm_medium);
+      if (attr.utm_campaign) params.set('utm_campaign', attr.utm_campaign);
+      if (attr.utm_content) params.set('utm_content', attr.utm_content);
+      params.set('entry_path', '/m');
+      params.set('signup_location', 'm_landing');
+      window.location.href = 'https://mywellet.com/?' + params.toString();
+      return false;
+    }
+  </script>
+</body>
+</html>

@@ -12,5 +12,7 @@
 /support       /support.html       200
 /me/           /me.html            200
 /me            /me.html            200
+/m/            /m.html             200
+/m             /m.html             200
 /start/        /me.html            301
 /start         /me.html            301
