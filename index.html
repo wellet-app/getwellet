@@ -3,6 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Mobile redirect: keep Google Ads landing URL stable at getwellet.com, route phones to /m -->
+  <script>
+  (function(){
+    try {
+      var qs = window.location.search || '';
+      // Honor explicit opt-out so visitors can force desktop layout from /m.
+      // Persist the opt-out in sessionStorage so internal navigation doesn't bounce them back.
+      if (qs.indexOf('desktop=1') !== -1) {
+        try { sessionStorage.setItem('wellet_force_desktop', '1'); } catch(e){}
+        return;
+      }
+      try { if (sessionStorage.getItem('wellet_force_desktop') === '1') return; } catch(e){}
+      // Only redirect when the visitor landed directly on '/' or '/index.html'
+      var path = window.location.pathname;
+      if (path !== '/' && path !== '/index.html') return;
+      // Avoid bouncing crawlers and ad-quality bots
+      var ua = navigator.userAgent || '';
+      if (/bot|crawler|spider|crawling|googlebot|bingbot|adsbot|facebookexternalhit|slackbot|twitterbot|linkedinbot/i.test(ua)) return;
+      // Phone detection: UA hint + viewport width. Excludes iPads / Android tablets so the desktop site still serves them.
+      var isPhoneUA = /iPhone|iPod|Android.*Mobile|BlackBerry|IEMobile|Opera Mini|Mobile Safari/i.test(ua);
+      var isNarrow = (window.innerWidth || document.documentElement.clientWidth || 0) <= 768;
+      if (isPhoneUA && isNarrow) {
+        window.location.replace('/m' + qs + window.location.hash);
+      }
+    } catch (e) { /* fail open to desktop */ }
+  })();
+  </script>
   <title>Wellet — The Health Tool Built for Caregivers</title>
   <meta name="description" content="Wellet reads your loved one's health records, watches for pattern shifts, and remembers what you can't. A record that belongs to your family, not the hospital. Built by a caregiver, for caregivers.">
 
