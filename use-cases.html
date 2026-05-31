@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Use Cases · Wellet</title>
+<meta name="description" content="Every situation Wellet addresses for family caregivers — from caregiver-pay program matching to silent EHR sync to dementia care patterns." />
+<style>
+  :root {
+    --ink: #1a1a1a;
+    --paper: #faf7f2;
+    --line: #e5e0d6;
+    --accent: #b8956b;
+    --muted: #6b6b6b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Charter', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
+    font-size: 18px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  header {
+    border-bottom: 1px solid var(--line);
+    padding: 1.5rem 2rem;
+  }
+  .nav {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .logo {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav a.back { color: var(--muted); font-size: 0.9rem; text-decoration: none; }
+  .nav a.back:hover { color: var(--ink); }
+  main {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 3rem 2rem 6rem;
+  }
+  .eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: 2.75rem;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+    font-weight: 400;
+  }
+  .intro {
+    font-size: 1.2rem;
+    color: #333;
+    max-width: 680px;
+    margin-bottom: 3.5rem;
+  }
+  .group {
+    margin: 3rem 0 2rem;
+  }
+  .group-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  ul.cases {
+    list-style: none;
+  }
+  ul.cases li {
+    border-bottom: 1px solid var(--line);
+  }
+  ul.cases li:last-child { border-bottom: none; }
+  .case-btn {
+    display: flex;
+    width: 100%;
+    padding: 1rem 0;
+    background: none;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 1.05rem;
+    color: var(--ink);
+    align-items: baseline;
+    gap: 0.75rem;
+    transition: color 0.15s ease;
+  }
+  .case-btn:hover { color: var(--accent); }
+  .case-btn .arrow {
+    color: var(--accent);
+    font-size: 0.9rem;
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+  .case-btn .label { font-weight: 500; }
+  .case-btn .tag {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 0.15rem 0.5rem;
+    border-radius: 2px;
+    flex-shrink: 0;
+  }
+  .case-btn .tag.new { color: #fff; background: var(--accent); border-color: var(--accent); }
+  /* Modal */
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 26, 26, 0.55);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    z-index: 100;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    background: var(--paper);
+    max-width: 620px;
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    border-radius: 4px;
+    padding: 2.5rem;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+  }
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--muted);
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.25rem 0.5rem;
+  }
+  .modal-close:hover { color: var(--ink); }
+  .modal h2 {
+    font-size: 1.6rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .modal .modal-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .modal .what {
+    margin-bottom: 1.25rem;
+    color: #2a2a2a;
+  }
+  .modal .section {
+    margin-top: 1.25rem;
+  }
+  .modal .section-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.35rem;
+  }
+  .modal .section p { color: #2a2a2a; }
+  .modal .disclaimer {
+    margin-top: 1.75rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.85rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 2rem;
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+  @media (max-width: 600px) {
+    main { padding: 2rem 1.25rem 4rem; }
+    h1 { font-size: 2rem; }
+    .intro { font-size: 1.05rem; }
+    .case-btn { flex-wrap: wrap; }
+    .case-btn .arrow { display: none; }
+    .modal { padding: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <a href="/" class="logo">Wellet</a>
+    <a href="/" class="back">← Home</a>
+  </div>
+</header>
+
+<main>
+  <div class="eyebrow">Use Cases</div>
+  <h1>Every situation Wellet addresses for the family caregiver.</h1>
+  <p class="intro">We built Wellet for the family member who quietly carries the medical load — the one keeping track of meds, visits, wearables, and questions across every hospital their loved one has ever seen. Below is what we do, in plain language. Tap any item to see how.</p>
+
+  <section class="group">
+    <h2 class="group-title">Caregiver pay and reimbursement</h2>
+    <ul class="cases">
+      <li><button class="case-btn" data-case="caregiver-pay-match"><span class="label">Find programs that pay you (or your loved one's clinic) to provide care</span> <span class="tag new">New</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="va-pcafc"><span class="label">Apply for VA PCAFC — caregiver pay for veterans' family caregivers</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="medicaid-sfc"><span class="label">Apply for state Medicaid Structured Family Caregiving</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="cms-guide"><span class="label">Find CMS GUIDE Model dementia respite + clinic support</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="medicare-cts"><span class="label">Ask your clinic to bill Medicare Caregiver Training Services</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="application-packet"><span class="label">Assemble the application packet from your loved one's chart</span> <span class="arrow">→</span></button></li>
+    </ul>
+  </section>
+
+  <section class="group">
+    <h2 class="group-title">Chart and records</h2>
+    <ul class="cases">
+      <li><button class="case-btn" data-case="multi-ehr"><span class="label">Pull every hospital chart into one record</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="wearable-sync"><span class="label">See wearable signals next to medical history</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="document-upload"><span class="label">Add scanned documents, faxed records, and screenshots</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="va-records"><span class="label">Pull a veteran's VA.gov records</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="background-sync"><span class="label">Keep the chart current without opening the app</span> <span class="arrow">→</span></button></li>
+    </ul>
+  </section>
+
+  <section class="group">
+    <h2 class="group-title">Patterns and what Wellet notices</h2>
+    <ul class="cases">
+      <li><button class="case-btn" data-case="caresignals"><span class="label">CareSignals — patterns no one human could catch</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="med-cascade"><span class="label">Notice when a new medication breaks step count or sleep</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="adl-decline"><span class="label">Watch for ADL drift — bathing, walking, eating, dressing</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="lab-trends"><span class="label">See lab values trending over years, not just last visit</span> <span class="arrow">→</span></button></li>
+    </ul>
+  </section>
+
+  <section class="group">
+    <h2 class="group-title">Before a visit, during a crisis</h2>
+    <ul class="cases">
+      <li><button class="case-btn" data-case="before-you-call"><span class="label">Get the answer before you pick up the phone</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="emergency-summary"><span class="label">Hand a paramedic everything they need in 10 seconds</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="visit-prep"><span class="label">Walk into the appointment with the right questions</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="ask-wellet"><span class="label">Ask Wellet about your loved one's chart in plain English</span> <span class="arrow">→</span></button></li>
+    </ul>
+  </section>
+
+  <section class="group">
+    <h2 class="group-title">Family and care circle</h2>
+    <ul class="cases">
+      <li><button class="case-btn" data-case="invite-sibling"><span class="label">Invite a sibling to share the load</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="wishes"><span class="label">Capture and confirm your loved one's wishes</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="weekly-digest"><span class="label">Get a weekly summary of what changed</span> <span class="arrow">→</span></button></li>
+    </ul>
+  </section>
+
+  <section class="group">
+    <h2 class="group-title">Looking ahead</h2>
+    <ul class="cases">
+      <li><button class="case-btn" data-case="clinical-trials"><span class="label">Match your loved one's diagnosis to clinical trials</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="genomic"><span class="label">Add genomic context to long-term decisions</span> <span class="arrow">→</span></button></li>
+      <li><button class="case-btn" data-case="acl-challenge"><span class="label">Wellet and the federal Caregiver AI Prize Challenge</span> <span class="arrow">→</span></button></li>
+    </ul>
+  </section>
+
+</main>
+
+<div class="modal-backdrop" id="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal">
+    <button class="modal-close" id="modal-close" aria-label="Close">×</button>
+    <div class="modal-eyebrow" id="modal-eyebrow"></div>
+    <h2 id="modal-title"></h2>
+    <div class="what" id="modal-what"></div>
+    <div class="section">
+      <div class="section-label">How Wellet does it</div>
+      <p id="modal-how"></p>
+    </div>
+    <div class="section" id="modal-status-wrap" style="display:none;">
+      <div class="section-label">Status</div>
+      <p id="modal-status"></p>
+    </div>
+    <div class="disclaimer" id="modal-disclaimer" style="display:none;"></div>
+  </div>
+</div>
+
+<footer>
+  Wellet does not pay caregivers and does not guarantee program approval. Eligibility and payment amounts are set by each program. <a href="/" style="color:var(--accent);">getwellet.com</a>
+</footer>
+
+<script>
+const CASES = {
+  "caregiver-pay-match": {
+    eyebrow: "Caregiver Pay",
+    title: "Find programs that pay you (or your loved one's clinic) to provide care",
+    what: "When a loved one's chart shows a qualifying diagnosis or insurance, Wellet surfaces the caregiver-pay programs that family may qualify for — and tells you the honest dollar range each one offers.",
+    how: "Wellet reads your loved one's diagnoses, insurance, ADL pattern, and visit history from the chart we already hold. We match those facts against four programs: VA PCAFC, state Medicaid Structured Family Caregiving, the CMS GUIDE Model for dementia, and Medicare Caregiver Training Services billing codes. We surface the ones you may qualify for with a clear next step.",
+    status: "Live on mywellet.com Resources tile when a qualifying diagnosis is present. Diagnosis matching rules engine and packet generator in development.",
+    disclaimer: "Wellet does not pay caregivers and does not guarantee program approval. Eligibility and payment amounts are set by each program. You apply directly to the program."
+  },
+  "va-pcafc": {
+    eyebrow: "Caregiver Pay",
+    title: "VA Program of Comprehensive Assistance for Family Caregivers (PCAFC)",
+    what: "If your loved one is a veteran with a service-connected condition and needs help with daily activities, you may qualify for a monthly stipend of roughly $800 to $2,500 — paid directly to the family caregiver, tax-free.",
+    how: "Wellet checks your loved one's VA.gov record for service-connection status and pulls the ADL evidence the application asks for: walking, dressing, bathing, eating, toileting. We surface PCAFC as a match, link out to the VA's eligibility tool, and assemble the supporting documentation from the chart.",
+    status: "Program-card live on mywellet.com when VA chart is connected and ADL signal is present. Packet generator in development.",
+    disclaimer: "Wellet does not pay caregivers and does not guarantee VA approval. PCAFC eligibility is determined by the VA based on its own assessment."
+  },
+  "medicaid-sfc": {
+    eyebrow: "Caregiver Pay",
+    title: "State Medicaid Structured Family Caregiving",
+    what: "If your loved one is on Medicaid and needs nursing-home-level care at home, several states (including North Carolina) pay the family caregiver a monthly stipend — up to about $1,100/month in NC through an approved agency.",
+    how: "Wellet checks the insurance on file, looks at the chart for the level-of-care signals these programs require, and routes you to the right state agency. In NC that's Careforth; other states use different approved partners.",
+    status: "Program-card live on mywellet.com when Medicaid is detected and care-level signals are present. Active in NC; other states added on request.",
+    disclaimer: "Wellet does not pay caregivers and does not guarantee program approval. Each state's SFC program runs differently, sets its own rates, and approves applications independently."
+  },
+  "cms-guide": {
+    eyebrow: "Caregiver Pay",
+    title: "CMS GUIDE Model — dementia care + family respite",
+    what: "If your loved one has dementia, is on Medicare fee-for-service, and is seen by a GUIDE-participating clinic, the family may qualify for up to $2,500/year in respite support — plus the clinic gets paid to coordinate care.",
+    how: "Wellet checks for a dementia diagnosis code (F01-F03, G30) in the chart, confirms Medicare FFS coverage, and looks up whether your loved one's clinic is on the CMS GUIDE participant list. When all three line up, we surface GUIDE as a match and walk you through what to ask the clinic for.",
+    status: "Program-card live on mywellet.com when dementia diagnosis is present. Clinic-participation lookup in development.",
+    disclaimer: "Wellet does not pay caregivers and does not guarantee GUIDE program approval. GUIDE respite and clinic participation are determined by CMS and the participating provider."
+  },
+  "medicare-cts": {
+    eyebrow: "Caregiver Pay",
+    title: "Medicare Caregiver Training Services (CTS)",
+    what: "Since 2024, Medicare lets clinics bill for training a family caregiver — codes 96202, 96203, 97550, 97551, G0541. Your loved one's clinic gets paid; you get the training free. CTS has no specific diagnosis restriction — it's available whenever the treatment plan includes caregiver involvement.",
+    how: "Wellet surfaces the CTS billing codes and the talking points to bring to the next visit. We tell you exactly which code your loved one's situation likely fits and how to ask the clinic about it without sounding like you're writing their billing for them.",
+    status: "Surfaced on mywellet.com Resources tile for any active care plan. Auto-suggested talking points in development.",
+    disclaimer: "Wellet does not bill Medicare and does not guarantee a clinic will offer CTS. The clinic decides whether to bill these codes."
+  },
+  "application-packet": {
+    eyebrow: "Caregiver Pay",
+    title: "Auto-assemble the application packet from your loved one's chart",
+    what: "Most families never apply for these programs because the documentation barrier is too high. Wellet already has the diagnosis, medication, ADL, and visit data each program asks for — we assemble the packet so the application takes minutes, not weeks.",
+    how: "When you select a program, Wellet pulls the relevant evidence from the chart: diagnosis codes, current meds, visit summaries, lab values, and ADL signals from CareSignals. We format it into the documentation the program asks for and walk you through filling in the rest.",
+    status: "In development. Spec complete; engineering sprint scheduled post-BDB.",
+    disclaimer: "Wellet does not submit applications on the family's behalf. You review and submit the packet directly to the program."
+  },
+
+  "multi-ehr": {
+    eyebrow: "Chart and Records",
+    title: "Pull every hospital chart into one record",
+    what: "Most loved ones have been seen at three to seven hospital systems over the years. Wellet pulls them all into one chart so you don't have to log into seven different patient portals.",
+    how: "Wellet connects to each hospital's Epic, Cerner, or Oracle Health system through the ONC Cures Act mandated FHIR API. We pull visits, medications, conditions, allergies, immunizations, lab values, observations, and diagnostic reports. Updates pull in the background.",
+    status: "Live. 7 hospital systems connected today, 50+ on the queue."
+  },
+  "wearable-sync": {
+    eyebrow: "Chart and Records",
+    title: "See wearable signals next to medical history",
+    what: "An Apple Watch knows things the EHR will never know — that resting heart rate trended up the week before a hospitalization, that step count fell off after a new medication. Wellet puts both timelines in one view.",
+    how: "We connect to Apple Health, Fitbit, Garmin, Oura, and Whoop through Apple HealthKit and Terra. Wearable observations sit alongside medical events on the same timeline.",
+    status: "Live for Apple HealthKit. Terra wearables (Fitbit, Garmin, Oura, Whoop) in beta."
+  },
+  "document-upload": {
+    eyebrow: "Chart and Records",
+    title: "Add scanned documents, faxed records, and screenshots",
+    what: "Not every hospital is connected, and not every record lives in an EHR. Wellet lets you add documents — discharge summaries, lab printouts, advance directives — and parses them into the chart.",
+    how: "Upload a PDF, photo, or screenshot from any device. Wellet's parse-document edge function extracts diagnoses, medications, and key dates, and merges them into the chart with the rest of your loved one's history.",
+    status: "Live on mywellet.com and the Wellet iOS app."
+  },
+  "va-records": {
+    eyebrow: "Chart and Records",
+    title: "Pull a veteran's VA.gov records",
+    what: "The VA holds decades of records most families never see — disability rating decisions, service-connection paperwork, every VA visit. Wellet pulls those into the same chart as the loved one's civilian care.",
+    how: "We connect through the VA Lighthouse FHIR API. The veteran signs in at VA.gov once, and Wellet pulls Patient, Conditions, Medications, Observations, and Allergies from VA Health.",
+    status: "Sandbox validated. Production access submitted to VA Lighthouse."
+  },
+  "background-sync": {
+    eyebrow: "Chart and Records",
+    title: "Keep the chart current without opening the app",
+    what: "You shouldn't have to remember to refresh. Wellet runs an hourly background sync against every connected hospital so the chart is current whenever you open it.",
+    how: "The background-ehr-sync cron pulls fresh data hourly. If a sync fails — a token expired, a hospital revoked scope — we notify you to reconnect before your next visit.",
+    status: "Live across all 10 connected charts."
+  },
+
+  "caresignals": {
+    eyebrow: "CareSignals",
+    title: "CareSignals — patterns no one human could catch",
+    what: "CareSignals is Wellet's pattern engine. It watches the chart across visits, medications, labs, and wearables to surface the kind of patterns a family member would never notice on their own.",
+    how: "Every night we run the compute-care-signals edge function across every active loved one. It clusters events, finds correlations between medications and wearable signals, and flags drops in ADL patterns. Each signal links back to the evidence it's built on.",
+    status: "Live. 10 CareSignals auto-detected so far across connected charts."
+  },
+  "med-cascade": {
+    eyebrow: "CareSignals",
+    title: "Notice when a new medication breaks step count or sleep",
+    what: "When three new medications start in the same week, step count often drops. Wellet notices and shows the evidence side-by-side so you can raise it at the next visit.",
+    how: "CareSignals correlates medication start dates with wearable observations 7, 14, and 30 days post-start. If a meaningful drop appears, we cluster the events and anchor them to the medication's start date.",
+    status: "Live for connected Apple HealthKit + EHR charts."
+  },
+  "adl-decline": {
+    eyebrow: "CareSignals",
+    title: "Watch for ADL drift — bathing, walking, eating, dressing",
+    what: "Activities of daily living don't fall off all at once. Wellet notices the small drifts — fewer steps, longer naps, fewer outings — and surfaces them as evidence for both the clinic and caregiver-pay applications.",
+    how: "We infer ADL signal from wearable patterns (step count, sleep, time outside), document uploads (PT notes, OT assessments), and visit summaries. CareSignals clusters the evidence into an ADL trend you can show.",
+    status: "Live for connected charts with wearable data."
+  },
+  "lab-trends": {
+    eyebrow: "CareSignals",
+    title: "See lab values trending over years, not just last visit",
+    what: "EHRs show you the last lab result. Wellet shows you the line — A1c over five years, creatinine across every hospitalization, cholesterol since the statin started.",
+    how: "Lab observations from every connected hospital sit in one timeline. Wellet groups them by LOINC code so a Duke A1c and a UNC A1c land on the same line.",
+    status: "Live."
+  },
+
+  "before-you-call": {
+    eyebrow: "Before You Call",
+    title: "Get the answer before you pick up the phone",
+    what: "Most caregiver questions don't need a callback — they need the chart in front of you. Wellet shows the answer (last visit, current meds, what changed) before you dial.",
+    how: "Wellet's Before You Call view summarizes the loved one's chart into the three questions families call clinics about: 'What did the doctor say?', 'What are they on?', and 'What changed?' All from data already in the chart.",
+    status: "Live on mywellet.com."
+  },
+  "emergency-summary": {
+    eyebrow: "Emergency",
+    title: "Hand a paramedic everything they need in 10 seconds",
+    what: "In an emergency, you have seconds to communicate diagnoses, meds, allergies, and the advance directive. Wellet generates a one-page emergency summary you can hand over.",
+    how: "We pull conditions, medications, allergies, and the most recent vitals into a single emergency-summary view. Tap once to bring it up; hand the phone over.",
+    status: "Live."
+  },
+  "visit-prep": {
+    eyebrow: "Before A Visit",
+    title: "Walk into the appointment with the right questions",
+    what: "Wellet drafts the three questions worth asking — based on what changed since the last visit, what wearable signals shifted, and what the loved one's wishes say.",
+    how: "The generate-visit-questions edge function pulls recent CareSignals, new meds, and open follow-ups, and drafts visit-ready questions you can scan on the drive over.",
+    status: "Live."
+  },
+  "ask-wellet": {
+    eyebrow: "Ask Wellet",
+    title: "Ask Wellet about your loved one's chart in plain English",
+    what: "Type a question — 'What was Mom's last A1c?', 'When did Dad start Lisinopril?', 'What did Duke say about the chest pain in March?' — and Wellet answers from the chart.",
+    how: "Ask Wellet retrieves the relevant evidence from your loved one's chart and answers with citations back to the original record. No PHI leaves your Wellet environment.",
+    status: "Live."
+  },
+
+  "invite-sibling": {
+    eyebrow: "Care Circle",
+    title: "Invite a sibling to share the load",
+    what: "One person shouldn't carry the medical weight alone. Wellet lets you invite siblings, partners, and other family caregivers to share read access to a loved one's chart.",
+    how: "Send a magic-link invite from the loved one's profile. The invitee gets a read-only view of the chart, the CareSignals timeline, and the wishes drawer. You stay in control of who has access.",
+    status: "Live for primary caregivers."
+  },
+  "wishes": {
+    eyebrow: "Care Circle",
+    title: "Capture and confirm your loved one's wishes",
+    what: "Wellet notices wishes mentioned in chart notes, advance directives, and family conversations — then asks you to confirm them so the family is aligned when it matters.",
+    how: "The extract-wishes edge function runs nightly across new documents, visit notes, and check-ins. It surfaces candidate wishes for you to confirm, edit, or dismiss.",
+    status: "Live. Nightly cron runs across every active loved one."
+  },
+  "weekly-digest": {
+    eyebrow: "Care Circle",
+    title: "Get a weekly summary of what changed",
+    what: "Every Friday Wellet sends a summary of the week — what shifted, what the chart added, what to follow up on. So you can stay informed without checking the app every day.",
+    how: "The generate-weekly-digest edge function rolls up the last 7 days of chart updates, CareSignals, and wishes into a short email + in-app digest.",
+    status: "Live."
+  },
+
+  "clinical-trials": {
+    eyebrow: "Looking Ahead",
+    title: "Match your loved one's diagnosis to clinical trials",
+    what: "Wellet checks ClinicalTrials.gov for trials that match your loved one's diagnosis, location, and recent labs — and shows you which ones they may qualify for.",
+    how: "The trials-edge edge function queries ClinicalTrials.gov on a schedule and matches active trials against the loved one's conditions, location, and inclusion criteria. Surface in the Resources tile.",
+    status: "In development. Spec complete; sprint scheduled."
+  },
+  "genomic": {
+    eyebrow: "Looking Ahead",
+    title: "Add genomic context to long-term decisions",
+    what: "If your loved one has had genomic testing (23andMe, hospital BRCA, pharmacogenomic panels), Wellet adds that context to medication decisions and risk forecasts.",
+    how: "Upload the genomic report. Wellet parses key variants and surfaces them alongside the relevant medications, conditions, and family history.",
+    status: "Phase 2.5 spec. In design."
+  },
+  "acl-challenge": {
+    eyebrow: "Federal Recognition",
+    title: "Wellet and the federal Caregiver AI Prize Challenge",
+    what: "In February 2026, HHS / Administration for Community Living launched a $2.5M prize challenge funding AI-enabled tools for family caregivers and the direct care workforce. Wellet is exactly the kind of tool the challenge is funding \u2014 already live, already AI-native, already in real families' hands.",
+    how: "Wellet hits all three pillars the challenge scores: on-demand support (Ask Wellet), watching well-being (CareSignals), and automating documentation (caregiver-pay packet generator). Our Technology Readiness Level is 7 \u2014 well above the challenge's TRL 3 floor \u2014 because Wellet is live in production with real Epic data across seven health systems.",
+    status: "Phase 1 deadline July 31, 2026. Wellet's submission is in active development."
+  }
+};
+
+const backdrop = document.getElementById('modal-backdrop');
+const modalTitle = document.getElementById('modal-title');
+const modalEyebrow = document.getElementById('modal-eyebrow');
+const modalWhat = document.getElementById('modal-what');
+const modalHow = document.getElementById('modal-how');
+const modalStatusWrap = document.getElementById('modal-status-wrap');
+const modalStatus = document.getElementById('modal-status');
+const modalDisclaimer = document.getElementById('modal-disclaimer');
+
+function openCase(key) {
+  const c = CASES[key];
+  if (!c) return;
+  modalEyebrow.textContent = c.eyebrow || '';
+  modalTitle.textContent = c.title;
+  modalWhat.textContent = c.what;
+  modalHow.textContent = c.how;
+  if (c.status) {
+    modalStatusWrap.style.display = 'block';
+    modalStatus.textContent = c.status;
+  } else {
+    modalStatusWrap.style.display = 'none';
+  }
+  if (c.disclaimer) {
+    modalDisclaimer.style.display = 'block';
+    modalDisclaimer.textContent = c.disclaimer;
+  } else {
+    modalDisclaimer.style.display = 'none';
+  }
+  backdrop.classList.add('open');
+  history.replaceState(null, '', '#' + key);
+}
+function closeCase() {
+  backdrop.classList.remove('open');
+  history.replaceState(null, '', window.location.pathname);
+}
+
+document.querySelectorAll('.case-btn').forEach(btn => {
+  btn.addEventListener('click', () => openCase(btn.dataset.case));
+});
+document.getElementById('modal-close').addEventListener('click', closeCase);
+backdrop.addEventListener('click', (e) => { if (e.target === backdrop) closeCase(); });
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCase(); });
+
+// Deep link
+if (window.location.hash) {
+  const key = window.location.hash.slice(1);
+  if (CASES[key]) openCase(key);
+}
+</script>
+</body>
+</html>
