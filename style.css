@@ -2723,7 +2723,7 @@ section {
 .cs-row-body::before {
   content: "";
   position: absolute;
-  left: -16px;
+  left: -37px;
   top: 7px;
   width: 12px;
   height: 12px;
@@ -2838,6 +2838,9 @@ section {
   }
   .cs-timeline-list::before {
     left: 44px;
+  }
+  .cs-row-body::before {
+    left: -29px;
   }
   .cs-row-day { font-size: 1.2rem; }
   .cs-row-title { font-size: 0.92rem; }
