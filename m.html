@@ -178,6 +178,14 @@
       font-size: 13px; color: var(--text-muted); margin: 10px 0 0;
       text-align: center;
     }
+    .form-card .demo-link {
+      display: block; text-align: center;
+      margin-top: 12px; padding-top: 12px;
+      border-top: 1px solid var(--border);
+      font-size: 14px; color: var(--primary);
+      text-decoration: none; font-weight: 500;
+    }
+    .form-card .demo-link:hover { text-decoration: underline; }
 
     /* Trust strip */
     .trust {
@@ -304,6 +312,7 @@
     <button type="submit" class="submit" id="m-submit">Get started — it's free</button>
     <div class="err" id="m-err" aria-live="polite"></div>
     <p class="note">No password. We send a 6-digit code to your email.</p>
+    <a class="demo-link" href="https://mywellet.com/?demo=guided" onclick="mDemoClick(event)">See a guided demo first &rarr;</a>
   </form>
 
   <!-- ========== Trust strip ========== -->
@@ -434,6 +443,11 @@
     }
 
     // ---------- SIGNUP HANDOFF ----------
+    function mDemoClick(e){
+      try { if (typeof fbq === 'function') fbq('trackCustom', 'DemoClick', { source: 'm_landing' }); } catch (err) {}
+      try { if (typeof gtag === 'function') gtag('event', 'demo_click', { source: 'm_landing' }); } catch (err) {}
+    }
+
     function mStartSignup(e){
       if (e && e.preventDefault) e.preventDefault();
       var input = document.getElementById('m-email');
