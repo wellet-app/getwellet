@@ -2674,7 +2674,7 @@ section {
   position: absolute;
   top: 8px;
   bottom: 8px;
-  left: 54px;
+  left: 77px;
   width: 2px;
   background: var(--color-surface-offset);
 }
@@ -2723,7 +2723,7 @@ section {
 .cs-row-body::before {
   content: "";
   position: absolute;
-  left: -37px;
+  left: -14px;
   top: 7px;
   width: 12px;
   height: 12px;
@@ -2837,10 +2837,10 @@ section {
     gap: var(--space-3);
   }
   .cs-timeline-list::before {
-    left: 44px;
+    left: 62px;
   }
   .cs-row-body::before {
-    left: -29px;
+    left: -11px;
   }
   .cs-row-day { font-size: 1.2rem; }
   .cs-row-title { font-size: 0.92rem; }
