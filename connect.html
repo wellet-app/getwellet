@@ -259,6 +259,91 @@
       line-height: 1.65;
     }
 
+    /* ---- Preview carousel (recipient app) ---- */
+    .cn-preview-section {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-10) 0;
+      overflow: hidden;
+    }
+    .cn-preview-head {
+      padding: 0 var(--space-12);
+      max-width: 760px;
+    }
+    .cn-preview-head h2 {
+      font-family: var(--font-display);
+      font-size: var(--text-xl);
+      font-weight: 400;
+      color: var(--color-text);
+      margin: var(--space-2) 0 var(--space-3);
+    }
+    .cn-preview-head .cn-preview-sub {
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.65;
+      margin-bottom: var(--space-6);
+    }
+    .cn-preview-head .cn-coming-soon-badge {
+      display: inline-block;
+      margin-bottom: var(--space-3);
+    }
+    .cn-preview-track {
+      display: flex;
+      gap: var(--space-6);
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      padding: var(--space-4) var(--space-12) var(--space-6);
+      scrollbar-width: thin;
+    }
+    .cn-preview-track::-webkit-scrollbar { height: 6px; }
+    .cn-preview-track::-webkit-scrollbar-thumb { background: var(--color-divider); border-radius: 3px; }
+    .cn-preview-slide {
+      flex: 0 0 auto;
+      width: 240px;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-3);
+    }
+    .cn-preview-slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 26px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08), 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .cn-preview-caption-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--color-text-faint);
+    }
+    .cn-preview-caption-title {
+      font-size: var(--text-sm);
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1.35;
+    }
+    .cn-preview-caption-body {
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      line-height: 1.55;
+    }
+    .cn-preview-hint {
+      padding: 0 var(--space-12);
+      margin-top: var(--space-2);
+      font-size: var(--text-xs);
+      color: var(--color-text-faint);
+    }
+    @media (max-width: 640px) {
+      .cn-preview-head, .cn-preview-hint { padding: 0 var(--space-6); }
+      .cn-preview-track { padding: var(--space-4) var(--space-6) var(--space-6); }
+      .cn-preview-slide { width: 210px; }
+    }
+
     /* ---- Privacy section ---- */
     .cn-privacy-section {
       background: var(--color-surface);
@@ -809,6 +894,87 @@
             <p>Fitbit, Garmin, Oura, Whoop, Dexcom, and 200+ devices via Terra API. One integration, every wearable.</p>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- ---- RECIPIENT APP PREVIEW ---- -->
+    <section class="cn-section" aria-labelledby="cn-preview-label">
+      <div class="container">
+        <div class="cn-section-label" id="cn-preview-label">A preview of what's coming</div>
+        <div class="cn-preview-section">
+          <div class="cn-preview-head">
+            <span class="cn-coming-soon-badge">Coming Soon</span>
+            <h2>The companion app, designed for your loved one.</h2>
+            <p class="cn-preview-sub">Wellet Connect on iPhone is built for the person being cared for — not the caregiver. Larger text. Higher contrast. Calmer pacing. Their story, in their voice, on their own device. Here is an early look at the screens we are designing.</p>
+          </div>
+          <div class="cn-preview-track" role="list" aria-label="Wellet Connect preview screens">
+
+            <article class="cn-preview-slide" role="listitem">
+              <img src="/assets/connect-preview/wellet_connect_01_welcome.png" alt="Welcome and sign-in screen with three large entry options including a code-from-family path." loading="lazy">
+              <div class="cn-preview-caption-eyebrow">Welcome</div>
+              <div class="cn-preview-caption-title">A gentle way in</div>
+              <div class="cn-preview-caption-body">Three large entry options. One obvious next step. A real-person help link at the bottom.</div>
+            </article>
+
+            <article class="cn-preview-slide" role="listitem">
+              <img src="/assets/connect-preview/wellet_connect_02_today.png" alt="Today screen showing a noticed blood-pressure update, a buffered note coming Friday, and a memory the recipient added." loading="lazy">
+              <div class="cn-preview-caption-eyebrow">Today</div>
+              <div class="cn-preview-caption-title">What's new, in their voice</div>
+              <div class="cn-preview-caption-body">Notices written for them, not about them. Sensitive notes are held briefly so a family member can be there first.</div>
+            </article>
+
+            <article class="cn-preview-slide" role="listitem">
+              <img src="/assets/connect-preview/wellet_connect_03_quiet.png" alt="Quiet-day Today screen reading 'Nothing new today. Your circle is quiet.'" loading="lazy">
+              <div class="cn-preview-caption-eyebrow">A quiet day</div>
+              <div class="cn-preview-caption-title">Silence is a feature</div>
+              <div class="cn-preview-caption-body">Most days are calm. The app stays calm with them.</div>
+            </article>
+
+            <article class="cn-preview-slide" role="listitem">
+              <img src="/assets/connect-preview/wellet_connect_04_comfort.png" alt="Comfort Mode home screen with a warm family photo, an orientation cue, and a single large 'I need help' button." loading="lazy">
+              <div class="cn-preview-caption-eyebrow">Comfort Mode</div>
+              <div class="cn-preview-caption-title">For harder days</div>
+              <div class="cn-preview-caption-body">A family photo. The day of the week. One large button that reaches the people who love them.</div>
+            </article>
+
+            <article class="cn-preview-slide" role="listitem">
+              <img src="/assets/connect-preview/wellet_connect_05_story.png" alt="My story timeline screen showing life events the recipient and family have added alongside auto-pulled medical visits." loading="lazy">
+              <div class="cn-preview-caption-eyebrow">My story</div>
+              <div class="cn-preview-caption-title">A life, not a chart</div>
+              <div class="cn-preview-caption-body">Birthdays, trips, and tea with friends sit next to checkups and prescriptions. They get to add their own.</div>
+            </article>
+
+            <article class="cn-preview-slide" role="listitem">
+              <img src="/assets/connect-preview/wellet_connect_06_numbers.png" alt="My numbers screen showing labs and vitals translated into plain-language sentences with no traffic-light colors." loading="lazy">
+              <div class="cn-preview-caption-eyebrow">My numbers</div>
+              <div class="cn-preview-caption-title">Plain language, not red dots</div>
+              <div class="cn-preview-caption-body">Lab values and vitals translated into sentences anyone can act on. No alarm colors.</div>
+            </article>
+
+            <article class="cn-preview-slide" role="listitem">
+              <img src="/assets/connect-preview/wellet_connect_07_noticed.png" alt="What's been noticed screen showing softened-framing notices with source attribution." loading="lazy">
+              <div class="cn-preview-caption-eyebrow">What's been noticed</div>
+              <div class="cn-preview-caption-title">Patterns, named gently</div>
+              <div class="cn-preview-caption-body">CareSignals rewritten for the recipient. Every notice shows where it came from and how to learn more.</div>
+            </article>
+
+            <article class="cn-preview-slide" role="listitem">
+              <img src="/assets/connect-preview/wellet_connect_08_voice.png" alt="My voice screen with a list of wish recordings and a large record button. A note says recordings are never used to train anything." loading="lazy">
+              <div class="cn-preview-caption-eyebrow">My voice</div>
+              <div class="cn-preview-caption-title">Their words, kept private</div>
+              <div class="cn-preview-caption-body">Short voice notes about what matters. Only the people they choose can hear them. Never used to train anything.</div>
+            </article>
+
+            <article class="cn-preview-slide" role="listitem">
+              <img src="/assets/connect-preview/wellet_connect_09_audit.png" alt="Settings screen titled 'What my circle has done for me' listing every caregiver action on the recipient's behalf." loading="lazy">
+              <div class="cn-preview-caption-eyebrow">Transparency</div>
+              <div class="cn-preview-caption-title">What my circle has done for me</div>
+              <div class="cn-preview-caption-body">Every action a family member takes on their behalf is visible to them. They can remove anyone from their circle at any time.</div>
+            </article>
+
+          </div>
+          <p class="cn-preview-hint">Swipe or scroll to see all nine screens. Mockup only — not connected to real data.</p>
         </div>
       </div>
     </section>
