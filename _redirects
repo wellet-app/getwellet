@@ -16,3 +16,7 @@
 /m             /m.html             200
 /start/        /me.html            301
 /start         /me.html            301
+/research/     /research.html      200
+/research      /research.html      200
+/research-admin/ /research-admin.html 200
+/research-admin  /research-admin.html 200

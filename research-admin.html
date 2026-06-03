@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wellet — ACL Research Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #2d6a4f;
+      --primary-dark: #1b4332;
+      --bg: #faf8f4;
+      --bg-card: #ffffff;
+      --border: #e5e2dc;
+      --text: #1a2e22;
+      --text-muted: #6b7568;
+      --accent-warn: #c2410c;
+      --accent-good: #166534;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: 'DM Sans', system-ui, sans-serif; font-size: 15px; line-height: 1.5; }
+    h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; font-weight: 500; letter-spacing: -0.01em; margin: 0 0 0.5em; }
+    h1 { font-size: 28px; }
+    h2 { font-size: 20px; margin-top: 2em; }
+    a { color: var(--primary); }
+    .wrap { max-width: 1280px; margin: 0 auto; padding: 24px; }
+    .header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px; }
+    .header h1 { margin: 0; }
+    .signout { color: var(--text-muted); background: none; border: 1px solid var(--border); padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; }
+    .signout:hover { background: #f0ede7; }
+
+    .gate { max-width: 420px; margin: 80px auto; background: var(--bg-card); padding: 32px; border-radius: 12px; border: 1px solid var(--border); }
+    .gate p { color: var(--text-muted); margin-bottom: 16px; }
+    .gate input[type="password"] { width: 100%; padding: 10px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 15px; font-family: inherit; margin-bottom: 12px; }
+    .gate button { width: 100%; padding: 10px; background: var(--primary); color: #fff; border: 0; border-radius: 6px; font-size: 15px; font-weight: 500; cursor: pointer; }
+    .gate button:hover { background: var(--primary-dark); }
+    .gate .err { color: var(--accent-warn); font-size: 13px; margin-bottom: 10px; }
+
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin-bottom: 24px; }
+    .stat { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; }
+    .stat .label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+    .stat .value { font-family: 'Fraunces', Georgia, serif; font-size: 28px; font-weight: 500; color: var(--primary-dark); margin-top: 4px; }
+
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; align-items: center; }
+    .filter-chip { background: var(--bg-card); border: 1px solid var(--border); padding: 6px 12px; border-radius: 999px; font-size: 13px; cursor: pointer; color: var(--text); }
+    .filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .filter-chip:hover:not(.active) { background: #f0ede7; }
+
+    table { width: 100%; border-collapse: collapse; background: var(--bg-card); border-radius: 10px; overflow: hidden; border: 1px solid var(--border); font-size: 13px; }
+    th, td { padding: 10px 12px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border); }
+    th { background: #f5f2eb; font-weight: 500; color: var(--text-muted); font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+    tr:last-child td { border-bottom: 0; }
+    tr:hover td { background: #fafaf6; }
+    td.email { font-family: 'SF Mono', Menlo, monospace; font-size: 12px; }
+    td.story { max-width: 320px; }
+    td.story .clip { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .badge { display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 11px; font-weight: 500; }
+    .badge-followup { background: #ffedd5; color: #9a3412; }
+    .badge-sent { background: #dcfce7; color: var(--accent-good); }
+    .badge-selected { background: #dbeafe; color: #1e40af; }
+    .badge-done { background: #f3e8ff; color: #6b21a8; }
+    .actions { display: flex; gap: 4px; flex-wrap: wrap; }
+    .action-btn { background: none; border: 1px solid var(--border); padding: 4px 8px; border-radius: 4px; font-size: 11px; cursor: pointer; color: var(--text); font-family: inherit; }
+    .action-btn:hover { background: #f0ede7; }
+    .action-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .empty { text-align: center; padding: 60px 20px; color: var(--text-muted); }
+    .loading { text-align: center; padding: 40px; color: var(--text-muted); }
+
+    .modal-backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.4); display: none; align-items: center; justify-content: center; padding: 20px; z-index: 1000; }
+    .modal { background: var(--bg-card); border-radius: 12px; padding: 24px; max-width: 720px; width: 100%; max-height: 90vh; overflow: auto; }
+    .modal h2 { margin-top: 0; }
+    .modal .field { margin-bottom: 12px; }
+    .modal .field-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); margin-bottom: 2px; }
+    .modal .field-value { font-size: 14px; white-space: pre-wrap; }
+    .modal-close { float: right; background: none; border: 0; cursor: pointer; font-size: 22px; color: var(--text-muted); }
+    .csv-link { background: var(--primary); color: #fff; padding: 8px 16px; border-radius: 6px; text-decoration: none; font-size: 13px; font-weight: 500; cursor: pointer; border: 0; font-family: inherit; }
+    .csv-link:hover { background: var(--primary-dark); }
+  </style>
+</head>
+<body>
+  <div id="gate-view" class="gate">
+    <h1>Wellet ACL Research Admin</h1>
+    <p>Enter the admin secret to view caregiver survey responses.</p>
+    <div id="gate-err" class="err" style="display:none;"></div>
+    <input type="password" id="secret-input" placeholder="Admin secret" autocomplete="off">
+    <button id="gate-submit">Unlock</button>
+  </div>
+
+  <div id="dash-view" class="wrap" style="display:none;">
+    <div class="header">
+      <h1>ACL Caregiver Survey — Responses</h1>
+      <div>
+        <button id="csv-export" class="csv-link">Export CSV</button>
+        <button id="signout" class="signout">Sign out</button>
+      </div>
+    </div>
+    <div class="stats" id="stats"></div>
+
+    <div class="filters">
+      <span style="font-size:12px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.05em;">Filter:</span>
+      <button class="filter-chip active" data-filter="all">All</button>
+      <button class="filter-chip" data-filter="followup_optin">Follow-up opt-in</button>
+      <button class="filter-chip" data-filter="incentive_pending">Incentive pending</button>
+      <button class="filter-chip" data-filter="incentive_sent">Incentive sent</button>
+      <button class="filter-chip" data-filter="selected_for_followup">Selected for follow-up</button>
+      <button class="filter-chip" data-filter="followup_completed">Follow-up done</button>
+    </div>
+
+    <div id="table-wrap" class="loading">Loading...</div>
+  </div>
+
+  <div id="modal-backdrop" class="modal-backdrop">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modal-close">&times;</button>
+      <div id="modal-body"></div>
+    </div>
+  </div>
+
+  <script>
+    const ADMIN_URL = 'https://nrpdhxygzyfmyljzfexv.supabase.co/functions/v1/admin-acl-survey';
+    let secret = sessionStorage.getItem('acl_admin_secret') || '';
+    let rows = [];
+    let stats = {};
+    let currentFilter = 'all';
+
+    const gateView = document.getElementById('gate-view');
+    const dashView = document.getElementById('dash-view');
+    const gateErr = document.getElementById('gate-err');
+    const secretInput = document.getElementById('secret-input');
+    const tableWrap = document.getElementById('table-wrap');
+    const statsEl = document.getElementById('stats');
+
+    function showGate(err) {
+      gateView.style.display = 'block';
+      dashView.style.display = 'none';
+      if (err) { gateErr.textContent = err; gateErr.style.display = 'block'; }
+      secretInput.focus();
+    }
+    function showDash() {
+      gateView.style.display = 'none';
+      dashView.style.display = 'block';
+      loadData();
+    }
+
+    document.getElementById('gate-submit').onclick = tryUnlock;
+    secretInput.addEventListener('keydown', e => { if (e.key === 'Enter') tryUnlock(); });
+    document.getElementById('signout').onclick = () => {
+      sessionStorage.removeItem('acl_admin_secret');
+      secret = '';
+      secretInput.value = '';
+      showGate();
+    };
+
+    async function tryUnlock() {
+      const val = secretInput.value.trim();
+      if (!val) { showGate('Enter a secret.'); return; }
+      gateErr.style.display = 'none';
+      try {
+        const res = await fetch(ADMIN_URL, { method: 'GET', headers: { 'X-Admin-Secret': val } });
+        if (res.status === 401) { showGate('Wrong secret.'); return; }
+        if (!res.ok) {
+          const t = await res.text();
+          showGate('Error: ' + t.substring(0, 200));
+          return;
+        }
+        secret = val;
+        sessionStorage.setItem('acl_admin_secret', secret);
+        const data = await res.json();
+        rows = data.rows || [];
+        stats = data.stats || {};
+        showDash();
+      } catch (e) {
+        showGate('Network error: ' + e.message);
+      }
+    }
+
+    async function loadData() {
+      tableWrap.innerHTML = '<div class="loading">Loading...</div>';
+      try {
+        const res = await fetch(ADMIN_URL, { method: 'GET', headers: { 'X-Admin-Secret': secret } });
+        if (res.status === 401) { sessionStorage.removeItem('acl_admin_secret'); showGate('Session expired.'); return; }
+        const data = await res.json();
+        rows = data.rows || [];
+        stats = data.stats || {};
+        renderStats();
+        renderTable();
+      } catch (e) {
+        tableWrap.innerHTML = '<div class="empty">Failed to load: ' + e.message + '</div>';
+      }
+    }
+
+    function renderStats() {
+      statsEl.innerHTML = `
+        <div class="stat"><div class="label">Total responses</div><div class="value">${stats.total ?? 0}</div></div>
+        <div class="stat"><div class="label">Follow-up opt-in</div><div class="value">${stats.optin ?? 0}</div></div>
+        <div class="stat"><div class="label">Incentive sent</div><div class="value">${stats.incentive_sent ?? 0}</div></div>
+        <div class="stat"><div class="label">Selected for follow-up</div><div class="value">${stats.selected_for_followup ?? 0}</div></div>
+        <div class="stat"><div class="label">Follow-up completed</div><div class="value">${stats.followup_completed ?? 0}</div></div>
+      `;
+    }
+
+    document.querySelectorAll('.filter-chip').forEach(c => {
+      c.onclick = () => {
+        document.querySelectorAll('.filter-chip').forEach(x => x.classList.remove('active'));
+        c.classList.add('active');
+        currentFilter = c.dataset.filter;
+        renderTable();
+      };
+    });
+
+    function filterRows() {
+      if (currentFilter === 'all') return rows;
+      if (currentFilter === 'followup_optin') return rows.filter(r => r.followup_optin);
+      if (currentFilter === 'incentive_pending') return rows.filter(r => !r.incentive_sent);
+      if (currentFilter === 'incentive_sent') return rows.filter(r => r.incentive_sent);
+      if (currentFilter === 'selected_for_followup') return rows.filter(r => r.selected_for_followup);
+      if (currentFilter === 'followup_completed') return rows.filter(r => r.followup_completed);
+      return rows;
+    }
+
+    function fmtDate(s) {
+      if (!s) return '';
+      const d = new Date(s);
+      return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + ' ' +
+             d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+    }
+
+    function esc(s) {
+      if (s == null) return '';
+      return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function renderTable() {
+      const filtered = filterRows();
+      if (filtered.length === 0) {
+        tableWrap.innerHTML = '<div class="empty">No responses yet for this filter.</div>';
+        return;
+      }
+      const html = `
+        <table>
+          <thead>
+            <tr>
+              <th>When</th>
+              <th>Email</th>
+              <th>Relationship</th>
+              <th>State</th>
+              <th>Condition</th>
+              <th>Q8 — One thing to remove</th>
+              <th>Q11 — Top challenge</th>
+              <th>Q13 — Programs</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${filtered.map(r => {
+              const badges = [];
+              if (r.followup_optin) badges.push('<span class="badge badge-followup">FU opt-in</span>');
+              if (r.incentive_sent) badges.push('<span class="badge badge-sent">Paid</span>');
+              if (r.selected_for_followup) badges.push('<span class="badge badge-selected">FU picked</span>');
+              if (r.followup_completed) badges.push('<span class="badge badge-done">FU done</span>');
+              const topChallenge = Array.isArray(r.challenge_ranking) && r.challenge_ranking.length > 0 ? r.challenge_ranking[0] : '';
+              return `
+                <tr>
+                  <td>${esc(fmtDate(r.created_at))}</td>
+                  <td class="email">${esc(r.email)}</td>
+                  <td>${esc(r.relationship || '')}</td>
+                  <td>${esc(r.state_us || '')}</td>
+                  <td>${esc(r.condition_area || '')}</td>
+                  <td class="story"><div class="clip">${esc(r.one_thing_to_remove || '')}</div></td>
+                  <td>${esc(topChallenge)}</td>
+                  <td>${esc(r.knew_about_programs || '')}</td>
+                  <td>${badges.join(' ') || '<span style="color:var(--text-muted);font-size:11px;">—</span>'}</td>
+                  <td class="actions">
+                    <button class="action-btn" onclick="openDetail('${r.id}')">View</button>
+                    <button class="action-btn ${r.incentive_sent ? 'active' : ''}" onclick="toggleField('${r.id}', 'incentive_sent', ${!r.incentive_sent})">${r.incentive_sent ? '✓ Paid' : 'Mark paid'}</button>
+                    ${r.followup_optin ? `<button class="action-btn ${r.selected_for_followup ? 'active' : ''}" onclick="toggleField('${r.id}', 'selected_for_followup', ${!r.selected_for_followup})">${r.selected_for_followup ? '✓ Picked' : 'Pick FU'}</button>` : ''}
+                    ${r.selected_for_followup ? `<button class="action-btn ${r.followup_completed ? 'active' : ''}" onclick="toggleField('${r.id}', 'followup_completed', ${!r.followup_completed})">${r.followup_completed ? '✓ Done' : 'Mark done'}</button>` : ''}
+                  </td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+        </table>
+      `;
+      tableWrap.classList.remove('loading');
+      tableWrap.innerHTML = html;
+    }
+
+    async function toggleField(id, field, newVal) {
+      const patch = {};
+      patch[field] = newVal;
+      try {
+        const res = await fetch(ADMIN_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-Admin-Secret': secret },
+          body: JSON.stringify({ id, patch })
+        });
+        if (!res.ok) { alert('Update failed'); return; }
+        const data = await res.json();
+        const idx = rows.findIndex(r => r.id === id);
+        if (idx >= 0) rows[idx] = data.row;
+        // Recompute simple counters
+        stats.incentive_sent = rows.filter(r => r.incentive_sent).length;
+        stats.selected_for_followup = rows.filter(r => r.selected_for_followup).length;
+        stats.followup_completed = rows.filter(r => r.followup_completed).length;
+        renderStats();
+        renderTable();
+      } catch (e) { alert('Network error: ' + e.message); }
+    }
+
+    function openDetail(id) {
+      const r = rows.find(x => x.id === id);
+      if (!r) return;
+      const labels = {
+        is_active_caregiver: 'Active caregiver?',
+        relationship: 'Q2 Relationship',
+        living_arrangement: 'Q3 Living arrangement',
+        caregiving_duration: 'Q4 Caregiving duration',
+        condition_area: 'Q5 Condition area',
+        state_us: 'Q6 State',
+        urbanicity: 'Q7 Urbanicity',
+        one_thing_to_remove: 'Q8 One thing to remove',
+        num_hospital_systems: 'Q9 Hospital systems',
+        last_info_search_difficulty: 'Q10 Last info search',
+        challenge_ranking: 'Q11 Challenge ranking',
+        tools_tried: 'Q12 Tools tried',
+        knew_about_programs: 'Q13 Knew about programs',
+        programs_lookup_story: 'Q14 Lookup story',
+        recent_appointment_story: 'Q15 Recent appointment',
+        trust_requirements: 'Q16 Trust requirements',
+        email: 'Q17 Email',
+        followup_optin: 'Q18 Follow-up opt-in',
+        incentive_choice: 'Q19 Incentive choice',
+        additional_notes: 'Q20 Additional notes',
+      };
+      let html = `<h2>Response ${fmtDate(r.created_at)} — ${esc(r.email)}</h2>`;
+      for (const [k, label] of Object.entries(labels)) {
+        let val = r[k];
+        if (val == null || val === '') continue;
+        if (Array.isArray(val)) val = val.join(', ');
+        if (typeof val === 'boolean') val = val ? 'yes' : 'no';
+        html += `<div class="field"><div class="field-label">${esc(label)}</div><div class="field-value">${esc(val)}</div></div>`;
+      }
+      // Editable follow-up notes
+      html += `<div class="field"><div class="field-label">Internal follow-up notes</div>
+        <textarea id="fu-notes" rows="5" style="width:100%;padding:8px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:14px;">${esc(r.followup_notes || '')}</textarea>
+        <button class="action-btn" style="margin-top:8px;" onclick="saveNotes('${r.id}')">Save notes</button>
+      </div>`;
+      document.getElementById('modal-body').innerHTML = html;
+      document.getElementById('modal-backdrop').style.display = 'flex';
+    }
+
+    async function saveNotes(id) {
+      const txt = document.getElementById('fu-notes').value;
+      await fetch(ADMIN_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-Admin-Secret': secret },
+        body: JSON.stringify({ id, patch: { followup_notes: txt } })
+      });
+      const idx = rows.findIndex(r => r.id === id);
+      if (idx >= 0) rows[idx].followup_notes = txt;
+      alert('Saved');
+    }
+
+    document.getElementById('modal-close').onclick = () => {
+      document.getElementById('modal-backdrop').style.display = 'none';
+    };
+    document.getElementById('modal-backdrop').onclick = (e) => {
+      if (e.target.id === 'modal-backdrop') document.getElementById('modal-backdrop').style.display = 'none';
+    };
+
+    document.getElementById('csv-export').onclick = () => {
+      const filtered = filterRows();
+      const keys = ['created_at','email','relationship','living_arrangement','caregiving_duration','condition_area','state_us','urbanicity','one_thing_to_remove','num_hospital_systems','last_info_search_difficulty','challenge_ranking','tools_tried','knew_about_programs','programs_lookup_story','recent_appointment_story','trust_requirements','followup_optin','incentive_choice','additional_notes','incentive_sent','selected_for_followup','followup_completed','followup_notes'];
+      const csvEsc = v => {
+        if (v == null) return '';
+        const s = Array.isArray(v) ? v.join('|') : String(v);
+        return '"' + s.replace(/"/g,'""') + '"';
+      };
+      const lines = [keys.join(',')];
+      filtered.forEach(r => lines.push(keys.map(k => csvEsc(r[k])).join(',')));
+      const blob = new Blob([lines.join('\n')], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'acl_survey_responses_' + new Date().toISOString().slice(0,10) + '.csv';
+      a.click();
+      URL.revokeObjectURL(url);
+    };
+
+    // Auto-unlock if we already have a stored secret
+    if (secret) {
+      fetch(ADMIN_URL, { method: 'GET', headers: { 'X-Admin-Secret': secret } })
+        .then(r => r.ok ? showDash() : (sessionStorage.removeItem('acl_admin_secret'), secret = '', showGate()))
+        .catch(() => showGate());
+    } else {
+      showGate();
+    }
+  </script>
+</body>
+</html>

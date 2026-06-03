@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caregiver Research — Wellet</title>
+  <meta name="description" content="Help shape what comes next for Wellet. A 10-minute survey for family caregivers. $25 thank-you to the caregiver organization of your choice.">
+  <meta name="robots" content="noindex, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Help shape what comes next for Wellet">
+  <meta property="og:description" content="A 10-minute survey for family caregivers. Your time is honored with a $25 donation to a caregiver org of your choice.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://getwellet.com/research">
+  <meta property="og:image" content="https://getwellet.com/og-image.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="./base.css">
+  <link rel="stylesheet" href="./style.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%232d6a4f'/%3E%3Cpath d='M8 16c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8' stroke='white' stroke-width='2.5' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='16' cy='16' r='3' fill='white'/%3E%3C/svg%3E">
+
+  <!-- Theme init -->
+  <script>
+    (function() {
+      var stored = localStorage.getItem('wellet-theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = stored || (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    })();
+  </script>
+
+  <style>
+    /* ---- Research survey page styles ---- */
+    .rs-header {
+      padding: var(--space-6) 0;
+      border-bottom: 1px solid var(--color-divider);
+      background: color-mix(in srgb, var(--color-bg) 90%, transparent);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .rs-header-inner {
+      max-width: var(--content-default);
+      margin: 0 auto;
+      padding: 0 var(--space-6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+
+    .rs-wordmark {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 1.5rem;
+      color: var(--color-text);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+
+    .rs-back {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      text-decoration: none;
+      transition: color var(--transition-interactive);
+    }
+    .rs-back:hover { color: var(--color-primary); }
+
+    main.rs-main {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: var(--space-12) var(--space-6) var(--space-24);
+    }
+
+    .rs-intro h1 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(2rem, 1.4rem + 2vw, 2.75rem);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin: 0 0 var(--space-6);
+    }
+
+    .rs-intro p {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: 1.6;
+      color: var(--color-text);
+      margin: 0 0 var(--space-4);
+    }
+
+    .rs-intro p.rs-meta {
+      color: var(--color-text-muted);
+      font-size: var(--text-sm);
+    }
+
+    .rs-trust-strip {
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: var(--space-5);
+      margin: var(--space-8) 0;
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    .rs-trust-strip strong {
+      color: var(--color-text);
+      font-weight: 500;
+    }
+
+    form#research-survey {
+      margin-top: var(--space-12);
+    }
+
+    .rs-section {
+      margin-bottom: var(--space-16);
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--color-divider);
+    }
+    .rs-section:first-child { border-top: 0; padding-top: 0; }
+
+    .rs-section-label {
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--space-2);
+    }
+
+    .rs-section-title {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: var(--text-xl);
+      line-height: 1.2;
+      color: var(--color-text);
+      margin: 0 0 var(--space-8);
+      letter-spacing: -0.01em;
+    }
+
+    .rs-q {
+      margin-bottom: var(--space-10);
+    }
+
+    .rs-q-label {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 500;
+      color: var(--color-text);
+      line-height: 1.5;
+      display: block;
+      margin-bottom: var(--space-2);
+    }
+
+    .rs-q-help {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      line-height: 1.5;
+      margin-bottom: var(--space-4);
+    }
+
+    .rs-required {
+      color: var(--color-primary);
+      font-weight: 500;
+    }
+
+    /* Radio + checkbox options */
+    .rs-options { display: flex; flex-direction: column; gap: var(--space-2); }
+
+    .rs-option {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      transition: all var(--transition-interactive);
+      background: var(--color-surface-2);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      line-height: 1.5;
+    }
+    .rs-option:hover { border-color: var(--color-primary); background: var(--color-primary-light); }
+    .rs-option input { margin-top: 3px; accent-color: var(--color-primary); flex-shrink: 0; }
+    .rs-option input:checked ~ span { color: var(--color-text); font-weight: 500; }
+    .rs-option:has(input:checked) { border-color: var(--color-primary); background: var(--color-primary-light); }
+
+    /* Text inputs */
+    input[type="text"], input[type="email"], select, textarea {
+      width: 100%;
+      padding: var(--space-3) var(--space-4);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      background: var(--color-surface-2);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      line-height: 1.5;
+      transition: border-color var(--transition-interactive);
+    }
+    input[type="text"]:focus, input[type="email"]:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 15%, transparent);
+    }
+    textarea { resize: vertical; min-height: 100px; font-family: var(--font-body); }
+    .rs-char-count { font-family: var(--font-body); font-size: 0.75rem; color: var(--color-text-faint); text-align: right; margin-top: var(--space-1); }
+
+    /* Ranking (drag list) */
+    .rs-rank-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+    .rs-rank-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: var(--space-3) var(--space-4);
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      cursor: grab;
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-text);
+      transition: all var(--transition-interactive);
+      user-select: none;
+    }
+    .rs-rank-item:hover { border-color: var(--color-primary); }
+    .rs-rank-item.dragging { opacity: 0.5; cursor: grabbing; }
+    .rs-rank-item.drag-over { border-color: var(--color-primary); background: var(--color-primary-light); }
+    .rs-rank-number {
+      width: 28px;
+      height: 28px;
+      border-radius: var(--radius-full);
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+    .rs-rank-grip {
+      color: var(--color-text-faint);
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    .rs-rank-label { flex: 1; }
+    .rs-rank-up, .rs-rank-down {
+      background: transparent;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      width: 28px; height: 28px;
+      cursor: pointer;
+      color: var(--color-text-muted);
+      font-size: 1rem;
+      line-height: 1;
+      transition: all var(--transition-interactive);
+    }
+    .rs-rank-up:hover, .rs-rank-down:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    /* Submit */
+    .rs-submit-wrap {
+      margin-top: var(--space-8);
+      padding-top: var(--space-8);
+      border-top: 1px solid var(--color-divider);
+    }
+    .rs-submit-btn {
+      width: 100%;
+      padding: var(--space-4) var(--space-6);
+      background: var(--color-primary);
+      color: var(--color-text-inverse);
+      border: none;
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      font-weight: 500;
+      cursor: pointer;
+      transition: background var(--transition-interactive);
+    }
+    .rs-submit-btn:hover { background: var(--color-primary-hover); }
+    .rs-submit-btn:active { background: var(--color-primary-active); }
+    .rs-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .rs-submit-note {
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+      text-align: center;
+      margin-top: var(--space-4);
+      line-height: 1.5;
+    }
+
+    .rs-progress {
+      position: fixed;
+      top: 81px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--color-divider);
+      z-index: 49;
+    }
+    .rs-progress-bar {
+      height: 100%;
+      background: var(--color-primary);
+      width: 0%;
+      transition: width 300ms ease;
+    }
+
+    /* Thanks state */
+    .rs-thanks {
+      display: none;
+      text-align: center;
+      padding: var(--space-16) var(--space-6);
+    }
+    .rs-thanks h2 {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: var(--text-2xl);
+      color: var(--color-text);
+      margin: 0 0 var(--space-6);
+      letter-spacing: -0.02em;
+    }
+    .rs-thanks p {
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      color: var(--color-text);
+      line-height: 1.6;
+      margin: 0 0 var(--space-4);
+      max-width: 480px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .rs-error {
+      display: none;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      color: #991b1b;
+      padding: var(--space-4);
+      border-radius: var(--radius-md);
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+      margin: var(--space-4) 0;
+    }
+    [data-theme='dark'] .rs-error {
+      background: #1f1414;
+      border-color: #5c2424;
+      color: #fecaca;
+    }
+
+    /* Branching */
+    .rs-hidden { display: none; }
+
+    @media (max-width: 640px) {
+      main.rs-main { padding: var(--space-8) var(--space-4) var(--space-16); }
+      .rs-rank-up, .rs-rank-down { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="rs-header">
+    <div class="rs-header-inner">
+      <a href="/" class="rs-wordmark">Wellet</a>
+      <a href="/" class="rs-back">← back to wellet</a>
+    </div>
+  </header>
+
+  <div class="rs-progress"><div class="rs-progress-bar" id="progress-bar"></div></div>
+
+  <main class="rs-main">
+
+    <!-- INTRO -->
+    <section class="rs-intro" id="intro">
+      <h1>Help shape what comes next.</h1>
+      <p>Wellet is being submitted to a federal grant program for AI tools that help family caregivers. The application asks us to show that real caregivers — not just the founder, who is one — have shaped what we are building.</p>
+      <p>This survey takes about 10 minutes. Your answers will be anonymized and used in our federal application and in our public writing about Wellet.</p>
+      <p>As a thank-you, we will send a $25 donation to a caregiver advocacy organization of your choice, or a $25 Amazon gift card if you prefer.</p>
+      <p>If you opt into a 15 to 20 minute follow-up interview, we will send a $100 magickitchen.com food gift — meals for your loved one or for you. Magic Kitchen specializes in meals built for aging and recovery diets.</p>
+      <p class="rs-meta">Plain language throughout. We use "loved one" not "patient." Nothing clinical.</p>
+
+      <div class="rs-trust-strip">
+        <strong>Your privacy:</strong> we never ask for your loved one's name, hospital, diagnosis, or any medical detail. Your responses are stored securely. We will never share your name or email with anyone outside our research team. Anonymized quotes may appear in our federal application and in our public writing.
+      </div>
+    </section>
+
+    <!-- FORM -->
+    <form id="research-survey" novalidate>
+
+      <!-- SECTION A: CONTEXT -->
+      <section class="rs-section">
+        <div class="rs-section-label">Section A — About you</div>
+        <h2 class="rs-section-title">Tell us a little about your caregiving role.</h2>
+
+        <!-- Q1 — eligibility -->
+        <div class="rs-q">
+          <label class="rs-q-label" for="q1">1. Are you currently providing care for an aging or chronically ill family member or friend? <span class="rs-required">*</span></label>
+          <div class="rs-options">
+            <label class="rs-option"><input type="radio" name="q1" value="yes" required><span>Yes</span></label>
+            <label class="rs-option"><input type="radio" name="q1" value="no" required><span>No</span></label>
+          </div>
+        </div>
+
+        <div id="conditional-block">
+          <!-- Q2 -->
+          <div class="rs-q">
+            <label class="rs-q-label">2. What is your relationship to the person you care for? <span class="rs-required">*</span></label>
+            <div class="rs-options">
+              <label class="rs-option"><input type="radio" name="q2" value="daughter"><span>Daughter</span></label>
+              <label class="rs-option"><input type="radio" name="q2" value="son"><span>Son</span></label>
+              <label class="rs-option"><input type="radio" name="q2" value="spouse"><span>Spouse or partner</span></label>
+              <label class="rs-option"><input type="radio" name="q2" value="other_family"><span>Other family (sibling, niece, grandchild, etc.)</span></label>
+              <label class="rs-option"><input type="radio" name="q2" value="friend"><span>Friend or neighbor</span></label>
+              <label class="rs-option"><input type="radio" name="q2" value="other"><span>Other</span></label>
+            </div>
+          </div>
+
+          <!-- Q3 -->
+          <div class="rs-q">
+            <label class="rs-q-label">3. Where does your loved one live? <span class="rs-required">*</span></label>
+            <div class="rs-options">
+              <label class="rs-option"><input type="radio" name="q3" value="same_home"><span>With me, full-time</span></label>
+              <label class="rs-option"><input type="radio" name="q3" value="nearby"><span>Nearby (under 30 minutes away)</span></label>
+              <label class="rs-option"><input type="radio" name="q3" value="same_region"><span>Same city or region but more than 30 minutes</span></label>
+              <label class="rs-option"><input type="radio" name="q3" value="different_state"><span>Different state</span></label>
+              <label class="rs-option"><input type="radio" name="q3" value="long_distance"><span>Long-distance or different country</span></label>
+            </div>
+          </div>
+
+          <!-- Q4 -->
+          <div class="rs-q">
+            <label class="rs-q-label">4. How long have you been a caregiver for this person? <span class="rs-required">*</span></label>
+            <div class="rs-options">
+              <label class="rs-option"><input type="radio" name="q4" value="under_6mo"><span>Less than 6 months</span></label>
+              <label class="rs-option"><input type="radio" name="q4" value="6mo_2yr"><span>6 months to 2 years</span></label>
+              <label class="rs-option"><input type="radio" name="q4" value="2yr_5yr"><span>2 to 5 years</span></label>
+              <label class="rs-option"><input type="radio" name="q4" value="over_5yr"><span>More than 5 years</span></label>
+            </div>
+          </div>
+
+          <!-- Q5 -->
+          <div class="rs-q">
+            <label class="rs-q-label">5. What is the main condition area you are navigating?</label>
+            <div class="rs-q-help">Pick the closest, or skip.</div>
+            <div class="rs-options">
+              <label class="rs-option"><input type="radio" name="q5" value="dementia"><span>Memory loss, dementia, or Alzheimer's</span></label>
+              <label class="rs-option"><input type="radio" name="q5" value="cardiac"><span>Heart or cardiovascular</span></label>
+              <label class="rs-option"><input type="radio" name="q5" value="cancer"><span>Cancer (active or survivorship)</span></label>
+              <label class="rs-option"><input type="radio" name="q5" value="multiple_chronic"><span>Multiple chronic conditions</span></label>
+              <label class="rs-option"><input type="radio" name="q5" value="recovery"><span>Recovery from a hospital stay</span></label>
+              <label class="rs-option"><input type="radio" name="q5" value="general_aging"><span>General aging without one specific condition</span></label>
+              <label class="rs-option"><input type="radio" name="q5" value="other"><span>Other</span></label>
+              <label class="rs-option"><input type="radio" name="q5" value="prefer_not_say"><span>Prefer not to say</span></label>
+            </div>
+          </div>
+
+          <!-- Q6 -->
+          <div class="rs-q">
+            <label class="rs-q-label" for="q6">6. What state do you live in? <span class="rs-required">*</span></label>
+            <select id="q6" name="q6">
+              <option value="">-- Select your state --</option>
+            </select>
+          </div>
+
+          <!-- Q7 -->
+          <div class="rs-q">
+            <label class="rs-q-label">7. How would you describe where you live? <span class="rs-required">*</span></label>
+            <div class="rs-options">
+              <label class="rs-option"><input type="radio" name="q7" value="major_city"><span>Major city or urban</span></label>
+              <label class="rs-option"><input type="radio" name="q7" value="suburb"><span>Suburb of a major city</span></label>
+              <label class="rs-option"><input type="radio" name="q7" value="small_town"><span>Small town</span></label>
+              <label class="rs-option"><input type="radio" name="q7" value="rural"><span>Rural</span></label>
+              <label class="rs-option"><input type="radio" name="q7" value="not_sure"><span>Not sure</span></label>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      <!-- SECTION B: DAILY -->
+      <section class="rs-section">
+        <div class="rs-section-label">Section B — The day-to-day</div>
+        <h2 class="rs-section-title">What caregiving actually looks like.</h2>
+
+        <!-- Q8 -->
+        <div class="rs-q">
+          <label class="rs-q-label" for="q8">8. If you could remove one thing from your caregiving day — one task, one feeling, one worry — what would it be? <span class="rs-required">*</span></label>
+          <textarea id="q8" name="q8" maxlength="500" placeholder="The specific thing you'd hand off if you could." rows="4"></textarea>
+          <div class="rs-char-count"><span id="q8-count">0</span> / 500</div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="rs-q">
+          <label class="rs-q-label">9. How many different hospital systems, clinics, or providers does your loved one currently see? <span class="rs-required">*</span></label>
+          <div class="rs-options">
+            <label class="rs-option"><input type="radio" name="q9" value="one"><span>One</span></label>
+            <label class="rs-option"><input type="radio" name="q9" value="two"><span>Two</span></label>
+            <label class="rs-option"><input type="radio" name="q9" value="three_four"><span>Three to four</span></label>
+            <label class="rs-option"><input type="radio" name="q9" value="five_plus"><span>Five or more</span></label>
+            <label class="rs-option"><input type="radio" name="q9" value="dont_know"><span>I don't honestly know</span></label>
+          </div>
+        </div>
+
+        <!-- Q10 -->
+        <div class="rs-q">
+          <label class="rs-q-label">10. When was the last time you needed information about your loved one's health — a medication name, lab result, doctor's note — and could not find it quickly? <span class="rs-required">*</span></label>
+          <div class="rs-options">
+            <label class="rs-option"><input type="radio" name="q10" value="today"><span>Today or yesterday</span></label>
+            <label class="rs-option"><input type="radio" name="q10" value="this_week"><span>This past week</span></label>
+            <label class="rs-option"><input type="radio" name="q10" value="this_month"><span>This past month</span></label>
+            <label class="rs-option"><input type="radio" name="q10" value="over_month"><span>More than a month ago</span></label>
+            <label class="rs-option"><input type="radio" name="q10" value="never"><span>Never</span></label>
+          </div>
+        </div>
+
+        <!-- Q11 ranking -->
+        <div class="rs-q">
+          <label class="rs-q-label">11. Rank these caregiving challenges from hardest (top) to easiest (bottom) for you personally. <span class="rs-required">*</span></label>
+          <div class="rs-q-help">Drag to reorder, or use the up and down arrows.</div>
+          <ul class="rs-rank-list" id="rank-list">
+            <li class="rs-rank-item" draggable="true" data-key="meds"><span class="rs-rank-number">1</span><span class="rs-rank-grip">⋮⋮</span><span class="rs-rank-label">Keeping track of medications and dosages</span><button type="button" class="rs-rank-up" aria-label="Move up">↑</button><button type="button" class="rs-rank-down" aria-label="Move down">↓</button></li>
+            <li class="rs-rank-item" draggable="true" data-key="prep_visits"><span class="rs-rank-number">2</span><span class="rs-rank-grip">⋮⋮</span><span class="rs-rank-label">Preparing for doctor appointments</span><button type="button" class="rs-rank-up" aria-label="Move up">↑</button><button type="button" class="rs-rank-down" aria-label="Move down">↓</button></li>
+            <li class="rs-rank-item" draggable="true" data-key="notice_changes"><span class="rs-rank-number">3</span><span class="rs-rank-grip">⋮⋮</span><span class="rs-rank-label">Noticing health changes between appointments</span><button type="button" class="rs-rank-up" aria-label="Move up">↑</button><button type="button" class="rs-rank-down" aria-label="Move down">↓</button></li>
+            <li class="rs-rank-item" draggable="true" data-key="paperwork"><span class="rs-rank-number">4</span><span class="rs-rank-grip">⋮⋮</span><span class="rs-rank-label">Managing paperwork, bills, insurance</span><button type="button" class="rs-rank-up" aria-label="Move up">↑</button><button type="button" class="rs-rank-down" aria-label="Move down">↓</button></li>
+            <li class="rs-rank-item" draggable="true" data-key="benefits"><span class="rs-rank-number">5</span><span class="rs-rank-grip">⋮⋮</span><span class="rs-rank-label">Finding programs or benefits you may qualify for</span><button type="button" class="rs-rank-up" aria-label="Move up">↑</button><button type="button" class="rs-rank-down" aria-label="Move down">↓</button></li>
+            <li class="rs-rank-item" draggable="true" data-key="emotional"><span class="rs-rank-number">6</span><span class="rs-rank-grip">⋮⋮</span><span class="rs-rank-label">The emotional weight</span><button type="button" class="rs-rank-up" aria-label="Move up">↑</button><button type="button" class="rs-rank-down" aria-label="Move down">↓</button></li>
+            <li class="rs-rank-item" draggable="true" data-key="family_coord"><span class="rs-rank-number">7</span><span class="rs-rank-grip">⋮⋮</span><span class="rs-rank-label">Coordinating with other family members</span><button type="button" class="rs-rank-up" aria-label="Move up">↑</button><button type="button" class="rs-rank-down" aria-label="Move down">↓</button></li>
+            <li class="rs-rank-item" draggable="true" data-key="own_exhaustion"><span class="rs-rank-number">8</span><span class="rs-rank-grip">⋮⋮</span><span class="rs-rank-label">Your own physical exhaustion</span><button type="button" class="rs-rank-up" aria-label="Move up">↑</button><button type="button" class="rs-rank-down" aria-label="Move down">↓</button></li>
+          </ul>
+        </div>
+
+      </section>
+
+      <!-- SECTION C: TRIED + NEED -->
+      <section class="rs-section">
+        <div class="rs-section-label">Section C — What you've tried, what you need</div>
+        <h2 class="rs-section-title">Tools, programs, doctor visits.</h2>
+
+        <!-- Q12 -->
+        <div class="rs-q">
+          <label class="rs-q-label" for="q12">12. Have you tried any apps, websites, or tools to help with caregiving? Which ones, and what made them work or not work?</label>
+          <textarea id="q12" name="q12" maxlength="1000" placeholder="Names of products, what you liked, what made you stop." rows="5"></textarea>
+          <div class="rs-char-count"><span id="q12-count">0</span> / 1000</div>
+        </div>
+
+        <!-- Q13 -->
+        <div class="rs-q">
+          <label class="rs-q-label">13. Before today, did you know there are state Medicaid waivers, VA programs, FSA provisions, and other programs that may pay family caregivers or reimburse caregiver expenses? <span class="rs-required">*</span></label>
+          <div class="rs-options">
+            <label class="rs-option"><input type="radio" name="q13" value="yes_looked"><span>Yes — I've looked into one or more</span></label>
+            <label class="rs-option"><input type="radio" name="q13" value="yes_heard"><span>Yes — I've heard of them but haven't pursued</span></label>
+            <label class="rs-option"><input type="radio" name="q13" value="no_idea"><span>No — I had no idea</span></label>
+          </div>
+        </div>
+
+        <!-- Q14 -->
+        <div class="rs-q rs-hidden" id="q14-wrap">
+          <label class="rs-q-label" for="q14">14. What happened when you looked into it?</label>
+          <textarea id="q14" name="q14" maxlength="500" placeholder="What you found, where you got stuck." rows="4"></textarea>
+          <div class="rs-char-count"><span id="q14-count">0</span> / 500</div>
+        </div>
+
+        <!-- Q15 -->
+        <div class="rs-q">
+          <label class="rs-q-label" for="q15">15. Tell us about your loved one's most recent doctor appointment. How did you prepare? What did you wish you'd had with you?</label>
+          <textarea id="q15" name="q15" maxlength="1000" placeholder="Walk us through it." rows="5"></textarea>
+          <div class="rs-char-count"><span id="q15-count">0</span> / 1000</div>
+        </div>
+
+        <!-- Q16 -->
+        <div class="rs-q">
+          <label class="rs-q-label" for="q16">16. If a tool existed that pulled your loved one's records from every hospital they see, noticed patterns before the next visit, matched you to programs you may qualify for, and answered your questions in plain English — what would have to be true about it for you to trust it?</label>
+          <textarea id="q16" name="q16" maxlength="1000" placeholder="What does trust look like for you." rows="5"></textarea>
+          <div class="rs-char-count"><span id="q16-count">0</span> / 1000</div>
+        </div>
+
+      </section>
+
+      <!-- SECTION D: CLOSING -->
+      <section class="rs-section">
+        <div class="rs-section-label">Section D — Where to send your thank-you</div>
+        <h2 class="rs-section-title">A few last things.</h2>
+
+        <!-- Q17 -->
+        <div class="rs-q">
+          <label class="rs-q-label" for="q17">17. What's your email address? <span class="rs-required">*</span></label>
+          <div class="rs-q-help">For sending your $25 thank-you. We will not add you to any list without your yes.</div>
+          <input type="email" id="q17" name="q17" required placeholder="you@example.com">
+        </div>
+
+        <!-- Q18 -->
+        <div class="rs-q">
+          <label class="rs-q-label">18. Would you be willing to do a 15 to 20 minute follow-up interview? In return, we will send you a $100 magickitchen.com food gift — meals for your loved one or for you. <span class="rs-required">*</span></label>
+          <div class="rs-options">
+            <label class="rs-option"><input type="radio" name="q18" value="yes"><span>Yes, interested in the follow-up</span></label>
+            <label class="rs-option"><input type="radio" name="q18" value="no"><span>No thanks, just the survey</span></label>
+          </div>
+        </div>
+
+        <!-- Q19 -->
+        <div class="rs-q">
+          <label class="rs-q-label">19. Where would you like your $25 thank-you to go? <span class="rs-required">*</span></label>
+          <div class="rs-options">
+            <label class="rs-option"><input type="radio" name="q19" value="nac"><span>Donation to National Alliance for Caregiving</span></label>
+            <label class="rs-option"><input type="radio" name="q19" value="aarp"><span>Donation to AARP Foundation</span></label>
+            <label class="rs-option"><input type="radio" name="q19" value="alz"><span>Donation to Alzheimer's Association</span></label>
+            <label class="rs-option"><input type="radio" name="q19" value="other_org"><span>Donation to a caregiver org of my choice (tell us by email)</span></label>
+            <label class="rs-option"><input type="radio" name="q19" value="amazon"><span>$25 Amazon gift card to me</span></label>
+          </div>
+        </div>
+
+        <!-- Q20 -->
+        <div class="rs-q">
+          <label class="rs-q-label" for="q20">20. Anything else you want us to know?</label>
+          <textarea id="q20" name="q20" maxlength="500" placeholder="Optional." rows="3"></textarea>
+          <div class="rs-char-count"><span id="q20-count">0</span> / 500</div>
+        </div>
+
+      </section>
+
+      <div class="rs-error" id="error-msg"></div>
+
+      <div class="rs-submit-wrap">
+        <button type="submit" class="rs-submit-btn" id="submit-btn">Submit survey</button>
+        <p class="rs-submit-note">We'll email your $25 thank-you within 5 business days.</p>
+      </div>
+
+    </form>
+
+    <!-- THANKS -->
+    <section class="rs-thanks" id="thanks">
+      <h2>Thank you.</h2>
+      <p>Your answers are received. We'll send your $25 thank-you within 5 business days to the email you gave.</p>
+      <p>If you opted into the follow-up interview, we'll reach out within the next two weeks to schedule.</p>
+      <p>Real caregivers like you are why Wellet exists.</p>
+      <p style="margin-top: var(--space-12);"><a href="/" class="rs-back">← back to wellet</a></p>
+    </section>
+
+  </main>
+
+  <script>
+    // -------- US states + territories --------
+    const STATES = ['Alabama','Alaska','Arizona','Arkansas','California','Colorado','Connecticut','Delaware','District of Columbia','Florida','Georgia','Hawaii','Idaho','Illinois','Indiana','Iowa','Kansas','Kentucky','Louisiana','Maine','Maryland','Massachusetts','Michigan','Minnesota','Mississippi','Missouri','Montana','Nebraska','Nevada','New Hampshire','New Jersey','New Mexico','New York','North Carolina','North Dakota','Ohio','Oklahoma','Oregon','Pennsylvania','Rhode Island','South Carolina','South Dakota','Tennessee','Texas','Utah','Vermont','Virginia','Washington','West Virginia','Wisconsin','Wyoming','Puerto Rico','Other US territory','Outside the US'];
+    const stateSelect = document.getElementById('q6');
+    STATES.forEach(s => {
+      const opt = document.createElement('option');
+      opt.value = s; opt.textContent = s;
+      stateSelect.appendChild(opt);
+    });
+
+    // -------- Character counters --------
+    ['q8','q12','q14','q15','q16','q20'].forEach(id => {
+      const el = document.getElementById(id);
+      const counter = document.getElementById(id + '-count');
+      if (el && counter) {
+        el.addEventListener('input', () => { counter.textContent = el.value.length; });
+      }
+    });
+
+    // -------- Q1 branching: hide rest if "no" --------
+    const conditionalBlock = document.getElementById('conditional-block');
+    const restOfForm = document.querySelectorAll('.rs-section:not(:first-child)');
+    const submitWrap = document.querySelector('.rs-submit-wrap');
+
+    document.querySelectorAll('input[name="q1"]').forEach(r => {
+      r.addEventListener('change', e => {
+        if (e.target.value === 'no') {
+          // Hide everything past Q1
+          conditionalBlock.classList.add('rs-hidden');
+          restOfForm.forEach(s => s.classList.add('rs-hidden'));
+          // Show an exit message
+          if (!document.getElementById('exit-msg')) {
+            const exit = document.createElement('div');
+            exit.id = 'exit-msg';
+            exit.className = 'rs-trust-strip';
+            exit.style.marginTop = 'var(--space-8)';
+            exit.innerHTML = '<strong>Thank you.</strong> This survey is for active family caregivers. If you know someone who is, we would be grateful if you shared this link with them: <strong>getwellet.com/research</strong>';
+            conditionalBlock.parentNode.insertBefore(exit, conditionalBlock.nextSibling);
+          }
+        } else {
+          conditionalBlock.classList.remove('rs-hidden');
+          restOfForm.forEach(s => s.classList.remove('rs-hidden'));
+          const exit = document.getElementById('exit-msg');
+          if (exit) exit.remove();
+        }
+      });
+    });
+
+    // -------- Q13 branching: show Q14 only if "yes_looked" --------
+    document.querySelectorAll('input[name="q13"]').forEach(r => {
+      r.addEventListener('change', e => {
+        document.getElementById('q14-wrap').classList.toggle('rs-hidden', e.target.value !== 'yes_looked');
+      });
+    });
+
+    // -------- Q11 drag-and-drop ranking --------
+    const rankList = document.getElementById('rank-list');
+    let dragSrc = null;
+
+    function refreshRankNumbers() {
+      [...rankList.children].forEach((item, i) => {
+        item.querySelector('.rs-rank-number').textContent = i + 1;
+      });
+    }
+
+    rankList.addEventListener('dragstart', e => {
+      const item = e.target.closest('.rs-rank-item');
+      if (!item) return;
+      dragSrc = item;
+      item.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+    });
+    rankList.addEventListener('dragend', e => {
+      const item = e.target.closest('.rs-rank-item');
+      if (item) item.classList.remove('dragging');
+      [...rankList.children].forEach(c => c.classList.remove('drag-over'));
+      refreshRankNumbers();
+    });
+    rankList.addEventListener('dragover', e => {
+      e.preventDefault();
+      const item = e.target.closest('.rs-rank-item');
+      if (!item || item === dragSrc) return;
+      const rect = item.getBoundingClientRect();
+      const after = (e.clientY - rect.top) / rect.height > 0.5;
+      [...rankList.children].forEach(c => c.classList.remove('drag-over'));
+      item.classList.add('drag-over');
+      if (after) {
+        item.parentNode.insertBefore(dragSrc, item.nextSibling);
+      } else {
+        item.parentNode.insertBefore(dragSrc, item);
+      }
+    });
+
+    // Arrow buttons (mobile fallback)
+    rankList.addEventListener('click', e => {
+      const upBtn = e.target.closest('.rs-rank-up');
+      const downBtn = e.target.closest('.rs-rank-down');
+      if (!upBtn && !downBtn) return;
+      const item = e.target.closest('.rs-rank-item');
+      if (upBtn && item.previousElementSibling) {
+        item.parentNode.insertBefore(item, item.previousElementSibling);
+        refreshRankNumbers();
+      } else if (downBtn && item.nextElementSibling) {
+        item.parentNode.insertBefore(item.nextElementSibling, item);
+        refreshRankNumbers();
+      }
+    });
+
+    // -------- Progress bar --------
+    const form = document.getElementById('research-survey');
+    const progressBar = document.getElementById('progress-bar');
+    function updateProgress() {
+      const requiredFields = form.querySelectorAll('[required], input[name="q2"], input[name="q3"], input[name="q4"], input[name="q7"], input[name="q9"], input[name="q10"], input[name="q13"], input[name="q18"], input[name="q19"]');
+      const groups = ['q1','q2','q3','q4','q7','q9','q10','q13','q18','q19','q17','q6','q8'];
+      let filled = 0;
+      groups.forEach(name => {
+        if (name === 'q6' || name === 'q8' || name === 'q17') {
+          const el = document.getElementById(name);
+          if (el && el.value.trim()) filled++;
+        } else {
+          if (document.querySelector(`input[name="${name}"]:checked`)) filled++;
+        }
+      });
+      const pct = Math.round((filled / groups.length) * 100);
+      progressBar.style.width = pct + '%';
+    }
+    form.addEventListener('input', updateProgress);
+    form.addEventListener('change', updateProgress);
+
+    // -------- Submission --------
+    const SUPABASE_URL = 'https://nrpdhxygzyfmyljzfexv.supabase.co';
+    const SUPABASE_ANON = window.__WELLET_RESEARCH_ANON__ || '';  // set via build-time injection or inline below
+    const errorMsg = document.getElementById('error-msg');
+    const submitBtn = document.getElementById('submit-btn');
+
+    function getRadio(name) {
+      const el = document.querySelector(`input[name="${name}"]:checked`);
+      return el ? el.value : null;
+    }
+    function getChallengeRanking() {
+      return [...document.querySelectorAll('#rank-list .rs-rank-item')].map((item, i) => ({
+        key: item.dataset.key,
+        rank: i + 1,
+        label: item.querySelector('.rs-rank-label').textContent
+      }));
+    }
+
+    form.addEventListener('submit', async e => {
+      e.preventDefault();
+      errorMsg.style.display = 'none';
+
+      // Validate required
+      const q1 = getRadio('q1');
+      if (!q1) { showError('Please answer question 1.'); return; }
+
+      if (q1 === 'yes') {
+        const requiredRadios = ['q2','q3','q4','q7','q9','q10','q13','q18','q19'];
+        for (const name of requiredRadios) {
+          if (!getRadio(name)) { showError(`Please answer question ${name.substring(1)}.`); return; }
+        }
+        if (!document.getElementById('q6').value) { showError('Please select your state (question 6).'); return; }
+        if (!document.getElementById('q8').value.trim()) { showError('Please answer question 8.'); return; }
+        if (!document.getElementById('q17').value.trim() || !document.getElementById('q17').checkValidity()) {
+          showError('Please enter a valid email address (question 17).'); return;
+        }
+      } else {
+        showError('Thanks. This survey is for active caregivers — feel free to share with one.');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      const payload = {
+        is_active_caregiver: q1 === 'yes',
+        relationship: getRadio('q2'),
+        living_arrangement: getRadio('q3'),
+        caregiving_duration: getRadio('q4'),
+        condition_area: getRadio('q5'),
+        state_us: document.getElementById('q6').value,
+        urbanicity: getRadio('q7'),
+        one_thing_to_remove: document.getElementById('q8').value.trim(),
+        num_hospital_systems: getRadio('q9'),
+        last_info_search_difficulty: getRadio('q10'),
+        challenge_ranking: getChallengeRanking(),
+        tools_tried: document.getElementById('q12').value.trim() || null,
+        knew_about_programs: getRadio('q13'),
+        programs_lookup_story: document.getElementById('q14').value.trim() || null,
+        recent_appointment_story: document.getElementById('q15').value.trim() || null,
+        trust_requirements: document.getElementById('q16').value.trim() || null,
+        email: document.getElementById('q17').value.trim().toLowerCase(),
+        followup_optin: getRadio('q18') === 'yes',
+        incentive_choice: getRadio('q19'),
+        additional_notes: document.getElementById('q20').value.trim() || null,
+        user_agent: navigator.userAgent.substring(0, 500)
+      };
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/submit-acl-survey`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        if (!res.ok) {
+          const t = await res.text();
+          throw new Error(t || 'Submission failed');
+        }
+        // Show thanks
+        form.style.display = 'none';
+        document.getElementById('intro').style.display = 'none';
+        document.getElementById('thanks').style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } catch (err) {
+        showError('Something went wrong submitting. Please try again, or email betsy@getwellet.com directly.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit survey';
+      }
+    });
+
+    function showError(msg) {
+      errorMsg.textContent = msg;
+      errorMsg.style.display = 'block';
+      errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    refreshRankNumbers();
+    updateProgress();
+  </script>
+</body>
+</html>
