@@ -388,6 +388,58 @@
       margin: 0;
     }
 
+    /* ---- Results chips (answer recap) ---- */
+    .sc-results-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin: 0 0 var(--space-6) 0;
+    }
+    .sc-results-chips:empty { display: none; }
+    .sc-results-chip {
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-divider);
+      color: var(--color-text-muted);
+      font-size: var(--text-xs);
+      font-weight: 500;
+      letter-spacing: 0.01em;
+    }
+
+    /* ---- Results summary strip ---- */
+    .sc-results-summary {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-3);
+      margin: 0 0 var(--space-6) 0;
+    }
+    @media (min-width: 560px) {
+      .sc-results-summary { grid-template-columns: repeat(3, 1fr); }
+    }
+    .sc-stat {
+      background: var(--color-bg);
+      border: 1px solid var(--color-divider);
+      border-radius: var(--radius-md, 12px);
+      padding: var(--space-4) var(--space-5);
+    }
+    .sc-stat-val {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(var(--text-xl), 3vw, var(--text-2xl, 28px));
+      line-height: 1;
+      color: var(--color-primary);
+      font-variant-numeric: tabular-nums lining-nums;
+      letter-spacing: -0.01em;
+    }
+    .sc-stat-label {
+      margin-top: 6px;
+      font-size: var(--text-xs);
+      color: var(--color-text-muted);
+      letter-spacing: 0.02em;
+    }
+
     /* ---- Programs (hero of /scorecard2) ---- */
     .sc-program-list {
       list-style: none;
@@ -486,20 +538,25 @@
       margin-bottom: var(--space-1, 4px);
     }
     .sc-program-cta {
-      display: inline-block;
-      color: var(--color-primary);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: var(--space-3);
+      padding: 10px 18px;
+      background: var(--color-text, #261d1c);
+      color: #fff;
       font-family: var(--font-display);
-      font-weight: 500;
+      font-weight: 600;
       font-size: var(--text-sm);
       text-decoration: none;
-      padding: var(--space-2) 0;
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.18s ease;
+      border-radius: 999px;
+      transition: background 0.18s ease, transform 0.12s ease;
     }
     .sc-program-cta:hover,
     .sc-program-cta:focus-visible {
-      border-bottom-color: var(--color-primary);
+      background: var(--color-primary);
     }
+    .sc-program-cta:active { transform: scale(0.98); }
 
     /* ---- CareSignals cross-sell footer ---- */
     .sc-signals-wrap {
@@ -896,8 +953,24 @@
         <!-- ===== Results ===== -->
         <div class="sc-results" id="sc-results">
           <div class="sc-results-eyebrow">Your personalized scorecard</div>
-          <h2>Programs your family <strong>may qualify for</strong></h2>
+          <h2 id="sc-results-heading"><span id="sc-results-count">Programs</span> your family <strong>may qualify for</strong></h2>
           <p class="sc-results-intro" id="sc-results-intro">Based on what you shared, here are the caregiver-pay programs we matched. Eligibility varies — this is a starting list, not a guarantee. Each one links out to the official application.</p>
+          <div class="sc-results-chips" id="sc-results-chips" aria-label="Your answers in brief"></div>
+
+          <div class="sc-results-summary" id="sc-results-summary" hidden>
+            <div class="sc-stat">
+              <div class="sc-stat-val" id="sc-stat-high">0</div>
+              <div class="sc-stat-label">Strong matches</div>
+            </div>
+            <div class="sc-stat">
+              <div class="sc-stat-val" id="sc-stat-secondary">0</div>
+              <div class="sc-stat-label" id="sc-stat-secondary-label">Worth exploring</div>
+            </div>
+            <div class="sc-stat">
+              <div class="sc-stat-val" id="sc-stat-top">&mdash;</div>
+              <div class="sc-stat-label">Top single-program estimate</div>
+            </div>
+          </div>
 
           <ol class="sc-program-list" id="sc-program-list" aria-label="Matched caregiver-pay programs"></ol>
 
@@ -1167,6 +1240,98 @@
       });
     }
 
+    // ---- Helpers for the results recap ----
+    var AGE_LABELS = {
+      '60_69': 'Age 60\u201369',
+      '70_79': 'Age 70\u201379',
+      '80_89': 'Age 80\u201389',
+      '90_plus': 'Age 90+'
+    };
+    var COVERAGE_LABELS = {
+      medicare: 'Medicare',
+      medicaid: 'Medicaid',
+      veteran: 'VA',
+      private: 'Private',
+      marketplace: 'Marketplace'
+    };
+    var CONDITION_LABELS = {
+      dementia: 'Dementia',
+      diabetes: 'Diabetes',
+      heart: 'Heart',
+      lung: 'Lung',
+      kidney: 'Kidney',
+      cancer: 'Cancer',
+      mobility: 'Mobility',
+      mental: 'Mental health',
+      parkinsons: 'Parkinson\u2019s',
+      stroke: 'Stroke'
+    };
+    var ADL_LABELS = {
+      '0': 'Independent',
+      '1_2': 'Help with 1\u20132 ADLs',
+      '3_plus': '3+ ADL needs',
+      'supervision': 'Needs supervision'
+    };
+    var ROLE_LABELS = {
+      primary: 'Primary caregiver',
+      shared: 'Shared caregiver',
+      distant: 'Long-distance caregiver',
+      professional: 'Professional caregiver',
+      other: 'Caregiver'
+    };
+
+    function buildChips(answers) {
+      var chips = [];
+      if (answers.loved_one_age_band && AGE_LABELS[answers.loved_one_age_band]) {
+        chips.push(AGE_LABELS[answers.loved_one_age_band]);
+      }
+      if (Array.isArray(answers.coverage) && answers.coverage.length) {
+        var covs = answers.coverage.map(function (c) { return COVERAGE_LABELS[c] || c; });
+        chips.push(covs.join(' + '));
+      }
+      if (Array.isArray(answers.conditions) && answers.conditions.length) {
+        var conds = answers.conditions
+          .map(function (c) { return CONDITION_LABELS[c] || null; })
+          .filter(function (c) { return c; });
+        if (conds.length) chips.push(conds.join(' \u00b7 '));
+      }
+      if (answers.adl_level && ADL_LABELS[answers.adl_level]) {
+        chips.push(ADL_LABELS[answers.adl_level]);
+      }
+      if (answers.caregiver_role && ROLE_LABELS[answers.caregiver_role]) {
+        chips.push(ROLE_LABELS[answers.caregiver_role]);
+      }
+      return chips;
+    }
+
+    // Pulls the largest plausible dollar figure out of an amount string
+    // (e.g. "Up to ~$3,034\u20133,500/mo (Level 2)" \u2192 3500).
+    function maxDollarsFromAmount(s) {
+      if (!s) return 0;
+      var nums = String(s).replace(/,/g, '').match(/\$?\s*(\d+(?:\.\d+)?)/g);
+      if (!nums) return 0;
+      var max = 0;
+      nums.forEach(function (n) {
+        var v = parseFloat(n.replace(/[^\d.]/g, ''));
+        if (!isNaN(v) && v > max) max = v;
+      });
+      return max;
+    }
+
+    function topEstimateLabel(programs) {
+      var best = null;
+      var bestVal = 0;
+      programs.forEach(function (p) {
+        var v = maxDollarsFromAmount(p.amount);
+        // Heuristic: per-month figures live in the hundreds-to-thousands; per-year
+        // figures in the thousands. We just want the punchiest number on the page.
+        if (v > bestVal) { bestVal = v; best = p; }
+      });
+      if (!best) return '\u2014';
+      // Reuse the program's own short amount line for clarity.
+      return best.amount || '\u2014';
+    }
+
     function renderResults(data) {
       // Hide form steps + loader
       document.querySelectorAll('.sc-step').forEach(function (el) { el.hidden = true; });
@@ -1176,6 +1341,44 @@
 
       // Build program list (hero of the results page)
       var programs = (data && data.programs) || [];
+
+      // --- Dynamic heading count ---
+      var countEl = document.getElementById('sc-results-count');
+      if (countEl) {
+        countEl.textContent = programs.length === 1
+          ? '1 program'
+          : programs.length + ' programs';
+      }
+
+      // --- Context chips (answer recap) ---
+      var chipsWrap = document.getElementById('sc-results-chips');
+      if (chipsWrap) {
+        chipsWrap.innerHTML = '';
+        buildChips(state.answers).forEach(function (label) {
+          var c = document.createElement('span');
+          c.className = 'sc-results-chip';
+          c.textContent = label;
+          chipsWrap.appendChild(c);
+        });
+      }
+
+      // --- Summary stat strip ---
+      var summaryEl = document.getElementById('sc-results-summary');
+      if (summaryEl && programs.length) {
+        var high = programs.filter(function (p) { return p.confidence === 'high'; }).length;
+        var medium = programs.filter(function (p) { return p.confidence === 'medium'; }).length;
+        var low = programs.filter(function (p) { return p.confidence === 'low'; }).length;
+        document.getElementById('sc-stat-high').textContent = String(high);
+        var secondary = medium > 0 ? medium : low;
+        document.getElementById('sc-stat-secondary').textContent = String(secondary);
+        document.getElementById('sc-stat-secondary-label').textContent =
+          medium > 0 ? 'Worth a closer look' : 'Bonus benefits to check';
+        document.getElementById('sc-stat-top').textContent = topEstimateLabel(programs);
+        summaryEl.hidden = false;
+      } else if (summaryEl) {
+        summaryEl.hidden = true;
+      }
+
       var programList = document.getElementById('sc-program-list');
       programList.innerHTML = '';
       programs.forEach(function (p) {
@@ -1239,7 +1442,13 @@
           cta.href = p.link;
           cta.target = '_blank';
           cta.rel = 'noopener noreferrer';
-          cta.textContent = (p.cta_label || 'Learn more') + ' →';
+          var ctaLabel = document.createElement('span');
+          ctaLabel.textContent = p.cta_label || 'Learn more';
+          var ctaArrow = document.createElement('span');
+          ctaArrow.setAttribute('aria-hidden', 'true');
+          ctaArrow.textContent = '→';
+          cta.appendChild(ctaLabel);
+          cta.appendChild(ctaArrow);
         }
 
         li.appendChild(header);
