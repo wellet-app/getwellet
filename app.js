@@ -401,6 +401,11 @@ document.addEventListener('DOMContentLoaded', function() {
 function startSignup(e, location) {
   if (e && e.preventDefault) e.preventDefault();
   var prefix = location === 'hero' ? 'hero' : 'bottom';
+  // Users in /me mode self-select "for me" before signup; carry that intent
+  // through to mywellet so it can skip the self-vs-loved-one gate. Explicit on
+  // both routes (no implicit default) so the caregiver flow is unambiguous too.
+  var isMeRoute = window.location.pathname.indexOf('/me') === 0 || window.location.pathname === '/me.html';
+  var intendedMode = isMeRoute ? 'me' : 'caregiver';
   var input = document.getElementById(prefix + '-signup-email');
   var btn = document.getElementById(prefix + '-signup-btn');
   var errEl = document.getElementById(prefix + '-signup-error');
@@ -430,7 +435,7 @@ function startSignup(e, location) {
   // Google Ads — sign_up event (no conversion label set up yet)
   try {
     if (typeof gtag === 'function') {
-      gtag('event', 'sign_up', { method: 'email', send_to: 'AW-985109408' });
+      gtag('event', 'sign_up', { method: 'email', send_to: 'AW-985109408', intended_mode: intendedMode });
     }
   } catch (err) {}
   // Pass attribution + email through to mywellet.com
@@ -443,6 +448,7 @@ function startSignup(e, location) {
   if (attr.utm_campaign) params.set('utm_campaign', attr.utm_campaign);
   if (attr.entry_path) params.set('entry_path', attr.entry_path);
   params.set('signup_location', location);
+  params.set('intended_mode', intendedMode);
   window.location.href = 'https://mywellet.com/?' + params.toString();
   return false;
 }

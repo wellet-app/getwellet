@@ -791,7 +791,7 @@
           }
           if (btn) { btn.disabled = true; btn.textContent = 'Starting…'; }
           try { if (typeof rdt === 'function') rdt('track', 'Lead', { currency: 'USD', value: 0 }); } catch (err) {}
-          try { if (typeof gtag === 'function') gtag('event', 'sign_up', { method: 'email', send_to: 'AW-985109408' }); } catch (err) {}
+          try { if (typeof gtag === 'function') gtag('event', 'sign_up', { method: 'email', send_to: 'AW-985109408', intended_mode: 'me' }); } catch (err) {}
           var attr = {};
           try { attr = (typeof getAttribution === 'function') ? getAttribution() : {}; } catch (err) {}
           var params = new URLSearchParams();
@@ -802,6 +802,7 @@
           if (attr.entry_path) params.set('entry_path', attr.entry_path);
           params.set('signup_location', 'me_pricing');
           params.set('landing_page', '/me');
+          params.set('intended_mode', 'me');
           window.location.href = 'https://mywellet.com/?' + params.toString();
           return false;
         }
@@ -822,7 +823,7 @@
         }
         if (btn2) { btn2.disabled = true; btn2.textContent = 'Starting\u2026'; }
         try { if (typeof rdt === 'function') rdt('track', 'Lead', { currency: 'USD', value: 0 }); } catch (err) {}
-        try { if (typeof gtag === 'function') gtag('event', 'sign_up', { method: 'email', send_to: 'AW-985109408' }); } catch (err) {}
+        try { if (typeof gtag === 'function') gtag('event', 'sign_up', { method: 'email', send_to: 'AW-985109408', intended_mode: 'me' }); } catch (err) {}
         var attr2 = {};
         try { attr2 = (typeof getAttribution === 'function') ? getAttribution() : {}; } catch (err) {}
         var params2 = new URLSearchParams();
@@ -833,6 +834,7 @@
         if (attr2.entry_path)   params2.set('entry_path', attr2.entry_path);
         params2.set('signup_location', 'me_' + location);
         params2.set('landing_page', '/me');
+        params2.set('intended_mode', 'me');
         window.location.href = 'https://mywellet.com/?' + params2.toString();
         return false;
       };
