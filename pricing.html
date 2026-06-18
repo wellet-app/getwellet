@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pricing — Wellet</title>
-  <meta name="description" content="Free, Plus ($99/yr), and Pro ($299/yr). One preventable ER visit costs more than a year of Wellet. Built by a daughter, for caregivers.">
+  <meta name="description" content="Wellet is free, forever, for family caregivers. Wellet Pro credit packs cover personal genomics, pedigree, and hereditary pattern scans. No ads. No data sales.">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Pricing — Wellet">
-  <meta property="og:description" content="Free, Plus, and Pro. Annual or monthly. No ads. No data sales.">
+  <meta property="og:description" content="Free, forever, for caregivers. Wellet Pro credit packs for personal genomics and pedigree.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getwellet.com/pricing">
   <meta property="og:image" content="https://getwellet.com/og-image.png">
@@ -32,25 +32,9 @@
     .pricing-hero h1 { font-family: var(--font-display); font-size: var(--text-4xl); color: var(--color-text); margin-bottom: var(--space-3); font-weight: 400; }
     .pricing-hero .subtitle { font-size: var(--text-lg); color: var(--color-text-muted); max-width: 640px; margin: 0 auto var(--space-6); font-weight: 300; }
 
-    /* Billing toggle */
-    .billing-toggle { display: inline-flex; background: var(--color-surface-2); border: 1px solid var(--color-divider); border-radius: var(--radius-full); padding: 4px; margin: var(--space-4) auto var(--space-2); }
-    .billing-toggle button { background: transparent; border: none; padding: var(--space-2) var(--space-5); border-radius: var(--radius-full); font-family: var(--font-body); font-size: var(--text-sm); font-weight: 500; color: var(--color-text-muted); cursor: pointer; transition: all var(--transition-interactive); }
-    .billing-toggle button.active { background: var(--color-primary); color: white; }
-    .billing-save { font-size: var(--text-xs); color: var(--color-primary); font-weight: 500; margin-left: var(--space-2); }
-
-    .price-monthly, .price-yearly { display: none; }
-    .show-monthly .price-monthly { display: inline; }
-    .show-yearly .price-yearly { display: inline; }
-
-    .price-note-monthly, .price-note-yearly { display: none; }
-    .show-monthly .price-note-monthly { display: block; }
-    .show-yearly .price-note-yearly { display: block; }
-
-    .btn-tier-monthly, .btn-tier-yearly { display: none; }
-    .show-monthly .btn-tier-monthly { display: inline-flex; }
-    .show-yearly .btn-tier-yearly { display: inline-flex; }
-
-    .pricing-faq { padding: var(--space-12) 0; background: var(--color-surface-2); margin-top: var(--space-12); }
+    .pricing-grid-single { grid-template-columns: minmax(0, 480px); justify-content: center; }
+    .pro-section .pricing-card { background: var(--color-surface-1); }
+    .pricing-faq { padding: var(--space-12) 0; margin-top: var(--space-12); }
     .pricing-faq h2 { font-family: var(--font-display); font-size: var(--text-2xl); color: var(--color-text); margin-bottom: var(--space-6); font-weight: 400; text-align: center; }
     .faq-item { background: var(--color-surface-1); border: 1px solid var(--color-divider); border-radius: var(--radius-lg); padding: var(--space-5) var(--space-6); margin-bottom: var(--space-3); }
     .faq-q { font-family: var(--font-display); font-size: var(--text-base); color: var(--color-text); font-weight: 500; margin-bottom: var(--space-2); }
@@ -134,81 +118,92 @@
   <!-- ========== HERO ========== -->
   <section class="pricing-hero">
     <div class="container">
-      <h1>Simple, honest pricing</h1>
-      <p class="subtitle">One preventable ER visit costs $2,000 to $5,000. Wellet costs less than your monthly streaming subscriptions.</p>
+      <h1>Free, forever, for caregivers</h1>
+      <p class="subtitle">If you're caring for a loved one, Wellet is yours at no cost. No tiers. No paywalls. No upsell.</p>
+    </div>
+  </section>
 
-      <div class="billing-toggle" id="billing-toggle" role="tablist" aria-label="Billing period">
-        <button type="button" role="tab" data-period="monthly">Monthly</button>
-        <button type="button" role="tab" data-period="yearly" class="active">Yearly <span class="billing-save">Save 17%</span></button>
+  <!-- ========== CAREGIVER FREE PLAN ========== -->
+  <section class="pricing-section" id="pricing" style="padding-top:0;">
+    <div class="container">
+      <div class="pricing-grid pricing-grid-single">
+
+        <!-- Free (only caregiver plan) -->
+        <div class="pricing-card featured">
+          <div class="tier-name">Wellet</div>
+          <div class="tier-tagline">For caring for a loved one — and yourself</div>
+          <div class="price">$0</div>
+          <div class="price-note">Free, forever</div>
+          <ul role="list">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Care for one or more loved ones</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Live EHR connections (Epic, VA, Cerner, MyChart)</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Wearables and Apple Health</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Care circle for family and care team</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> AI summaries and CareSignals</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Document uploads and AI extraction</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Ask Wellet, personalized to your loved one</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Your own records, alongside theirs</li>
+          </ul>
+          <a href="https://mywellet.com" class="btn-tier">Get started</a>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ========== PRICING ========== -->
-  <section class="pricing-section show-yearly" id="pricing" style="padding-top:0;">
+  <!-- ========== WELLET PRO (separate product) ========== -->
+  <section class="pricing-section pro-section" style="padding-top:var(--space-8);background:var(--color-surface-2);">
     <div class="container">
+      <div style="text-align:center;max-width:680px;margin:0 auto var(--space-8);">
+        <div style="font-family:var(--font-body);font-size:var(--text-xs);font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--color-primary);margin-bottom:var(--space-3);">A separate product</div>
+        <h2 style="font-family:var(--font-display);font-size:var(--text-3xl);color:var(--color-text);margin-bottom:var(--space-3);font-weight:400;">Wellet Pro</h2>
+        <p style="font-size:var(--text-lg);color:var(--color-text-muted);font-weight:300;">Pay-per-use credit packs for personal genomics, pedigree rendering, and hereditary pattern scans. Built for self-trackers, not caregivers.</p>
+      </div>
+
       <div class="pricing-grid">
 
-        <!-- Free -->
+        <!-- Starter -->
         <div class="pricing-card">
-          <div class="tier-name">Free</div>
-          <div class="tier-tagline">Get organized</div>
-          <div class="price">$0</div>
-          <div class="price-note">Always free</div>
+          <div class="tier-name">Starter</div>
+          <div class="tier-tagline">100 credits</div>
+          <div class="price">$10</div>
+          <div class="price-note">$0.10 per credit · one-time</div>
           <ul role="list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> 1 care recipient profile</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Care circle</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Health timeline (manual entry)</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Document uploads</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Basic Ask Wellet</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Try a genomic import or pedigree render</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Credits never expire</li>
           </ul>
-          <a href="https://mywellet.com" class="btn-tier">Get started free</a>
+          <a href="https://wellet-pro.netlify.app" class="btn-tier">Open Wellet Pro</a>
         </div>
 
-        <!-- Plus -->
+        <!-- Standard -->
         <div class="pricing-card featured">
-          <div class="card-badge">Most Popular</div>
-          <div class="tier-name">Plus</div>
-          <div class="tier-tagline">Update Me + AI insights</div>
-          <div class="price">
-            <span class="price-monthly">$9.99<span style="font-size: var(--text-sm); font-family: var(--font-body); color: var(--color-text-muted);">/mo</span></span>
-            <span class="price-yearly">$99<span style="font-size: var(--text-sm); font-family: var(--font-body); color: var(--color-text-muted);">/yr</span></span>
-          </div>
-          <div class="price-note price-note-monthly">Billed monthly · Cancel anytime</div>
-          <div class="price-note price-note-yearly">$99/yr — billed annually (save $20)</div>
+          <div class="card-badge">Best Value</div>
+          <div class="tier-name">Standard</div>
+          <div class="tier-tagline">300 credits</div>
+          <div class="price">$25</div>
+          <div class="price-note">$0.083 per credit · one-time</div>
           <ul role="list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Everything in Free</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Weekly AI health summaries</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Personalized Ask Wellet</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> AI document extraction</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Pattern detection alerts</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Larger care circle</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Multiple genomic and pedigree runs</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Hereditary pattern scans</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Credits never expire</li>
           </ul>
-          <a href="https://buy.stripe.com/6oU5kF3HXeOn2CB2ma8so00" class="btn-tier btn-tier-monthly" data-plan="plus-monthly">Start Plus — $9.99/mo</a>
-          <a href="https://buy.stripe.com/9B63cx6U9ay77WVf8W8so03" class="btn-tier btn-tier-yearly" data-plan="plus-yearly">Start Plus — $99/yr</a>
+          <a href="https://wellet-pro.netlify.app" class="btn-tier">Open Wellet Pro</a>
         </div>
 
-        <!-- Pro -->
+        <!-- Power -->
         <div class="pricing-card">
-          <div class="tier-name">Pro</div>
-          <div class="tier-tagline">The full picture</div>
-          <div class="price">
-            <span class="price-monthly">$29.99<span style="font-size: var(--text-sm); font-family: var(--font-body); color: var(--color-text-muted);">/mo</span></span>
-            <span class="price-yearly">$299<span style="font-size: var(--text-sm); font-family: var(--font-body); color: var(--color-text-muted);">/yr</span></span>
-          </div>
-          <div class="price-note price-note-monthly">Billed monthly · Cancel anytime</div>
-          <div class="price-note price-note-yearly">$299/yr — billed annually (save $60)</div>
+          <div class="tier-name">Power</div>
+          <div class="tier-tagline">750 credits</div>
+          <div class="price">$50</div>
+          <div class="price-note">$0.067 per credit · one-time</div>
           <ul role="list">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Everything in Plus</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Live EHR integration</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Wearable data (Oura, Apple Health) <span style="font-size:11px;opacity:0.7;font-weight:500;">Coming soon</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Patterns</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Multiple care recipients</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Priority support</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Deep genomic work and rare-disease scans</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Family historian use cases</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Credits never expire</li>
           </ul>
-          <a href="https://buy.stripe.com/3cI4gB7Yd9u3a534ui8so01" class="btn-tier btn-tier-monthly" data-plan="pro-monthly">Start Pro — $29.99/mo</a>
-          <a href="https://buy.stripe.com/4gM6oJcetbCb90Z5ym8so02" class="btn-tier btn-tier-yearly" data-plan="pro-yearly">Start Pro — $299/yr</a>
+          <a href="https://wellet-pro.netlify.app" class="btn-tier">Open Wellet Pro</a>
         </div>
+
       </div>
     </div>
   </section>
@@ -226,18 +221,18 @@
       <h2>Common questions</h2>
 
       <div class="faq-item">
-        <div class="faq-q">Can I try Wellet before I pay?</div>
-        <div class="faq-a">Yes — the Free plan never expires, and you can also try the live document parser at <a href="https://mywellet.com/try" style="color:var(--color-primary);">mywellet.com/try</a> without signing up. Drop a discharge summary, see what Wellet reads in seconds.</div>
+        <div class="faq-q">Is Wellet really free?</div>
+        <div class="faq-a">Yes. If you're caring for a loved one, Wellet is free, forever. No tiers, no paywall, no credit card. Wellet is built to be a gift to caregivers, sustained by foundation grants, partner licenses, and the separate Wellet Pro product for self-trackers.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">What's the difference between Plus and Pro?</div>
-        <div class="faq-a">Plus covers everything most caregivers need: AI summaries, pattern alerts, document extraction, and Ask Wellet personalized to your loved one. Pro adds live EHR integration (Wellet pulls records straight from MyChart/Epic), wearable data, and multiple care recipients — useful if you're caring for more than one person or want continuous syncing instead of manual uploads.</div>
+        <div class="faq-q">What is Wellet Pro?</div>
+        <div class="faq-a">Wellet Pro is a separate product for people doing deep personal work with their own health data — genomic imports, pedigree rendering, hereditary pattern scans. It's pay-per-use because those features cost real compute to run. If you're a caregiver, you do not need Pro. If you're a self-tracker who wants those tools, Pro is built for you.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">Can I cancel anytime?</div>
-        <div class="faq-a">Yes. Monthly plans cancel at the next billing date. Yearly plans are prorated if you cancel within the first 30 days; after that, your subscription runs to the end of the year you've paid for. No questions asked.</div>
+        <div class="faq-q">Can I try Wellet before signing up?</div>
+        <div class="faq-a">Yes. You can try the live document parser at <a href="https://mywellet.com/try" style="color:var(--color-primary);">mywellet.com/try</a> without signing up. Drop a discharge summary, see what Wellet reads in seconds.</div>
       </div>
 
       <div class="faq-item">
@@ -246,8 +241,8 @@
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">Why is Wellet so much cheaper than I'd expect?</div>
-        <div class="faq-a">Wellet was built by one caregiver with AI tools, not a 30-person engineering team. That's the whole point of the Billion Dollar Build — proving that one person who's lived the problem can ship a real product. Lower overhead means lower prices. <a href="/journal" style="color:var(--color-primary);">Read the build journal</a>.</div>
+        <div class="faq-q">How does Wellet stay free?</div>
+        <div class="faq-a">Foundation grants, mission-aligned partner licenses, and revenue from the separate Wellet Pro product. Wellet does not take venture capital and never will. The caregiver side stays a gift. <a href="/journal" style="color:var(--color-primary);">Read the build journal</a>.</div>
       </div>
 
       <div class="faq-item">
@@ -274,21 +269,6 @@
     </div>
   </footer>
 
-  <script>
-    // Billing toggle
-    (function(){
-      var section = document.querySelector('.pricing-section');
-      var toggle = document.getElementById('billing-toggle');
-      if (!section || !toggle) return;
-      toggle.addEventListener('click', function(e){
-        var btn = e.target.closest('button[data-period]');
-        if (!btn) return;
-        var period = btn.dataset.period;
-        section.classList.remove('show-monthly', 'show-yearly');
-        section.classList.add('show-' + period);
-        toggle.querySelectorAll('button').forEach(function(b){ b.classList.toggle('active', b === btn); });
-      });
-    })();
-  </script>
+
 </body>
 </html>
