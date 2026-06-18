@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Pricing — Wellet</title>
-  <meta name="description" content="Wellet is free, forever, for family caregivers. Wellet Pro credit packs cover personal genomics, pedigree, and hereditary pattern scans. No ads. No data sales.">
+  <meta name="description" content="Free for caregivers who join before App Store launch. After launch, $10 once — yours forever. No subscription, no ads, no data sale.">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Pricing — Wellet">
-  <meta property="og:description" content="Free, forever, for caregivers. Wellet Pro credit packs for personal genomics and pedigree.">
+  <meta property="og:description" content="Free now. $10 once after App Store launch. No subscription. No ads. No data sale.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://getwellet.com/pricing">
   <meta property="og:image" content="https://getwellet.com/og-image.png">
@@ -79,6 +79,20 @@
 </head>
 <body>
 
+  <!-- ========== LAUNCH BANNER ========== -->
+  <div class="launch-banner" role="complementary" aria-label="App Store launch notice">
+    <div class="container">
+      <p>App Store launch coming. <strong>$10 once</strong> after launch. <a href="#pricing">Free for everyone who joins before then.</a></p>
+    </div>
+  </div>
+  <style>
+    .launch-banner { background: var(--color-primary, #2d6a4f); color: #faf6f0; padding: 8px 0; font-family: var(--font-body); font-size: 13px; line-height: 1.4; }
+    .launch-banner p { margin: 0; text-align: center; font-weight: 300; }
+    .launch-banner strong { font-weight: 500; }
+    .launch-banner a { color: #faf6f0; text-decoration: underline; text-underline-offset: 2px; }
+    .launch-banner a:hover { opacity: 0.85; }
+  </style>
+
   <!-- ========== HEADER ========== -->
   <header class="header">
     <div class="container">
@@ -118,8 +132,8 @@
   <!-- ========== HERO ========== -->
   <section class="pricing-hero">
     <div class="container">
-      <h1>Free, forever, for caregivers</h1>
-      <p class="subtitle">If you're caring for a loved one, Wellet is yours at no cost. No tiers. No paywalls. No upsell.</p>
+      <h1>Free now. $10 once after launch.</h1>
+      <p class="subtitle">Sign up before our App Store launch and Wellet is yours, free forever. After launch, new caregivers pay $10 once — after their first hospital connect. No subscription. No ads. No data sale.</p>
     </div>
   </section>
 
@@ -128,12 +142,12 @@
     <div class="container">
       <div class="pricing-grid pricing-grid-single">
 
-        <!-- Free (only caregiver plan) -->
+        <!-- Wellet caregiver unlock -->
         <div class="pricing-card featured">
           <div class="tier-name">Wellet</div>
           <div class="tier-tagline">For caring for a loved one — and yourself</div>
-          <div class="price">$0</div>
-          <div class="price-note">Free, forever</div>
+          <div class="price">Free<span style="font-size:0.5em;color:var(--color-text-muted);font-weight:300;display:block;margin-top:6px;">until App Store launch</span></div>
+          <div class="price-note">After launch: $10 once, charged after your first hospital connect. Today's signups stay free forever.</div>
           <ul role="list">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Care for one or more loved ones</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Live EHR connections (Epic, VA, Cerner, MyChart)</li>
@@ -164,10 +178,10 @@
 
         <!-- Starter -->
         <div class="pricing-card">
-          <div class="tier-name">Starter</div>
-          <div class="tier-tagline">100 credits</div>
+          <div class="tier-name">Pro Starter</div>
+          <div class="tier-tagline">100 Pro credits</div>
           <div class="price">$10</div>
-          <div class="price-note">$0.10 per credit · one-time</div>
+          <div class="price-note">$0.10 per credit · one-time · separate from the Wellet unlock</div>
           <ul role="list">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Try a genomic import or pedigree render</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Credits never expire</li>
@@ -221,8 +235,13 @@
       <h2>Common questions</h2>
 
       <div class="faq-item">
-        <div class="faq-q">Is Wellet really free?</div>
-        <div class="faq-a">Yes. If you're caring for a loved one, Wellet is free, forever. No tiers, no paywall, no credit card. Wellet is built to be a gift to caregivers, sustained by foundation grants, partner licenses, and the separate Wellet Pro product for self-trackers.</div>
+        <div class="faq-q">Why does Wellet cost $10?</div>
+        <div class="faq-a">Because we don't take venture capital, don't sell ads, and don't sell your data — we need a way to keep the lights on. $10 once is a token of skin in the game from each caregiver. It is not a subscription. It is not a tier. It is one charge, then Wellet is yours forever. The charge happens after you connect your first hospital, so you only pay if Wellet actually works for you.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">I joined Wellet before the App Store launch — do I pay?</div>
+        <div class="faq-a">No. Every caregiver who signed up before App Store launch is free forever, tied to your email. If you later download the iOS app with the same email, the unlock screen never appears. This is our promise to the people who showed up first.</div>
       </div>
 
       <div class="faq-item">
@@ -237,12 +256,22 @@
 
       <div class="faq-item">
         <div class="faq-q">Does Wellet sell my data?</div>
-        <div class="faq-a">Never. Wellet runs on a HIPAA-grade architecture and we don't sell, share, or advertise against your health data. The only people who see your loved one's records are the people you invite into the care circle. <a href="/transparency" style="color:var(--color-primary);">Read the full transparency report</a>.</div>
+        <div class="faq-a">Never. We don't sell, share, or advertise against your health data. The only people who see your loved one's records are the people you invite into the care circle. <a href="/transparency" style="color:var(--color-primary);">Read the full transparency report</a>.</div>
       </div>
 
       <div class="faq-item">
-        <div class="faq-q">How does Wellet stay free?</div>
-        <div class="faq-a">Foundation grants, mission-aligned partner licenses, and revenue from the separate Wellet Pro product. Wellet does not take venture capital and never will. The caregiver side stays a gift. <a href="/journal" style="color:var(--color-primary);">Read the build journal</a>.</div>
+        <div class="faq-q">How does Wellet stay sustainable?</div>
+        <div class="faq-a">Three sources: the $10 one-time charge from new caregivers, foundation grants and mission-aligned partner licenses, and revenue from the separate Wellet Pro product. Wellet does not take venture capital and never will. <a href="/journal" style="color:var(--color-primary);">Read the build journal</a>.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What if $10 is a hardship?</div>
+        <div class="faq-a">Email hello@mywellet.com and we will unlock your account at no cost. No questions, no proof required. Caregiving is hard enough.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">Can I get a refund?</div>
+        <div class="faq-a">Yes. On the web, 30-day no-questions refund. On iOS, Apple handles refunds through their standard window. Email hello@mywellet.com either way.</div>
       </div>
 
       <div class="faq-item">
