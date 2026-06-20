@@ -367,6 +367,14 @@ section {
   font-style: italic;
 }
 
+/* V2: italic accent on hero h1 — forest (primary), matches m.html and the
+   rcard pattern library. Falls back to forest hex if canonical token missing. */
+.hero h1 em.hero-accent {
+  font-style: italic;
+  font-weight: 500;
+  color: var(--core-color-forest, var(--color-primary, #11443b));
+}
+
 .hero-subtitle {
   font-size: var(--text-lg);
   font-weight: 300;
