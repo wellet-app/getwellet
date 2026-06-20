@@ -11,6 +11,15 @@
    guidelines document.
 
    Naming convention: --c-* for color, --rc-* for resources-card primitives.
+
+   FONTS: V2 uses Gambetta (display, italic noun emphasis) and Public Sans
+   (body). The primitives below reference --font-v2-serif and --font-v2-sans
+   with sensible fallbacks. To activate v2 typography, also add to <head>:
+
+     <link href="https://api.fontshare.com/v2/css?f[]=gambetta@300,400,500,400i&display=swap" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+   Fraunces / DM Sans remain loaded for v1 surfaces; no conflict.
    ============================================================================ */
 
 :root {
@@ -56,6 +65,10 @@
   --c-v2-ink:       #1c2826;
   --c-v2-ink-2:     #3a4a45;
   --c-v2-ink-3:     #6b7773;
+
+  /* ---- V2 typography family aliases ---- */
+  --font-v2-serif:  "Gambetta", Georgia, serif;
+  --font-v2-sans:   "Public Sans", system-ui, -apple-system, sans-serif;
 
   /* ---- rcard primitive sizing ---- */
   --rc-border-w:    3px;
@@ -149,10 +162,11 @@
   background: var(--c-walnut);
 }
 
-/* ---- Title: italic display face ---- */
+/* ---- Title: italic display face (Gambetta) ---- */
 .rc-title {
-  font-family: var(--font-display, var(--serif, Georgia)), serif;
+  font-family: var(--font-v2-serif);
   font-style: italic;
+  font-weight: 500;
   font-size: 1.05rem;
   line-height: 1.25;
   color: var(--c-v2-ink);

@@ -8,6 +8,20 @@ A single additive stylesheet (`wellet-v2-tokens.css`) loaded after `style.css` o
 
 ## What's inside
 
+### Typography
+
+- **Display**: Gambetta (Fontshare) — weights 300/400/500/400i
+- **Body**: Public Sans (Google Fonts) — weights 400/500/600/700
+
+The tokens file exposes `--font-v2-serif` and `--font-v2-sans` aliases. To activate v2 typography on a page, also load the two fonts in `<head>`:
+
+```html
+<link href="https://api.fontshare.com/v2/css?f[]=gambetta@300,400,500,400i&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+```
+
+Fraunces and DM Sans remain loaded on v1 pages — no conflict, no replacement until each surface migrates.
+
 ### Color tokens (`--c-*`)
 The v2 semantic palette:
 
