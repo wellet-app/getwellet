@@ -22,28 +22,29 @@ The Wellet wordmark is the primary brand mark. Use the full wordmark whenever sp
 
 ### Primary
 
-- **Wellet Sage** — `#608F7C` — primary brand color
-- **Deep Ink** — `#1A2329` — primary text, dark backgrounds
-- **Paper** — `#FAFAF7` — default background
+- **Forest** — `#11453B` — primary brand color (wordmark, headlines, primary text on Stone)
+- **Midnight** — `#193241` — depth accent, used sparingly
+- **Stone** — `#E8E6E0` — default background
 
 ### Supporting
 
-- **Warm Cream** — `#F4EFE6` — section backgrounds
-- **Sage Tint** — `#E8EFEB` — soft highlights
-- **Signal Amber** — `#C67E3F` — attention, change indicators
-- **Signal Clay** — `#B85C4C` — errors, critical signals
+- **Mist** — `#B8C9CE` — cool neutral, supporting blocks, dividers
+- **Mint** — `#9ECF90` — fresh accent, highlights, success states
+- **White** — `#FFFFFF` — card surfaces against Stone
+
+**Rule of restraint:** Stone canvas, Forest for brand, one Mint or Mist accent per artifact. No terra, no orange, no yellow.
 
 ## Typography
 
-- **Display:** Fraunces (serif). Used for headlines and the wordmark.
-- **Body:** DM Sans (sans). Used for all running text and UI.
+- **Display:** Gambetta (serif). Used for headlines and the wordmark.
+- **Body:** Public Sans (sans). Used for all running text and UI.
 
 **Type hierarchy**
 
-- H1: Fraunces 48–64px, weight 500
-- H2: Fraunces 32–40px, weight 500
-- Body: DM Sans 16–17px, weight 400, line-height 1.55
-- Caption: DM Sans 13–14px, weight 500
+- H1: Gambetta 48–64px, weight 500
+- H2: Gambetta 32–40px, weight 500
+- Body: Public Sans 16–17px, weight 400, line-height 1.55
+- Caption: Public Sans 13–14px, weight 500
 
 ## Voice
 

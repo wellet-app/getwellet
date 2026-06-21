@@ -43,12 +43,12 @@
   --content-wide: 1200px;
 
   /* Fonts */
-  --font-display: 'Fraunces', serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Gambetta', Georgia, serif;
+  --font-body: 'Public Sans', system-ui, -apple-system, sans-serif;
 
   /* Accent */
-  --color-amber: #C07028;
-  --color-amber-light: #f5e6d8;
+  --color-mint: #9ECF90; /* was --color-amber #C07028 (retired) */
+  --color-mint-light: #DCE9E2; /* was --color-amber-light (retired) */
 }
 
 /* ============================================================
@@ -362,8 +362,8 @@ section {
 }
 
 .hero h1 strong {
-  color: var(--color-amber);
-  font-weight: 400;
+  color: var(--core-color-forest, var(--color-primary, #11443b));
+  font-weight: 500;
   font-style: italic;
 }
 
@@ -557,7 +557,7 @@ section {
 }
 
 .phone-before-title {
-  font-family: var(--font-serif, 'Fraunces', serif);
+  font-family: var(--font-serif, 'Gambetta', serif);
   font-size: 14px;
   font-weight: 500;
   color: var(--color-text);
@@ -578,7 +578,7 @@ section {
 }
 
 .phone-before-stat-val {
-  font-family: var(--font-serif, 'Fraunces', serif);
+  font-family: var(--font-serif, 'Gambetta', serif);
   font-size: 18px;
   font-weight: 500;
   color: var(--color-primary);
@@ -619,7 +619,7 @@ section {
 .phone-update-text strong {
   font-weight: 600;
   text-decoration: underline;
-  text-decoration-color: var(--color-amber);
+  text-decoration-color: var(--color-mint);
   text-underline-offset: 2px;
 }
 
@@ -646,7 +646,7 @@ section {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--color-amber);
+  color: var(--color-mint);
   margin-bottom: 2px;
 }
 
@@ -660,7 +660,7 @@ section {
 .phone-alert-title {
   font-size: 11px;
   font-weight: 600;
-  color: var(--color-amber);
+  color: var(--color-mint);
   margin-bottom: 2px;
 }
 
@@ -1367,7 +1367,7 @@ section {
 }
 
 .preview-dot--changed {
-  background: var(--color-amber);
+  background: var(--color-mint);
 }
 
 .preview-dot--new {
@@ -1403,7 +1403,7 @@ section {
 
 .signal-icon--motion { background: #74c69d; }
 .signal-icon--door { background: #52b788; }
-.signal-icon--routine { background: var(--color-amber); }
+.signal-icon--routine { background: var(--color-mint); }
 
 .signal-label {
   color: #d8f3dc;
@@ -1426,7 +1426,7 @@ section {
 }
 
 .signal-status--late {
-  color: var(--color-amber);
+  color: var(--color-mint);
 }
 
 .signal-row--alert {

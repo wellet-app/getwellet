@@ -5,10 +5,6 @@
 
   <!-- V2 canonical tokens -->
   <link rel="stylesheet" href="/wellet-v2-tokens.css">
-  <!-- V2 fonts -->
-  <link href="https://api.fontshare.com/v2/css?f[]=gambetta@300,400,500,400i&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Press &amp; Media Kit — Wellet</title>
   <meta name="description" content="Wellet press kit — logos, screenshots, founder bio, brand guidelines, and media contact. Wellet is a health companion built for family caregivers.">
@@ -25,7 +21,8 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=gambetta@300,400,500,400i,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="./base.css">
@@ -51,7 +48,7 @@
       margin-bottom: var(--space-3);
     }
     .press-hero h1 {
-      font-family: 'Fraunces', Georgia, serif;
+      font-family: 'Gambetta', Georgia, serif;
       font-weight: 400;
       font-size: clamp(2.25rem, 5vw, 3.5rem);
       line-height: 1.1;
@@ -95,7 +92,7 @@
     .press-section { padding: var(--space-12) 0; }
     .press-section-alt { background: var(--color-surface); }
     .press-section h2 {
-      font-family: 'Fraunces', Georgia, serif;
+      font-family: 'Gambetta', Georgia, serif;
       font-weight: 500;
       font-size: clamp(1.5rem, 3vw, 2rem);
       color: var(--color-text);
@@ -166,7 +163,7 @@
     }
     .press-logo-card--sage .press-logo-dl a:hover {
       background: #fff;
-      color: #608F7C;
+      color: #11453B;
       border-color: #fff;
     }
     .press-logo-card--light { background: var(--color-surface); }
@@ -224,7 +221,7 @@
     }
     .press-photo-dl:hover { text-decoration: underline; }
     .press-founder-bio h3 {
-      font-family: 'Fraunces', Georgia, serif;
+      font-family: 'Gambetta', Georgia, serif;
       font-weight: 500;
       font-size: var(--text-2xl);
       margin: 0 0 4px;
@@ -285,7 +282,7 @@
     .press-swatch-row { display: flex; gap: var(--space-2); margin-bottom: var(--space-4); }
     .press-swatch { width: 44px; height: 44px; border-radius: var(--radius-sm); display: inline-block; }
     .press-brand-card h3 {
-      font-family: 'Fraunces', Georgia, serif;
+      font-family: 'Gambetta', Georgia, serif;
       font-weight: 500;
       font-size: var(--text-xl);
       margin: 0 0 var(--space-2);
@@ -308,7 +305,7 @@
       background: var(--color-primary-light);
     }
     .press-cta h2 {
-      font-family: 'Fraunces', Georgia, serif;
+      font-family: 'Gambetta', Georgia, serif;
       font-weight: 500;
       font-size: clamp(1.5rem, 3vw, 2rem);
       margin: 0 0 var(--space-2);
@@ -531,7 +528,7 @@
         <div class="press-brand">
           <div class="press-brand-card">
             <div class="press-swatch-row">
-              <span class="press-swatch" style="background:#608F7C" title="#608F7C"></span>
+              <span class="press-swatch" style="background:#11453B" title="#11453B"></span>
               <span class="press-swatch" style="background:#1A2329" title="#1A2329"></span>
               <span class="press-swatch" style="background:#FAFAF7;border:1px solid #D8D4CA" title="#FAFAF7"></span>
               <span class="press-swatch" style="background:#F4EFE6;border:1px solid #D8D4CA" title="#F4EFE6"></span>
@@ -539,7 +536,7 @@
               <span class="press-swatch" style="background:#B85C4C" title="#B85C4C"></span>
             </div>
             <h3>Colors &amp; type at a glance</h3>
-            <p>Primary: Wellet Sage <code>#608F7C</code>. Display: Fraunces. Body: DM Sans. Full guidelines cover clear space, voice, and do&rsquo;s/don&rsquo;ts.</p>
+            <p>Primary: Forest <code>#11453B</code>. Display: Gambetta. Body: Public Sans. Full guidelines cover clear space, voice, and do&rsquo;s/don&rsquo;ts.</p>
             <p class="press-brand-links">
               <a class="btn-ghost" href="/press/brand/wellet-brand-guidelines.pdf" target="_blank" rel="noopener noreferrer">View guidelines (PDF)</a>
               <a class="btn-ghost" href="/press/brand/wellet-brand-guidelines.pdf" download>Download PDF</a>
@@ -672,7 +669,7 @@
       const c = getChartColors();
       Chart.defaults.color = c.textMuted;
       Chart.defaults.borderColor = c.border;
-      Chart.defaults.font.family = "'DM Sans', sans-serif";
+      Chart.defaults.font.family = "'Public Sans', sans-serif";
       Chart.defaults.font.size = 12;
     }
 

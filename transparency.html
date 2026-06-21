@@ -5,10 +5,6 @@
 
   <!-- V2 canonical tokens -->
   <link rel="stylesheet" href="/wellet-v2-tokens.css">
-  <!-- V2 fonts -->
-  <link href="https://api.fontshare.com/v2/css?f[]=gambetta@300,400,500,400i&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Wellet Transparency Dashboard</title>
   <meta name="description" content="Live, anonymized usage data from Wellet — showing how caregivers use the app. No personal health information is collected or displayed. Published for researchers and medical professionals.">
@@ -27,7 +23,8 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=gambetta@300,400,500,400i,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
   <!-- Styles -->
   <link rel="stylesheet" href="./base.css">
@@ -86,8 +83,8 @@
 
     /* Pre-launch honesty banner */
     .tp-prelaunch-banner {
-      background: var(--color-amber-light);
-      border: 1px solid var(--color-amber);
+      background: var(--color-mint-light);
+      border: 1px solid var(--color-mint);
       border-radius: var(--radius-lg);
       padding: var(--space-5) var(--space-6);
       margin-bottom: var(--space-6);
@@ -96,12 +93,12 @@
       align-items: flex-start;
     }
     [data-theme="dark"] .tp-prelaunch-banner {
-      background: color-mix(in srgb, var(--color-amber) 18%, var(--color-surface));
-      border-color: color-mix(in srgb, var(--color-amber) 60%, transparent);
+      background: color-mix(in srgb, var(--color-mint) 18%, var(--color-surface));
+      border-color: color-mix(in srgb, var(--color-mint) 60%, transparent);
     }
     .tp-prelaunch-icon {
       flex-shrink: 0;
-      color: var(--color-amber);
+      color: var(--color-mint);
       margin-top: 2px;
     }
     .tp-prelaunch-text strong {
@@ -927,7 +924,7 @@
       const c = getChartColors();
       Chart.defaults.color = c.textMuted;
       Chart.defaults.borderColor = c.border;
-      Chart.defaults.font.family = "'DM Sans', sans-serif";
+      Chart.defaults.font.family = "'Public Sans', sans-serif";
       Chart.defaults.font.size = 12;
     }
 
