@@ -15,20 +15,24 @@
 <title>Use Cases · Wellet</title>
 <meta name="description" content="Every situation Wellet addresses for family caregivers — from caregiver-pay program matching to silent EHR sync to dementia care patterns." />
 <style>
+  /* Brand v2.01: tokens loaded from /wellet-v2-tokens.css above.
+     Local aliases below for readability — all map to canonical hexes. */
   :root {
-    --ink: #1a1a1a;
-    --paper: #faf7f2;
-    --line: #e5e0d6;
-    --accent: #b8956b;
-    --muted: #6b6b6b;
+    --ink: #11443B;        /* Forest — brand primary / body text */
+    --paper: #E8E6E0;      /* Stone — default surface */
+    --line: #d4cfc3;       /* hairline on Stone */
+    --accent: #11443B;     /* Forest — eyebrows + interactive accents */
+    --accent-soft: #9ECF90;/* Mint — success / NEW pill background */
+    --muted: #5b6a64;      /* desaturated Forest — secondary text */
+    --ink-soft: #2a3a35;   /* slightly lighter Forest for body paragraphs */
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     background: var(--paper);
     color: var(--ink);
-    font-family: 'Charter', 'Iowan Old Style', Georgia, 'Times New Roman', serif;
-    font-size: 18px;
-    line-height: 1.55;
+    font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 17px;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
   }
   header {
@@ -43,13 +47,13 @@
     align-items: baseline;
   }
   .logo {
-    font-family: 'Public Sans', -apple-system, sans-serif;
-    font-weight: 700;
-    font-size: 1.25rem;
-    letter-spacing: -0.02em;
+    /* Canonical SVG wordmark — never typeset per brand v2.01 lock */
+    display: inline-block;
+    line-height: 0;
     color: var(--ink);
     text-decoration: none;
   }
+  .logo svg { display: block; height: 28px; width: auto; fill: var(--ink); }
   .nav a.back { color: var(--muted); font-size: 0.9rem; text-decoration: none; }
   .nav a.back:hover { color: var(--ink); }
   main {
@@ -66,17 +70,21 @@
     margin-bottom: 1rem;
   }
   h1 {
+    font-family: 'Gambetta', 'Charter', Georgia, serif;
     font-size: 2.75rem;
     line-height: 1.1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
     margin-bottom: 1.5rem;
     font-weight: 400;
+    color: var(--ink);
   }
+  h1 em { font-style: italic; font-weight: 400; color: var(--ink); }
   .intro {
-    font-size: 1.2rem;
-    color: #333;
+    font-size: 1.15rem;
+    color: var(--ink-soft);
     max-width: 680px;
     margin-bottom: 3.5rem;
+    line-height: 1.55;
   }
   .group {
     margin: 3rem 0 2rem;
@@ -111,14 +119,16 @@
     color: var(--ink);
     align-items: baseline;
     gap: 0.75rem;
-    transition: color 0.15s ease;
+    transition: color 0.15s ease, background 0.15s ease;
   }
-  .case-btn:hover { color: var(--accent); }
+  .case-btn:hover { color: var(--ink); background: rgba(17, 68, 59, 0.04); }
+  .case-btn:hover .arrow { transform: translateX(2px); }
   .case-btn .arrow {
     color: var(--accent);
     font-size: 0.9rem;
     margin-left: auto;
     flex-shrink: 0;
+    transition: transform 0.15s ease;
   }
   .case-btn .label { font-weight: 500; }
   .case-btn .tag {
@@ -132,12 +142,17 @@
     border-radius: 2px;
     flex-shrink: 0;
   }
-  .case-btn .tag.new { color: #fff; background: var(--accent); border-color: var(--accent); }
+  .case-btn .tag.new {
+    color: var(--ink);
+    background: var(--accent-soft);
+    border-color: var(--accent-soft);
+    font-weight: 600;
+  }
   /* Modal */
   .modal-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(26, 26, 26, 0.55);
+    background: rgba(17, 68, 59, 0.45);
     display: none;
     align-items: center;
     justify-content: center;
@@ -170,11 +185,13 @@
   }
   .modal-close:hover { color: var(--ink); }
   .modal h2 {
-    font-size: 1.6rem;
+    font-family: 'Gambetta', 'Charter', Georgia, serif;
+    font-size: 1.7rem;
     line-height: 1.2;
     margin-bottom: 1rem;
     font-weight: 500;
     letter-spacing: -0.01em;
+    color: var(--ink);
   }
   .modal .modal-eyebrow {
     font-family: 'Public Sans', sans-serif;
@@ -186,7 +203,8 @@
   }
   .modal .what {
     margin-bottom: 1.25rem;
-    color: #2a2a2a;
+    color: var(--ink-soft);
+    line-height: 1.6;
   }
   .modal .section {
     margin-top: 1.25rem;
@@ -199,7 +217,7 @@
     color: var(--muted);
     margin-bottom: 0.35rem;
   }
-  .modal .section p { color: #2a2a2a; }
+  .modal .section p { color: var(--ink-soft); line-height: 1.6; }
   .modal .disclaimer {
     margin-top: 1.75rem;
     padding-top: 1rem;
@@ -229,14 +247,23 @@
 
 <header>
   <div class="nav">
-    <a href="/" class="logo">Wellet</a>
+    <a href="/" class="logo" aria-label="Wellet">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="296 224 493 157" fill="currentColor" role="img" aria-hidden="true">
+        <path d="M 555 345.046875 L 555 232.613281 L 552.113281 232.613281 L 520.03125 242.804688 L 520.03125 244.503906 C 527.84375 251.632812 530.21875 256.222656 530.21875 268.964844 L 530.21875 345.054688 C 530.21875 357.796875 527.84375 362.375 520.03125 369.515625 L 520.03125 371.214844 L 565.175781 371.214844 L 565.175781 369.515625 C 557.367188 362.386719 554.992188 357.796875 554.992188 345.054688 Z M 555 345.046875 "/>
+        <path d="M 605.300781 345.046875 L 605.300781 232.613281 L 602.414062 232.613281 L 570.332031 242.804688 L 570.332031 244.503906 C 578.144531 251.632812 580.519531 256.222656 580.519531 268.964844 L 580.519531 345.054688 C 580.519531 357.796875 578.144531 362.375 570.332031 369.515625 L 570.332031 371.214844 L 615.476562 371.214844 L 615.476562 369.515625 C 607.667969 362.386719 605.292969 357.796875 605.292969 345.054688 Z M 605.300781 345.046875 "/>
+        <path d="M 689.421875 358.808594 L 668.519531 358.808594 C 657.476562 358.808594 655.78125 357.617188 655.78125 351.847656 L 655.78125 281.359375 L 690.949219 281.359375 L 691.628906 273.371094 L 655.78125 273.371094 L 655.78125 244.515625 L 654.589844 244.515625 L 638.097656 263.539062 C 634.539062 267.625 633.34375 270.488281 633.34375 278.476562 L 633.34375 281.359375 L 619.804688 285.964844 L 619.804688 285.964844 L 619.804688 287.503906 L 633.34375 287.503906 L 633.34375 343.214844 C 633.34375 363.875 644.046875 372.546875 661.214844 372.546875 C 673.121094 372.546875 682.972656 366.929688 691.292969 359.789062 Z M 689.421875 358.808594 "/>
+        <path d="M 743.328125 358.808594 L 722.4375 358.808594 C 711.394531 358.808594 709.699219 357.617188 709.699219 351.847656 L 709.699219 281.359375 L 744.867188 281.359375 L 745.546875 273.371094 L 709.699219 273.371094 L 709.699219 244.515625 L 708.503906 244.515625 L 692.015625 263.539062 C 688.457031 267.625 687.261719 270.488281 687.261719 278.476562 L 687.261719 281.359375 L 673.722656 285.964844 L 673.722656 285.964844 L 673.722656 287.503906 L 687.261719 287.503906 L 687.261719 343.214844 C 687.261719 363.875 697.964844 372.546875 715.132812 372.546875 C 727.039062 372.546875 736.890625 366.929688 745.210938 359.789062 Z M 743.328125 358.808594 "/>
+        <path d="M 763.804688 233.652344 C 754.84375 233.652344 749.246094 240.292969 749.246094 247.078125 C 749.246094 254.886719 754.851562 261.535156 763.804688 261.535156 C 772.78125 261.535156 778.378906 254.886719 778.378906 247.078125 C 778.378906 240.296875 772.78125 233.652344 763.804688 233.652344 Z M 763.804688 233.652344 "/>
+        <path d="M 451.578125 271.402344 L 451.578125 273.078125 C 458.046875 273.875 460.78125 277.886719 458.875 285.347656 L 446.246094 332.683594 L 432.039062 285.347656 C 429.519531 277.339844 432.871094 273.875 437.652344 273.078125 L 437.652344 271.402344 L 376.957031 271.402344 L 376.957031 273.078125 C 380.652344 273.585938 382.398438 274.882812 384.484375 282.886719 L 372.179688 332.671875 L 357.722656 285.476562 C 355.179688 277.515625 358.601562 273.585938 363.34375 273.078125 L 363.34375 271.402344 L 309.5625 271.402344 L 309.5625 273.078125 C 313.609375 274.144531 318.265625 280.609375 320.628906 287.964844 L 343.347656 358.71875 C 344.207031 361.351562 344.328125 362.503906 344.328125 364.382812 C 344.328125 367.097656 343.605469 371.964844 343.605469 371.964844 C 348.140625 372.679688 357.789062 374 364.351562 374 C 367.292969 374 367.5625 372.957031 369.21875 367.46875 L 380.953125 322.011719 L 396.328125 374 C 399.546875 374 414.214844 371.378906 419.039062 371.378906 C 419.039062 370.679688 419.355469 366.140625 419.625 363.660156 C 419.953125 360.660156 420.421875 358.984375 420.78125 357.71875 L 437.882812 287.96875 C 439.339844 281.992188 442.621094 273.953125 451.578125 273.058594 Z M 451.578125 271.402344 "/>
+      </svg>
+    </a>
     <a href="/" class="back">← Home</a>
   </div>
 </header>
 
 <main>
   <div class="eyebrow">Use Cases</div>
-  <h1>Every situation Wellet addresses for the family caregiver.</h1>
+  <h1>Every situation Wellet addresses <em>for the family caregiver.</em></h1>
   <p class="intro">We built Wellet for the family member who quietly carries the medical load — the one keeping track of meds, visits, wearables, and questions across every hospital their loved one has ever seen. Below is what we do, in plain language. Tap any item to see how.</p>
 
   <section class="group">
