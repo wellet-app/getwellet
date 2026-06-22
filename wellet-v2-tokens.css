@@ -22,14 +22,14 @@
    SECTION 1 — Canonical tokens (verbatim from dist/wellet.css)
    ============================================================================ */
 :root {
-  --core-color-cream: #e7e7df;
+  --core-color-cream: #e8e6e0;
   --core-color-cream-warm: #dcdace;
-  --core-color-forest: #11443b;
+  --core-color-forest: #11453b;
   --core-color-forest-deep: #0d3a32;
   --core-color-forest-2: #114445;
-  --core-color-midnight: #183241;
-  --core-color-mint: #9ece90;
-  --core-color-mist: #b7c9cd;
+  --core-color-midnight: #193241;
+  --core-color-mint: #9ecf90;
+  --core-color-mist: #b8c9ce;
   --core-color-stone: #dcdace;
   --core-color-forest-leaf: #2d4b40;
   --core-color-forest-pine: #1b4d45;
