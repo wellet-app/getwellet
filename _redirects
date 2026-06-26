@@ -18,5 +18,7 @@
 /start         /me.html            301
 /research/     /research.html      200
 /research      /research.html      200
+/aarp/         /aarp.html          200
+/aarp          /aarp.html          200
 /research-admin/ /research-admin.html 200
 /research-admin  /research-admin.html 200
