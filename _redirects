@@ -16,6 +16,8 @@
 /m             /m.html             200
 /start/        /me.html            301
 /start         /me.html            301
+/app/auth      /app-auth.html      200
+/app/auth/     /app-auth.html      200
 /research/     /research.html      200
 /research      /research.html      200
 /aarp/         /aarp.html          200
