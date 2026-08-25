@@ -127,6 +127,7 @@
 
         <!-- Wellet Connect (one-time record unlock) -->
         <div class="pricing-card">
+          <div class="card-badge">Start here</div>
           <div class="tier-name">Wellet</div>
           <div class="tier-tagline">The record</div>
           <div class="price">$10<span style="font-size:0.4em;color:var(--color-text-muted);font-weight:300;display:block;margin-top:6px;">per loved one · one-time</span></div>
@@ -145,9 +146,8 @@
 
         <!-- Ask Wellet + CareSignals subscription -->
         <div class="pricing-card featured">
-          <div class="card-badge">Recommended</div>
           <div class="tier-name">Ask Wellet + CareSignals</div>
-          <div class="tier-tagline">The intelligence layer</div>
+          <div class="tier-tagline">The intelligence layer · optional</div>
           <div class="price">$10<span style="font-size:0.4em;color:var(--color-text-muted);font-weight:300;display:block;margin-top:6px;">per month · covers all your loved ones</span></div>
           <div class="price-note">Ask plain-language questions across every record you connect, and let CareSignals surface patterns you would miss on your own. Launch pricing — may change as we validate. Cancel anytime.</div>
           <ul role="list">
@@ -161,6 +161,17 @@
         </div>
 
       </div>
+
+      <!-- Hardship access strip -->
+      <div class="hardship-strip" role="note" aria-label="Hardship access">
+        <p><strong>If $10 is a hardship, it's on us.</strong> Email <a href="mailto:hello@mywellet.com">hello@mywellet.com</a> and we'll unlock the record and cover the subscription. No questions, no proof. Caregiving is hard enough.</p>
+      </div>
+      <style>
+        .hardship-strip { max-width: 720px; margin: var(--space-8) auto 0; padding: var(--space-5) var(--space-6); background: var(--color-surface-2, #F4F1EA); border-left: 3px solid var(--color-primary, #11443B); border-radius: 4px; }
+        .hardship-strip p { margin: 0; font-family: var(--font-body); font-size: var(--text-base); line-height: 1.5; color: var(--color-text); font-weight: 300; }
+        .hardship-strip strong { font-weight: 500; }
+        .hardship-strip a { color: var(--color-primary, #11443B); text-decoration: underline; text-underline-offset: 2px; }
+      </style>
     </div>
   </section>
 
@@ -245,6 +256,11 @@
       </div>
 
       <div class="faq-item">
+        <div class="faq-q">I signed up early. What happens to me?</div>
+        <div class="faq-a">Anyone who signed up before this pricing page went live keeps their first loved one's record free for life. That was the promise, and it stands. The Ask Wellet and CareSignals subscription is new and available to everyone at the same price. If you signed up early and you're not sure whether that applies to you, email <a href="mailto:hello@mywellet.com" style="color:var(--color-primary);">hello@mywellet.com</a> and we'll sort it out.</div>
+      </div>
+
+      <div class="faq-item">
         <div class="faq-q">Why $10 per loved one, not $10 per family?</div>
         <div class="faq-a">Because each loved one is its own record — their own hospital connections, their own labs, their own changes to notice across visits. The work scales with the loved one, not with the family member. A sandwich-generation caregiver helping both parents and an adult child with disabilities pays $30, once, never again. Anyone you invite into a loved one's care circle uses Wellet free for that loved one — the inviter pays for the record, everyone else helps.</div>
       </div>
@@ -257,6 +273,11 @@
       <div class="faq-item">
         <div class="faq-q">What is Wellet Pro?</div>
         <div class="faq-a">Wellet Pro is a separate product for people doing deep personal work with their own health data — genomic imports, pedigree rendering, hereditary pattern scans. It's sold in pay-per-use credit packs because those features cost real compute to run. If you're a caregiver, you do not need Pro. If you're a self-tracker who wants those tools, Pro is built for you.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">What does a Wellet Pro credit actually buy?</div>
+        <div class="faq-a">A credit is Wellet Pro's unit of compute. Heavier operations — a full genomic import, a hereditary pattern scan across a curated variant set, a multi-generation pedigree render — spend more credits than light ones like previews and single-variant lookups. Every operation shows its exact credit cost before it runs, so you never spend without seeing the number first. Credits never expire. Starter (100 credits) is meant for trying one full workflow, Standard (300) for ongoing work, Power (750) for serial family-history and rare-disease work.</div>
       </div>
 
       <div class="faq-item">
