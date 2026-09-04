@@ -48,13 +48,19 @@
     }
 
     .brand {
-      font-family: 'Fraunces', serif;
-      font-weight: 400;
-      font-size: 1.5rem;
-      letter-spacing: -0.01em;
-      color: var(--color-primary, #11443B);
-      text-decoration: none;
+      display: inline-block;
+      line-height: 0;
     }
+
+    .brand img {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    .brand .brand-light { display: none; }
+    [data-theme="dark"] .brand .brand-dark { display: none; }
+    [data-theme="dark"] .brand .brand-light { display: block; }
 
     .main {
       flex: 1;
@@ -101,7 +107,10 @@
 <body>
   <div class="page">
     <header class="topbar">
-      <a href="/" class="brand">wellet</a>
+      <a href="/" class="brand" aria-label="Wellet">
+        <img class="brand-dark" src="/assets/wellet-wordmark.svg" alt="Wellet">
+        <img class="brand-light" src="/assets/wellet-wordmark-cream.svg" alt="">
+      </a>
     </header>
 
     <main class="main">
