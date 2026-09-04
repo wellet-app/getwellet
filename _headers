@@ -22,3 +22,15 @@
 
 /research-admin/
   X-Robots-Tag: noindex, nofollow, noarchive
+
+/wildwood
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/wildwood.html
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/wildwood/
+  X-Robots-Tag: noindex, nofollow, noarchive
+
+/assets/wildwood/*
+  X-Robots-Tag: noindex, nofollow, noarchive
