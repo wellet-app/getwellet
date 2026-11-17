@@ -198,30 +198,22 @@
       font-size: var(--text-sm);
     }
   </style>
+  <link rel="stylesheet" href="/site-chrome.css">
 </head>
 <body>
 
   <!-- ========== HEADER ========== -->
-  <header class="sup-standalone-header">
-    <div class="container">
-      <a href="https://getwellet.com" class="logo" aria-label="Wellet home">
-        <img src="/assets/wellet-wordmark.svg" alt="Wellet" style="height:26px;width:auto;">
-      </a>
-      <div style="display:flex;align-items:center;gap:var(--space-4);">
-        <nav aria-label="Site links">
-          <ul class="nav-links" role="list" style="position:static;background:none;box-shadow:none;">
-            <li><a href="/connect">Connect</a></li>
-            <li><a href="/transparency">Transparency</a></li>
-            <li><a href="/press">Press</a></li>
-            <li><a href="/journal">Journal</a></li>
-          </ul>
-        </nav>
-        <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        </button>
-      </div>
-    </div>
-  </header>
+  <header class="gw-head">
+  <div class="gw-wrap">
+    <a class="gw-logo" href="/" aria-label="Wellet home"><img src="/assets/wellet-wordmark.svg" alt="wellet" width="104" height="26"></a>
+    <nav aria-label="Main">
+      <a class="gw-hide-sm" href="/#how">How it works</a>
+      <a class="gw-hide-sm" href="/pricing">Pricing</a>
+      <a class="gw-hide-sm" href="/support" aria-current="page">Help</a>
+      <a href="https://mywellet.com">Sign in</a>
+    </nav>
+  </div>
+</header>
 
   <!-- ========== HERO ========== -->
   <section class="sup-hero">
@@ -357,12 +349,14 @@
   </section>
 
   <!-- ========== FOOTER ========== -->
-  <footer class="sup-standalone-footer">
-    <div class="container">
-      <a href="https://getwellet.com">&larr; Back to getwellet.com</a>
-      <span class="footer-copy">&copy; 2026 Wellet Health. All rights reserved.</span>
-    </div>
-  </footer>
+  <footer class="gw-foot">
+  <div class="gw-wrap">
+    <span>© 2026 Wellet. Built by a caregiver, for caregivers.</span>
+    <nav aria-label="Footer">
+      <a href="/pricing">Pricing</a><a href="/support">Help</a><a href="/journal">Journal</a><a href="/podcast">Podcast</a><a href="/transparency">Transparency</a><a href="/press">Press</a><a href="https://mywellet.com/privacy">Privacy</a><a href="https://mywellet.com/terms">Terms</a>
+    </nav>
+  </div>
+</footer>
 
   <!-- ========== SCRIPTS ========== -->
   <script>

@@ -49,37 +49,22 @@
     .trust-strip strong { color: var(--color-text); font-weight: 500; }
   </style>
 
+  <link rel="stylesheet" href="/site-chrome.css">
 </head>
 <body>
 
   <!-- ========== HEADER ========== -->
-  <header class="header">
-    <div class="container">
-      <a href="/" class="logo" aria-label="Wellet home">
-        <img src="/assets/wellet-wordmark.svg" alt="Wellet" style="height:26px;width:auto;">
-      </a>
-      <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-      </button>
-      <nav>
-        <ul class="nav-links" role="list">
-          <li><a href="/#features">Features</a></li>
-          <li><a href="/pricing" aria-current="page">Pricing</a></li>
-          <li><a href="/#your-data">Your Data</a></li>
-          <li><a href="/connect">Connect</a></li>
-          <li class="nav-more-wrap"><button class="nav-more-btn" onclick="this.parentElement.classList.toggle('open')" aria-label="More pages">More <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l3 3 3-3"/></svg></button>
-            <ul class="nav-dropdown">
-              <li><a href="/journal">Journal</a></li>
-              <li><a href="/podcast">Podcast</a></li>
-              <li><a href="/transparency">Transparency</a></li>
-              <li><a href="/press">Press</a></li>
-            </ul>
-          </li>
-          <li><a href="https://mywellet.com" class="nav-signin" style="font-weight:500;color:var(--color-primary);white-space:nowrap;">Sign in →</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <header class="gw-head">
+  <div class="gw-wrap">
+    <a class="gw-logo" href="/" aria-label="Wellet home"><img src="/assets/wellet-wordmark.svg" alt="wellet" width="104" height="26"></a>
+    <nav aria-label="Main">
+      <a class="gw-hide-sm" href="/#how">How it works</a>
+      <a class="gw-hide-sm" href="/pricing" aria-current="page">Pricing</a>
+      <a class="gw-hide-sm" href="/support">Help</a>
+      <a href="https://mywellet.com">Sign in</a>
+    </nav>
+  </div>
+</header>
 
   <!-- ========== HERO ========== -->
   <section class="pricing-hero">
@@ -304,21 +289,14 @@
   </section>
 
   <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <p>&copy; 2026 Wellet. Built by a caregiver, for caregivers.</p>
-        <ul class="footer-links" role="list">
-          <li><a href="/">Home</a></li>
-          <li><a href="/journal">Journal</a></li>
-          <li><a href="/podcast">Podcast</a></li>
-          <li><a href="/transparency">Transparency</a></li>
-          <li><a href="/press">Press</a></li>
-          <li><a href="mailto:hello@mywellet.com">hello@mywellet.com</a></li>
-        </ul>
-      </div>
-    </div>
-  </footer>
+  <footer class="gw-foot">
+  <div class="gw-wrap">
+    <span>© 2026 Wellet. Built by a caregiver, for caregivers.</span>
+    <nav aria-label="Footer">
+      <a href="/pricing">Pricing</a><a href="/support">Help</a><a href="/journal">Journal</a><a href="/podcast">Podcast</a><a href="/transparency">Transparency</a><a href="/press">Press</a><a href="https://mywellet.com/privacy">Privacy</a><a href="https://mywellet.com/terms">Terms</a>
+    </nav>
+  </div>
+</footer>
 
 
 </body>
