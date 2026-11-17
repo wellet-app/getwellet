@@ -441,44 +441,22 @@
     }
   </style>
 
+  <link rel="stylesheet" href="/site-chrome.css">
 </head>
 <body class="jn-page">
 
   <!-- ========== HEADER ========== -->
-  <header class="header">
-    <div class="container">
-      <a href="/" class="logo" aria-label="Wellet home">
-        <img src="/assets/wellet-wordmark.svg" alt="Wellet" style="height:26px;width:auto;">
-      </a>
-      <button class="mobile-nav-toggle" aria-label="Toggle navigation" onclick="document.querySelector('.nav-links').classList.toggle('open')">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-      </button>
-      <nav>
-        <ul class="nav-links" role="list">
-                    <li><a href="/#features">Features</a></li>
-          <li><a href="/#pricing">Pricing</a></li>
-          <li><a href="/connect">Connect</a></li>
-          <li><a href="/journal" class="nav-active" aria-current="page">Journal</a></li>
-          <li class="nav-more-wrap"><button class="nav-more-btn" onclick="this.parentElement.classList.toggle('open')" aria-label="More pages">More <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4l3 3 3-3"/></svg></button>
-            <ul class="nav-dropdown">
-              <li><a href="/#how-it-works">How It Works</a></li>
-              <li><a href="/#founder">About</a></li>
-              <li><a href="/#faq">FAQ</a></li>
-              <li><a href="/#your-data">Your Data</a></li>
-              <li><a href="/transparency">Transparency</a></li>
-              <li><a href="/press">Press</a></li>
-            </ul>
-          </li>
-          <li><a href="https://mywellet.com" class="nav-signin" style="font-weight:500;color:var(--color-primary);white-space:nowrap;">Sign in →</a></li>
-          <li>
-            <button class="theme-toggle" data-theme-toggle aria-label="Switch to dark mode">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-            </button>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <header class="gw-head">
+  <div class="gw-wrap">
+    <a class="gw-logo" href="/" aria-label="Wellet home"><img src="/assets/wellet-wordmark.svg" alt="wellet" width="104" height="26"></a>
+    <nav aria-label="Main">
+      <a class="gw-hide-sm" href="/#how">How it works</a>
+      <a class="gw-hide-sm" href="/pricing">Pricing</a>
+      <a class="gw-hide-sm" href="/support">Help</a>
+      <a href="https://mywellet.com">Sign in</a>
+    </nav>
+  </div>
+</header>
 
   <!-- ========== MAIN ========== -->
   <main class="jn-main" id="main-content">
@@ -680,44 +658,14 @@
   </main>
 
   <!-- ========== FOOTER ========== -->
-  <footer class="footer">
-    <div class="container">
-      <span class="footer-copy">&copy; 2026 Wellet Health. All rights reserved.</span>
-      <div class="footer-links">
-        <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer">Blog<span class="sr-only"> (opens in new tab)</span></a>
-        <a href="/press">Press</a>
-        <a href="mailto:hello@getwellet.com">Contact</a>
-        <a href="https://mywellet.com/privacy">Privacy</a>
-        <a href="https://mywellet.com/terms">Terms</a>
-      </div>
-    </div>
-    <div class="container footer-social">
-      <a href="https://x.com/betsyeble" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on X" title="@betsyeble on X">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      </a>
-      <a href="https://x.com/welletapp" target="_blank" rel="noopener noreferrer" aria-label="Wellet on X" title="@welletapp on X">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      </a>
-      <a href="https://www.linkedin.com/in/betsyeble/" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on LinkedIn" title="Betsy Eble on LinkedIn">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-      </a>
-      <a href="https://bsky.app/profile/betsyeble.bsky.social" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on Bluesky" title="@betsyeble on Bluesky">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 10.8c-1.087-2.114-4.046-6.053-6.798-7.995C2.566.944 1.561 1.266.902 1.565.139 1.908 0 3.08 0 3.768c0 .69.378 5.65.624 6.479.785 2.627 3.6 3.476 6.158 3.226-4.476.767-8.07 2.632-4.86 8.527 3.53 5.2 6.088-.508 7.078-2.012.315-.483.465-.71.535-.838a.56.56 0 0 1 .93 0c.07.128.22.355.535.838.99 1.504 3.548 7.212 7.079 2.012 3.21-5.895-.385-7.76-4.86-8.527 2.557.25 5.372-.6 6.157-3.226.247-.828.625-5.79.625-6.479 0-.688-.14-1.86-.903-2.203-.659-.3-1.664-.62-4.3 1.24C12.046 4.747 9.087 8.686 8 10.8h4z"/></svg>
-      </a>
-      <a href="https://instagram.com/welletapp" target="_blank" rel="noopener noreferrer" aria-label="Wellet on Instagram" title="@welletapp on Instagram">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-      </a>
-      <a href="https://medium.com/@betsyeble" target="_blank" rel="noopener noreferrer" aria-label="Betsy Eble on Medium" title="Betsy Eble on Medium">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M13.54 12a6.8 6.8 0 0 1-6.77 6.82A6.8 6.8 0 0 1 0 12a6.8 6.8 0 0 1 6.77-6.82A6.8 6.8 0 0 1 13.54 12zM20.96 12c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
-      </a>
-      <a href="https://open.spotify.com/show/5QUDaF0Pp0mIfZwh1aEzU6" target="_blank" rel="noopener noreferrer" aria-label="Wellet Podcast on Spotify" title="Wellet Podcast on Spotify">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z"/></svg>
-      </a>
-    </div>
-    <div class="container footer-disclaimer">
-      <p>Wellet is not a medical device and does not provide medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider with questions about a medical condition.</p>
-    </div>
-  </footer>
+  <footer class="gw-foot">
+  <div class="gw-wrap">
+    <span>© 2026 Wellet. Built by a caregiver, for caregivers.</span>
+    <nav aria-label="Footer">
+      <a href="/pricing">Pricing</a><a href="/support">Help</a><a href="/journal">Journal</a><a href="/podcast">Podcast</a><a href="/transparency">Transparency</a><a href="/press">Press</a><a href="https://mywellet.com/privacy">Privacy</a><a href="https://mywellet.com/terms">Terms</a>
+    </nav>
+  </div>
+</footer>
 
   <!-- ========== SCRIPTS ========== -->
   <script>

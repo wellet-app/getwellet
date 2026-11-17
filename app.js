@@ -211,7 +211,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       e.preventDefault();
       target.scrollIntoView({ behavior: 'smooth' });
       // Close mobile nav if open
-      document.querySelector('.nav-links').classList.remove('open');
+      document.querySelector('.nav-links')?.classList.remove('open');
     }
   });
 });
@@ -219,7 +219,7 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
 // --- CLOSE MOBILE NAV ON LINK CLICK ---
 document.querySelectorAll('.nav-links a').forEach((link) => {
   link.addEventListener('click', () => {
-    document.querySelector('.nav-links').classList.remove('open');
+    document.querySelector('.nav-links')?.classList.remove('open');
   });
 });
 
