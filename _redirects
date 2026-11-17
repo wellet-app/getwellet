@@ -1,3 +1,7 @@
+# Home v3 is responsive, so the separate phone page retires.
+/m      /   301!
+/m/     /   301!
+/m.html /   301!
 /early-access   /pricing   301!
 /early-access/  /pricing   301!
 /early-access.html /pricing 301!
@@ -19,8 +23,6 @@
 /support       /support.html       200
 /me/           /me.html            200
 /me            /me.html            200
-/m/            /m.html             200
-/m             /m.html             200
 /start/        /me.html            301
 /start         /me.html            301
 /app/auth      /app-auth.html      200
